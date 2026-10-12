@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<meta name="ext-resource-dependency" content="haiton-data.js" data-resource-id="haitonData">
+<template id="__bundler_thumbnail" data-bg-color="#e9e7e4"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#e9e7e4"/><text x="50" y="64" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="40" fill="#c8102e">h</text></svg></template>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&amp;family=Rubik:wght@300;400;500;700;800;900&amp;family=IBM+Plex+Sans+Hebrew:wght@300;400;500;700&amp;family=Frank+Ruhl+Libre:wght@300;400;500;700;900&amp;family=Noto+Serif+Hebrew:wght@300;400;500;700;800;900&amp;family=Secular+One&amp;family=Varela+Round&amp;family=Assistant:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>:root{--hf:Heebo;--df:'Frank Ruhl Libre'}body{margin:0;background:#e9e7e4}@keyframes hticker{from{transform:translateX(-50%)}to{transform:translateX(0)}}a{color:#c8102e;text-decoration:none}a:hover{text-decoration:underline}*{box-sizing:border-box}::-webkit-scrollbar{width:0;height:0}input:focus{outline:none}</style>
+</helmet>
+<div dir="rtl" style="min-height:100vh;background:#e9e7e4;display:flex;flex-direction:column;align-items:center;gap:14px;padding:22px 16px 40px;font-family:var(--hf), sans-serif;color:#141414">
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center">
+    <div style="display:flex;gap:2px;background:#d9d6d1;padding:3px;border-radius:999px;flex-wrap:wrap">
+      <sc-for list="{{ personaBtns }}" as="p" hint-placeholder-count="4">
+        <button onClick="{{ p.onClick }}" style="border:none;background:transparent;padding:0;cursor:pointer">
+          <sc-if value="{{ p.active }}"><span style="display:block;padding:7px 14px;border-radius:999px;background:#141414;color:#fff;font:600 13px var(--hf)">{{ p.label }}</span></sc-if>
+          <sc-if value="{{ p.inactive }}"><span style="display:block;padding:7px 14px;border-radius:999px;color:#333;font:500 13px var(--hf)">{{ p.label }}</span></sc-if>
+        </button>
+      </sc-for>
+    </div>
+    <div style="display:flex;gap:2px;background:#d9d6d1;padding:3px;border-radius:999px">
+      <sc-for list="{{ deviceBtns }}" as="p" hint-placeholder-count="2">
+        <button onClick="{{ p.onClick }}" style="border:none;background:transparent;padding:0;cursor:pointer">
+          <sc-if value="{{ p.active }}"><span style="display:block;padding:7px 14px;border-radius:999px;background:#fff;color:#141414;font:600 13px var(--hf)">{{ p.label }}</span></sc-if>
+          <sc-if value="{{ p.inactive }}"><span style="display:block;padding:7px 14px;border-radius:999px;color:#333;font:500 13px var(--hf)">{{ p.label }}</span></sc-if>
+        </button>
+      </sc-for>
+    </div>
+    <button onClick="{{ restart }}" style="height:32px;padding:0 14px;border:1px solid #c9c5bf;border-radius:999px;background:transparent;font:500 13px var(--hf);color:#333;cursor:pointer">התחלה מחדש</button>
+  </div>
+  <div style="font:500 13px var(--hf);color:#555">{{ journey }}</div>
+
+<div style="{{ frameStyle }}">
+  <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ true }}">
+    <div style="height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 30px;font:600 15px var(--hf);direction:ltr;background:{{ statusBg }};color:{{ statusFg }}"><span>12:51</span><span style="display:flex;gap:4px;align-items:center"><span style="width:17px;height:10px;border-radius:2px;background:currentColor"></span><span style="width:24px;height:11px;border-radius:3px;border:1.5px solid currentColor"></span></span></div>
+  </sc-if>
+  <sc-if value="{{ isDesktop }}">
+    <div style="height:38px;flex:none;display:flex;align-items:center;gap:14px;padding:0 14px;background:#f1f0ee;border-bottom:1px solid #e2e0dc;direction:ltr">
+      <span style="display:flex;gap:6px"><span style="width:11px;height:11px;border-radius:50%;background:#d4d1cc"></span><span style="width:11px;height:11px;border-radius:50%;background:#d4d1cc"></span><span style="width:11px;height:11px;border-radius:50%;background:#d4d1cc"></span></span>
+      <span style="flex:1;max-width:420px;margin:0 auto;height:24px;border-radius:6px;background:#fff;font:400 12px ui-monospace,monospace;color:#666;display:flex;align-items:center;justify-content:center">haiton.app</span>
+      <span style="width:57px"></span>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isChat }}" hint-placeholder-val="{{ true }}">
+  <div style="flex:1;min-height:0;display:flex;flex-direction:column;font-family:Assistant, sans-serif">
+    <div style="height:54px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 16px">
+      <button onClick="{{ goFeed }}" style="width:36px;height:36px;border:none;background:transparent;display:flex;flex-direction:column;gap:5px;align-items:center;justify-content:center;cursor:pointer"><span style="width:18px;height:2px;background:#0d0d0d;border-radius:2px"></span><span style="width:12px;height:2px;background:#0d0d0d;border-radius:2px"></span></button>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:1px">
+        <div style="font:600 17px Assistant;color:#0d0d0d">הכתב</div>
+        <button onClick="{{ openFacts }}" style="border:none;background:transparent;padding:0;font:500 12px Assistant;color:#6b6b6b;cursor:pointer;white-space:nowrap;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#cfcfcf">{{ factsChip }}</button>
+      </div>
+      <button onClick="{{ newChat }}" style="height:32px;padding:0 12px;border:1px solid #e3e3e3;border-radius:999px;background:#fff;font:600 13px Assistant;color:#0d0d0d;cursor:pointer">חדש</button>
+    </div>
+    <div ref="{{ chatRef }}" style="flex:1;min-height:0;overflow-y:auto;padding:16px 18px 24px">
+      <div style="max-width:740px;margin:0 auto;display:flex;flex-direction:column;gap:24px">
+        <sc-for list="{{ messages }}" as="m" hint-placeholder-count="1">
+          <sc-if value="{{ m.isReporter }}">
+            <div style="display:flex;gap:12px;align-items:flex-start">
+              <div style="width:28px;height:28px;flex:none;border-radius:50%;background:#0d0d0d;color:#fff;display:flex;align-items:center;justify-content:center;font:700 13px var(--hf)">כ</div>
+              <div style="font-size:16.5px;line-height:1.65;color:#0d0d0d;padding-top:1px;text-wrap:pretty">{{ m.text }}</div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ m.isUser }}">
+            <div style="display:flex;justify-content:flex-end">
+              <div style="max-width:78%;background:#f2f2f2;border-radius:22px;padding:10px 16px;font-size:16.5px;line-height:1.55;color:#0d0d0d;text-wrap:pretty">{{ m.text }}</div>
+            </div>
+          </sc-if>
+        </sc-for>
+        <sc-if value="{{ typing }}">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div style="width:28px;height:28px;flex:none;border-radius:50%;background:#0d0d0d;color:#fff;display:flex;align-items:center;justify-content:center;font:700 13px var(--hf)">כ</div>
+            <span style="font-size:15px;color:#8f8f8f">הכתב מקליד…</span>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+    <div style="flex:none;padding:6px 12px 22px">
+      <div style="max-width:740px;margin:0 auto;display:flex;flex-direction:column;gap:10px">
+        <sc-if value="{{ canBackDraft }}">
+          <div style="display:flex;justify-content:center"><button onClick="{{ resumeDraft }}" style="height:38px;padding:0 18px;border:1px solid #d9d9d9;border-radius:999px;background:#fff;font:600 14.5px Assistant;color:#0d0d0d;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.06)">חזרה לטיוטה ←</button></div>
+        </sc-if>
+        <sc-if value="{{ canFinish }}">
+          <div style="display:flex;justify-content:center"><button onClick="{{ startDraft }}" style="height:38px;padding:0 18px;border:1px solid #d9d9d9;border-radius:999px;background:#fff;font:600 14.5px Assistant;color:#0d0d0d;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.06)">די, תיצור טיוטה</button></div>
+        </sc-if>
+        <div style="background:#f4f4f4;border-radius:28px;padding:6px;display:flex;align-items:center;gap:8px;min-height:54px">
+          <input value="{{ input }}" onChange="{{ onInput }}" onKeyDown="{{ onKey }}" placeholder="ספרו לכתב…" style="flex:1;min-width:0;border:none;background:transparent;font:400 16px Assistant;color:#0d0d0d;padding:0 12px">
+          <sc-if value="{{ canSend }}"><button onClick="{{ send }}" style="width:40px;height:40px;flex:none;border:none;border-radius:50%;background:#0d0d0d;color:#fff;font:700 18px var(--hf);cursor:pointer;display:flex;align-items:center;justify-content:center">↑</button></sc-if><sc-if value="{{ cantSend }}"><span style="width:40px;height:40px;flex:none;border-radius:50%;background:#d6d6d6;color:#fff;font:700 18px var(--hf);display:flex;align-items:center;justify-content:center">↑</span></sc-if>
+        </div>
+        <div style="text-align:center;font-size:12px;color:#8a8a8a">{{ countLabel }}</div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isLoading }}">
+  <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:0 40px">
+    <div style="width:100%;max-width:420px;display:flex;flex-direction:column;gap:26px">
+      <div style="font:900 22px var(--hf);color:#c8102e;letter-spacing:-.5px;direction:ltr;text-align:right">haiton</div>
+      <div style="font:800 27px var(--hf);line-height:1.2">העורך עובד על הכתבה</div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <sc-for list="{{ loadSteps }}" as="s" hint-placeholder-count="3">
+          <div style="display:flex;align-items:center;gap:12px;font:500 17px var(--hf)">
+            <sc-if value="{{ s.done }}"><span style="width:22px;height:22px;border-radius:50%;background:#c8102e;color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center">✓</span></sc-if>
+            <sc-if value="{{ s.active }}"><span style="width:22px;height:22px;border-radius:50%;border:2px solid #c8102e;display:flex;align-items:center;justify-content:center"><span style="width:8px;height:8px;border-radius:50%;background:#c8102e"></span></span></sc-if>
+            <sc-if value="{{ s.waiting }}"><span style="width:22px;height:22px;border-radius:50%;border:2px solid #ddd"></span></sc-if>
+            <span>{{ s.label }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <button onClick="{{ cancelLoading }}" style="align-self:flex-start;height:38px;padding:0 16px;border:1px solid #d6d6d6;border-radius:999px;background:#fff;color:#141414;font:600 14px var(--hf);cursor:pointer">ביטול וחזרה לשיחה</button>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isDraft }}">
+  <div style="flex:1;min-height:0;display:flex;flex-direction:column">
+    <div style="height:54px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-bottom:1px solid #ececec">
+      <button onClick="{{ backToChat }}" style="border:none;background:transparent;font:500 20px var(--hf);cursor:pointer;padding:4px">→</button>
+      <div style="font:700 16px var(--hf)">טיוטה</div>
+      <span style="font:500 12px var(--hf);color:#555;background:#f3f2ef;padding:4px 10px;border-radius:999px">לא פורסם</span>
+    </div>
+    <div style="flex:1;min-height:0;overflow-y:auto;padding:22px 18px 24px">
+      <div style="max-width:720px;margin:0 auto">
+        <div style="{{ draftFade }}">
+          <div style="font:700 13px var(--hf);color:#c8102e;margin-bottom:8px">{{ meName }}</div>
+          <h1 style="font:800 28px/1.18 var(--hf);margin:0 0 12px;text-wrap:pretty">{{ draft.headline }}</h1>
+          <p style="font:500 17px/1.5 var(--hf);color:#3a3a3a;margin:0 0 18px;text-wrap:pretty">{{ draft.sub }}</p>
+          <div style="background:#f6f5f2;border-radius:10px;padding:12px 14px;margin-bottom:18px">
+            <div style="font:700 12px var(--hf);color:#555;margin-bottom:4px">תקציר</div>
+            <div style="font:400 15px/1.5 var(--hf)">{{ draft.summary }}</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:22px">
+            <sc-for list="{{ draft.body }}" as="p" hint-placeholder-count="3"><p style="font:400 16.5px/1.7 var(--hf);margin:0;text-wrap:pretty">{{ p }}</p></sc-for>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px">
+            <div style="border:1px solid #ececec;border-radius:10px;padding:12px 14px">
+              <div style="font:800 13px var(--hf);color:#c8102e;margin-bottom:4px">מבזק</div>
+              <div style="font:500 15px/1.45 var(--hf)">{{ draft.flash }}</div>
+            </div>
+            <div style="border:1px solid #ececec;border-radius:10px;padding:12px 14px">
+              <div style="font:800 13px var(--hf);color:#555;margin-bottom:4px">הפוש שיישלח</div>
+              <div style="font:700 15px/1.45 var(--hf)">{{ draft.push }}</div>
+            </div>
+          </div>
+          <sc-if value="{{ hasBasis }}">
+            <div style="margin-top:22px;border:1px solid #ececec;border-radius:12px;overflow:hidden">
+              <div style="padding:11px 14px;background:#f6f5f2;font:700 13px var(--hf);color:#555">על מה העורך נשען</div>
+              <sc-if value="{{ basis.hasPrev }}">
+                <div style="padding:12px 14px;border-top:1px solid #ececec;display:flex;flex-direction:column;gap:4px">
+                  <div style="font:700 12px var(--hf);color:#c8102e">כתבה קודמת שלכם · {{ basis.prev.time }}</div>
+                  <div style="font:600 15px/1.4 var(--hf);text-wrap:pretty">{{ basis.prev.headline }}</div>
+                </div>
+              </sc-if>
+              <div style="padding:12px 14px;border-top:1px solid #ececec;display:flex;flex-direction:column;gap:8px">
+                <div style="font:700 12px var(--hf);color:#555">מהכרטסת שלכם</div>
+                <div style="display:flex;flex-wrap:wrap;gap:6px">
+                  <sc-for list="{{ basis.facts }}" as="f" hint-placeholder-count="3"><span style="padding:5px 10px;border-radius:999px;background:#f3f2ef;font:500 13px var(--hf);color:#141414">{{ f.k }}: {{ f.v }}</span></sc-for>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ hasNewFacts }}">
+            <div style="margin-top:12px;border:1px solid #ececec;border-radius:12px;overflow:hidden">
+              <div style="padding:11px 14px;background:#f6f5f2;display:flex;justify-content:space-between;gap:8px"><span style="font:700 13px var(--hf);color:#555">חדש לכרטסת, מתוך השיחה</span><span style="font:400 12px var(--hf);color:#777">נשמר בפרסום</span></div>
+              <sc-for list="{{ newFacts }}" as="f" hint-placeholder-count="2">
+                <button onClick="{{ f.onClick }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;border:none;border-top:1px solid #ececec;background:#fff;cursor:pointer;text-align:right">
+                  <span style="display:flex;flex-direction:column;gap:2px"><span style="font:500 12px var(--hf);color:#777">{{ f.k }}</span><span style="font:600 15px var(--hf);color:#141414">{{ f.v }}</span></span>
+                  <sc-if value="{{ f.checked }}"><span style="width:22px;height:22px;flex:none;border-radius:6px;background:#141414;color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center">✓</span></sc-if>
+                  <sc-if value="{{ f.unchecked }}"><span style="width:22px;height:22px;flex:none;border-radius:6px;border:2px solid #cfcfcf"></span></sc-if>
+                </button>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+        <sc-if value="{{ revising }}">
+          <div style="position:sticky;bottom:0;display:flex;justify-content:center;padding-top:12px"><div style="background:#141414;color:#fff;font:500 14px var(--hf);padding:10px 18px;border-radius:999px">העורך מעדכן: {{ revNote }}…</div></div>
+        </sc-if>
+      </div>
+    </div>
+    <div style="flex:none;border-top:1px solid #ececec;padding:12px 18px 22px">
+      <div style="max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:12px">
+        <div style="font:600 13px var(--hf);color:#555">בקשה מהעורך</div>
+        <div style="display:flex;gap:8px;overflow-x:auto">
+          <sc-for list="{{ revOptions }}" as="r" hint-placeholder-count="5">
+            <button onClick="{{ r.onClick }}" style="flex:none;height:36px;padding:0 14px;border:1px solid #dcdcdc;border-radius:999px;background:#fff;font:500 14px var(--hf);color:#141414;cursor:pointer">{{ r.label }}</button>
+          </sc-for>
+        </div>
+        <button onClick="{{ toPublish }}" style="width:100%;height:50px;border:none;border-radius:12px;background:#c8102e;color:#fff;font:700 17px var(--hf);cursor:pointer">המשך לפרסום</button>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isPublish }}">
+  <div style="flex:1;min-height:0;display:flex;flex-direction:column;position:relative">
+    <div style="height:54px;flex:none;display:flex;align-items:center;gap:12px;padding:0 16px;border-bottom:1px solid #ececec">
+      <button onClick="{{ backToDraft }}" style="border:none;background:transparent;font:500 20px var(--hf);cursor:pointer;padding:4px">→</button>
+      <div style="font:700 16px var(--hf)">למי לפרסם?</div>
+    </div>
+    <div style="flex:1;min-height:0;overflow-y:auto;padding:16px 18px">
+      <div style="max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:10px">
+        <sc-for list="{{ audienceModes }}" as="a" hint-placeholder-count="4">
+          <sc-if value="{{ a.enabled }}">
+          <button onClick="{{ a.onClick }}" style="display:flex;align-items:center;gap:12px;text-align:right;padding:14px;border:1px solid #e3e3e3;border-radius:12px;background:#fff;cursor:pointer;font-family:var(--hf)">
+            <sc-if value="{{ a.active }}"><span style="width:20px;height:20px;flex:none;border-radius:50%;border:6px solid #c8102e"></span></sc-if>
+            <sc-if value="{{ a.inactive }}"><span style="width:20px;height:20px;flex:none;border-radius:50%;border:2px solid #c9c9c9"></span></sc-if>
+            <span style="display:flex;flex-direction:column;gap:2px"><span style="font:700 16px var(--hf);color:#141414">{{ a.label }}</span><span style="font:400 13px var(--hf);color:#555">{{ a.hint }}</span></span>
+          </button>
+          </sc-if>
+          <sc-if value="{{ a.disabled }}">
+            <div style="display:flex;align-items:center;gap:12px;text-align:right;padding:14px;border:1px dashed #d6d6d6;border-radius:12px;background:#faf9f7">
+              <span style="width:20px;height:20px;flex:none;border-radius:50%;border:2px solid #e0e0e0"></span>
+              <span style="display:flex;flex-direction:column;gap:2px"><span style="font:700 16px var(--hf);color:#8a8a8a">{{ a.label }}</span><span style="font:400 13px var(--hf);color:#6b6b6b">{{ a.hint }}</span></span>
+            </div>
+          </sc-if>
+        </sc-for>
+        <sc-if value="{{ noConnections }}">
+          <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start;padding:14px;background:#f6f5f2;border-radius:12px">
+            <div style="font:400 14px/1.5 var(--hf);color:#444;text-wrap:pretty">עוד אין לכם חיבורים, לכן הכתבה תישמר אצלכם. כדי לשלוח כתבות, הזמינו חברים ומשפחה.</div>
+            <button onClick="{{ openInvite }}" style="height:38px;padding:0 16px;border:none;border-radius:999px;background:#141414;color:#fff;font:600 14px var(--hf);cursor:pointer">הזמנת חברים</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ showPeople }}">
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px">
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <sc-for list="{{ groupChips }}" as="g" hint-placeholder-count="0">
+                <button onClick="{{ g.onClick }}" style="height:34px;padding:0 14px;border:1px solid #dcdcdc;border-radius:999px;background:#f7f6f3;font:500 14px var(--hf);cursor:pointer">+ {{ g.name }}</button>
+              </sc-for>
+            </div>
+            <div style="border:1px solid #ececec;border-radius:12px;overflow:hidden">
+              <sc-for list="{{ peopleList }}" as="p" hint-placeholder-count="5">
+                <button onClick="{{ p.onClick }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border:none;border-bottom:1px solid #f0f0f0;background:#fff;cursor:pointer;font:500 15px var(--hf);color:#141414">
+                  <span>{{ p.name }}</span>
+                  <sc-if value="{{ p.checked }}"><span style="width:22px;height:22px;border-radius:6px;background:#c8102e;color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center">✓</span></sc-if>
+                  <sc-if value="{{ p.unchecked }}"><span style="width:22px;height:22px;border-radius:6px;border:2px solid #cfcfcf"></span></sc-if>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ showGroupPick }}">
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+            <sc-for list="{{ groupPick }}" as="g" hint-placeholder-count="0">
+              <sc-if value="{{ g.enabled }}"><button onClick="{{ g.onClick }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border:1px solid #ececec;border-radius:12px;background:#fff;cursor:pointer;font:500 15px var(--hf);color:#141414">
+                <span>{{ g.name }}</span><span style="font:400 13px var(--hf);color:#555">{{ g.mark }}</span>
+              </button></sc-if>
+              <sc-if value="{{ g.disabled }}"><div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border:1px dashed #d6d6d6;border-radius:12px;background:#faf9f7;font:500 15px var(--hf);color:#8a8a8a">
+                <span>{{ g.name }}</span><span style="display:flex;align-items:center;gap:10px"><span style="font:400 13px var(--hf);color:#6b6b6b">אין חברים בקבוצה</span><button onClick="{{ g.edit }}" style="border:none;background:transparent;padding:0;font:600 13px var(--hf);color:#c8102e;cursor:pointer;text-decoration:underline">עריכת הקבוצה</button></span>
+              </div></sc-if>
+            </sc-for>
+            <sc-if value="{{ noGroups }}"><div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start;padding:8px 2px"><div style="font:400 14px/1.5 var(--hf);color:#555">עוד אין קבוצות. אפשר ליצור קבוצה עכשיו מתוך החיבורים שלכם.</div><button onClick="{{ newGroupFromPublish }}" style="height:38px;padding:0 16px;border:none;border-radius:999px;background:#141414;color:#fff;font:600 14px var(--hf);cursor:pointer">+ יצירת קבוצה</button></div></sc-if>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+    <div style="flex:none;border-top:1px solid #ececec;padding:12px 18px 22px">
+      <div style="max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:10px">
+        <div style="font:400 13px/1.45 var(--hf);color:#555">אחרי הפרסום הנוסח ננעל. אפשר להסיר את הכתבה, אי אפשר לשכתב אותה.</div>
+        <sc-if value="{{ canPublish }}"><button onClick="{{ publish }}" style="width:100%;height:50px;border:none;border-radius:12px;background:#c8102e;color:#fff;font:700 17px var(--hf);cursor:pointer">{{ publishLabel }}</button></sc-if><sc-if value="{{ cantPublish }}"><div style="width:100%;height:50px;border-radius:12px;background:#d6d6d6;color:#fff;font:700 17px var(--hf);display:flex;align-items:center;justify-content:center">{{ publishLabel }}</div></sc-if>
+      </div>
+    </div>
+    <sc-if value="{{ showGroupSheet }}">
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,.42);display:flex;flex-direction:column;justify-content:flex-end;align-items:center">
+        <div style="width:100%;max-width:560px;background:#fff;border-radius:22px 22px 0 0;padding:22px 18px 26px;display:flex;flex-direction:column;gap:14px;max-height:88%;overflow-y:auto">
+          <div style="font:800 13px var(--hf);color:#2a7d3e">פורסם ✓</div>
+          <div style="font:800 21px/1.25 var(--hf)">רוצים ליצור קבוצה מהאנשים האלה או מחלקם?</div>
+          <input value="{{ groupName }}" onChange="{{ onGroupName }}" placeholder="שם הקבוצה" style="height:46px;border:1px solid #d6d6d6;border-radius:10px;padding:0 14px;font:500 16px var(--hf)">
+          <sc-if value="{{ gsHasError }}"><div style="font:500 13px var(--hf);color:#c8102e">{{ gsError }}</div></sc-if>
+          <div style="border:1px solid #ececec;border-radius:12px;overflow:hidden">
+            <sc-for list="{{ groupMembers }}" as="p" hint-placeholder-count="3">
+              <button onClick="{{ p.onClick }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border:none;border-bottom:1px solid #f0f0f0;background:#fff;cursor:pointer;font:500 15px var(--hf);color:#141414">
+                <span>{{ p.name }}</span>
+                <sc-if value="{{ p.checked }}"><span style="width:22px;height:22px;border-radius:6px;background:#141414;color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center">✓</span></sc-if>
+                <sc-if value="{{ p.unchecked }}"><span style="width:22px;height:22px;border-radius:6px;border:2px solid #cfcfcf"></span></sc-if>
+              </button>
+            </sc-for>
+          </div>
+          <div style="font:400 13px/1.45 var(--hf);color:#555">מי שלא ייכנס לקבוצה עדיין קיבל את הכתבה.</div>
+          <div style="display:flex;gap:10px">
+            <button onClick="{{ createGroup }}" style="flex:1;height:48px;border:none;border-radius:12px;background:{{ gsBtnBg }};color:#fff;font:700 16px var(--hf);cursor:pointer">יצירת קבוצה</button>
+            <button onClick="{{ skipGroup }}" style="flex:1;height:48px;border:1px solid #d6d6d6;border-radius:12px;background:#fff;color:#141414;font:600 16px var(--hf);cursor:pointer">לא עכשיו</button>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isFeed }}">
+  <div style="flex:1;min-height:0;display:flex;flex-direction:column;position:relative">
+    <sc-if value="{{ classicNews }}">
+    <div style="flex:none;background:#c8102e">
+      <div style="max-width:1200px;margin:0 auto;padding:12px 18px 14px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px">
+        <div style="font:900 32px/1 var(--hf);color:#fff;letter-spacing:-1.5px;direction:ltr">haiton</div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <span style="font:500 12px var(--hf);color:#fff">יום רביעי, 7 באוקטובר 2026</span>
+          <button onClick="{{ openNotifs }}" style="position:relative;height:30px;padding:0 12px;border:1.5px solid #fff;border-radius:999px;background:transparent;color:#fff;font:600 12.5px var(--hf);cursor:pointer">התראות<sc-if value="{{ hasUnread }}"><span style="position:absolute;top:-4px;left:-4px;width:12px;height:12px;border-radius:50%;background:#ffd23f;border:2px solid #c8102e"></span></sc-if></button>
+          <button onClick="{{ openMyPage }}" style="width:32px;height:32px;border-radius:50%;border:1.5px solid #fff;background:{{ meAvatarBgClassic }};color:#fff;font:700 14px var(--hf);cursor:pointer">{{ meBadge }}</button>
+        </div>
+      </div>
+    </div>
+    <sc-if value="{{ showFlash }}">
+      <div style="height:30px;background:#f3f3f1;border-bottom:1px solid #e3e3e0;display:flex;align-items:stretch;overflow:hidden">
+        <div style="flex:none;position:relative;z-index:1;background:#c8102e;color:#fff;font:800 12.5px/30px var(--hf);padding:0 12px">מבזקים</div>
+        <div style="flex:1;min-width:0;overflow:hidden;direction:ltr">
+          <div style="display:flex;width:max-content;height:30px;animation:hticker 40s linear infinite" style-hover="animation-play-state:paused">
+            <sc-for list="{{ tickerItems }}" as="f" hint-placeholder-count="6">
+              <button onClick="{{ f.open }}" style="flex:none;direction:rtl;display:flex;align-items:center;gap:8px;height:30px;padding:0 20px;border:none;border-left:1px solid #dcdcd8;background:transparent;cursor:pointer;white-space:nowrap">
+                <span style="font:700 12px var(--hf);color:#c8102e;direction:ltr">{{ f.clock }}</span>
+                <span style="font:500 13px var(--hf);color:#141414">{{ f.text }}</span>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+    <div style="flex:none;border-bottom:1px solid #e2e2e2;background:#fff">
+      <div style="max-width:1200px;margin:0 auto;display:flex;gap:4px;overflow-x:auto;padding:0 10px">
+        <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="1">
+          <button onClick="{{ t.onClick }}" style="flex:none;height:46px;padding:0 10px;border:none;background:transparent;cursor:pointer;position:relative">
+            <sc-if value="{{ t.active }}"><span style="font:800 15.5px var(--hf);color:#141414">{{ t.name }}</span><span style="position:absolute;bottom:0;left:6px;right:6px;height:3px;background:#c8102e"></span></sc-if>
+            <sc-if value="{{ t.inactive }}"><span style="font:500 15.5px var(--hf);color:#555">{{ t.name }}</span></sc-if>
+          </button>
+        </sc-for>
+        <button onClick="{{ openNewGroup }}" style="flex:none;height:46px;padding:0 10px;border:none;background:transparent;cursor:pointer;font:500 15.5px var(--hf);color:#c8102e">+ קבוצה</button>
+      </div>
+    </div>
+    <div style="flex:1;min-height:0;overflow-y:auto;padding-bottom:96px">
+      <sc-if value="{{ groupHeader }}">
+        <div style="max-width:1200px;margin:0 auto;padding:16px 18px 0;display:flex;justify-content:space-between;align-items:center;gap:12px"><span style="font:400 13.5px var(--hf);color:#555;min-width:0">{{ groupCaption }}</span><button onClick="{{ editCurrentGroup }}" style="flex:none;height:30px;padding:0 12px;border-radius:999px;background:transparent;font:500 13px var(--hf);cursor:pointer;border:1px solid #d6d6d6;color:#141414">עריכת הקבוצה</button></div>
+      </sc-if>
+
+      <sc-if value="{{ feedMobile }}">
+        <sc-if value="{{ hasMain }}">
+          <div onClick="{{ main.open }}" style="cursor:pointer;padding-bottom:18px;border-bottom:1px solid #e6e6e6">
+            <sc-if value="{{ main.hasImage }}">
+              <div style="aspect-ratio:16/9;background:repeating-linear-gradient(135deg,#ecebe8 0 8px,#e2e1dd 8px 16px);display:flex;align-items:center;justify-content:center;font:12px ui-monospace,monospace;color:#6f6b64;direction:ltr">{{ main.img }}</div>
+            </sc-if>
+            <div style="padding:16px 18px 0;display:flex;flex-direction:column;gap:8px">
+              <h2 style="font:800 27px/1.18 var(--hf);margin:0;text-wrap:pretty">{{ main.headline }}</h2>
+              <p style="font:400 16px/1.5 var(--hf);color:#444;margin:0;text-wrap:pretty">{{ main.sub }}</p>
+              <div style="font:500 12.5px var(--hf);color:#666"><span style="color:#c8102e;font-weight:700">{{ main.author }}</span> · {{ main.time }}</div>
+            </div>
+          </div>
+          <sc-for list="{{ subs }}" as="a" hint-placeholder-count="3">
+            <div onClick="{{ a.open }}" style="cursor:pointer;display:flex;gap:14px;padding:16px 18px;border-bottom:1px solid #e6e6e6">
+              <sc-if value="{{ a.hasImage }}"><div style="width:112px;height:74px;flex:none;background:repeating-linear-gradient(135deg,#ecebe8 0 6px,#e2e1dd 6px 12px);display:flex;align-items:center;justify-content:center;font:10px ui-monospace,monospace;color:#6f6b64;direction:ltr;text-align:center;padding:4px">{{ a.img }}</div></sc-if>
+              <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+                <h3 style="font:700 16.5px/1.3 var(--hf);margin:0;text-wrap:pretty">{{ a.headline }}</h3>
+                <div style="font:500 12px var(--hf);color:#666"><span style="color:#c8102e;font-weight:700">{{ a.author }}</span> · {{ a.time }}</div>
+              </div>
+            </div>
+          </sc-for>
+          <sc-if value="{{ hasMore }}">
+            <div style="padding:24px 18px 4px"><div style="font:800 19px var(--hf)">עוד כתבות</div><div style="width:34px;height:3px;background:#c8102e;margin-top:6px"></div></div>
+            <sc-for list="{{ more }}" as="a" hint-placeholder-count="3">
+              <div onClick="{{ a.open }}" style="cursor:pointer;padding:14px 18px;border-bottom:1px solid #ececec;display:flex;flex-direction:column;gap:4px">
+                <h4 style="font:700 15.5px/1.35 var(--hf);margin:0;text-wrap:pretty">{{ a.headline }}</h4>
+                <div style="font:500 12px var(--hf);color:#666"><span style="color:#c8102e;font-weight:700">{{ a.author }}</span> · {{ a.time }}</div>
+              </div>
+            </sc-for>
+          </sc-if>
+        </sc-if>
+      </sc-if>
+
+      <sc-if value="{{ feedDesktop }}">
+        <sc-if value="{{ hasMain }}">
+          <div style="max-width:1200px;margin:0 auto;padding:28px 32px 0">
+            <div style="display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:36px">
+              <div onClick="{{ main.open }}" style="cursor:pointer;display:flex;flex-direction:column;gap:12px">
+                <sc-if value="{{ main.hasImage }}">
+                  <div style="aspect-ratio:16/9;background:repeating-linear-gradient(135deg,#ecebe8 0 10px,#e2e1dd 10px 20px);display:flex;align-items:center;justify-content:center;font:13px ui-monospace,monospace;color:#6f6b64;direction:ltr">{{ main.img }}</div>
+                </sc-if>
+                <h2 style="font:800 40px/1.12 var(--hf);margin:0;text-wrap:pretty;letter-spacing:-.5px">{{ main.headline }}</h2>
+                <p style="font:400 19px/1.5 var(--hf);color:#444;margin:0;text-wrap:pretty">{{ main.sub }}</p>
+                <div style="font:500 13.5px var(--hf);color:#666"><span style="color:#c8102e;font-weight:700">{{ main.author }}</span> · {{ main.time }}</div>
+              </div>
+              <div style="display:flex;flex-direction:column">
+                <sc-for list="{{ subs }}" as="a" hint-placeholder-count="3">
+                  <div onClick="{{ a.open }}" style="cursor:pointer;display:flex;flex-direction:column;gap:10px;padding:0 0 18px;margin-bottom:18px;border-bottom:1px solid #e6e6e6">
+                    <sc-if value="{{ a.hasImage }}"><div style="aspect-ratio:2/1;background:repeating-linear-gradient(135deg,#ecebe8 0 8px,#e2e1dd 8px 16px);display:flex;align-items:center;justify-content:center;font:11px ui-monospace,monospace;color:#6f6b64;direction:ltr">{{ a.img }}</div></sc-if>
+                    <h3 style="font:700 18px/1.3 var(--hf);margin:0;text-wrap:pretty">{{ a.headline }}</h3>
+                    <div style="font:500 12.5px var(--hf);color:#666"><span style="color:#c8102e;font-weight:700">{{ a.author }}</span> · {{ a.time }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+            <sc-if value="{{ hasMore }}">
+              <div style="padding:18px 0 16px;border-top:2px solid #141414;margin-top:8px;font:800 21px var(--hf)">עוד כתבות</div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:28px">
+                <sc-for list="{{ more }}" as="a" hint-placeholder-count="4">
+                  <div onClick="{{ a.open }}" style="cursor:pointer;display:flex;flex-direction:column;gap:8px">
+                    <sc-if value="{{ a.hasImage }}"><div style="aspect-ratio:16/10;background:repeating-linear-gradient(135deg,#ecebe8 0 6px,#e2e1dd 6px 12px);display:flex;align-items:center;justify-content:center;font:10px ui-monospace,monospace;color:#6f6b64;direction:ltr">{{ a.img }}</div></sc-if>
+                    <h4 style="font:700 16px/1.35 var(--hf);margin:0;text-wrap:pretty">{{ a.headline }}</h4>
+                    <div style="font:500 12px var(--hf);color:#666"><span style="color:#c8102e;font-weight:700">{{ a.author }}</span> · {{ a.time }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
+      </sc-if>
+
+      <sc-if value="{{ feedEmpty }}">
+        <div style="padding:56px 28px;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center"><div style="font:400 15px/1.5 var(--hf);color:#555;max-width:320px;text-wrap:pretty">עוד אין כאן כתבות שכללו אתכם. כתבו משהו בעצמכם, או הזמינו חברים כדי לקרוא את שלהם.</div><div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center"><button onClick="{{ newChat }}" style="height:40px;padding:0 18px;border:none;border-radius:999px;background:#141414;color:#fff;font:600 14.5px var(--hf);cursor:pointer">ספרו לכתב</button><button onClick="{{ openInvite }}" style="height:40px;padding:0 18px;border:1px solid #d6d6d6;border-radius:999px;background:transparent;color:#141414;font:600 14.5px var(--hf);cursor:pointer">הזמנת חברים</button></div></div>
+      </sc-if>
+    </div>
+    </sc-if>
+    <sc-if value="{{ tabloidNews }}">
+    <div style="flex:none;background:#f3eee4">
+      <div style="max-width:1200px;margin:0 auto;padding:10px 18px 0">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;font:500 11.5px var(--hf);color:#5d554a">
+          <span>יום רביעי · 7.10.2026</span>
+          <span style="display:flex;align-items:center;gap:8px"><button onClick="{{ openNotifs }}" style="position:relative;height:28px;padding:0 11px;border:1px solid #16130f;border-radius:999px;background:transparent;color:#16130f;font:600 12px var(--hf);cursor:pointer">התראות<sc-if value="{{ hasUnread }}"><span style="position:absolute;top:-4px;left:-4px;width:12px;height:12px;border-radius:50%;background:#d7261e;border:2px solid #f3eee4"></span></sc-if></button><button onClick="{{ openMyPage }}" style="width:30px;height:30px;border-radius:50%;border:none;background:{{ meAvatarBg }};color:#f3eee4;font:700 13px var(--hf);cursor:pointer">{{ meBadge }}</button></span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 0 10px;border-bottom:1px solid #16130f">
+          <div style="font:900 56px/.95 var(--df);color:#d7261e;letter-spacing:-2px;direction:ltr">haiton</div>
+          <div style="font:600 12.5px var(--hf);color:#16130f;letter-spacing:.4px">החדשות של האנשים שלכם</div>
+        </div>
+        <div style="height:4px;border-bottom:1px solid #16130f"></div>
+      </div>
+      <sc-if value="{{ showFlash }}">
+        <div style="height:30px;background:#16130f;display:flex;align-items:stretch;overflow:hidden">
+          <div style="flex:none;position:relative;z-index:1;background:#d7261e;color:#fff;font:800 12.5px var(--hf);padding:0 12px;display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:#fff"></span>מבזקים</div>
+          <div style="flex:1;min-width:0;overflow:hidden;direction:ltr">
+            <div style="display:flex;width:max-content;height:30px;animation:hticker 40s linear infinite" style-hover="animation-play-state:paused">
+              <sc-for list="{{ tickerItems }}" as="f" hint-placeholder-count="6">
+                <button onClick="{{ f.open }}" style="flex:none;direction:rtl;display:flex;align-items:center;gap:8px;height:30px;padding:0 20px;border:none;border-left:1px solid #3a342c;background:transparent;cursor:pointer;white-space:nowrap">
+                  <span style="font:700 11.5px var(--hf);color:#ff7a6e;direction:ltr">{{ f.clock }}</span>
+                  <span style="font:500 13px var(--hf);color:#f3eee4">{{ f.text }}</span>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+      <div style="max-width:1200px;margin:0 auto;display:flex;gap:6px;overflow-x:auto;padding:10px 18px">
+        <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="1">
+          <button onClick="{{ t.onClick }}" style="flex:none;border:none;background:transparent;padding:0;cursor:pointer">
+            <sc-if value="{{ t.active }}"><span style="display:block;height:32px;line-height:32px;padding:0 14px;border-radius:999px;background:#16130f;color:#f3eee4;font:700 14px/32px var(--hf)">{{ t.name }}</span></sc-if>
+            <sc-if value="{{ t.inactive }}"><span style="display:block;height:32px;padding:0 14px;border-radius:999px;border:1px solid #cfc6b6;color:#16130f;font:500 14px/30px var(--hf)">{{ t.name }}</span></sc-if>
+          </button>
+        </sc-for>
+        <button onClick="{{ openNewGroup }}" style="flex:none;height:32px;padding:0 14px;border-radius:999px;border:1px dashed #8a8072;background:transparent;color:#16130f;font:500 14px var(--hf);cursor:pointer">+ קבוצה</button>
+      </div>
+    </div>
+    <div style="flex:1;min-height:0;overflow-y:auto;background:#f3eee4;padding-bottom:96px">
+      <sc-if value="{{ groupHeader }}">
+        <div style="max-width:1200px;margin:0 auto;padding:16px 18px 0;display:flex;justify-content:space-between;align-items:center;gap:12px"><span style="font:500 13.5px var(--hf);color:#5d554a;min-width:0">{{ groupCaption }}</span><button onClick="{{ editCurrentGroup }}" style="flex:none;height:30px;padding:0 12px;border-radius:999px;background:transparent;font:500 13px var(--hf);cursor:pointer;border:1px solid #16130f;color:#16130f">עריכת הקבוצה</button></div>
+      </sc-if>
+
+      <sc-if value="{{ feedMobile }}">
+        <sc-if value="{{ hasMain }}">
+          <sc-if value="{{ main.noImage }}">
+            <div onClick="{{ main.open }}" style="cursor:pointer;background:#d7261e;color:#fff;padding:24px 18px 22px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex"><span style="background:#fff;color:#d7261e;font:800 12px var(--hf);letter-spacing:.6px;padding:4px 9px">{{ leadKicker }}</span></div>
+              <h2 style="font:900 36px/1.05 var(--df);margin:0;text-wrap:pretty">{{ main.headline }}</h2>
+              <p style="font:500 16px/1.5 var(--hf);margin:0;color:#fff;text-wrap:pretty">{{ main.sub }}</p>
+              <div style="display:flex;align-items:center;gap:8px;font:500 12.5px var(--hf)"><span style="width:24px;height:24px;border-radius:50%;background:{{ main.leadAvatarBg }};color:#fff;font:700 12px var(--hf);display:flex;align-items:center;justify-content:center">{{ main.initial }}</span><span style="font-weight:700">{{ main.author }}</span><span>· {{ main.time }}</span></div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ main.hasImage }}">
+            <div onClick="{{ main.open }}" style="cursor:pointer;padding:20px 18px 22px;border-bottom:1px solid #16130f;display:flex;flex-direction:column;gap:12px">
+              <div style="font:800 12px var(--hf);color:#d7261e;letter-spacing:.6px">{{ leadKicker }}</div>
+              <h2 style="font:900 34px/1.06 var(--df);margin:0;color:#16130f;text-wrap:pretty">{{ main.headline }}</h2>
+              <div style="aspect-ratio:4/3;background:repeating-linear-gradient(135deg,#e6dfd1 0 8px,#ddd5c5 8px 16px);display:flex;align-items:center;justify-content:center;font:12px ui-monospace,monospace;color:#6f665a;direction:ltr">{{ main.img }}</div>
+              <p style="font:400 16px/1.5 var(--hf);color:#3d362d;margin:0;text-wrap:pretty">{{ main.sub }}</p>
+              <div style="display:flex;align-items:center;gap:8px;font:500 12.5px var(--hf);color:#5d554a"><span style="width:24px;height:24px;border-radius:50%;background:{{ main.color }};color:#fff;font:700 12px var(--hf);display:flex;align-items:center;justify-content:center">{{ main.initial }}</span><span style="font-weight:700;color:#16130f">{{ main.author }}</span><span>· {{ main.time }}</span></div>
+            </div>
+          </sc-if>
+          <sc-for list="{{ subs }}" as="a" hint-placeholder-count="3">
+            <div onClick="{{ a.open }}" style="cursor:pointer;display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;padding:18px 18px;border-bottom:1px solid #d8cfbf">
+              <div style="font:900 30px/1 var(--df);color:#d7261e">{{ a.num }}</div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <sc-if value="{{ a.hasPrev }}"><div style="font:800 11.5px var(--hf);color:#d7261e;letter-spacing:.4px">המשך סיפור</div></sc-if>
+                <h3 style="font:800 19px/1.25 var(--df);margin:0;color:#16130f;text-wrap:pretty">{{ a.headline }}</h3>
+                <div style="display:flex;align-items:center;gap:7px;font:500 12px var(--hf);color:#5d554a"><span style="width:20px;height:20px;border-radius:50%;background:{{ a.color }};color:#fff;font:700 11px var(--hf);display:flex;align-items:center;justify-content:center">{{ a.initial }}</span><span style="font-weight:700;color:#16130f">{{ a.author }}</span><span>· {{ a.time }}</span></div>
+              </div>
+            </div>
+          </sc-for>
+          <sc-if value="{{ hasMore }}">
+            <div style="padding:26px 18px 8px;display:flex;align-items:center;gap:12px"><span style="font:900 22px var(--df);color:#16130f">עוד מהמעגל</span><span style="flex:1;height:3px;background:#16130f"></span></div>
+            <sc-for list="{{ more }}" as="a" hint-placeholder-count="3">
+              <div onClick="{{ a.open }}" style="cursor:pointer;display:flex;gap:12px;padding:14px 18px;border-bottom:1px solid #d8cfbf">
+                <sc-if value="{{ a.hasImage }}"><div style="width:76px;height:76px;flex:none;background:repeating-linear-gradient(135deg,#e6dfd1 0 6px,#ddd5c5 6px 12px);display:flex;align-items:center;justify-content:center;font:9px ui-monospace,monospace;color:#6f665a;direction:ltr;text-align:center;padding:4px">{{ a.img }}</div></sc-if>
+                <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+                  <h4 style="font:700 16px/1.3 var(--df);margin:0;color:#16130f;text-wrap:pretty">{{ a.headline }}</h4>
+                  <div style="display:flex;align-items:center;gap:6px;font:500 12px var(--hf);color:#5d554a"><span style="width:8px;height:8px;border-radius:50%;background:{{ a.color }}"></span><span style="font-weight:700;color:#16130f">{{ a.author }}</span><span>· {{ a.time }}</span></div>
+                </div>
+              </div>
+            </sc-for>
+          </sc-if>
+        </sc-if>
+      </sc-if>
+
+      <sc-if value="{{ feedDesktop }}">
+        <sc-if value="{{ hasMain }}">
+          <div style="max-width:1200px;margin:0 auto;padding:28px 32px 0;display:flex;flex-direction:column;gap:28px">
+            <sc-if value="{{ main.noImage }}">
+              <div onClick="{{ main.open }}" style="cursor:pointer;background:#d7261e;color:#fff;padding:40px 44px 36px;display:flex;flex-direction:column;gap:18px">
+                <div style="display:flex"><span style="background:#fff;color:#d7261e;font:800 13px var(--hf);letter-spacing:.6px;padding:5px 10px">{{ leadKicker }}</span></div>
+                <h2 style="font:900 66px/1.02 var(--df);margin:0;max-width:980px;text-wrap:pretty;letter-spacing:-.5px">{{ main.headline }}</h2>
+                <p style="font:500 21px/1.5 var(--hf);margin:0;max-width:760px;text-wrap:pretty">{{ main.sub }}</p>
+                <div style="display:flex;align-items:center;gap:9px;font:500 14px var(--hf)"><span style="width:28px;height:28px;border-radius:50%;background:{{ main.leadAvatarBg }};color:#fff;font:700 13px var(--hf);display:flex;align-items:center;justify-content:center">{{ main.initial }}</span><span style="font-weight:700">{{ main.author }}</span><span>· {{ main.time }}</span></div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ main.hasImage }}">
+              <div onClick="{{ main.open }}" style="cursor:pointer;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:36px;align-items:end;padding-bottom:28px;border-bottom:1px solid #16130f">
+                <div style="display:flex;flex-direction:column;gap:16px">
+                  <div style="font:800 13px var(--hf);color:#d7261e;letter-spacing:.6px">{{ leadKicker }}</div>
+                  <h2 style="font:900 54px/1.03 var(--df);margin:0;color:#16130f;text-wrap:pretty;letter-spacing:-.5px">{{ main.headline }}</h2>
+                  <p style="font:400 18px/1.5 var(--hf);color:#3d362d;margin:0;text-wrap:pretty">{{ main.sub }}</p>
+                  <div style="display:flex;align-items:center;gap:9px;font:500 13.5px var(--hf);color:#5d554a"><span style="width:28px;height:28px;border-radius:50%;background:{{ main.color }};color:#fff;font:700 13px var(--hf);display:flex;align-items:center;justify-content:center">{{ main.initial }}</span><span style="font-weight:700;color:#16130f">{{ main.author }}</span><span>· {{ main.time }}</span></div>
+                </div>
+                <div style="aspect-ratio:4/3;background:repeating-linear-gradient(135deg,#e6dfd1 0 10px,#ddd5c5 10px 20px);display:flex;align-items:center;justify-content:center;font:13px ui-monospace,monospace;color:#6f665a;direction:ltr">{{ main.img }}</div>
+              </div>
+            </sc-if>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:#cfc6b6;border-bottom:1px solid #cfc6b6">
+              <sc-for list="{{ subs }}" as="a" hint-placeholder-count="3">
+                <div onClick="{{ a.open }}" style="cursor:pointer;background:#f3eee4;padding:4px 22px 24px;display:flex;flex-direction:column;gap:12px">
+                  
+                  <sc-if value="{{ a.hasImage }}"><div style="aspect-ratio:3/2;background:repeating-linear-gradient(135deg,#e6dfd1 0 8px,#ddd5c5 8px 16px);display:flex;align-items:center;justify-content:center;font:11px ui-monospace,monospace;color:#6f665a;direction:ltr">{{ a.img }}</div></sc-if>
+                  <sc-if value="{{ a.hasPrev }}"><div style="font:800 12px var(--hf);color:#d7261e;letter-spacing:.4px;padding-top:14px">המשך סיפור</div></sc-if>
+                  <h3 style="font:800 22px/1.22 var(--df);margin:0;color:#16130f;text-wrap:pretty">{{ a.headline }}</h3>
+                  <div style="display:flex;align-items:center;gap:7px;font:500 12.5px var(--hf);color:#5d554a"><span style="width:22px;height:22px;border-radius:50%;background:{{ a.color }};color:#fff;font:700 11px var(--hf);display:flex;align-items:center;justify-content:center">{{ a.initial }}</span><span style="font-weight:700;color:#16130f">{{ a.author }}</span><span>· {{ a.time }}</span></div>
+                </div>
+              </sc-for>
+            </div>
+            <sc-if value="{{ hasMore }}">
+              <div style="display:flex;align-items:center;gap:14px"><span style="font:900 26px var(--df);color:#16130f">עוד מהמעגל</span><span style="flex:1;height:3px;background:#16130f"></span></div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:28px 24px">
+                <sc-for list="{{ more }}" as="a" hint-placeholder-count="4">
+                  <div onClick="{{ a.open }}" style="cursor:pointer;display:flex;flex-direction:column;gap:10px;padding-top:12px;border-top:1px solid #16130f">
+                    <sc-if value="{{ a.hasImage }}"><div style="aspect-ratio:16/10;background:repeating-linear-gradient(135deg,#e6dfd1 0 6px,#ddd5c5 6px 12px);display:flex;align-items:center;justify-content:center;font:10px ui-monospace,monospace;color:#6f665a;direction:ltr">{{ a.img }}</div></sc-if>
+                    <h4 style="font:700 17px/1.3 var(--df);margin:0;color:#16130f;text-wrap:pretty">{{ a.headline }}</h4>
+                    <div style="display:flex;align-items:center;gap:6px;font:500 12px var(--hf);color:#5d554a"><span style="width:8px;height:8px;border-radius:50%;background:{{ a.color }}"></span><span style="font-weight:700;color:#16130f">{{ a.author }}</span><span>· {{ a.time }}</span></div>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
+      </sc-if>
+
+      <sc-if value="{{ feedEmpty }}">
+        <div style="padding:56px 28px;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center"><div style="font:400 15px/1.5 var(--hf);color:#5d554a;max-width:320px;text-wrap:pretty">עוד אין כאן כתבות שכללו אתכם. כתבו משהו בעצמכם, או הזמינו חברים כדי לקרוא את שלהם.</div><div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center"><button onClick="{{ newChat }}" style="height:40px;padding:0 18px;border:none;border-radius:999px;background:#141414;color:#fff;font:600 14.5px var(--hf);cursor:pointer">ספרו לכתב</button><button onClick="{{ openInvite }}" style="height:40px;padding:0 18px;border:1px solid #16130f;border-radius:999px;background:transparent;color:#141414;font:600 14.5px var(--hf);cursor:pointer">הזמנת חברים</button></div></div>
+      </sc-if>
+    </div>
+    </sc-if>
+    <sc-if value="{{ hasDraft }}">
+      <div style="position:absolute;bottom:86px;left:16px;right:16px;display:flex;justify-content:flex-end;pointer-events:none">
+        <button onClick="{{ resume }}" style="pointer-events:auto;width:100%;max-width:360px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border:1px solid #16130f;border-radius:14px;background:#fffdf7;cursor:pointer;text-align:right;box-shadow:4px 4px 0 #16130f">
+          <span style="display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font:700 12px var(--hf);color:#c8102e">{{ draftKicker }}</span><span style="font:700 15px/1.35 var(--hf);color:#16130f;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ draftPreview }}</span></span>
+          <span style="flex:none;font:600 13.5px var(--hf);color:#16130f">המשך ←</span>
+        </button>
+      </div>
+    </sc-if>
+    <button onClick="{{ newChat }}" style="position:absolute;bottom:24px;left:20px;height:50px;padding:0 22px;border:none;border-radius:999px;background:#141414;color:#fff;font:700 16px var(--hf);cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.25)">+ מה קרה?</button>
+    <sc-if value="{{ toastVisible }}">
+      <div style="position:absolute;top:10px;left:50%;transform:translateX(-50%);width:calc(100% - 24px);max-width:420px;background:#141414;color:#fff;border-radius:14px;padding:12px 16px;display:flex;flex-direction:column;gap:3px;box-shadow:0 10px 30px rgba(0,0,0,.25)">
+        <div style="font:700 14px var(--hf)">{{ toastTitle }}</div>
+        <sc-if value="{{ toastPush }}"><div style="font:400 13.5px/1.4 var(--hf);color:#d8d8d8">פוש נשלח: {{ pushText }}</div></sc-if>
+      </div>
+    </sc-if>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isArticleTabloid }}">
+  <div style="flex:1;min-height:0;display:flex;flex-direction:column;background:#f3eee4">
+    <div style="flex:none;border-bottom:1px solid #16130f">
+      <div style="max-width:1200px;margin:0 auto;height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 14px">
+        <button onClick="{{ goFeed }}" style="border:none;background:transparent;color:#16130f;font:500 20px var(--hf);cursor:pointer;padding:4px">→</button>
+        <div style="font:900 28px/1 var(--df);color:#d7261e;letter-spacing:-1px;direction:ltr">haiton</div>
+        <span style="width:28px"></span>
+      </div>
+    </div>
+    <div style="flex:1;min-height:0;overflow-y:auto;padding:26px 18px 48px">
+      <div style="max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:16px">
+        <div style="font:800 12.5px var(--hf);color:#d7261e;letter-spacing:.6px">{{ art.kicker }}</div>
+        <h1 style="font:900 38px/1.06 var(--df);margin:0;color:#16130f;text-wrap:pretty;letter-spacing:-.3px">{{ art.headline }}</h1>
+        <p style="font:500 18.5px/1.5 var(--hf);color:#3d362d;margin:0;text-wrap:pretty">{{ art.sub }}</p>
+        <div style="display:flex;align-items:center;gap:10px;padding:12px 0;border-top:1px solid #16130f;border-bottom:1px solid #d8cfbf">
+          <span style="width:34px;height:34px;flex:none;border-radius:50%;background:{{ art.color }};color:#fff;font:700 15px var(--hf);display:flex;align-items:center;justify-content:center">{{ art.initial }}</span>
+          <span style="display:flex;flex-direction:column;gap:1px"><button onClick="{{ art.openAuthor }}" style="border:none;background:transparent;padding:0;text-align:right;font:700 14px var(--hf);color:#16130f;cursor:pointer">{{ art.author }}</button><span style="font:400 12.5px var(--hf);color:#5d554a">{{ art.time }}</span></span>
+        </div>
+        <sc-if value="{{ art.hasImage }}">
+          <div style="aspect-ratio:16/10;background:repeating-linear-gradient(135deg,#e6dfd1 0 8px,#ddd5c5 8px 16px);display:flex;align-items:center;justify-content:center;font:12px ui-monospace,monospace;color:#6f665a;direction:ltr">{{ art.img }}</div>
+        </sc-if>
+        <div style="display:flex;flex-direction:column;gap:16px;padding-top:4px">
+          <sc-for list="{{ art.body }}" as="p" hint-placeholder-count="3"><p style="font:400 18px/1.8 var(--hf);color:#16130f;margin:0;text-wrap:pretty">{{ p }}</p></sc-for>
+        </div>
+        <div style="display:flex;justify-content:center;padding-top:8px;font:900 20px var(--df);color:#d7261e">■</div>
+        <sc-if value="{{ art.hasPrev }}">
+          <div style="margin-top:10px;padding-top:14px;border-top:3px solid #16130f;display:flex;flex-direction:column;gap:4px">
+            <div style="font:900 22px var(--df);color:#16130f">הסיפור עד כה</div>
+            <div style="font:400 13px/1.5 var(--hf);color:#5d554a">הכתבה נשענת רק על כתבות קודמות של {{ art.firstName }}.</div>
+            <div style="display:flex;flex-direction:column;margin-top:12px">
+              <sc-for list="{{ art.history }}" as="h" hint-placeholder-count="1">
+                <div onClick="{{ h.open }}" style="cursor:pointer;display:grid;grid-template-columns:14px minmax(0,1fr);gap:12px">
+                  <div style="display:flex;flex-direction:column;align-items:center"><span style="width:12px;height:12px;flex:none;border-radius:50%;background:#d7261e;margin-top:3px"></span><span style="flex:1;width:2px;background:#cfc6b6"></span></div>
+                  <div style="display:flex;flex-direction:column;gap:4px;padding-bottom:16px"><span style="font:700 12px var(--hf);color:#d7261e">{{ h.time }}</span><span style="font:800 18px/1.3 var(--df);color:#16130f;text-wrap:pretty">{{ h.headline }}</span><span style="font:400 14.5px/1.5 var(--hf);color:#3d362d;text-wrap:pretty">{{ h.sub }}</span></div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ canReact }}">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding-top:6px">
+            <div style="font:600 13px var(--hf);color:#5d554a">{{ reactPrompt }}</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center">
+              <sc-for list="{{ reactBtns }}" as="r" hint-placeholder-count="3">
+                <button onClick="{{ r.onClick }}" style="border:none;background:transparent;padding:0;cursor:pointer">
+                  <sc-if value="{{ r.active }}"><span style="display:block;height:36px;padding:0 16px;border-radius:999px;background:#16130f;color:#fff;font:700 14px/36px var(--hf)">{{ r.label }}</span></sc-if>
+                  <sc-if value="{{ r.inactive }}"><span style="display:block;height:36px;padding:0 16px;border-radius:999px;border:1px solid #16130f;color:#141414;font:500 14px/34px var(--hf)">{{ r.label }}</span></sc-if>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ canReport }}">
+          <div style="display:flex;justify-content:center">
+            <button onClick="{{ openReport }}" style="height:36px;padding:0 14px;border:1px solid #cfc6b6;border-radius:999px;background:transparent;color:#5d554a;font:500 13.5px var(--hf);cursor:pointer;display:flex;align-items:center;gap:6px"><span style="font-size:13px">⚑</span>דיווח על הכתבה</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ reportDone }}">
+          <div style="display:flex;justify-content:center"><span style="height:36px;padding:0 14px;border-radius:999px;background:#e6dfd1;color:#5d554a;font:500 13.5px var(--hf);display:flex;align-items:center;gap:6px">✓ הדיווח נשלח למנהל האתר</span></div>
+        </sc-if>
+        <sc-if value="{{ art.isMine }}">
+          <div style="display:flex;flex-direction:column;gap:10px;padding:14px 16px;border:1px solid #16130f;border-radius:4px;background:#fffdf7;margin-top:8px">
+            <div style="font:800 13px var(--hf);color:#141414">מי קיבל את הכתבה</div>
+            <div style="font:400 14.5px/1.5 var(--hf);color:#3d362d;text-wrap:pretty">{{ art.audText }}</div>
+            <sc-if value="{{ art.showRecv }}">
+              <div style="display:flex;flex-direction:column;gap:6px;padding-top:10px;border-top:1px solid #e6dfd1">
+                <div style="font:800 13px var(--hf);color:#141414">תגובות</div>
+                <sc-for list="{{ art.recvList }}" as="r" hint-placeholder-count="0">
+                  <div style="display:flex;justify-content:space-between;gap:10px;font:500 14.5px var(--hf);color:#16130f"><span>{{ r.name }}</span><span style="padding:2px 10px;border-radius:999px;background:#16130f;color:#fff;font:600 13px var(--hf)">{{ r.label }}</span></div>
+                </sc-for>
+                <sc-if value="{{ art.noRecv }}"><div style="font:400 13.5px var(--hf);color:#5d554a">עוד אין תגובות.</div></sc-if>
+              </div>
+            </sc-if>
+            <button onClick="{{ askRemoveArticle }}" style="align-self:flex-start;height:36px;padding:0 14px;border:1px solid #c8102e;border-radius:999px;background:transparent;color:#c8102e;font:600 13.5px var(--hf);cursor:pointer">הסרת הכתבה</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ showYourTurn }}">
+          <div style="margin-top:12px;padding:22px;background:#16130f;color:#f3eee4;display:flex;flex-direction:column;gap:14px;align-items:flex-start">
+            <div style="font:900 24px/1.2 var(--df)">גם לכם קרה משהו היום?</div>
+            <button onClick="{{ newChat }}" style="height:44px;padding:0 20px;border:none;border-radius:999px;background:#d7261e;color:#fff;font:700 15px var(--hf);cursor:pointer">ספרו לכתב</button>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isArticleClassic }}">
+  <div style="flex:1;min-height:0;display:flex;flex-direction:column">
+    <div style="flex:none;background:#c8102e">
+      <div style="max-width:1200px;margin:0 auto;height:50px;display:flex;align-items:center;justify-content:space-between;padding:0 14px">
+        <button onClick="{{ goFeed }}" style="border:none;background:transparent;color:#fff;font:500 20px var(--hf);cursor:pointer;padding:4px">→</button>
+        <div style="font:900 22px var(--hf);color:#fff;letter-spacing:-1px;direction:ltr">haiton</div>
+        <span style="width:28px"></span>
+      </div>
+    </div>
+    <div style="flex:1;min-height:0;overflow-y:auto;padding:24px 18px 48px">
+      <div style="max-width:720px;margin:0 auto">
+        <h1 style="font:800 30px/1.16 var(--hf);margin:0 0 12px;text-wrap:pretty;letter-spacing:-.3px">{{ art.headline }}</h1>
+        <p style="font:500 18px/1.5 var(--hf);color:#3a3a3a;margin:0 0 16px;text-wrap:pretty">{{ art.sub }}</p>
+        <div style="font:400 13px var(--hf);color:#555;padding-bottom:14px;border-bottom:1px solid #ececec;margin-bottom:18px;display:flex;gap:4px;align-items:center">מאת <button onClick="{{ art.openAuthor }}" style="border:none;background:transparent;padding:0;font:700 13px var(--hf);color:#c8102e;cursor:pointer">{{ art.author }}</button> · {{ art.time }}</div>
+        <sc-if value="{{ art.hasImage }}">
+          <div style="aspect-ratio:16/10;background:repeating-linear-gradient(135deg,#ecebe8 0 8px,#e2e1dd 8px 16px);display:flex;align-items:center;justify-content:center;font:12px ui-monospace,monospace;color:#6f6b64;direction:ltr;margin-bottom:20px">{{ art.img }}</div>
+        </sc-if>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <sc-for list="{{ art.body }}" as="p" hint-placeholder-count="3"><p style="font:400 17.5px/1.75 var(--hf);margin:0;text-wrap:pretty">{{ p }}</p></sc-for>
+        </div>
+        <sc-if value="{{ art.hasPrev }}">
+          <div style="margin-top:30px;padding-top:14px;border-top:2px solid #141414;display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;flex-direction:column;gap:2px"><div style="font:800 19px var(--hf)">הסיפור עד כה</div><div style="font:400 13px var(--hf);color:#555">הכתבה נשענת רק על כתבות קודמות של {{ art.firstName }}.</div></div>
+            <sc-for list="{{ art.history }}" as="h" hint-placeholder-count="1">
+              <div onClick="{{ h.open }}" style="cursor:pointer;display:flex;flex-direction:column;gap:4px;padding:12px 0;border-bottom:1px solid #e6e6e6"><span style="font:600 12px var(--hf);color:#c8102e">{{ h.time }}</span><span style="font:700 16.5px/1.35 var(--hf);text-wrap:pretty">{{ h.headline }}</span></div>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ canReact }}">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding-top:28px">
+            <div style="font:600 13px var(--hf);color:undefined">{{ reactPrompt }}</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center">
+              <sc-for list="{{ reactBtns }}" as="r" hint-placeholder-count="3">
+                <button onClick="{{ r.onClick }}" style="border:none;background:transparent;padding:0;cursor:pointer">
+                  <sc-if value="{{ r.active }}"><span style="display:block;height:36px;padding:0 16px;border-radius:999px;background:#c8102e;color:#fff;font:700 14px/36px var(--hf)">{{ r.label }}</span></sc-if>
+                  <sc-if value="{{ r.inactive }}"><span style="display:block;height:36px;padding:0 16px;border-radius:999px;border:1px solid #555;color:#141414;font:500 14px/34px var(--hf)">{{ r.label }}</span></sc-if>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ canReport }}">
+          <div style="display:flex;margin-top:24px">
+            <button onClick="{{ openReport }}" style="height:36px;padding:0 14px;border:1px solid #d6d6d6;border-radius:999px;background:#fff;color:#555;font:500 13.5px var(--hf);cursor:pointer;display:flex;align-items:center;gap:6px"><span style="font-size:13px">⚑</span>דיווח על הכתבה</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ reportDone }}">
+          <div style="display:flex;justify-content:center"><span style="height:36px;padding:0 14px;border-radius:999px;background:#f3f2ef;color:#555;font:500 13.5px var(--hf);display:flex;align-items:center;gap:6px">✓ הדיווח נשלח למנהל האתר</span></div>
+        </sc-if>
+        <sc-if value="{{ art.isMine }}">
+          <div style="display:flex;flex-direction:column;gap:10px;padding:14px 16px;border:1px solid #d6d6d6;border-radius:4px;background:#fffdf7;margin-top:24px">
+            <div style="font:800 13px var(--hf);color:#141414">מי קיבל את הכתבה</div>
+            <div style="font:400 14.5px/1.5 var(--hf);color:#3d362d;text-wrap:pretty">{{ art.audText }}</div>
+            <sc-if value="{{ art.showRecv }}">
+              <div style="display:flex;flex-direction:column;gap:6px;padding-top:10px;border-top:1px solid #e6dfd1">
+                <div style="font:800 13px var(--hf);color:#141414">תגובות</div>
+                <sc-for list="{{ art.recvList }}" as="r" hint-placeholder-count="0">
+                  <div style="display:flex;justify-content:space-between;gap:10px;font:500 14.5px var(--hf);color:#16130f"><span>{{ r.name }}</span><span style="padding:2px 10px;border-radius:999px;background:#16130f;color:#fff;font:600 13px var(--hf)">{{ r.label }}</span></div>
+                </sc-for>
+                <sc-if value="{{ art.noRecv }}"><div style="font:400 13.5px var(--hf);color:#5d554a">עוד אין תגובות.</div></sc-if>
+              </div>
+            </sc-if>
+            <button onClick="{{ askRemoveArticle }}" style="align-self:flex-start;height:36px;padding:0 14px;border:1px solid #c8102e;border-radius:999px;background:transparent;color:#c8102e;font:600 13.5px var(--hf);cursor:pointer">הסרת הכתבה</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ showYourTurn }}">
+          <div style="margin-top:36px;padding:20px;background:#f6f5f2;border-radius:14px;display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+            <div style="font:800 19px/1.3 var(--hf)">גם לכם קרה משהו היום?</div>
+            <button onClick="{{ newChat }}" style="height:44px;padding:0 20px;border:none;border-radius:999px;background:#141414;color:#fff;font:700 15px var(--hf);cursor:pointer">ספרו לכתב</button>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isUser }}">
+  <div style="flex:1;min-height:0;display:flex;flex-direction:column;background:{{ pageBg }}">
+    <sc-if value="{{ tabloidNews }}">
+    <div style="flex:none;border-bottom:1px solid #16130f">
+      <div style="max-width:1200px;margin:0 auto;height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 14px">
+        <button onClick="{{ userBack }}" style="border:none;background:transparent;color:#16130f;font:500 20px var(--hf);cursor:pointer;padding:4px">→</button>
+        <div style="font:900 28px/1 var(--df);color:#d7261e;letter-spacing:-1px;direction:ltr">haiton</div>
+        <span style="width:28px"></span>
+      </div>
+    </div>
+    </sc-if>
+    <sc-if value="{{ classicNews }}">
+    <div style="flex:none;background:#c8102e">
+      <div style="max-width:1200px;margin:0 auto;height:50px;display:flex;align-items:center;justify-content:space-between;padding:0 14px">
+        <button onClick="{{ userBack }}" style="border:none;background:transparent;color:#fff;font:500 20px var(--hf);cursor:pointer;padding:4px">→</button>
+        <div style="font:900 22px var(--hf);color:#fff;letter-spacing:-1px;direction:ltr">haiton</div>
+        <span style="width:28px"></span>
+      </div>
+    </div>
+    </sc-if>
+    <div style="flex:1;min-height:0;overflow-y:auto;padding:28px 18px 48px">
+      <div style="max-width:720px;margin:0 auto">
+        <div style="display:flex;align-items:center;gap:14px;padding-bottom:20px;border-bottom:2px solid #141414">
+          <div style="width:56px;height:56px;flex:none;border-radius:50%;background:{{ upage.avatarBg }};color:#fff;font:800 22px var(--hf);display:flex;align-items:center;justify-content:center">{{ upage.badge }}</div>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <div style="font:800 24px var(--hf)">{{ upage.name }}</div>
+            <div style="font:400 14px var(--hf);color:#555">{{ upage.caption }}</div>
+          </div>
+        </div>
+        <sc-if value="{{ upage.showConnActions }}">
+          <div style="display:flex;flex-wrap:wrap;gap:8px;padding-top:14px">
+            <button onClick="{{ upage.toggleMute }}" style="height:34px;padding:0 14px;border:1px solid #cfc6b6;border-radius:999px;background:transparent;color:#16130f;font:500 13.5px var(--hf);cursor:pointer">{{ upage.muteLabel }}</button>
+            <button onClick="{{ upage.askRemoveConn }}" style="height:34px;padding:0 14px;border:1px solid #cfc6b6;border-radius:999px;background:transparent;color:#c8102e;font:500 13.5px var(--hf);cursor:pointer">הסרה מהחיבורים</button>
+          </div>
+          <sc-if value="{{ upage.isMuted }}"><div style="padding-top:10px;font:400 13px/1.5 var(--hf);color:#5d554a">הכתבות של {{ upage.first }} לא יופיעו אצלכם בעמוד הראשי.</div></sc-if>
+        </sc-if>
+        <sc-if value="{{ upage.isMe }}">
+          <div style="display:flex;gap:6px;padding:14px 0 2px">
+            <sc-for list="{{ upage.tabs }}" as="t" hint-placeholder-count="2">
+              <button onClick="{{ t.onClick }}" style="flex:none;border:none;background:transparent;padding:0;cursor:pointer">
+                <sc-if value="{{ t.active }}"><span style="display:block;height:34px;padding:0 16px;border-radius:999px;background:#16130f;color:#fff;font:700 14px/34px var(--hf)">{{ t.name }}</span></sc-if>
+                <sc-if value="{{ t.inactive }}"><span style="display:block;height:34px;padding:0 16px;border-radius:999px;border:1px solid #cfc6b6;color:#16130f;font:500 14px/32px var(--hf)">{{ t.name }}</span></sc-if>
+              </button>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ upage.showArticles }}">
+        <sc-for list="{{ upage.list }}" as="a" hint-placeholder-count="2">
+          <div onClick="{{ a.open }}" style="cursor:pointer;display:flex;gap:14px;padding:18px 0;border-bottom:1px solid #e6e6e6">
+            <sc-if value="{{ a.hasImage }}"><div style="width:112px;height:74px;flex:none;background:repeating-linear-gradient(135deg,#ecebe8 0 6px,#e2e1dd 6px 12px);display:flex;align-items:center;justify-content:center;font:10px ui-monospace,monospace;color:#6f6b64;direction:ltr;text-align:center;padding:4px">{{ a.img }}</div></sc-if>
+            <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+              <h3 style="font:700 17px/1.3 var(--hf);margin:0;text-wrap:pretty">{{ a.headline }}</h3>
+              <div style="font:500 12.5px var(--hf);color:#666">{{ a.time }}</div>
+            </div>
+            <sc-if value="{{ a.canRemove }}"><button onClick="{{ a.askRemove }}" style="flex:none;align-self:center;margin-right:auto;height:30px;padding:0 12px;border:1px solid #cfc6b6;border-radius:999px;background:transparent;color:#c8102e;font:500 13px var(--hf);cursor:pointer">הסרה</button></sc-if>
+          </div>
+        </sc-for>
+        <sc-if value="{{ upage.empty }}"><div style="padding:40px 0;font:400 15px var(--hf);color:#555">עוד אין כתבות.</div></sc-if>
+        </sc-if>
+        <sc-if value="{{ upage.showFacts }}">
+          <div style="padding-top:16px;display:flex;flex-direction:column;gap:16px">
+            <div style="font:400 14px/1.55 var(--hf);color:#5d554a;text-wrap:pretty">הכרטסת נבנית ממה שסיפרתם לכתב, ורק לכם יש גישה אליה. הכתב משתמש בה כדי לדייק את הכתבות שלכם. אפשר למחוק כל פרט.</div>
+            <div style="background:#fffdf7;border:1px solid #16130f;box-shadow:5px 5px 0 #16130f">
+              <div style="padding:14px 16px 12px;border-bottom:2px solid #d7261e;display:flex;justify-content:space-between;align-items:baseline;gap:10px">
+                <span style="font:900 23px var(--df);color:#16130f">כרטסת עובדות</span>
+                <span style="font:500 12.5px var(--hf);color:#5d554a">{{ upage.name }} · {{ upage.factCount }}</span>
+              </div>
+              <sc-for list="{{ upage.facts }}" as="f" hint-placeholder-count="4">
+                <div style="display:grid;grid-template-columns:96px minmax(0,1fr) 28px;gap:12px;align-items:start;padding:12px 16px;border-bottom:1px solid #c9d6e8">
+                  <span style="font:600 12.5px/1.6 var(--hf);color:#5d554a">{{ f.k }}</span>
+                  <span style="display:flex;flex-direction:column;gap:3px;min-width:0">
+                    <span style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="font:700 17px/1.35 var(--df);color:#16130f">{{ f.v }}</span><sc-if value="{{ f.isNew }}"><span style="background:#d7261e;color:#fff;font:700 11px var(--hf);padding:2px 7px">חדש</span></sc-if></span>
+                    <span style="font:400 12px/1.4 var(--hf);color:#8a8072">{{ f.src }}</span>
+                  </span>
+                  <button onClick="{{ f.remove }}" style="width:28px;height:28px;border:none;background:transparent;color:#8a8072;font:400 20px/1 var(--hf);cursor:pointer">×</button>
+                </div>
+              </sc-for>
+              <sc-if value="{{ upage.noFacts }}"><div style="padding:28px 16px;font:400 14.5px/1.5 var(--hf);color:#5d554a">הכרטסת עוד ריקה. היא תתמלא מהשיחות שלכם עם הכתב.</div></sc-if>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ upage.showSettings }}">
+          <div style="padding-top:18px;display:flex;flex-direction:column;gap:28px">
+            <div style="display:flex;flex-direction:column">
+              <div style="padding-bottom:10px;border-bottom:2px solid #16130f;font:800 18px var(--hf);color:#16130f">פרופיל</div>
+              <div style="display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid #d8cfbf">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex:none">
+                  <sc-if value="{{ hasPhoto }}"><div style="width:56px;height:56px;border-radius:50%;background:repeating-linear-gradient(135deg,#e6dfd1 0 6px,#ddd5c5 6px 12px);display:flex;align-items:center;justify-content:center;font:9px ui-monospace,monospace;color:#6f665a;direction:ltr">photo</div></sc-if>
+                  <sc-if value="{{ noPhoto }}"><div style="width:56px;height:56px;border-radius:50%;background:#16130f;color:#fff;font:800 22px var(--hf);display:flex;align-items:center;justify-content:center">{{ upage.initial }}</div></sc-if>
+                  <button onClick="{{ togglePhoto }}" style="border:none;background:transparent;padding:0;font:600 12px var(--hf);color:#c8102e;cursor:pointer">{{ photoLabel }}</button>
+                </div>
+                <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:6px">
+                  <span style="font:500 12.5px var(--hf);color:#5d554a">השם שמופיע על הכתבות שלכם</span>
+                  <input value="{{ profileName }}" onChange="{{ onProfileName }}" style="height:42px;border:1px solid #cfc6b6;border-radius:10px;padding:0 12px;font:500 16px var(--hf);background:#fff;color:#16130f;min-width:0">
+                  <sc-if value="{{ nameEmpty }}"><span style="font:500 13px var(--hf);color:#c8102e">השם לא יכול להיות ריק. עד שתזינו שם, יוצג {{ savedName }}.</span></sc-if>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column">
+              <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:10px;border-bottom:2px solid #16130f">
+                <span style="font:800 18px var(--hf);color:#16130f">חיבורים</span>
+                <button onClick="{{ openInvite }}" style="height:34px;padding:0 14px;border:none;border-radius:999px;background:#16130f;color:#fff;font:600 14px var(--hf);cursor:pointer">+ הזמנת חברים</button>
+              </div>
+              <sc-for list="{{ connList }}" as="c" hint-placeholder-count="3">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #d8cfbf">
+                  <span style="display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font:700 16px var(--hf);color:#16130f">{{ c.name }}</span><span style="font:400 13px var(--hf);color:#5d554a">{{ c.status }}</span></span>
+                  <span style="display:flex;gap:6px;flex:none"><button onClick="{{ c.toggleMute }}" style="height:30px;padding:0 10px;border:1px solid #cfc6b6;border-radius:999px;background:transparent;font:500 13px var(--hf);cursor:pointer;color:#16130f">{{ c.muteLabel }}</button><button onClick="{{ c.remove }}" style="height:30px;padding:0 10px;border:1px solid #cfc6b6;border-radius:999px;background:transparent;font:500 13px var(--hf);cursor:pointer;color:#c8102e">הסרה</button></span>
+                </div>
+              </sc-for>
+              <sc-if value="{{ noConnections }}"><div style="padding:16px 0;font:400 14.5px/1.5 var(--hf);color:#5d554a">עוד אין לכם חיבורים. מי שיצטרף דרך הקישור שלכם יופיע כאן.</div></sc-if>
+            </div>
+            <sc-if value="{{ hasHiddenList }}">
+              <div style="display:flex;flex-direction:column">
+                <div style="padding-bottom:10px;border-bottom:2px solid #16130f;font:800 18px var(--hf);color:#16130f">כתבות מוסתרות</div>
+                <sc-for list="{{ hiddenList }}" as="h" hint-placeholder-count="0">
+                  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #d8cfbf">
+                    <span style="display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font:700 15px/1.35 var(--hf);color:#16130f;text-wrap:pretty">{{ h.headline }}</span><span style="font:400 13px var(--hf);color:#5d554a">{{ h.author }}</span></span>
+                    <button onClick="{{ h.unhide }}" style="flex:none;height:30px;padding:0 10px;border:1px solid #cfc6b6;border-radius:999px;background:transparent;font:500 13px var(--hf);cursor:pointer;color:#16130f">הצגה מחדש</button>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+            <div style="display:flex;flex-direction:column">
+              <div style="padding-bottom:10px;border-bottom:2px solid #16130f;font:800 18px var(--hf);color:#16130f">התראות</div>
+              <sc-for list="{{ prefList }}" as="p" hint-placeholder-count="3">
+                <button onClick="{{ p.onClick }}" style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 0;border:none;border-bottom:1px solid #d8cfbf;background:transparent;cursor:pointer;text-align:right">
+                  <span style="font:500 15px var(--hf);color:#16130f">{{ p.label }}</span>
+                  <sc-if value="{{ p.on }}"><span style="width:42px;height:24px;flex:none;border-radius:999px;background:#16130f;display:flex;align-items:center;justify-content:flex-end;padding:3px"><span style="width:18px;height:18px;border-radius:50%;background:#fff"></span></span></sc-if>
+                  <sc-if value="{{ p.off }}"><span style="width:42px;height:24px;flex:none;border-radius:999px;background:#cfc6b6;display:flex;align-items:center;justify-content:flex-start;padding:3px"><span style="width:18px;height:18px;border-radius:50%;background:#fff"></span></span></sc-if>
+                </button>
+              </sc-for>
+            </div>
+            <div style="display:flex;flex-direction:column">
+              <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:10px;border-bottom:2px solid #16130f">
+                <span style="font:800 18px var(--hf);color:#16130f">קבוצות</span>
+                <button onClick="{{ openNewGroup }}" style="height:34px;padding:0 14px;border:none;border-radius:999px;background:#16130f;color:#fff;font:600 14px var(--hf);cursor:pointer">+ קבוצה חדשה</button>
+              </div>
+              <sc-for list="{{ upage.groups }}" as="g" hint-placeholder-count="2">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #d8cfbf">
+                  <span style="display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font:700 16px var(--hf);color:#16130f">{{ g.name }}</span><sc-if value="{{ g.hasMembers }}"><span style="font:400 13px var(--hf);color:#5d554a">{{ g.members }}</span></sc-if><sc-if value="{{ g.empty }}"><span style="font:500 13px var(--hf);color:#c8102e">אין חברים · ערכו או מחקו את הקבוצה</span></sc-if></span>
+                  <span style="display:flex;gap:6px;flex:none"><button onClick="{{ g.edit }}" style="height:30px;padding:0 10px;border:1px solid #cfc6b6;border-radius:999px;background:transparent;font:500 13px var(--hf);cursor:pointer;color:#16130f">עריכה</button><button onClick="{{ g.remove }}" style="height:30px;padding:0 10px;border:1px solid #cfc6b6;border-radius:999px;background:transparent;font:500 13px var(--hf);cursor:pointer;color:#c8102e">מחיקה</button></span>
+                </div>
+              </sc-for>
+              <sc-if value="{{ upage.noGroups }}"><div style="padding:16px 0;font:400 14.5px/1.5 var(--hf);color:#5d554a">עוד אין קבוצות.</div></sc-if>
+            </div>
+            <div style="display:flex;flex-direction:column">
+              <div style="padding-bottom:10px;border-bottom:2px solid #16130f;font:800 18px var(--hf);color:#16130f">חשבון</div>
+              <div style="display:flex;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid #d8cfbf;font:400 14.5px var(--hf);color:#5d554a"><span>החשבון המחובר</span><span style="direction:ltr;color:#16130f;font-weight:500">{{ acctEmail }}</span></div>
+              <button onClick="{{ logout }}" style="display:flex;justify-content:space-between;align-items:center;padding:14px 0;border:none;border-bottom:1px solid #d8cfbf;background:transparent;cursor:pointer;font:600 15.5px var(--hf);color:#16130f;text-align:right"><span>התנתקות</span><span style="color:#8a8072">←</span></button>
+              <button onClick="{{ askDelete }}" style="display:flex;justify-content:space-between;align-items:center;padding:14px 0;border:none;border-bottom:1px solid #d8cfbf;background:transparent;cursor:pointer;font:600 15.5px var(--hf);color:#c8102e;text-align:right"><span>מחיקת החשבון</span><span>←</span></button>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isSignedOut }}">
+  <div style="flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:24px;background:#f3eee4">
+    <div style="width:100%;max-width:400px;display:flex;flex-direction:column;gap:18px">
+      <div style="font:900 44px/1 var(--df);color:#d7261e;letter-spacing:-1.5px;direction:ltr;text-align:right">haiton</div>
+      <div style="font:800 26px/1.25 var(--hf);color:#16130f">{{ endTitle }}</div>
+      <div style="font:400 15px/1.55 var(--hf);color:#3d362d;text-wrap:pretty">{{ endText }}</div>
+      <button onClick="{{ endAction }}" style="height:52px;border:none;border-radius:12px;background:#16130f;font:700 16px var(--hf);color:#fff;cursor:pointer">{{ endCta }}</button>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ showNewGroup }}">
+    <div style="position:absolute;inset:0;background:rgba(0,0,0,.42);display:flex;flex-direction:column;justify-content:flex-end;align-items:center;z-index:5">
+      <div style="width:100%;max-width:560px;background:#fff;border-radius:22px 22px 0 0;padding:22px 18px 26px;display:flex;flex-direction:column;gap:14px;max-height:88%;overflow-y:auto">
+        <div style="font:800 21px/1.25 var(--hf)">{{ ngTitle }}</div>
+        <input value="{{ ngName }}" onChange="{{ onNgName }}" placeholder="שם הקבוצה" style="height:46px;border:1px solid #d6d6d6;border-radius:10px;padding:0 14px;font:500 16px var(--hf)">
+        <sc-if value="{{ ngHasError }}"><div style="font:500 13px var(--hf);color:#c8102e">{{ ngError }}</div></sc-if>
+        <div style="font:600 13px var(--hf);color:#555">{{ ngCount }}</div>
+        <div style="border:1px solid #ececec;border-radius:12px;overflow:hidden">
+          <sc-for list="{{ ngPeople }}" as="p" hint-placeholder-count="4">
+            <button onClick="{{ p.onClick }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border:none;border-bottom:1px solid #f0f0f0;background:#fff;cursor:pointer;font:500 15px var(--hf);color:#141414">
+              <span>{{ p.name }}</span>
+              <sc-if value="{{ p.checked }}"><span style="width:22px;height:22px;border-radius:6px;background:#141414;color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center">✓</span></sc-if>
+              <sc-if value="{{ p.unchecked }}"><span style="width:22px;height:22px;border-radius:6px;border:2px solid #cfcfcf"></span></sc-if>
+            </button>
+          </sc-for>
+          <sc-if value="{{ ngNoPeople }}"><div style="padding:16px 14px;font:400 14px/1.5 var(--hf);color:#555">עוד אין לכם חיבורים. אחרי שמישהו יצטרף דרככם, אפשר יהיה לצרף אותו לקבוצה.</div></sc-if>
+        </div>
+        <sc-if value="{{ ngNoPeople }}"><button onClick="{{ openInvite }}" style="height:48px;border:none;border-radius:12px;background:#141414;color:#fff;font:700 16px var(--hf);cursor:pointer">הזמנת חברים</button></sc-if>
+        <div style="display:flex;gap:10px">
+          <sc-if value="{{ ngHasPeople }}"><button onClick="{{ saveNewGroup }}" style="flex:1;height:48px;border:none;border-radius:12px;background:{{ ngBtnBg }};color:#fff;font:700 16px var(--hf);cursor:pointer">{{ ngSaveLabel }}</button></sc-if>
+          <button onClick="{{ closeNewGroup }}" style="flex:1;height:48px;border:1px solid #d6d6d6;border-radius:12px;background:#fff;color:#141414;font:600 16px var(--hf);cursor:pointer">ביטול</button>
+        </div>
+        <sc-if value="{{ ngIsEdit }}"><button onClick="{{ deleteEditGroup }}" style="height:40px;border:none;background:transparent;color:#c8102e;font:600 14.5px var(--hf);cursor:pointer">מחיקת הקבוצה</button></sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showReport }}">
+    <div style="position:absolute;inset:0;background:rgba(0,0,0,.42);display:flex;flex-direction:column;justify-content:flex-end;align-items:center;z-index:5">
+      <div style="width:100%;max-width:560px;background:#fff;border-radius:22px 22px 0 0;padding:22px 18px 26px;display:flex;flex-direction:column;gap:14px;max-height:88%;overflow-y:auto">
+        <sc-if value="{{ reportForm }}">
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <div style="font:800 21px/1.25 var(--hf)">דיווח על הכתבה</div>
+            <div style="font:400 14px/1.5 var(--hf);color:#555;text-wrap:pretty">הדיווח נשלח למנהל האתר והוא מטפל בו. מי שכתב את הכתבה לא יידע מי דיווח.</div>
+          </div>
+          <div style="border:1px solid #ececec;border-radius:12px;overflow:hidden">
+            <sc-for list="{{ reportReasons }}" as="r" hint-placeholder-count="5">
+              <button onClick="{{ r.onClick }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border:none;border-bottom:1px solid #f0f0f0;background:#fff;cursor:pointer;font:500 15px var(--hf);color:#141414;text-align:right">
+                <span>{{ r.label }}</span>
+                <sc-if value="{{ r.checked }}"><span style="width:20px;height:20px;flex:none;border-radius:50%;border:6px solid #141414"></span></sc-if>
+                <sc-if value="{{ r.unchecked }}"><span style="width:20px;height:20px;flex:none;border-radius:50%;border:2px solid #cfcfcf"></span></sc-if>
+              </button>
+            </sc-for>
+          </div>
+          <textarea value="{{ reportNote }}" onChange="{{ onReportNote }}" placeholder="פרטים נוספים (לא חובה)" style="min-height:76px;border:1px solid #d6d6d6;border-radius:10px;padding:10px 14px;font:400 15px/1.5 var(--hf);resize:none"></textarea>
+          <div style="display:flex;gap:10px">
+            <button onClick="{{ sendReport }}" style="flex:1;height:48px;border:none;border-radius:12px;background:{{ reportBtnBg }};color:#fff;font:700 16px var(--hf);cursor:pointer">שליחת דיווח</button>
+            <button onClick="{{ closeReport }}" style="flex:1;height:48px;border:1px solid #d6d6d6;border-radius:12px;background:#fff;color:#141414;font:600 16px var(--hf);cursor:pointer">ביטול</button>
+          </div>
+          <div style="font:400 13px/1.5 var(--hf);color:#555;text-align:center">אפשר לפנות אלינו גם במייל <a href="mailto:info@haiton.app" style="direction:ltr;unicode-bidi:isolate">info@haiton.app</a></div>
+        </sc-if>
+        <sc-if value="{{ reportSent }}">
+          <div style="display:flex;flex-direction:column;gap:10px;padding:8px 0 4px">
+            <div style="width:44px;height:44px;border-radius:50%;background:#141414;color:#fff;font-size:20px;display:flex;align-items:center;justify-content:center">✓</div>
+            <div style="font:800 21px/1.25 var(--hf)">הדיווח נשלח</div>
+            <div style="font:400 14.5px/1.55 var(--hf);color:#444;text-wrap:pretty">מנהל האתר יבדוק את הכתבה ויטפל בה. אפשר להוסיף פרטים במייל <a href="mailto:info@haiton.app" style="direction:ltr;unicode-bidi:isolate">info@haiton.app</a></div>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:6px">
+              <button onClick="{{ hideReported }}" style="height:48px;border:none;border-radius:12px;background:#141414;color:#fff;font:700 16px var(--hf);cursor:pointer">הסתרת הכתבה מהפיד שלי</button>
+              <sc-if value="{{ canMuteReported }}"><button onClick="{{ muteReported }}" style="height:48px;border:1px solid #d6d6d6;border-radius:12px;background:#fff;color:#141414;font:600 16px var(--hf);cursor:pointer">השתקת {{ reportedFirst }}</button></sc-if>
+              <button onClick="{{ closeReport }}" style="height:44px;border:none;background:transparent;color:#555;font:500 15px var(--hf);cursor:pointer">סגירה</button>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showDelete }}">
+    <div style="position:absolute;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;padding:24px;z-index:5">
+      <div style="width:100%;max-width:400px;background:#fff;border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:14px">
+        <div style="font:800 21px/1.3 var(--hf);color:#141414">למחוק את החשבון?</div>
+        <div style="font:400 14.5px/1.55 var(--hf);color:#444;text-wrap:pretty">כל הכתבות שלכם, כרטסת העובדות והקבוצות יימחקו לצמיתות. הכתבות יוסרו גם מהפיד של מי שקיבל אותן. אי אפשר לבטל את הפעולה.</div>
+        <div style="display:flex;flex-direction:column;gap:8px;padding-top:4px">
+          <button onClick="{{ confirmDelete }}" style="height:48px;border:none;border-radius:12px;background:#c8102e;color:#fff;font:700 16px var(--hf);cursor:pointer">מחיקה לצמיתות</button>
+          <button onClick="{{ cancelDelete }}" style="height:48px;border:1px solid #d6d6d6;border-radius:12px;background:#fff;color:#141414;font:600 16px var(--hf);cursor:pointer">ביטול</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showNote }}">
+    <div style="position:absolute;bottom:90px;left:50%;transform:translateX(-50%);width:calc(100% - 24px);max-width:420px;background:#141414;color:#fff;border-radius:14px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 10px 30px rgba(0,0,0,.25);z-index:7">
+      <span style="font:600 14px/1.4 var(--hf)">{{ noteText }}</span>
+      <sc-if value="{{ noteHasUndo }}"><button onClick="{{ noteUndo }}" style="flex:none;border:none;background:transparent;color:#fff;font:700 14px var(--hf);text-decoration:underline;cursor:pointer">ביטול</button></sc-if>
+    </div>
+  </sc-if>
+  <sc-if value="{{ showConfirm }}">
+    <div style="position:absolute;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;padding:24px;z-index:6">
+      <div style="width:100%;max-width:400px;background:#fff;border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:14px">
+        <div style="font:800 21px/1.3 var(--hf);color:#141414">{{ confirm.title }}</div>
+        <div style="font:400 14.5px/1.55 var(--hf);color:#444;text-wrap:pretty">{{ confirm.text }}</div>
+        <div style="display:flex;flex-direction:column;gap:8px;padding-top:4px">
+          <button onClick="{{ confirm.yes }}" style="height:48px;border:none;border-radius:12px;background:#c8102e;color:#fff;font:700 16px var(--hf);cursor:pointer">{{ confirm.yesLabel }}</button>
+          <sc-if value="{{ confirm.hasAlt }}"><button onClick="{{ confirm.alt }}" style="width:100%;height:48px;border:none;border-radius:12px;background:#141414;color:#fff;font:700 16px var(--hf);cursor:pointer">{{ confirm.altLabel }}</button></sc-if>
+          <button onClick="{{ confirm.no }}" style="height:48px;border:1px solid #d6d6d6;border-radius:12px;background:#fff;color:#141414;font:600 16px var(--hf);cursor:pointer">{{ confirm.noLabel }}</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showNotifs }}">
+    <div style="position:absolute;inset:0;background:rgba(0,0,0,.42);display:flex;flex-direction:column;justify-content:flex-end;align-items:center;z-index:5">
+      <div style="width:100%;max-width:560px;background:#fff;border-radius:22px 22px 0 0;padding:22px 18px 26px;display:flex;flex-direction:column;gap:6px;max-height:80%;overflow-y:auto">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:6px">
+          <div style="font:800 21px/1.25 var(--hf)">התראות</div>
+          <button onClick="{{ closeNotifs }}" style="width:36px;height:36px;border:none;background:transparent;font:400 24px/1 var(--hf);color:#555;cursor:pointer">×</button>
+        </div>
+        <sc-for list="{{ notifList }}" as="n" hint-placeholder-count="0">
+          <div onClick="{{ n.open }}" style="display:flex;gap:12px;padding:13px 0;border-top:1px solid #f0f0f0;cursor:pointer">
+            <span style="width:8px;height:8px;margin-top:8px;flex:none;border-radius:50%;background:{{ n.dot }}"></span>
+            <span style="flex:1;display:flex;flex-direction:column;gap:3px;min-width:0"><span style="font:700 15px/1.4 var(--hf);color:#141414">{{ n.text }}</span><span style="font:400 13.5px/1.45 var(--hf);color:#555">{{ n.sub }}</span><span style="font:400 12px var(--hf);color:#767676">{{ n.time }}</span>
+              <sc-if value="{{ n.hasAction }}"><span style="display:flex;gap:8px;padding-top:6px"><button onClick="{{ n.action }}" style="height:34px;padding:0 14px;border:none;border-radius:999px;background:#141414;color:#fff;font:600 13.5px var(--hf);cursor:pointer">{{ n.actionLabel }}</button></span></sc-if>
+            </span>
+            <span style="flex:none;align-self:center;color:#8a8a8a;font:500 16px var(--hf)">←</span>
+          </div>
+        </sc-for>
+        <sc-if value="{{ noNotifs }}"><div style="padding:18px 0 8px;font:400 14.5px/1.55 var(--hf);color:#555;text-wrap:pretty">אין התראות חדשות. כשמישהו יצטרף דרך ההזמנה שלכם או יגיב לכתבה שלכם, זה יופיע כאן.</div></sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isLock }}">
+  <div onClick="{{ openFromLock }}" style="flex:1;min-height:0;background:#1d1e22;display:flex;flex-direction:column;align-items:center;padding:60px 14px 0;gap:6px;cursor:pointer">
+    <div style="font:400 15px var(--hf);color:#d6d6d6">יום רביעי, 7 באוקטובר</div>
+    <div style="font:300 82px/1 var(--hf);color:#fff;direction:ltr;margin-bottom:34px">12:51</div>
+    <div style="width:100%;max-width:380px;background:rgba(255,255,255,.93);border-radius:20px;padding:12px 14px;display:flex;gap:12px;align-items:center">
+      <div style="width:38px;height:38px;flex:none;border-radius:9px;background:#c8102e;color:#fff;font:900 20px var(--hf);display:flex;align-items:center;justify-content:center">h</div>
+      <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+        <div style="display:flex;justify-content:space-between;font:500 12.5px var(--hf);color:#555"><span style="font-weight:700;color:#141414;direction:ltr">haiton</span><span>עכשיו</span></div>
+        <div style="font:700 15px/1.35 var(--hf);color:#141414">{{ lockPush }}</div>
+      </div>
+    </div>
+    <div style="margin-top:auto;padding-bottom:28px;font:400 13px var(--hf);color:#a0a0a0">הקישו על ההתראה</div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isInvite }}">
+  <div style="flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:24px;background:#faf9f7">
+    <div style="width:100%;max-width:400px;display:flex;flex-direction:column;gap:22px">
+      <div style="font:900 30px var(--hf);color:#c8102e;letter-spacing:-1.5px;direction:ltr;text-align:right">haiton</div>
+      <div style="font:800 26px/1.25 var(--hf);text-wrap:pretty">{{ inviteTitle }}</div>
+      <div style="font:400 15px/1.5 var(--hf);color:#444">{{ inviteSub }}</div>
+      <sc-if value="{{ notSignedIn }}">
+        <button onClick="{{ toGoogle }}" style="height:52px;border:1px solid #d6d6d6;border-radius:12px;background:#fff;font:600 16px var(--hf);color:#141414;cursor:pointer">המשך עם Google</button>
+        <button onClick="{{ declineInvite }}" style="height:44px;border:none;background:transparent;color:#555;font:500 15px var(--hf);cursor:pointer">לא תודה</button>
+      </sc-if>
+      <sc-if value="{{ signedIn }}">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><span style="font:400 14px var(--hf);color:#555;direction:ltr">{{ email }}</span><button onClick="{{ switchAccount }}" style="border:none;background:transparent;padding:0;font:600 13.5px var(--hf);color:#c8102e;cursor:pointer">לא אתם? החלפת חשבון</button></div>
+        <button onClick="{{ acceptInvite }}" style="height:52px;border:none;border-radius:12px;background:#c8102e;font:700 17px var(--hf);color:#fff;cursor:pointer">קבלת ההזמנה</button>
+        <button onClick="{{ declineInvite }}" style="height:44px;border:none;background:transparent;color:#555;font:500 15px var(--hf);cursor:pointer">לא תודה</button>
+      </sc-if>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isLanding }}">
+  <div style="flex:1;min-height:0;overflow-y:auto;background:#f3eee4">
+    <div style="max-width:1000px;margin:0 auto;padding:14px 20px 40px;display:flex;flex-direction:column;gap:26px">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:12px;border-bottom:1px solid #16130f">
+        <div style="font:900 34px/1 var(--df);color:#d7261e;letter-spacing:-1.5px;direction:ltr">haiton</div>
+        <button onClick="{{ toGoogle }}" style="height:34px;padding:0 14px;border:1px solid #16130f;border-radius:999px;background:transparent;color:#16130f;font:600 14px var(--hf);cursor:pointer">כניסה</button>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;padding-top:8px">
+        <div style="font:800 12.5px var(--hf);color:#d7261e;letter-spacing:.6px">החדשות של האנשים שלכם</div>
+        <h1 style="font:900 44px/1.04 var(--df);margin:0;color:#16130f;letter-spacing:-.5px;text-wrap:pretty">מה שקרה לכם היום ראוי לכותרת</h1>
+        <p style="font:400 18px/1.55 var(--hf);margin:0;color:#3d362d;max-width:620px;text-wrap:pretty">מספרים לכתב מה קרה, העורך כותב מזה כתבה, ואתם מחליטים מי יקרא אותה. בעמוד הראשי מחכות הכתבות של החברים והמשפחה.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;padding-top:6px">
+          <button onClick="{{ toGoogle }}" style="height:52px;padding:0 26px;border:none;border-radius:999px;background:#d7261e;color:#fff;font:700 17px var(--hf);cursor:pointer">הצטרפות</button>
+          <button onClick="{{ toGoogle }}" style="height:52px;padding:0 22px;border:none;background:transparent;color:#16130f;font:600 15.5px var(--hf);cursor:pointer;text-decoration:underline;text-underline-offset:4px">כבר יש לי חשבון</button>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:#cfc6b6;border-top:3px solid #16130f;border-bottom:1px solid #cfc6b6">
+        <div style="background:#f3eee4;padding:16px 4px 20px;display:flex;flex-direction:column;gap:6px"><span style="font:900 34px/1 var(--df);color:#d7261e">01</span><span style="font:800 19px/1.3 var(--df);color:#16130f">מספרים לכתב</span><span style="font:400 15px/1.5 var(--hf);color:#3d362d">כמה משפטים על מה שקרה, בשיחה.</span></div>
+        <div style="background:#f3eee4;padding:16px 4px 20px;display:flex;flex-direction:column;gap:6px"><span style="font:900 34px/1 var(--df);color:#d7261e">02</span><span style="font:800 19px/1.3 var(--df);color:#16130f">העורך כותב</span><span style="font:400 15px/1.5 var(--hf);color:#3d362d">כתבה עם כותרת, רק ממה שסיפרתם.</span></div>
+        <div style="background:#f3eee4;padding:16px 4px 20px;display:flex;flex-direction:column;gap:6px"><span style="font:900 34px/1 var(--df);color:#d7261e">03</span><span style="font:800 19px/1.3 var(--df);color:#16130f">אתם בוחרים מי קורא</span><span style="font:400 15px/1.5 var(--hf);color:#3d362d">כל כתבה נשלחת רק למי שבחרתם.</span></div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isWelcome }}">
+  <div style="flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:24px;background:#fff">
+    <div style="width:100%;max-width:420px;display:flex;flex-direction:column;gap:22px">
+      <div style="font:900 30px/1 var(--df);color:#d7261e;letter-spacing:-1px;direction:ltr;text-align:right">haiton</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="font:800 27px/1.2 var(--hf);color:#141414">ברוכים הבאים, {{ meFirst }}</div>
+        <div style="font:400 15.5px/1.55 var(--hf);color:#444;text-wrap:pretty">נכתוב יחד את הכתבה הראשונה שלכם. זה לוקח כמה דקות, ונסביר כל שלב בדרך.</div>
+      </div>
+      <div style="display:flex;flex-direction:column;border-top:1px solid #ececec">
+        <sc-for list="{{ welcomeSteps }}" as="w" hint-placeholder-count="4">
+          <div style="display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;padding:13px 0;border-bottom:1px solid #ececec">
+            <span style="width:26px;height:26px;border-radius:50%;background:#141414;color:#fff;font:700 13px var(--hf);display:flex;align-items:center;justify-content:center">{{ w.n }}</span>
+            <span style="display:flex;flex-direction:column;gap:2px"><span style="font:700 15.5px var(--hf);color:#141414">{{ w.t }}</span><span style="font:400 13.5px/1.45 var(--hf);color:#555">{{ w.d }}</span></span>
+          </div>
+        </sc-for>
+      </div>
+      <button onClick="{{ startOnboarding }}" style="height:52px;border:none;border-radius:12px;background:#c8102e;font:700 17px var(--hf);color:#fff;cursor:pointer">לכתבה הראשונה שלי</button>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ tipShow }}">
+    <div style="position:absolute;left:12px;right:12px;bottom:150px;display:flex;justify-content:center;z-index:4;pointer-events:none">
+      <div style="width:100%;max-width:440px;background:#141414;color:#fff;border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:8px;box-shadow:0 12px 32px rgba(0,0,0,.28);pointer-events:auto">
+        <div style="font:700 12px var(--hf);color:#ff8a80">{{ tip.step }}</div>
+        <div style="font:800 18px/1.3 var(--hf)">{{ tip.title }}</div>
+        <div style="font:400 14.5px/1.55 var(--hf);color:#e4e4e4;text-wrap:pretty">{{ tip.text }}</div>
+        <div style="display:flex;justify-content:flex-end;padding-top:4px"><button onClick="{{ tipOk }}" style="height:36px;padding:0 18px;border:none;border-radius:999px;background:#fff;color:#141414;font:700 14px var(--hf);cursor:pointer">הבנתי</button></div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showInvite }}">
+    <div style="position:absolute;inset:0;background:rgba(0,0,0,.42);display:flex;flex-direction:column;justify-content:flex-end;align-items:center;z-index:5">
+      <div style="width:100%;max-width:560px;background:#fff;border-radius:22px 22px 0 0;padding:22px 18px 26px;display:flex;flex-direction:column;gap:14px">
+        <sc-if value="{{ inviteForm }}">
+          <sc-if value="{{ inviteOnboard }}">
+            <div style="font:700 12px var(--hf);color:#c8102e">שלב 4 מתוך 4</div>
+            <div style="font:800 21px/1.25 var(--hf)">העמוד הראשי שלכם מחכה לאנשים שלכם</div>
+            <div style="font:400 14.5px/1.55 var(--hf);color:#444;text-wrap:pretty">הכתבה הראשונה נשמרה אצלכם. כדי שיהיה למי לשלוח אותה, ומה לקרוא בעמוד הראשי, הזמינו חברים ומשפחה. רק מי שתזמינו יוכל לקבל מכם כתבות.</div>
+          </sc-if>
+          <sc-if value="{{ inviteGeneric }}">
+            <div style="font:800 21px/1.25 var(--hf)">הזמנת חברים</div>
+            <div style="font:400 14.5px/1.55 var(--hf);color:#444;text-wrap:pretty">שלחו את הקישור לחברים ולמשפחה. מי שיצטרף יוכל לקבל מכם כתבות, והכתבות שלו יופיעו אצלכם בעמוד הראשי.</div>
+          </sc-if>
+          <div style="display:flex;align-items:center;gap:8px;height:48px;padding:0 6px 0 14px;border:1px solid #d6d6d6;border-radius:12px">
+            <span style="flex:1;min-width:0;font:500 15px var(--hf);color:#141414;direction:ltr;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ inviteLink }}</span>
+            <button onClick="{{ copyInvite }}" style="flex:none;height:36px;padding:0 14px;border:none;border-radius:9px;background:#f3f2ef;color:#141414;font:600 14px var(--hf);cursor:pointer">{{ copyLabel }}</button>
+          </div>
+          <div style="display:flex;gap:10px">
+            <button onClick="{{ sendInvite }}" style="flex:1;height:48px;border:none;border-radius:12px;background:#141414;color:#fff;font:700 15.5px var(--hf);cursor:pointer">שליחה בוואטסאפ</button>
+            <button onClick="{{ sendInvite }}" style="flex:1;height:48px;border:1px solid #d6d6d6;border-radius:12px;background:#fff;color:#141414;font:600 15.5px var(--hf);cursor:pointer">שליחה במייל</button>
+          </div>
+          <button onClick="{{ closeInvite }}" style="height:40px;border:none;background:transparent;color:#555;font:500 14.5px var(--hf);cursor:pointer">{{ inviteCloseLabel }}</button>
+        </sc-if>
+        <sc-if value="{{ inviteSent }}">
+          <div style="width:44px;height:44px;border-radius:50%;background:#141414;color:#fff;font-size:20px;display:flex;align-items:center;justify-content:center">✓</div>
+          <div style="font:800 21px/1.25 var(--hf)">ההזמנה נשלחה</div>
+          <div style="font:400 14.5px/1.55 var(--hf);color:#444;text-wrap:pretty">כשמישהו יצטרף, נודיע לכם בהתראות. מאותו רגע אפשר יהיה לשלוח לו כתבות, והכתבות שלו יופיעו אצלכם בעמוד הראשי.</div>
+          <button onClick="{{ closeInvite }}" style="height:48px;border:none;border-radius:12px;background:#141414;color:#fff;font:700 16px var(--hf);cursor:pointer">{{ inviteDoneLabel }}</button>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isGoogle }}">
+  <div style="flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:24px;background:#f1f0ee">
+    <div style="width:100%;max-width:400px;background:#fff;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><button onClick="{{ googleBack }}" style="border:none;background:transparent;font:500 20px var(--hf);cursor:pointer;padding:4px">→</button><span style="font:700 13px var(--hf);color:#555">Google</span></div>
+      <div style="font:700 20px var(--hf)">בחירת חשבון</div>
+      <button onClick="{{ signIn }}" style="display:flex;align-items:center;gap:12px;padding:12px;border:1px solid #e3e3e3;border-radius:12px;background:#fff;cursor:pointer;text-align:right">
+        <span style="width:36px;height:36px;flex:none;border-radius:50%;background:#e6e3de;font:700 15px var(--hf);display:flex;align-items:center;justify-content:center">{{ meInitial }}</span>
+        <span style="display:flex;flex-direction:column;gap:2px"><span style="font:600 15px var(--hf);color:#141414">{{ meName }}</span><span style="font:400 13px var(--hf);color:#555">{{ email }}</span></span>
+      </button>
+      <sc-if value="{{ noOtherAcct }}"><button onClick="{{ showOtherAcct }}" style="display:flex;align-items:center;gap:12px;padding:12px;border:1px solid #e3e3e3;border-radius:12px;background:#fff;cursor:pointer;text-align:right"><span style="width:36px;height:36px;flex:none;border-radius:50%;border:1.5px dashed #b5b5b5;display:flex;align-items:center;justify-content:center;font:400 20px var(--hf);color:#555">+</span><span style="font:600 15px var(--hf);color:#141414">שימוש בחשבון אחר</span></button></sc-if>
+      <sc-if value="{{ otherAcct }}"><div style="display:flex;flex-direction:column;gap:10px"><input value="{{ otherEmail }}" onChange="{{ onOtherEmail }}" placeholder="name@gmail.com" style="height:46px;border:1px solid #d6d6d6;border-radius:10px;padding:0 14px;font:500 16px var(--hf);direction:ltr;text-align:left"><button onClick="{{ signInOther }}" style="height:46px;border:none;border-radius:10px;background:{{ otherBtnBg }};color:#fff;font:700 15px var(--hf);cursor:pointer">המשך</button></div></sc-if>
+      <div style="font:400 12.5px/1.5 var(--hf);color:#666">haiton יקבל את השם וכתובת המייל שלכם.</div>
+    </div>
+  </div>
+  </sc-if>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;newsStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;tabloid&quot;,&quot;classic&quot;],&quot;default&quot;:&quot;tabloid&quot;,&quot;tsType&quot;:&quot;'tabloid'|'classic'&quot;,&quot;section&quot;:&quot;News&quot;},&quot;displayFont&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Frank Ruhl Libre&quot;,&quot;Noto Serif Hebrew&quot;,&quot;Secular One&quot;,&quot;Rubik&quot;,&quot;Heebo&quot;],&quot;default&quot;:&quot;Rubik&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Type&quot;},&quot;font&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Heebo&quot;,&quot;Rubik&quot;,&quot;IBM Plex Sans Hebrew&quot;,&quot;Frank Ruhl Libre&quot;,&quot;Noto Serif Hebrew&quot;,&quot;Secular One&quot;,&quot;Varela Round&quot;],&quot;default&quot;:&quot;Rubik&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Type&quot;},&quot;persona&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;maya&quot;,&quot;tamar&quot;,&quot;mom&quot;,&quot;omri&quot;,&quot;shlomo&quot;],&quot;default&quot;:&quot;maya&quot;,&quot;tsType&quot;:&quot;'maya'|'tamar'|'mom'|'omri'|'shlomo'&quot;},&quot;device&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;mobile&quot;,&quot;desktop&quot;],&quot;default&quot;:&quot;mobile&quot;,&quot;tsType&quot;:&quot;'mobile'|'desktop'&quot;},&quot;showNewsflash&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+const EMPTY = { label: '', journey: '', start: 'chat', meId: '', meName: '', people: [], groups: [], script: [], replies: [], feed: [] };
+const PERSONAS = ['maya', 'tamar', 'mom', 'omri', 'shlomo'];
+const TIPS = {
+  chat: { step: 'שלב 1 מתוך 4', title: 'ספרו לכתב מה קרה', text: 'כמה משפטים מספיקים. הכתב ישאל שאלה או שתיים, וכשיש סיפור יופיע הכפתור "די, תיצור טיוטה".' },
+  draft: { step: 'שלב 2 מתוך 4', title: 'זו הטיוטה שלכם', text: 'העורך כתב כתבה רק ממה שסיפרתם. אפשר לבקש נוסח אחר או לחזור לשיחה. למטה מופיעים פרטים שהכתב למד עליכם, ואתם מחליטים אם לשמור אותם בכרטסת.' },
+  publish: { step: 'שלב 3 מתוך 4', title: 'אתם בוחרים מי קורא', text: 'כל כתבה נשלחת רק למי שבחרתם. עוד אין לכם חיבורים, אז הכתבה הראשונה תישמר אצלכם. בשלב הבא נזמין חברים.' }
+};
+const REVS = [['מצחיק יותר', 1], ['דרמטי יותר', 2], ['מאופק יותר', 3], ['תמציתי יותר', 4], ['כותרת חדשה', 'hl'], ['נוסח אחר', 'next']];
+const REACTS = ['אהבתי', 'מצחיק', 'מרגש'];
+const NEWBIE = { id: 'noa_new', name: 'נועה ברק' };
+const FRONT = 'עמוד ראשי';
+
+class Component extends DCLogic {
+  state = { D: null, messages: [], groups: [], selected: {}, groupMembers: {}, ngSel: {}, facts: [], newSel: {}, tipsSeen: {}, mine: [], notifs: [], joined: [], removed: {}, muted: {}, hidden: {}, userHidden: {}, gone: {}, reactions: {}, reported: {}, received: {}, wiped: false, prefs: { articles: true, joins: true, reactions: true }, persona: this.props.persona || 'maya', device: this.props.device || 'mobile' };
+  chatRef = React.createRef();
+  timers = [];
+  loadTimers = [];
+  componentDidMount() {
+    this.applyFont();
+    const src = (window.__resources && window.__resources.haitonData) || new URL('haiton-data.js', document.baseURI).href;
+    import(src).then(m => this.setState({ D: m.DATA }, () => this.reset(this.state.persona)));
+  }
+  componentWillUnmount() { this.timers.forEach(clearTimeout); this.loadTimers.forEach(clearTimeout); }
+  applyFont() { const f = this.props.font || 'Heebo', d = this.props.displayFont || 'Frank Ruhl Libre'; const s = document.documentElement.style; s.setProperty('--hf', "'" + f + "'"); s.setProperty('--df', "'" + d + "'"); }
+  componentDidUpdate() { this.applyFont(); const el = this.chatRef.current; if (el) el.scrollTop = el.scrollHeight; }
+  later(fn, ms) { this.timers.push(setTimeout(fn, ms)); }
+  P() { return (this.state.D && this.state.D[this.state.persona]) || EMPTY; }
+  meName() { return (this.state.myName || '').trim() || this.P().meName; }
+  people() { const st = this.state; return [...(st.wiped ? [] : this.P().people), ...(st.joined || [])].filter(p => !(st.removed || {})[p.id]); }
+  pName(id) { return ([...this.P().people, ...(this.state.joined || [])].find(p => p.id === id) || {}).name; }
+  reset(persona) {
+    this.timers.forEach(clearTimeout); this.timers = []; this.loadTimers.forEach(clearTimeout); this.loadTimers = [];
+    const P = (this.state.D && this.state.D[persona]) || EMPTY;
+    this.setState({ tipsSeen: {}, invite: null, invited: false, inviteOnboard: false, copied: false, facts: (P.facts || []).slice(), newSel: Object.fromEntries((P.newFacts || []).map((_, i) => [i, true])), userTab: 'articles', userBack: 'feed', newGroup: false, ngEdit: null, ngFrom: null, showDelete: false, persona, screen: P.start, prev: 'feed', messages: [{ r: 1, text: 'מה קרה?' }], input: P.script[0] || '', typing: false, loadStep: 0, rev: 0, hl: -1, revising: false, revNote: '', mode: P.people.length ? 'people' : 'me', selected: {}, groupSel: 0, showGroupSheet: false, groupName: '', groupMembers: {}, groups: P.groups.slice(), tab: 'front', mine: [], lastPub: null, toast: false, articleId: null, userId: null, signedIn: false, notifs: [], notifOpen: false, joined: [], joinScheduled: false, removed: {}, muted: {}, hidden: {}, reactions: {}, reported: {}, report: null, prefs: { articles: true, joins: true, reactions: true }, confirm: null, draftReady: false, draftAt: 0, otherAcct: false, otherEmail: '', altEmail: '', authBack: P.start, myName: null, hasPhoto: false, received: {}, wiped: false, userHidden: {}, gone: {}, note: null });
+  }
+  userCount() { return (this.state.messages || []).filter(m => !m.r).length; }
+  freshChat = () => { const P = this.P(); this.setState({ screen: 'chat', confirm: null, messages: [{ r: 1, text: 'מה קרה?' }], input: P.script[0] || '', typing: false, selected: {}, mode: this.people().length ? 'people' : 'me', draftReady: false, draftAt: 0, rev: 0, hl: -1 }); };
+  newChat = () => { if (this.userCount() > 0) this.setState({ confirm: { type: 'newChat' } }); else this.freshChat(); };
+  resume = () => this.setState({ confirm: null, screen: this.state.draftReady && this.userCount() === this.state.draftAt ? 'draft' : 'chat' });
+  send = () => {
+    const P = this.P(), text = (this.state.input || '').trim();
+    if (!text || this.state.typing) return;
+    const n = this.userCount() + 1;
+    const reply = P.replies[n - 1];
+    this.setState(s => ({ messages: [...s.messages, { text }], input: P.script[n] || '', typing: !!reply }));
+    if (reply) this.later(() => this.setState(s => ({ typing: false, messages: [...s.messages, { r: 1, text: reply }] })), 1300);
+  };
+  startDraft = () => {
+    this.setState({ screen: 'loading', loadStep: 0, rev: 0, hl: -1 });
+    this.loadTimers = [1, 2, 3].map(i => setTimeout(() => this.setState({ loadStep: i }), i * 1000));
+    this.loadTimers.push(setTimeout(() => this.setState({ screen: 'draft', draftReady: true, draftAt: this.userCount() }), 3400));
+  };
+  cancelLoading = () => { this.loadTimers.forEach(clearTimeout); this.loadTimers = []; this.setState({ screen: 'chat' }); };
+  draft() {
+    const P = this.P(), st = this.state;
+    if (!P.versions) return { body: [] };
+    const v = P.versions[st.rev];
+    return { headline: st.hl >= 0 ? P.alts[st.hl] : v.headline, sub: v.sub, summary: P.summary, body: st.rev === 4 ? [P.body[0], P.body[P.body.length - 1]] : P.body, flash: P.flash, push: P.push };
+  }
+  revise(label, key) {
+    if (this.state.revising) return;
+    const P = this.P();
+    this.setState({ revising: true, revNote: label });
+    this.later(() => this.setState(s => ({ revising: false, ...(key === 'hl' ? { hl: (s.hl + 1) % P.alts.length } : key === 'next' ? { rev: (s.rev + 1) % P.versions.length, hl: -1 } : { rev: key, hl: -1 }) })), 1400);
+  }
+  allGroups() { return this.state.groups || []; }
+  gIdx() { return Math.max(0, Math.min(this.state.groupSel || 0, this.allGroups().length - 1)); }
+  selIds() { const st = this.state; return this.people().filter(p => (st.selected || {})[p.id]).map(p => p.id); }
+  closeNotifs = () => this.setState(s => ({ notifOpen: false, notifs: (s.notifs || []).map(x => ({ ...x, unread: false })) }));
+  sendTo(id) { this.closeNotifs(); if (this.userCount() > 0) { this.setState({ confirm: { type: 'newChat', to: id } }); return; } this.freshChat(); this.setState({ selected: { [id]: true }, mode: 'people' }); }
+  sendCurrentTo(id) { const st = this.state, ready = st.draftReady && this.userCount() === st.draftAt; this.setState({ confirm: null, selected: { ...st.selected, [id]: true }, mode: 'people', screen: ready ? 'publish' : 'chat' }); }
+  note(text, undo) { clearTimeout(this.noteTimer); this.setState({ note: { text, undo: !!undo } }); this.noteUndo = undo || null; this.noteTimer = setTimeout(() => this.setState({ note: null }), 5000); }
+  isOnboard() { return !!this.P().onboard || !!this.state.wiped; }
+  hasFact(f) { return (this.state.facts || []).some(x => x.k === f.k && x.v === f.v); }
+  canPublish() {
+    const m = this.state.mode;
+    if (m === 'people') return this.selIds().length > 0;
+    if (m === 'group') { const g = this.allGroups()[this.gIdx()]; return !!(g && g.members.length); }
+    if (m === 'circle') return this.people().length > 0;
+    return true;
+  }
+  finishPublish(tab) {
+    const ob = this.isOnboard() && !this.state.invited;
+    this.setState({ screen: 'feed', showGroupSheet: false, tab: tab || 'front', toast: !ob, invite: ob ? 'form' : null, inviteOnboard: ob, invited: true, copied: false });
+    this.later(() => this.setState({ toast: false }), 5000);
+  }
+  publish = () => {
+    const st = this.state, P = this.P();
+    if (!this.canPublish()) return;
+    const sel = this.selIds(), groups = this.allGroups(), mine = st.mine || [];
+    const aud = st.mode === 'people' ? sel : st.mode === 'group' ? groups[this.gIdx()].members : st.mode === 'me' ? [] : this.people().map(p => p.id);
+    const pub = { ...this.draft(), id: 'mine' + (mine.length + 1), prev: mine.length ? mine[0].id : st.wiped ? null : P.basisPrev, authorId: P.meId, author: this.meName(), time: 'עכשיו', clock: '12:50', img: '', aud };
+    const nf = (P.newFacts || []).filter((f, i) => st.newSel[i] && !this.hasFact(f)).map(f => ({ ...f, isNew: true, src: 'נוסף היום, מתוך השיחה' }));
+    const base = { mine: [pub, ...mine], lastPub: pub, facts: [...(st.facts || []), ...nf], newSel: {}, messages: [{ r: 1, text: 'מה קרה?' }], input: P.script[0] || '', draftReady: false, draftAt: 0 };
+    if (st.mode === 'people') {
+      const gm = {}; sel.forEach(k => gm[k] = true);
+      this.setState({ ...base, showGroupSheet: true, groupMembers: gm, groupName: P.groupNameScript || '' });
+    } else { this.setState(base); this.finishPublish(); }
+    if (aud.length) this.later(() => this.setState(s => {
+      const who = aud[0], label = REACTS[0];
+      const received = { ...s.received, [pub.id]: [...((s.received || {})[pub.id] || []), { id: who, label }] };
+      const nt = { id: 'react-' + pub.id, kind: 'react', article: pub.id, text: 'תגובה חדשה מ' + (this.pName(who) || '') + ': ' + label, sub: pub.headline, time: 'עכשיו', unread: true };
+      if ((s.gone || {})[pub.id]) return null;
+      return { received, notifs: (s.prefs || {}).reactions ? [nt, ...(s.notifs || [])] : s.notifs };
+    }), 8000);
+  };
+  openArticle(id) { this.setState(s => ({ screen: 'article', articleId: id, prev: s.screen === 'user' ? 'user' : 'feed' })); }
+  openInvite = () => this.setState({ invite: 'form', inviteOnboard: false, copied: false, newGroup: false, notifOpen: false });
+  sendInvite = () => {
+    const st = this.state;
+    this.setState({ invite: 'sent', invited: true });
+    if (st.joinScheduled) return;
+    this.setState({ joinScheduled: true });
+    this.later(() => this.setState(s => ({ joined: [...(s.joined || []), NEWBIE], notifs: (s.prefs || {}).joins ? [{ id: 'join', kind: 'join', person: NEWBIE.id, text: NEWBIE.name + ' הצטרפה דרך ההזמנה שלכם', sub: 'מעכשיו אפשר לשלוח לה כתבות, והכתבות שלה יופיעו אצלכם בעמוד הראשי.', time: 'עכשיו', unread: true }, ...(s.notifs || [])] : s.notifs })), 6000);
+  };
+  ngError() {
+    const st = this.state, name = (st.ngName || '').trim();
+    if (!name) return '';
+    if (name === FRONT || this.allGroups().some((g, i) => g.name === name && i !== st.ngEdit)) return 'כבר יש קבוצה בשם הזה. בחרו שם אחר.';
+    return '';
+  }
+  openGroupEditor(gi) { const g = this.allGroups()[gi]; if (!g) return; const sel = {}; g.members.forEach(m => sel[m] = true); this.setState({ newGroup: true, ngEdit: gi, ngName: g.name, ngSel: sel, ngFrom: null }); }
+  deleteGroup(gi) { this.setState(s => { const g = s.groups[gi]; return { groups: s.groups.filter((_, j) => j !== gi), tab: g && s.tab === g.name ? 'front' : s.tab, groupSel: 0, newGroup: false, ngEdit: null }; }); }
+  saveGroup = () => {
+    const st = this.state, name = (st.ngName || '').trim(), members = Object.keys(st.ngSel || {}).filter(k => st.ngSel[k]);
+    if (!name || !members.length || this.ngError()) return;
+    if (st.ngEdit != null) {
+      const old = st.groups[st.ngEdit];
+      this.setState(s => ({ groups: s.groups.map((g, i) => i === s.ngEdit ? { name, members } : g), newGroup: false, ngEdit: null, ...(s.ngFrom === 'publish' ? { mode: 'group', groupSel: s.ngEdit, ngFrom: null } : {}), tab: old && s.tab === old.name ? name : s.tab }));
+    } else {
+      this.setState(s => ({ groups: [...s.groups, { name, members }], newGroup: false, tab: s.screen === 'feed' ? name : s.tab, ...(s.ngFrom === 'publish' ? { mode: 'group', groupSel: s.groups.length } : {}), ngFrom: null }));
+    }
+  };
+  removeArticle(id) { this.setState(s => ({ mine: (s.mine || []).filter(a => a.id !== id), notifs: (s.notifs || []).filter(x => x.article !== id), gone: { ...(s.gone || {}), [id]: true }, hidden: { ...s.hidden, [id]: true }, confirm: null, screen: s.screen === 'article' ? (s.prev === 'user' ? 'user' : 'feed') : s.screen })); }
+  removeConn(id) { this.setState(s => ({ removed: { ...s.removed, [id]: true }, confirm: null, groups: s.groups.map(g => ({ ...g, members: g.members.filter(m => m !== id) })), selected: { ...s.selected, [id]: false }, screen: s.screen === 'user' && s.userId === id ? 'feed' : s.screen })); }
+  toggleMute(id) { this.setState(s => ({ muted: { ...s.muted, [id]: !(s.muted || {})[id] } })); }
+  doSignIn(email) { const from = this.state.authBack; this.setState({ signedIn: true, altEmail: email || '', otherAcct: false, screen: from === 'signedOut' ? 'feed' : from === 'invite' ? 'invite' : 'welcome' }); }
+  renderVals() {
+    const st = this.state, P = this.P(), D = st.D;
+    const mob = st.device === 'mobile', meName = this.meName(), people = this.people(), np = people.length;
+    const hidden = st.hidden || {}, muted = st.muted || {}, removed = st.removed || {};
+    const all = (st.mine || []).concat(st.wiped ? [] : P.feed).filter(a => !hidden[a.id]);
+    const photo = !!st.hasPhoto, PHOTO = 'repeating-linear-gradient(135deg,#bdb4a4 0 4px,#a99f8d 4px 8px)';
+    const feedAll = all.filter(a => a.authorId === P.meId || (!muted[a.authorId] && !removed[a.authorId]));
+    const byId = id => all.find(a => a.id === id) || all[0] || { body: [] };
+    const groups = this.allGroups(), gs = this.gIdx();
+    const grp = groups.find(g => g.name === st.tab);
+    const list = grp ? feedAll.filter(a => (a.authorId === P.meId ? grp.members.some(m => (a.aud || []).includes(m)) : grp.members.includes(a.authorId))) : feedAll;
+    const COLORS = ['#d7261e', '#1f5fbf', '#2f8a4c', '#c47a12', '#7a3fb0', '#0f7b80', '#b0306a'];
+    const colorOf = id => COLORS[[...(id || '')].reduce((h, c) => h + c.charCodeAt(0), 0) % COLORS.length];
+    const tab = (this.props.newsStyle ?? 'tabloid') === 'tabloid';
+    const findPrev = a => (a && a.prev ? all.find(x => x.id === a.prev && x.authorId === a.authorId) : null);
+    const pName = id => this.pName(id);
+    const audText = a => !a.aud ? 'נשלחה לכל המעגל שלכם.' : a.aud.length ? 'נשלחה ל-' + a.aud.length + ': ' + a.aud.map(pName).filter(Boolean).join(', ') : 'נשמרה רק אצלכם. אף אחד אחר לא קיבל אותה.';
+    const dec = a => ({ ...a, author: a.authorId === P.meId ? meName : a.author, hasPrev: !!findPrev(a), firstName: (a.author || '').split(' ')[0], hasImage: !!a.img, noImage: !a.img, color: a.authorId === P.meId && photo ? PHOTO : colorOf(a.authorId), leadAvatarBg: a.authorId === P.meId && photo ? PHOTO : '#16130f', initial: a.authorId === P.meId && photo ? '' : ((a.authorId === P.meId ? meName : a.author) || ' ')[0], kicker: a.time === 'עכשיו' ? 'חדש · עכשיו' : 'מהמעגל של ' + (meName || '').split(' ')[0], open: () => this.openArticle(a.id), openAuthor: () => this.setState({ screen: 'user', userId: a.authorId, userTab: 'articles', userBack: 'article' }) });
+    const artRaw = byId(st.articleId), history = []; let hp = findPrev(artRaw); while (hp && history.length < 5) { history.push(dec(hp)); hp = findPrev(hp); }
+    const artMine = artRaw.authorId === P.meId, artFirst = (artRaw.author || '').split(' ')[0];
+    const facts = st.facts || [], isMe = st.userId === P.meId, ut = st.userTab || 'articles';
+    const basisPrev = (st.mine || [])[0] || (P.basisPrev && !st.wiped ? all.find(x => x.id === P.basisPrev) : null), basisFacts = facts.filter(f => (P.usedFacts || []).includes(f.k));
+    const toggle = (key, id) => () => this.setState(s => ({ [key]: { ...s[key], [id]: !(s[key] || {})[id] } }));
+    const selIds = this.selIds();
+    const ua = all.filter(a => a.authorId === st.userId);
+    const uName = isMe ? meName : (ua[0] || {}).author || pName(st.userId) || '';
+    const uConn = !isMe && people.some(p => p.id === st.userId);
+    const n = this.userCount(), sc = st.screen;
+    const modes = [
+      { id: 'circle', label: 'כל המעגל', hint: np ? 'כל מי שמחובר אליכם (' + np + ')' : 'עוד אין לכם חיבורים', disabled: !np },
+      { id: 'me', label: 'רק אני', hint: 'הכתבה תישאר אצלכם' },
+      { id: 'people', label: 'אנשים מסוימים', hint: np ? 'בחירה מתוך החיבורים שלכם' : 'עוד אין לכם חיבורים', disabled: !np },
+      { id: 'group', label: 'קבוצה', hint: !np ? 'עוד אין לכם חיבורים' : groups.length ? 'אחת הקבוצות ששמרתם' : 'עוד אין קבוצות, אפשר ליצור אחת', disabled: !np }
+    ];
+    const pubLabel = st.mode === 'people' ? (selIds.length ? 'פרסום ל-' + selIds.length + ' אנשים' : 'בחרו למי לפרסם') : st.mode === 'me' ? 'שמירה לעצמי' : st.mode === 'group' ? (groups.length ? (groups[gs].members.length ? 'פרסום ל' + groups[gs].name : groups.some(g => g.members.length) ? 'בחרו קבוצה שיש בה חברים' : 'כל הקבוצות ריקות · הוסיפו להן חברים') : 'צרו קבוצה כדי לפרסם') : np ? 'פרסום לכל המעגל' : 'אין חיבורים';
+    const canBackDraft = !!st.draftReady && n === st.draftAt && !st.typing;
+    const ngName = (st.ngName || '').trim(), ngErr = this.ngError(), ngOk = !!ngName && !ngErr && Object.values(st.ngSel || {}).some(Boolean);
+    const gsName = (st.groupName || '').trim(), gsErr = gsName && (gsName === FRONT || groups.some(g => g.name === gsName)) ? 'כבר יש קבוצה בשם הזה. בחרו שם אחר.' : '';
+    const gsOk = !!gsName && !gsErr && Object.values(st.groupMembers || {}).some(Boolean);
+    const cf = st.confirm, closeCf = () => this.setState({ confirm: null });
+    let confirm = {};
+    if (cf && cf.type === 'newChat') { const toFirst = cf.to ? (pName(cf.to) || '').split(' ')[0] : ''; confirm = { title: 'להתחיל סיפור חדש?', text: 'השיחה הנוכחית עם הכתב והטיוטה שלה יימחקו. אפשר גם לחזור אליהן ולהמשיך.', yesLabel: 'סיפור חדש', noLabel: 'המשך הסיפור הנוכחי', yes: cf.to ? () => { this.freshChat(); this.setState({ selected: { [cf.to]: true }, mode: 'people' }); } : this.freshChat, no: sc === 'chat' ? closeCf : this.resume, hasAlt: !!cf.to, altLabel: 'שליחת הסיפור הנוכחי ל' + toFirst, alt: () => this.sendCurrentTo(cf.to) }; }
+    if (cf && cf.type === 'removeArticle') confirm = { title: 'להסיר את הכתבה?', text: 'הכתבה תוסר מהעמוד שלכם ומהפיד של כל מי שקיבל אותה. אי אפשר לבטל את הפעולה.', yesLabel: 'הסרת הכתבה', noLabel: 'ביטול', yes: () => this.removeArticle(cf.id), no: closeCf };
+    if (cf && cf.type === 'removeConn') confirm = { title: 'להסיר את ' + (pName(cf.id) || '') + ' מהחיבורים?', text: 'לא תקבלו יותר כתבות זה מזה, וההסרה תחול גם על הקבוצות שלכם. אפשר להזמין שוב בכל זמן.', yesLabel: 'הסרה', noLabel: 'ביטול', yes: () => this.removeConn(cf.id), no: closeCf };
+    const notifs = st.notifs || [], reacted = (st.reactions || {})[artRaw.id];
+    const lastUser = [...(st.messages || [])].reverse().find(m => !m.r);
+    const inviterFirst = (P.inviter || '').split(' ')[0];
+    const lp = st.lastPub;
+    const unhide = id => this.setState(s => ({ hidden: { ...s.hidden, [id]: false }, userHidden: { ...(s.userHidden || {}), [id]: false } }));
+    const hiddenArts = (st.mine || []).concat(st.wiped ? [] : P.feed).filter(a => (st.userHidden || {})[a.id]);
+    return {
+      personaBtns: PERSONAS.map(id => ({ label: D ? D[id].label : id, active: st.persona === id, inactive: st.persona !== id, onClick: () => this.reset(id) })),
+      deviceBtns: [['mobile', 'מובייל'], ['desktop', 'דסקטופ']].map(([id, label]) => ({ label, active: st.device === id, inactive: st.device !== id, onClick: () => this.setState({ device: id }) })),
+      restart: () => this.reset(st.persona), journey: P.journey,
+      frameStyle: mob ? { width: 390, height: 844, background: '#fff', borderRadius: 44, overflow: 'hidden', position: 'relative', boxShadow: '0 0 0 10px #161616, 0 30px 80px rgba(0,0,0,.25)', display: 'flex', flexDirection: 'column', marginTop: 10 } : { width: '100%', maxWidth: 1280, height: 800, background: '#fff', borderRadius: 12, overflow: 'hidden', position: 'relative', boxShadow: '0 30px 80px rgba(0,0,0,.18)', display: 'flex', flexDirection: 'column' },
+      isMobile: mob, isDesktop: !mob, statusBg: sc === 'lock' ? '#1d1e22' : ['feed', 'article', 'user'].includes(sc) ? (tab ? '#f3eee4' : '#c8102e') : '#fff', statusFg: sc === 'lock' || (!tab && ['feed', 'article', 'user'].includes(sc)) ? '#fff' : '#141414',
+      isChat: sc === 'chat', isLoading: sc === 'loading', isDraft: sc === 'draft', isPublish: sc === 'publish', isFeed: sc === 'feed', isArticle: sc === 'article', isUser: sc === 'user', isLock: sc === 'lock', isInvite: sc === 'invite', isGoogle: sc === 'google',
+      meName, meInitial: (meName || ' ')[0], email: st.altEmail || P.email || '',
+      chatRef: this.chatRef,
+      messages: (st.messages || []).map(m => ({ text: m.text, isUser: !m.r, isReporter: !!m.r })),
+      typing: st.typing, input: st.input || '',
+      canSend: !!(st.input || '').trim() && !st.typing, cantSend: !(st.input || '').trim() || !!st.typing,
+      onInput: e => this.setState({ input: e.target.value }), onKey: e => { if (e.key === 'Enter') this.send(); }, send: this.send,
+      canBackDraft, resumeDraft: () => this.setState({ screen: 'draft' }),
+      canFinish: n >= 1 && !st.typing && !!P.versions && !canBackDraft,
+      countLabel: 'הכתב לא מוסיף פרטים שלא סיפרתם',
+      startDraft: this.startDraft, newChat: this.newChat, cancelLoading: this.cancelLoading,
+      factsChip: facts.length ? 'הכתב זוכר ' + facts.length + ' דברים עליכם' : 'הכרטסת שלכם עוד ריקה',
+      openFacts: () => this.setState({ screen: 'user', userId: P.meId, userTab: 'facts', userBack: 'chat' }),
+      userBack: () => this.setState({ screen: st.userBack || 'feed' }),
+      hasBasis: !!(basisPrev || basisFacts.length), basis: { hasPrev: !!basisPrev, prev: basisPrev ? dec(basisPrev) : {}, facts: basisFacts },
+      hasNewFacts: (P.newFacts || []).some(f => !this.hasFact(f)), newFacts: (P.newFacts || []).map((f, i) => ({ ...f, i })).filter(f => !this.hasFact(f)).map(f => ({ ...f, checked: !!(st.newSel || {})[f.i], unchecked: !(st.newSel || {})[f.i], onClick: toggle('newSel', f.i) })),
+      loadSteps: ['מגדיר את הסיפור', 'בודק בכרטסת העובדות', 'מחפש כתבות קודמות שלכם'].map((label, i) => ({ label, done: st.loadStep > i, active: st.loadStep === i, waiting: st.loadStep < i })),
+      draft: this.draft(), revising: st.revising, revNote: st.revNote,
+      draftFade: { opacity: st.revising ? 0.35 : 1, transition: 'opacity .3s' },
+      revOptions: REVS.map(([label, key]) => ({ label, onClick: () => this.revise(label, key) })),
+      backToChat: () => this.setState({ screen: 'chat' }),
+      toPublish: () => !st.revising && this.setState({ screen: 'publish' }),
+      backToDraft: () => this.setState({ screen: 'draft' }),
+      audienceModes: modes.map(m => ({ ...m, enabled: !m.disabled, disabled: !!m.disabled, active: st.mode === m.id, inactive: st.mode !== m.id, onClick: () => this.setState(m.id === 'group' ? { mode: 'group', groupSel: Math.max(0, groups.findIndex(g => g.members.length)) } : { mode: m.id }) })),
+      noConnections: !np, openInvite: this.openInvite,
+      showPeople: st.mode === 'people' && np > 0, showGroupPick: st.mode === 'group' && np > 0, noGroups: !groups.length,
+      newGroupFromPublish: () => this.setState({ newGroup: true, ngEdit: null, ngName: '', ngSel: {}, ngFrom: 'publish' }),
+      groupChips: groups.map(g => ({ name: g.name, onClick: () => this.setState(s => { const sel = { ...s.selected }; g.members.forEach(id => sel[id] = true); return { selected: sel }; }) })),
+      peopleList: people.map(p => ({ name: p.name, checked: !!st.selected[p.id], unchecked: !st.selected[p.id], onClick: toggle('selected', p.id) })),
+      groupPick: groups.map((g, i) => ({ name: g.name, enabled: g.members.length > 0, disabled: !g.members.length, mark: i === gs ? '✓ נבחרה' : g.members.length + ' אנשים', edit: () => { this.openGroupEditor(i); this.setState({ ngFrom: 'publish' }); }, onClick: () => this.setState({ groupSel: i }) })),
+      publishLabel: pubLabel, publish: this.publish, canPublish: this.canPublish(), cantPublish: !this.canPublish(),
+      showGroupSheet: st.showGroupSheet, groupName: st.groupName || '', onGroupName: e => this.setState({ groupName: e.target.value }),
+      gsHasError: !!gsErr, gsError: gsErr, gsBtnBg: gsOk ? '#141414' : '#b5b5b5',
+      groupMembers: selIds.map(id => ({ name: pName(id), checked: !!st.groupMembers[id], unchecked: !st.groupMembers[id], onClick: toggle('groupMembers', id) })),
+      createGroup: () => {
+        if (!gsOk) return;
+        const members = Object.keys(st.groupMembers).filter(k => st.groupMembers[k]);
+        this.setState(s => ({ groups: [...s.groups, { name: gsName, members }] })); this.finishPublish(gsName);
+      },
+      skipGroup: () => this.finishPublish(),
+      tabs: ['front', ...groups.map(g => g.name)].map(id => ({ name: id === 'front' ? FRONT : id, active: st.tab === id, inactive: st.tab !== id, onClick: () => this.setState({ tab: id }) })),
+      showFlash: (this.props.showNewsflash ?? true) && feedAll.length > 1,
+      tickerItems: (() => { const ago = t => { t = t || ''; if (t.includes('אתמול')) return 1; if (t.includes('יומיים')) return 2; if (t.includes('שבועיים')) return 14; if (t.includes('שבוע')) return 7; const m = t.match(/(\d+)\s*ימים/); return m ? +m[1] : 0; }; const dt = t => { const d = new Date(2026, 9, 7 - ago(t)); return d.getDate() + '.' + (d.getMonth() + 1) + '.' + d.getFullYear(); }; const f = feedAll.slice(0, 6).map(a => ({ clock: dt(a.time), text: a.flash, open: () => this.openArticle(a.id) })); return [...f, ...f]; })(),
+      groupHeader: !!grp, groupCaption: grp ? (grp.members.map(pName).filter(Boolean).join(' · ') || 'אין חברים בקבוצה · ערכו או מחקו אותה') : '',
+      editCurrentGroup: () => this.openGroupEditor(groups.indexOf(grp)),
+      feedMobile: mob, feedDesktop: !mob,
+      hasMain: list.length > 0, feedEmpty: list.length === 0,
+      main: list[0] ? dec(list[0]) : {}, subs: list.slice(1, 4).map((a, i) => ({ ...dec(a), num: '0' + (i + 2) })), leadKicker: list[0] && list[0].time === 'עכשיו' ? 'חדש · עכשיו' : 'הסיפור של היום',
+      tabloidNews: tab, classicNews: !tab, isArticleTabloid: sc === 'article' && tab, isArticleClassic: sc === 'article' && !tab, pageBg: tab ? '#f3eee4' : '#fff', more: list.slice(4, 12).map(dec), hasMore: list.length > 4,
+      hasDraft: sc === 'feed' && n > 0 && !st.invite, resume: this.resume,
+      draftKicker: st.draftReady ? 'טיוטה שלא פורסמה' : 'סיפור בתהליך',
+      draftPreview: st.draftReady ? this.draft().headline : (lastUser || {}).text || '',
+      toastVisible: st.toast && sc === 'feed', toastTitle: lp ? (lp.aud.length ? 'הכתבה פורסמה ל-' + lp.aud.length + ' אנשים' : 'הכתבה נשמרה אצלכם') : '', toastPush: !!(lp && lp.aud.length), pushText: lp ? lp.push : '',
+      openMyPage: () => this.setState({ screen: 'user', userId: P.meId, userTab: 'articles', userBack: 'feed' }),
+      goFeed: () => this.setState({ screen: 'feed', showGroupSheet: false }),
+      art: (() => { const rl = ((st.received || {})[artRaw.id] || []).map(r => ({ name: pName(r.id), label: r.label })); return { ...dec(artRaw), history, isMine: sc === 'article' && artMine, audText: audText(artRaw), showRecv: !!(artRaw.aud && artRaw.aud.length), recvList: rl, noRecv: !rl.length }; })(),
+      askRemoveArticle: () => this.setState({ confirm: { type: 'removeArticle', id: artRaw.id } }),
+      canReact: sc === 'article' && !artMine,
+      reactPrompt: reacted ? 'שלחתם ל' + artFirst + ': ' + reacted : 'התגובה תגיע רק ל' + artFirst,
+      reactBtns: REACTS.map(label => ({ label, active: reacted === label, inactive: reacted !== label, onClick: () => this.setState(s => ({ reactions: { ...s.reactions, [artRaw.id]: (s.reactions || {})[artRaw.id] === label ? null : label } })) })),
+      canReport: sc === 'article' && !artMine && !(st.reported || {})[artRaw.id],
+      reportDone: sc === 'article' && !artMine && !!(st.reported || {})[artRaw.id],
+      openReport: () => this.setState({ report: 'form', reportReason: null, reportNote: '' }),
+      closeReport: () => this.setState({ report: null }),
+      showReport: !!st.report, reportForm: st.report === 'form', reportSent: st.report === 'sent',
+      reportReasons: ['מידע שגוי עליי', 'פוגע או מעליב', 'חושף פרטים אישיים', 'ספאם', 'אחר'].map(label => ({ label, checked: st.reportReason === label, unchecked: st.reportReason !== label, onClick: () => this.setState({ reportReason: label }) })),
+      reportNote: st.reportNote || '', onReportNote: e => this.setState({ reportNote: e.target.value }),
+      reportBtnBg: st.reportReason ? '#141414' : '#b5b5b5',
+      sendReport: () => { if (!st.reportReason) return; this.setState(s => ({ report: 'sent', reported: { ...(s.reported || {}), [artRaw.id]: true } })); },
+      isSignedOut: ['signedOut', 'deleted', 'declined'].includes(sc),
+      endTitle: sc === 'deleted' ? 'החשבון נמחק' : sc === 'declined' ? 'ההזמנה נדחתה' : 'התנתקתם',
+      endText: sc === 'deleted' ? 'הכתבות, הכרטסת והקבוצות שלכם נמחקו. אפשר להירשם מחדש בכל זמן.' : sc === 'declined' ? 'לא נצרף אתכם למעגל של ' + inviterFirst + '. אם תתחרטו, אפשר לבקש ממנו קישור חדש.' : 'הכתבות והכרטסת שלכם שמורות ויחכו לכם כשתתחברו שוב.',
+      endCta: sc === 'deleted' ? 'הרשמה מחדש' : sc === 'declined' ? 'מה זה haiton?' : 'התחברות',
+      endAction: () => sc === 'signedOut' ? this.setState({ screen: 'google', authBack: 'signedOut', otherAcct: false }) : this.setState({ screen: 'landing' }),
+      acctEmail: st.altEmail || P.email || P.meId + '@gmail.com',
+      logout: () => this.setState({ screen: 'signedOut' }),
+      askDelete: () => this.setState({ showDelete: true }), cancelDelete: () => this.setState({ showDelete: false }),
+      confirmDelete: () => this.setState(() => { this.timers.forEach(clearTimeout); this.timers = []; this.loadTimers.forEach(clearTimeout); this.loadTimers = []; return {}; }, () => this.setState({ showDelete: false, note: null, gone: {}, toast: false, screen: 'deleted', wiped: true, mine: [], lastPub: null, groups: [], facts: [], joined: [], joinScheduled: false, notifs: [], received: {}, reactions: {}, reported: {}, removed: {}, muted: {}, hidden: {}, userHidden: {}, myName: null, hasPhoto: false, tab: 'front', messages: [{ r: 1, text: 'מה קרה?' }], input: P.script[0] || '', draftReady: false, draftAt: 0, selected: {}, mode: 'me', invited: false, tipsSeen: {}, inviteOnboard: false, invite: null, confirm: null, report: null, notifOpen: false, typing: false, revising: false })),
+      showDelete: !!st.showDelete,
+      showConfirm: !!cf, confirm,
+      meBadge: photo ? '' : (meName || ' ')[0], meAvatarBg: photo ? PHOTO : '#16130f', meAvatarBgClassic: photo ? PHOTO : 'transparent',
+      nameEmpty: st.myName != null && !st.myName.trim(), savedName: P.meName,
+      hideReported: () => { const id = artRaw.id; this.setState(s => ({ hidden: { ...s.hidden, [id]: true }, userHidden: { ...(s.userHidden || {}), [id]: true }, report: null, screen: 'feed' })); this.note('הכתבה הוסתרה מהעמוד הראשי', () => unhide(id)); },
+      showNote: !!st.note, noteText: (st.note || {}).text || '', noteHasUndo: !!(st.note || {}).undo, noteUndo: () => { const u = this.noteUndo; clearTimeout(this.noteTimer); this.setState({ note: null }); if (u) u(); },
+      hasHiddenList: hiddenArts.length > 0, hiddenList: hiddenArts.map(a => ({ headline: a.headline, author: a.author, unhide: () => unhide(a.id) })),
+      canMuteReported: people.some(p => p.id === artRaw.authorId) && !muted[artRaw.authorId], reportedFirst: artFirst,
+      muteReported: () => this.setState(s => ({ muted: { ...s.muted, [artRaw.authorId]: true }, report: null, screen: 'feed' })),
+      openNewGroup: () => this.setState({ newGroup: true, ngEdit: null, ngName: '', ngSel: {}, ngFrom: null }),
+      closeNewGroup: () => this.setState({ newGroup: false, ngEdit: null }),
+      showNewGroup: !!st.newGroup, ngName: st.ngName || '', onNgName: e => this.setState({ ngName: e.target.value }),
+      ngTitle: st.ngEdit != null ? 'עריכת קבוצה' : 'קבוצה חדשה', ngSaveLabel: st.ngEdit != null ? 'שמירה' : 'יצירת קבוצה', ngIsEdit: st.ngEdit != null,
+      ngHasError: !!ngErr, ngError: ngErr,
+      deleteEditGroup: () => this.deleteGroup(st.ngEdit),
+      ngPeople: people.map(p => ({ name: p.name, checked: !!(st.ngSel || {})[p.id], unchecked: !(st.ngSel || {})[p.id], onClick: () => this.setState(s => ({ ngSel: { ...s.ngSel, [p.id]: !(s.ngSel || {})[p.id] } })) })),
+      ngNoPeople: !np, ngHasPeople: np > 0,
+      ngCount: (() => { const c = Object.values(st.ngSel || {}).filter(Boolean).length; return c ? c + ' נבחרו' : 'בחרו מי בקבוצה'; })(),
+      ngBtnBg: ngOk ? '#141414' : '#b5b5b5',
+      saveNewGroup: this.saveGroup,
+      showYourTurn: sc === 'article' && !artMine,
+      upage: {
+        name: uName, first: (uName || '').split(' ')[0], initial: (uName || ' ')[0], avatarBg: isMe && photo ? PHOTO : '#141414', badge: isMe && photo ? '' : (uName || ' ')[0], caption: ua.length === 1 ? 'כתבה אחת' : ua.length + ' כתבות',
+        list: ua.map(a => ({ ...dec(a), canRemove: isMe, askRemove: e => { e.stopPropagation(); this.setState({ confirm: { type: 'removeArticle', id: a.id } }); } })), empty: !ua.length, isMe,
+        showConnActions: uConn, isMuted: uConn && !!muted[st.userId], muteLabel: muted[st.userId] ? 'ביטול השתקה' : 'השתקה',
+        toggleMute: () => this.toggleMute(st.userId), askRemoveConn: () => this.setState({ confirm: { type: 'removeConn', id: st.userId } }),
+        showArticles: !isMe || ut === 'articles', showFacts: isMe && ut === 'facts', showSettings: isMe && ut === 'settings',
+        groups: groups.map((g, gi) => ({ name: g.name, hasMembers: g.members.length > 0, empty: !g.members.length, members: g.members.map(pName).filter(Boolean).join(' · '), edit: () => this.openGroupEditor(gi), remove: () => this.deleteGroup(gi) })), noGroups: !groups.length,
+        tabs: [['articles', 'כתבות'], ['facts', 'כרטסת עובדות'], ['settings', 'הגדרות']].map(([id, name]) => ({ name, active: ut === id, inactive: ut !== id, onClick: () => this.setState({ userTab: id }) })),
+        facts: facts.map((f, i) => ({ ...f, isNew: !!f.isNew, remove: () => this.setState(s => ({ facts: s.facts.filter((_, j) => j !== i) })) })), factCount: facts.length + ' פרטים', noFacts: !facts.length
+      },
+      profileName: st.myName != null ? st.myName : P.meName, onProfileName: e => this.setState({ myName: e.target.value }),
+      hasPhoto: !!st.hasPhoto, noPhoto: !st.hasPhoto, photoLabel: st.hasPhoto ? 'הסרת התמונה' : 'הוספת תמונה', togglePhoto: () => this.setState(s => ({ hasPhoto: !s.hasPhoto })),
+      connList: people.map(p => ({ name: p.name, status: muted[p.id] ? 'מושתק · לא מופיע בעמוד הראשי' : 'מופיע בעמוד הראשי', muteLabel: muted[p.id] ? 'ביטול השתקה' : 'השתקה', toggleMute: () => this.toggleMute(p.id), remove: () => this.setState({ confirm: { type: 'removeConn', id: p.id } }) })),
+      prefList: [['articles', 'כתבה חדשה מהמעגל'], ['joins', 'מישהו הצטרף דרך ההזמנה שלי'], ['reactions', 'תגובות לכתבות שלי']].map(([id, label]) => { const on = !!(st.prefs || {})[id]; return { label, on, off: !on, onClick: () => this.setState(s => ({ prefs: { ...s.prefs, [id]: !on } })) }; }),
+      openNotifs: () => this.setState({ notifOpen: true }),
+      closeNotifs: this.closeNotifs,
+      showNotifs: !!st.notifOpen, hasUnread: notifs.some(x => x.unread), noNotifs: !notifs.length,
+      notifList: notifs.map(x => ({ ...x, dot: x.unread ? '#c8102e' : '#d6d6d6',
+        open: () => { this.closeNotifs(); if (x.kind === 'join') this.setState({ screen: 'user', userId: x.person, userTab: 'articles', userBack: 'feed' }); else if (x.kind === 'react') { if ((st.mine || []).some(a => a.id === x.article)) this.openArticle(x.article); else this.note('הכתבה הזו הוסרה'); } },
+        hasAction: x.kind === 'join' && people.some(p => p.id === x.person), actionLabel: 'שליחת כתבה אליה',
+        action: e => { e.stopPropagation(); this.sendTo(x.person); } })),
+      lockPush: P.push || '', openFromLock: () => this.openArticle(P.pushArticle),
+      inviteTitle: (P.inviter || '') + ' מזמין אתכם להצטרף ל-haiton',
+      inviteSub: 'אחרי ההצטרפות תראו את הכתבות ש' + inviterFirst + ' בוחר לשתף אתכם.',
+      declineInvite: () => this.setState({ screen: 'declined' }),
+      switchAccount: () => this.setState({ signedIn: false, screen: 'google', authBack: 'invite', otherAcct: true }),
+      notSignedIn: !st.signedIn, signedIn: !!st.signedIn,
+      toGoogle: () => this.setState(s => ({ screen: 'google', authBack: s.screen, otherAcct: false })),
+      googleBack: () => this.setState({ screen: st.authBack && st.authBack !== 'google' ? st.authBack : 'landing' }),
+      signIn: () => this.doSignIn(''),
+      noOtherAcct: !st.otherAcct, otherAcct: !!st.otherAcct, showOtherAcct: () => this.setState({ otherAcct: true }),
+      otherEmail: st.otherEmail || '', onOtherEmail: e => this.setState({ otherEmail: e.target.value }),
+      otherBtnBg: /\S+@\S+\.\S+/.test(st.otherEmail || '') ? '#141414' : '#b5b5b5',
+      signInOther: () => { const e = (st.otherEmail || '').trim(); if (/\S+@\S+\.\S+/.test(e)) this.doSignIn(e); },
+      isLanding: sc === 'landing', isWelcome: sc === 'welcome', meFirst: (meName || '').split(' ')[0],
+      welcomeSteps: [['1', 'מספרים לכתב', 'מה קרה היום, במילים שלכם'], ['2', 'העורך כותב טיוטה', 'אפשר לשנות אותה כמה שרוצים'], ['3', 'בוחרים מי קורא', 'שום דבר לא מתפרסם בלי אישור שלכם'], ['4', 'מזמינים חברים', 'כדי שיהיה למי לשלוח, וממי לקרוא']].map(([n, t, d]) => ({ n, t, d })),
+      startOnboarding: this.newChat,
+      tipShow: this.isOnboard() && !!TIPS[sc] && !(st.tipsSeen || {})[sc], tip: TIPS[sc] || {},
+      tipOk: () => this.setState(s => ({ tipsSeen: { ...(s.tipsSeen || {}), [s.screen]: true } })),
+      showInvite: !!st.invite, inviteForm: st.invite === 'form', inviteSent: st.invite === 'sent',
+      inviteOnboard: !!st.inviteOnboard, inviteGeneric: !st.inviteOnboard,
+      inviteCloseLabel: st.inviteOnboard ? 'אחר כך' : 'סגירה', inviteDoneLabel: sc === 'feed' ? 'לעמוד הראשי' : 'סגירה',
+      inviteLink: 'haiton.app/i/' + P.meId, copyLabel: st.copied ? 'הועתק ✓' : 'העתקה',
+      copyInvite: () => this.setState({ copied: true }), sendInvite: this.sendInvite,
+      closeInvite: () => this.setState({ invite: null }),
+      acceptInvite: () => this.openArticle(P.inviteArticle)
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&family=Assistant:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#e9e7e4}a{color:#c8102e;text-decoration:none}a:hover{text-decoration:underline}*{box-sizing:border-box}::-webkit-scrollbar{width:0;height:0}input:focus{outline:none}</style>
+</helmet>
+<div dir="rtl" style="min-height:100vh;background:#e9e7e4;display:flex;align-items:center;justify-content:center;padding:32px 16px;font-family:Heebo, sans-serif;color:#141414">
+<div style="width:390px;height:844px;background:#fff;border-radius:44px;overflow:hidden;position:relative;box-shadow:0 0 0 10px #161616, 0 30px 80px rgba(0,0,0,.25);display:flex;flex-direction:column">
+  <div style="height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 30px;font:600 15px Heebo;direction:ltr"><span>9:41</span><span style="display:flex;gap:4px;align-items:center"><span style="width:17px;height:10px;border-radius:2px;background:#141414"></span><span style="width:24px;height:11px;border-radius:3px;border:1.5px solid #141414"></span></span></div>
+
+  <sc-if value="{{ isChat }}" hint-placeholder-val="{{ true }}">
+  <div style="flex:1;min-height:0;display:flex;flex-direction:column;font-family:Assistant, sans-serif">
+    <div style="height:52px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 16px">
+      <button onClick="{{ goFeed }}" style="width:36px;height:36px;border:none;background:transparent;display:flex;flex-direction:column;gap:5px;align-items:center;justify-content:center;cursor:pointer"><span style="width:18px;height:2px;background:#0d0d0d;border-radius:2px"></span><span style="width:12px;height:2px;background:#0d0d0d;border-radius:2px;align-self:center"></span></button>
+      <div style="font:600 17px Assistant;color:#0d0d0d">הכתב</div>
+      <button onClick="{{ resetChat }}" style="height:32px;padding:0 12px;border:1px solid #e3e3e3;border-radius:999px;background:#fff;font:600 13px Assistant;color:#0d0d0d;cursor:pointer">חדש</button>
+    </div>
+    <div ref="{{ chatRef }}" style="flex:1;min-height:0;overflow-y:auto;padding:16px 18px 24px;display:flex;flex-direction:column;gap:22px">
+      <sc-for list="{{ messages }}" as="m" hint-placeholder-count="2">
+        <sc-if value="{{ m.isReporter }}">
+          <div style="display:flex;gap:10px;align-items:flex-start">
+            <div style="width:28px;height:28px;flex:none;border-radius:50%;background:#0d0d0d;color:#fff;display:flex;align-items:center;justify-content:center;font:700 13px Heebo">כ</div>
+            <div style="font-size:16.5px;line-height:1.6;color:#0d0d0d;padding-top:1px;text-wrap:pretty">{{ m.text }}</div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ m.isUser }}">
+          <div style="display:flex;justify-content:flex-end">
+            <div style="max-width:80%;background:#f2f2f2;border-radius:22px;padding:10px 16px;font-size:16.5px;line-height:1.55;color:#0d0d0d;text-wrap:pretty">{{ m.text }}</div>
+          </div>
+        </sc-if>
+      </sc-for>
+      <sc-if value="{{ typing }}">
+        <div style="display:flex;gap:10px;align-items:center">
+          <div style="width:28px;height:28px;flex:none;border-radius:50%;background:#0d0d0d;color:#fff;display:flex;align-items:center;justify-content:center;font:700 13px Heebo">כ</div>
+          {{ typingDots }}
+        </div>
+      </sc-if>
+    </div>
+    <div style="flex:none;padding:6px 12px 22px;display:flex;flex-direction:column;gap:10px">
+      <sc-if value="{{ canFinish }}">
+        <div style="display:flex;justify-content:center"><button onClick="{{ startDraft }}" style="height:38px;padding:0 18px;border:1px solid #d9d9d9;border-radius:999px;background:#fff;font:600 14.5px Assistant;color:#0d0d0d;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.06)">די, תיצור טיוטה</button></div>
+      </sc-if>
+      <div style="background:#f4f4f4;border-radius:28px;padding:6px 6px 6px 6px;display:flex;align-items:center;gap:8px;min-height:52px">
+        <input value="{{ input }}" onChange="{{ onInput }}" onKeyDown="{{ onKey }}" placeholder="ספרי לכתב…" style="flex:1;min-width:0;border:none;background:transparent;font:400 16px Assistant;color:#0d0d0d;padding:0 12px" />
+        <button onClick="{{ send }}" style="width:40px;height:40px;flex:none;border:none;border-radius:50%;background:#0d0d0d;color:#fff;font:700 18px Heebo;cursor:pointer;display:flex;align-items:center;justify-content:center">↑</button>
+      </div>
+      <div style="text-align:center;font-size:12px;color:#8f8f8f">{{ countLabel }}</div>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isLoading }}">
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 40px;gap:28px">
+    <div style="font:900 22px Heebo;color:#c8102e;letter-spacing:-.5px;direction:ltr;text-align:right">haiton</div>
+    <div style="font:800 26px Heebo;line-height:1.2">העורך עובד על הכתבה</div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <sc-for list="{{ loadSteps }}" as="s" hint-placeholder-count="3">
+        <div style="display:flex;align-items:center;gap:12px;font:500 17px Heebo">
+          <sc-if value="{{ s.done }}"><span style="width:22px;height:22px;border-radius:50%;background:#c8102e;color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center">✓</span></sc-if>
+          <sc-if value="{{ s.active }}"><span style="width:22px;height:22px;border-radius:50%;border:2px solid #c8102e;display:flex;align-items:center;justify-content:center"><span style="width:8px;height:8px;border-radius:50%;background:#c8102e"></span></span></sc-if>
+          <sc-if value="{{ s.waiting }}"><span style="width:22px;height:22px;border-radius:50%;border:2px solid #ddd"></span></sc-if>
+          <span>{{ s.label }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isDraft }}">
+  <div style="flex:1;min-height:0;display:flex;flex-direction:column">
+    <div style="height:52px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-bottom:1px solid #ececec">
+      <button onClick="{{ backToChat }}" style="border:none;background:transparent;font:500 20px Heebo;cursor:pointer;padding:4px">→</button>
+      <div style="font:700 16px Heebo">טיוטה</div>
+      <span style="font:500 12px Heebo;color:#777;background:#f3f2ef;padding:4px 10px;border-radius:999px">לא פורסם</span>
+    </div>
+    <div style="flex:1;min-height:0;overflow-y:auto;padding:20px 18px 24px;position:relative">
+      <div style="{{ draftFade }}">
+        <div style="font:700 13px Heebo;color:#c8102e;margin-bottom:8px">מאיה כהן</div>
+        <h1 style="font:800 27px/1.18 Heebo;margin:0 0 12px;text-wrap:pretty">{{ draft.headline }}</h1>
+        <p style="font:500 17px/1.5 Heebo;color:#3a3a3a;margin:0 0 18px;text-wrap:pretty">{{ draft.sub }}</p>
+        <div style="background:#f6f5f2;border-radius:10px;padding:12px 14px;margin-bottom:18px">
+          <div style="font:700 12px Heebo;color:#777;margin-bottom:4px">תקציר</div>
+          <div style="font:400 15px/1.5 Heebo">{{ draft.summary }}</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:22px">
+          <sc-for list="{{ draft.body }}" as="p" hint-placeholder-count="4"><p style="font:400 16.5px/1.65 Heebo;margin:0;text-wrap:pretty">{{ p }}</p></sc-for>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="border:1px solid #ececec;border-radius:10px;padding:12px 14px">
+            <div style="font:800 13px Heebo;color:#c8102e;margin-bottom:4px">מבזק</div>
+            <div style="font:500 15px/1.45 Heebo">{{ draft.flash }}</div>
+          </div>
+          <div style="border:1px solid #ececec;border-radius:10px;padding:12px 14px">
+            <div style="font:800 13px Heebo;color:#777;margin-bottom:4px">הפוש שיישלח</div>
+            <div style="font:700 15px/1.45 Heebo">{{ draft.push }}</div>
+          </div>
+        </div>
+      </div>
+      <sc-if value="{{ revising }}">
+        <div style="position:sticky;bottom:0;display:flex;justify-content:center"><div style="background:#141414;color:#fff;font:500 14px Heebo;padding:10px 18px;border-radius:999px">העורך מעדכן: {{ revNote }}…</div></div>
+      </sc-if>
+    </div>
+    <div style="flex:none;border-top:1px solid #ececec;padding:12px 0 22px;display:flex;flex-direction:column;gap:12px">
+      <div style="font:600 13px Heebo;color:#777;padding:0 18px">בקשו מהעורך</div>
+      <div style="display:flex;gap:8px;overflow-x:auto;padding:0 18px">
+        <sc-for list="{{ revOptions }}" as="r" hint-placeholder-count="5">
+          <button onClick="{{ r.onClick }}" style="flex:none;height:36px;padding:0 14px;border:1px solid #dcdcdc;border-radius:999px;background:#fff;font:500 14px Heebo;color:#141414;cursor:pointer">{{ r.label }}</button>
+        </sc-for>
+      </div>
+      <div style="padding:0 18px"><button onClick="{{ toPublish }}" style="width:100%;height:50px;border:none;border-radius:12px;background:#c8102e;color:#fff;font:700 17px Heebo;cursor:pointer">המשך לפרסום</button></div>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isPublish }}">
+  <div style="flex:1;min-height:0;display:flex;flex-direction:column;position:relative">
+    <div style="height:52px;flex:none;display:flex;align-items:center;gap:12px;padding:0 16px;border-bottom:1px solid #ececec">
+      <button onClick="{{ backToDraft }}" style="border:none;background:transparent;font:500 20px Heebo;cursor:pointer;padding:4px">→</button>
+      <div style="font:700 16px Heebo">למי לפרסם?</div>
+    </div>
+    <div style="flex:1;min-height:0;overflow-y:auto;padding:16px 18px;display:flex;flex-direction:column;gap:10px">
+      <sc-for list="{{ audienceModes }}" as="a" hint-placeholder-count="4">
+        <button onClick="{{ a.onClick }}" style="display:flex;align-items:center;gap:12px;text-align:right;padding:14px;border:1px solid #e3e3e3;border-radius:12px;background:#fff;cursor:pointer;font-family:Heebo">
+          <sc-if value="{{ a.active }}"><span style="width:20px;height:20px;flex:none;border-radius:50%;border:6px solid #c8102e"></span></sc-if>
+          <sc-if value="{{ a.inactive }}"><span style="width:20px;height:20px;flex:none;border-radius:50%;border:2px solid #c9c9c9"></span></sc-if>
+          <span style="display:flex;flex-direction:column;gap:2px"><span style="font:700 16px Heebo;color:#141414">{{ a.label }}</span><span style="font:400 13px Heebo;color:#777">{{ a.hint }}</span></span>
+        </button>
+      </sc-for>
+      <sc-if value="{{ showPeople }}">
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px">
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <sc-for list="{{ groupChips }}" as="g" hint-placeholder-count="2">
+              <button onClick="{{ g.onClick }}" style="height:34px;padding:0 14px;border:1px solid #dcdcdc;border-radius:999px;background:#f7f6f3;font:500 14px Heebo;cursor:pointer">+ {{ g.name }}</button>
+            </sc-for>
+          </div>
+          <div style="border:1px solid #ececec;border-radius:12px;overflow:hidden">
+            <sc-for list="{{ peopleList }}" as="p" hint-placeholder-count="6">
+              <button onClick="{{ p.onClick }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border:none;border-bottom:1px solid #f0f0f0;background:#fff;cursor:pointer;font:500 15px Heebo;color:#141414">
+                <span>{{ p.name }}</span>
+                <sc-if value="{{ p.checked }}"><span style="width:22px;height:22px;border-radius:6px;background:#c8102e;color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center">✓</span></sc-if>
+                <sc-if value="{{ p.unchecked }}"><span style="width:22px;height:22px;border-radius:6px;border:2px solid #cfcfcf"></span></sc-if>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ showGroupPick }}">
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+          <sc-for list="{{ groupPick }}" as="g" hint-placeholder-count="2">
+            <button onClick="{{ g.onClick }}" style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border:1px solid #ececec;border-radius:12px;background:#fff;cursor:pointer;font:500 15px Heebo;color:#141414">
+              <span>{{ g.name }}</span><span style="font:400 13px Heebo;color:#777">{{ g.mark }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div>
+    <div style="flex:none;border-top:1px solid #ececec;padding:12px 18px 22px;display:flex;flex-direction:column;gap:10px">
+      <div style="font:400 13px/1.45 Heebo;color:#555">אחרי הפרסום הנוסח ננעל. אפשר להסיר את הכתבה, אי אפשר לשכתב אותה.</div>
+      <button onClick="{{ publish }}" style="width:100%;height:50px;border:none;border-radius:12px;background:#c8102e;color:#fff;font:700 17px Heebo;cursor:pointer">{{ publishLabel }}</button>
+    </div>
+    <sc-if value="{{ showGroupSheet }}">
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,.42);display:flex;flex-direction:column;justify-content:flex-end">
+        <div style="background:#fff;border-radius:22px 22px 0 0;padding:22px 18px 26px;display:flex;flex-direction:column;gap:14px;max-height:88%;overflow-y:auto">
+          <div style="font:800 13px Heebo;color:#2a8a3e">פורסם ✓</div>
+          <div style="font:800 21px/1.25 Heebo">רוצה ליצור קבוצה מהאנשים האלה או מחלקם?</div>
+          <input value="{{ groupName }}" onChange="{{ onGroupName }}" placeholder="שם הקבוצה" style="height:46px;border:1px solid #d6d6d6;border-radius:10px;padding:0 14px;font:500 16px Heebo" />
+          <div style="border:1px solid #ececec;border-radius:12px;overflow:hidden">
+            <sc-for list="{{ groupMembers }}" as="p" hint-placeholder-count="4">
+              <button onClick="{{ p.onClick }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border:none;border-bottom:1px solid #f0f0f0;background:#fff;cursor:pointer;font:500 15px Heebo;color:#141414">
+                <span>{{ p.name }}</span>
+                <sc-if value="{{ p.checked }}"><span style="width:22px;height:22px;border-radius:6px;background:#141414;color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center">✓</span></sc-if>
+                <sc-if value="{{ p.unchecked }}"><span style="width:22px;height:22px;border-radius:6px;border:2px solid #cfcfcf"></span></sc-if>
+              </button>
+            </sc-for>
+          </div>
+          <div style="font:400 13px/1.45 Heebo;color:#666">מי שלא ייכנס לקבוצה עדיין קיבל את הכתבה.</div>
+          <div style="display:flex;gap:10px">
+            <button onClick="{{ createGroup }}" style="flex:1;height:48px;border:none;border-radius:12px;background:#141414;color:#fff;font:700 16px Heebo;cursor:pointer">צור קבוצה</button>
+            <button onClick="{{ skipGroup }}" style="flex:1;height:48px;border:1px solid #d6d6d6;border-radius:12px;background:#fff;color:#141414;font:600 16px Heebo;cursor:pointer">לא עכשיו</button>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isFeed }}">
+  <div style="flex:1;min-height:0;display:flex;flex-direction:column;position:relative">
+    <div style="flex:none;background:#c8102e;padding:10px 16px 12px;display:flex;align-items:flex-end;justify-content:space-between">
+      <div style="font:900 30px/1 Heebo;color:#fff;letter-spacing:-1.5px;direction:ltr">haiton</div>
+      <div style="font:500 12px Heebo;color:#fff">יום רביעי, 7 באוקטובר 2026</div>
+    </div>
+    <div style="flex:none;display:flex;gap:4px;overflow-x:auto;border-bottom:1px solid #e2e2e2;padding:0 10px;background:#fff">
+      <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="1">
+        <button onClick="{{ t.onClick }}" style="flex:none;height:44px;padding:0 10px;border:none;background:transparent;cursor:pointer;display:flex;flex-direction:column;justify-content:center;gap:0;position:relative">
+          <sc-if value="{{ t.active }}"><span style="font:800 15.5px Heebo;color:#141414">{{ t.name }}</span><span style="position:absolute;bottom:0;left:6px;right:6px;height:3px;background:#c8102e"></span></sc-if>
+          <sc-if value="{{ t.inactive }}"><span style="font:500 15.5px Heebo;color:#5a5a5a">{{ t.name }}</span></sc-if>
+        </button>
+      </sc-for>
+    </div>
+    <div style="flex:1;min-height:0;overflow-y:auto;padding-bottom:90px">
+      <sc-if value="{{ showFlash }}">
+        <div style="background:#f3f3f1;padding:12px 16px 4px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="width:8px;height:8px;border-radius:50%;background:#c8102e"></span><span style="font:800 16px Heebo;color:#c8102e">מבזקים</span></div>
+          <sc-for list="{{ flashes }}" as="f" hint-placeholder-count="3">
+            <button onClick="{{ f.open }}" style="width:100%;display:flex;gap:10px;align-items:baseline;text-align:right;padding:8px 0;border:none;border-top:1px solid #e3e3e0;background:transparent;cursor:pointer">
+              <span style="flex:none;font:700 13px Heebo;color:#c8102e;direction:ltr">{{ f.clock }}</span>
+              <span style="font:500 14.5px/1.4 Heebo;color:#141414">{{ f.text }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ hasMain }}">
+        <div onClick="{{ main.open }}" style="cursor:pointer;padding-bottom:16px;border-bottom:1px solid #e6e6e6">
+          <sc-if value="{{ main.hasImage }}">
+            <div style="aspect-ratio:16/9;background:repeating-linear-gradient(135deg,#ecebe8 0 8px,#e2e1dd 8px 16px);display:flex;align-items:center;justify-content:center;font:12px ui-monospace,monospace;color:#77736c;direction:ltr">{{ main.img }}</div>
+          </sc-if>
+          <sc-if value="{{ main.noImage }}"><div style="height:6px"></div></sc-if>
+          <div style="padding:14px 16px 0;display:flex;flex-direction:column;gap:8px">
+            <h2 style="font:800 25px/1.2 Heebo;margin:0;text-wrap:pretty">{{ main.headline }}</h2>
+            <p style="font:400 15.5px/1.5 Heebo;color:#444;margin:0;text-wrap:pretty">{{ main.sub }}</p>
+            <div style="font:500 12.5px Heebo;color:#777"><span style="color:#c8102e;font-weight:700">{{ main.author }}</span> · {{ main.time }}</div>
+          </div>
+        </div>
+        <sc-for list="{{ subs }}" as="a" hint-placeholder-count="3">
+          <div onClick="{{ a.open }}" style="cursor:pointer;display:flex;gap:12px;padding:14px 16px;border-bottom:1px solid #e6e6e6">
+            <div style="width:116px;height:76px;flex:none;background:repeating-linear-gradient(135deg,#ecebe8 0 6px,#e2e1dd 6px 12px);display:flex;align-items:center;justify-content:center;font:10px ui-monospace,monospace;color:#77736c;direction:ltr;text-align:center;padding:4px">{{ a.img }}</div>
+            <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+              <h3 style="font:700 16px/1.3 Heebo;margin:0;text-wrap:pretty">{{ a.headline }}</h3>
+              <div style="font:500 12px Heebo;color:#777"><span style="color:#c8102e;font-weight:700">{{ a.author }}</span> · {{ a.time }}</div>
+            </div>
+          </div>
+        </sc-for>
+        <sc-if value="{{ hasMore }}">
+          <div style="padding:22px 16px 6px">
+            <div style="font:800 19px Heebo">עוד כתבות</div>
+            <div style="width:34px;height:3px;background:#c8102e;margin-top:6px"></div>
+          </div>
+          <sc-for list="{{ more }}" as="a" hint-placeholder-count="5">
+            <div onClick="{{ a.open }}" style="cursor:pointer;padding:12px 16px;border-bottom:1px solid #ececec;display:flex;flex-direction:column;gap:4px">
+              <h4 style="font:700 15.5px/1.35 Heebo;margin:0;text-wrap:pretty">{{ a.headline }}</h4>
+              <p style="font:400 13.5px/1.45 Heebo;color:#555;margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">{{ a.sub }}</p>
+              <div style="font:500 12px Heebo;color:#777"><span style="color:#c8102e;font-weight:700">{{ a.author }}</span> · {{ a.time }}</div>
+            </div>
+          </sc-for>
+        </sc-if>
+      </sc-if>
+      <sc-if value="{{ feedEmpty }}">
+        <div style="padding:60px 32px;text-align:center;font:400 15px/1.5 Heebo;color:#666">עוד אין כתבות מהאנשים בקבוצה הזו שכללו אותך.</div>
+      </sc-if>
+    </div>
+    <button onClick="{{ resetChat }}" style="position:absolute;bottom:24px;left:16px;height:50px;padding:0 20px;border:none;border-radius:999px;background:#141414;color:#fff;font:700 16px Heebo;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.25)">+ מה קרה?</button>
+    <sc-if value="{{ pushVisible }}">
+      <div onClick="{{ openMaya }}" style="position:absolute;top:8px;left:10px;right:10px;background:rgba(248,248,248,.97);border-radius:20px;padding:12px 14px;display:flex;gap:12px;align-items:center;box-shadow:0 10px 30px rgba(0,0,0,.2);cursor:pointer">
+        <div style="width:38px;height:38px;flex:none;border-radius:9px;background:#c8102e;color:#fff;font:900 20px Heebo;display:flex;align-items:center;justify-content:center">h</div>
+        <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+          <div style="display:flex;justify-content:space-between;font:500 12.5px Heebo;color:#666"><span style="font-weight:700;color:#141414;direction:ltr">haiton</span><span>עכשיו</span></div>
+          <div style="font:700 15px/1.35 Heebo;color:#141414">{{ pushText }}</div>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isArticle }}">
+  <div style="flex:1;min-height:0;display:flex;flex-direction:column">
+    <div style="flex:none;background:#c8102e;height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 14px">
+      <button onClick="{{ goFeed }}" style="border:none;background:transparent;color:#fff;font:500 20px Heebo;cursor:pointer;padding:4px">→</button>
+      <div style="font:900 22px Heebo;color:#fff;letter-spacing:-1px;direction:ltr">haiton</div>
+      <span style="width:28px"></span>
+    </div>
+    <div style="flex:1;min-height:0;overflow-y:auto;padding:20px 18px 40px">
+      <div style="font:700 13px Heebo;color:#c8102e;margin-bottom:8px">{{ art.author }}</div>
+      <h1 style="font:800 27px/1.18 Heebo;margin:0 0 12px;text-wrap:pretty">{{ art.headline }}</h1>
+      <p style="font:500 17px/1.5 Heebo;color:#3a3a3a;margin:0 0 14px;text-wrap:pretty">{{ art.sub }}</p>
+      <div style="font:400 13px Heebo;color:#777;padding-bottom:14px;border-bottom:1px solid #ececec;margin-bottom:16px">מאת <span style="font-weight:700;color:#141414">{{ art.author }}</span> · {{ art.time }}</div>
+      <sc-if value="{{ art.hasImage }}">
+        <div style="aspect-ratio:16/10;background:repeating-linear-gradient(135deg,#ecebe8 0 8px,#e2e1dd 8px 16px);display:flex;align-items:center;justify-content:center;font:12px ui-monospace,monospace;color:#77736c;direction:ltr;margin-bottom:18px">{{ art.img }}</div>
+      </sc-if>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <sc-for list="{{ art.body }}" as="p" hint-placeholder-count="3"><p style="font:400 17px/1.7 Heebo;margin:0;text-wrap:pretty">{{ p }}</p></sc-for>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;startScreen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;chat&quot;,&quot;draft&quot;,&quot;feed&quot;],&quot;default&quot;:&quot;chat&quot;,&quot;tsType&quot;:&quot;'chat'|'draft'|'feed'&quot;},&quot;showNewsflash&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+const MAYA = [
+  'אני אוכלת צהריים במשרד וכמעט שפכתי עליי רוטב טחינה. למזלי זה לא קרה, אחרת הייתי מתחרפנת.',
+  'שאריות מאתמול בערב — שווארמה ואורז.',
+  'כנראה הייתי צוחקת מבושה, רצה לשירותים לבכות, ואז שואלת בקבוצה של הבנות אם למישהי יש חולצה להחליף.'
+];
+const REPLIES = [
+  'וואו, ממש התחמקת מכדור. מה אכלת?',
+  'נשמע טעים. תגידי, אם זה היה נשפך עלייך, איך היית מגיבה?',
+  'אוי, אז זה היה יכול להיות די קטסטרופלי. ואיך הגבת כשזה לא נשפך עלייך?',
+  'ומה עבר לך בראש באותו רגע?',
+  'מי עוד היה שם איתך?',
+  'ואיך נגמר היום הזה?'
+];
+const BODY = [
+  'זה היה אמור להיות עוד צהריים רגילים במשרד. מאיה, מזכירה בחברת ביטוח, ישבה בחדר האוכל עם שאריות מארוחת הערב של אתמול, שווארמה ואורז, כשרוטב הטחינה נשפך על הרצפה, ממש ליד החולצה החדשה שלה.',
+  '"אני אוכלת צהריים במשרד וכמעט שפכתי עליי רוטב טחינה. למזלי זה לא קרה, אחרת הייתי מתחרפנת", סיפרה מאיה.',
+  'כשנשאלה מה היה קורה אילו התרחיש הגרוע היה מתממש, היא לא היססה: "כנראה הייתי צוחקת מבושה, רצה לשירותים לבכות, ואז שואלת בקבוצה של הבנות אם למישהי יש חולצה להחליף".',
+  'בסופו של דבר הטחינה נשארה על הרצפה, והחולצה נשארה נקייה.'
+];
+const VERSIONS = [
+  { headline: 'למזלה זה לא קרה: האסון נמנע – הטחינה כמעט עשתה בלגן בעבודה', sub: 'בהפסקת הצהריים במשרד נשפך רוטב הטחינה על הרצפה, סנטימטרים ספורים מהחולצה החדשה של מאיה. "אחרת הייתי מתחרפנת", היא מספרת' },
+  { headline: 'דרמת הטחינה במשרד: החולצה החדשה של מאיה ניצלה ברגע האחרון', sub: 'שווארמה, אורז ורוטב אחד שובב. התוכנית לגיבוי כבר הייתה מוכנה: לצחוק, לבכות בשירותים ולבקש חולצה בקבוצה של הבנות' },
+  { headline: 'רגעי אימה בחדר האוכל: רוטב הטחינה נשפך – והחולצה החדשה ניצלה בנס', sub: 'צהריים שגרתיים במשרד כמעט הסתיימו באסון. "אחרת הייתי מתחרפנת", משחזרת מאיה את הרגע' },
+  { headline: 'רוטב טחינה נשפך בחדר האוכל במשרד; מאיה לא נפגעה', sub: 'האירוע התרחש בהפסקת הצהריים. החולצה החדשה של מאיה לא הוכתמה' },
+  { headline: 'טחינה על הרצפה, לא על החולצה', sub: 'מאיה כמעט שפכה על עצמה טחינה בצהריים. היא לא' }
+];
+const ALT_HEADLINES = ['האסון שלא קרה: הטחינה פספסה את מאיה בסנטימטרים', 'הצהריים שכמעט נגמרו בבכי בשירותים', 'הטחינה נפלה, החולצה שרדה'];
+const PEOPLE = [
+  { id: 'mom', name: 'אמא' }, { id: 'dad', name: 'אבא' }, { id: 'shachar', name: 'שחר' },
+  { id: 'roni', name: 'רוני' }, { id: 'tamar', name: 'תמר' }, { id: 'orit', name: 'אורית' }, { id: 'yossi', name: 'יוסי' }
+];
+const GROUPS0 = [
+  { name: 'משפחה', members: ['mom', 'dad', 'shachar'] },
+  { name: 'חברים מהמשרד', members: ['tamar', 'orit', 'yossi'] }
+];
+const FEED = [
+  { id: 'a1', authorId: 'mom', author: 'רינה כהן', time: 'לפני שעה', clock: '11:42', img: 'ceramic bowl photo', headline: 'יצאה מהתנור: הקערה הכחולה של רינה שרדה את השריפה השנייה', sub: 'אחרי שתי קערות שנסדקו בחודש שעבר, הזיגוג החדש עמד בחום. "כשפתחתי את התנור עצרתי את הנשימה", היא מספרת', flash: 'רינה כהן הוציאה מהתנור קערה כחולה חדשה, ללא סדקים', body: ['אחרי שתי קערות שנסדקו בחודש שעבר, רינה החליטה לנסות זיגוג חדש.', '"כשפתחתי את התנור עצרתי את הנשימה", היא מספרת. "היא יצאה שלמה, והכחול יצא בדיוק כמו שרציתי".'] },
+  { id: 'a2', authorId: 'shachar', author: 'שחר לוי', time: 'לפני 3 שעות', clock: '09:15', img: 'gym photo', headline: 'שיא אישי בחדר הכושר: שחר הרים 100 קילו בסקוואט', sub: 'אחרי חודשים של אימונים בשש בבוקר, הרגע הגיע ביום שלישי. "הסתכלתי על המשקולות ולא האמנתי"', flash: 'שחר לוי שבר שיא אישי בסקוואט: 100 ק"ג', body: ['אחרי חודשים של אימונים בשש בבוקר, הרגע הגיע ביום שלישי.', '"הסתכלתי על המשקולות ולא האמנתי", אמר שחר.'] },
+  { id: 'a3', authorId: 'roni', author: 'רוני אברהם', time: 'אתמול', clock: '21:03', img: 'sofa photo', headline: 'אחרי שלושה שבועות על כריות: לדירה של רוני הגיעה ספה', sub: 'המשלוח התעכב פעמיים, והשליח נתקע במעלית. "התיישבנו עליה עוד לפני שהורדנו את הניילון"', flash: 'הספה הגיעה לדירה של רוני אחרי שני עיכובים במשלוח', body: ['המשלוח התעכב פעמיים, והשליח נתקע במעלית.', '"התיישבנו עליה עוד לפני שהורדנו את הניילון", סיפרה רוני.'] },
+  { id: 'a4', authorId: 'dad', author: 'דני כהן', time: 'אתמול', clock: '07:30', img: 'morning walk photo', headline: '14 ימים ברצף: דני ממשיך בהליכת הבוקר', sub: 'ההרגל התחיל אחרי בדיקה שגרתית. "בהתחלה זה היה עונש, עכשיו אני מחכה לזה"', flash: 'דני כהן השלים שבועיים רצופים של הליכות בוקר', body: ['ההרגל התחיל אחרי בדיקה שגרתית אצל הרופא.', '"בהתחלה זה היה עונש, עכשיו אני מחכה לזה", אומר דני.'] },
+  { id: 'a5', authorId: 'tamar', author: 'תמר גולן', time: 'לפני יומיים', clock: '13:20', img: 'office plant photo', headline: 'הפיקוס במשרד הוציא עלה חדש: "הוא היה על סף מוות"', sub: 'תמר אימצה את העציץ הנטוש בפינת המטבחון. שלושה חודשים של השקיה ראו פרי', flash: 'עלה חדש בפיקוס של המשרד', body: ['תמר אימצה את העציץ הנטוש בפינת המטבחון.', '"הוא היה על סף מוות", היא אומרת. "עכשיו יש לו עלה חדש".'] },
+  { id: 'a6', authorId: 'orit', author: 'אורית שמש', time: 'לפני יומיים', clock: '18:45', img: 'yeast cake photo', headline: 'המתכון של סבתא שוחזר: אורית אפתה עוגת שמרים לראשונה', sub: 'המתכון נמצא בכתב יד על דף מקומט. "הבצק תפח בדיוק כמו שהיא תיארה"', flash: 'אורית אפתה לראשונה את עוגת השמרים של סבתה', body: ['המתכון נמצא בכתב יד על דף מקומט במגירה.', '"הבצק תפח בדיוק כמו שהיא תיארה", סיפרה אורית.'] },
+  { id: 'a7', authorId: 'shachar', author: 'שחר לוי', time: 'לפני 3 ימים', clock: '23:10', img: 'tv photo', headline: 'סוף עידן: שחר סיים את הסדרה שליוותה אותו מאז הקיץ', sub: 'שש עונות, ארבעה חודשים, ופרק אחרון אחד. "אני לא יודע מה לעשות עם הערבים שלי"', flash: 'שחר לוי סיים לצפות בסדרה אחרי ארבעה חודשים', body: ['שש עונות, ארבעה חודשים, ופרק אחרון אחד.', '"אני לא יודע מה לעשות עם הערבים שלי", אמר שחר.'] },
+  { id: 'a8', authorId: 'yossi', author: 'יוסי מזרחי', time: 'לפני 4 ימים', clock: '16:00', img: 'parking photo', headline: 'נס בחניון: יוסי מצא חניה ליד הכניסה ביום ראשון בבוקר', sub: 'לראשונה מאז שהתחיל לעבוד בבניין, החניה הראשונה הייתה פנויה. "חשבתי שזו מלכודת"', flash: 'חניה פנויה ליד הכניסה, לראשונה מזה שנה', body: ['לראשונה מאז שהתחיל לעבוד בבניין, החניה הראשונה הייתה פנויה.', '"חשבתי שזו מלכודת", הודה יוסי.'] }
+];
+const greeting = () => [{ role: 'r', text: 'מה קרה?' }];
+
+class Component extends DCLogic {
+  state = { screen: 'chat', messages: greeting(), input: MAYA[0], typing: false, loadStep: 0, rev: 0, hl: -1, revising: false, revNote: '', mode: 'people', selected: {}, groupSel: 0, showGroupSheet: false, groupName: '', groupMembers: {}, groups: [], tab: 'front', published: null, pushVisible: false, articleId: null };
+  chatRef = React.createRef();
+  timers = [];
+  componentDidMount() {
+    const s = this.props.startScreen;
+    if (s === 'draft') this.setState({ screen: 'draft', messages: this.fullChat() });
+    if (s === 'feed') this.setState({ screen: 'feed', published: this.currentDraft() });
+  }
+  componentWillUnmount() { this.timers.forEach(clearTimeout); }
+  componentDidUpdate() { const el = this.chatRef.current; if (el) el.scrollTop = el.scrollHeight; }
+  later(fn, ms) { this.timers.push(setTimeout(fn, ms)); }
+  fullChat() { const m = greeting(); MAYA.forEach((t, i) => { m.push({ role: 'u', text: t }); m.push({ role: 'r', text: REPLIES[i] }); }); return m; }
+  userCount() { return this.state.messages.filter(m => m.role === 'u').length; }
+  currentDraft() {
+    const v = VERSIONS[this.state.rev];
+    return { headline: this.state.hl >= 0 ? ALT_HEADLINES[this.state.hl] : v.headline, sub: v.sub, summary: 'מאיה כמעט שפכה על עצמה רוטב טחינה בהפסקת הצהריים במשרד. הרוטב נחת על הרצפה.', body: this.state.rev === 4 ? [BODY[0], BODY[3]] : BODY, flash: 'חדר האוכל במשרד: רוטב טחינה נשפך על הרצפה, החולצה החדשה של מאיה יצאה ללא פגע', push: 'מאיה והטחינה – האסון שלא התרחש' };
+  }
+  send = () => {
+    const text = this.state.input.trim();
+    if (!text || this.state.typing) return;
+    const n = this.userCount() + 1;
+    this.setState(s => ({ messages: [...s.messages, { role: 'u', text }], input: MAYA[n] || '', typing: n < 7 }));
+    if (n >= 7) { this.later(this.startDraft, 500); return; }
+    this.later(() => this.setState(s => ({ typing: false, messages: [...s.messages, { role: 'r', text: REPLIES[Math.min(n - 1, REPLIES.length - 1)] }] })), 1300);
+  };
+  startDraft = () => {
+    this.setState({ screen: 'loading', loadStep: 0, rev: 0, hl: -1 });
+    [1, 2, 3].forEach(i => this.later(() => this.setState({ loadStep: i }), i * 1100));
+    this.later(() => this.setState({ screen: 'draft' }), 3700);
+  };
+  revise(label, fn) {
+    if (this.state.revising) return;
+    this.setState({ revising: true, revNote: label });
+    this.later(() => this.setState(s => ({ ...fn(s), revising: false })), 1500);
+  }
+  goFeed = () => this.setState({ screen: 'feed', showGroupSheet: false });
+  finishPublish() {
+    this.setState({ screen: 'feed', showGroupSheet: false, tab: 'front' });
+    this.later(() => this.setState({ pushVisible: true }), 700);
+    this.later(() => this.setState({ pushVisible: false }), 7000);
+  }
+  publish = () => {
+    const sel = Object.keys(this.state.selected).filter(k => this.state.selected[k]);
+    if (this.state.mode === 'people' && !sel.length) return;
+    const pub = this.currentDraft();
+    if (this.state.mode === 'people') {
+      const gm = {}; sel.forEach(k => gm[k] = true);
+      this.setState({ published: pub, showGroupSheet: true, groupMembers: gm, groupName: '' });
+    } else { this.setState({ published: pub }); this.finishPublish(); }
+  };
+  openArticle(id) { this.setState({ screen: 'article', articleId: id, pushVisible: false }); }
+  allGroups() { return [...GROUPS0, ...this.state.groups]; }
+  renderVals() {
+    const st = this.state;
+    const n = this.userCount();
+    const draft = this.currentDraft();
+    const selIds = Object.keys(st.selected).filter(k => st.selected[k]);
+    const mayaArt = st.published ? { id: 'maya', authorId: 'me', author: 'מאיה כהן', time: 'לפני 2 דק\'', clock: '12:48', img: '', noPhoto: true, headline: st.published.headline, sub: st.published.sub, flash: st.published.flash, body: st.published.body } : null;
+    const all = mayaArt ? [mayaArt, ...FEED] : FEED;
+    const grp = st.groups.find(g => g.name === st.tab);
+    const list = grp ? all.filter(a => a.authorId !== 'me' && grp.members.includes(a.authorId)) : all;
+    const dec = a => ({ ...a, hasImage: !a.noPhoto, noImage: !!a.noPhoto, img: a.img || '', open: () => this.openArticle(a.id) });
+    const art = all.find(a => a.id === st.articleId) || all[0];
+    const toggle = (key, id) => () => this.setState(s => ({ [key]: { ...s[key], [id]: !s[key][id] } }));
+    const modes = [
+      { id: 'circle', label: 'כל המעגל', hint: 'כל מי שמחובר אלייך' },
+      { id: 'me', label: 'רק אני', hint: 'הכתבה תישאר אצלך' },
+      { id: 'people', label: 'אנשים מסוימים', hint: 'בחרי מתוך החיבורים שלך' },
+      { id: 'group', label: 'קבוצה', hint: 'אחת הקבוצות ששמרת' }
+    ];
+    const pubLabel = st.mode === 'people' ? (selIds.length ? `פרסום ל-${selIds.length} אנשים` : 'בחרי למי לפרסם') : st.mode === 'me' ? 'שמירה לעצמי' : st.mode === 'group' ? `פרסום ל${this.allGroups()[st.groupSel].name}` : 'פרסום לכל המעגל';
+    return {
+      isChat: st.screen === 'chat', isLoading: st.screen === 'loading', isDraft: st.screen === 'draft', isPublish: st.screen === 'publish', isFeed: st.screen === 'feed', isArticle: st.screen === 'article',
+      chatRef: this.chatRef,
+      messages: st.messages.map(m => ({ text: m.text, isUser: m.role === 'u', isReporter: m.role === 'r' })),
+      typing: st.typing,
+      typingDots: React.createElement('span', { style: { display: 'inline-block', width: 10, height: 10, borderRadius: '50%', background: '#0d0d0d', animation: 'hpulse 1s ease-in-out infinite' } }, React.createElement('style', null, '@keyframes hpulse{0%,100%{transform:scale(.7);opacity:.5}50%{transform:scale(1);opacity:1}}')),
+      input: st.input, onInput: e => this.setState({ input: e.target.value }), onKey: e => { if (e.key === 'Enter') this.send(); }, send: this.send,
+      canFinish: n >= 2 && !st.typing,
+      countLabel: `הודעה ${n} מתוך 7 · הכתב לא מוסיף פרטים שלא סיפרת`,
+      startDraft: this.startDraft,
+      resetChat: () => this.setState({ screen: 'chat', messages: greeting(), input: MAYA[0], typing: false, selected: {}, mode: 'people' }),
+      loadSteps: ['מגדיר את הסיפור', 'אוסף עובדות', 'מצליב מקורות'].map((label, i) => ({ label, done: st.loadStep > i, active: st.loadStep === i, waiting: st.loadStep < i })),
+      draft, revising: st.revising, revNote: st.revNote,
+      draftFade: { opacity: st.revising ? 0.35 : 1, transition: 'opacity .3s' },
+      revOptions: [
+        ['שנה טון', s => ({ rev: [1, 2, 3, 0][[0, 1, 2, 3].indexOf(s.rev) >= 0 ? s.rev : 0], hl: -1 })],
+        ['מצחיק יותר', () => ({ rev: 1, hl: -1 })],
+        ['דרמטי יותר', () => ({ rev: 2, hl: -1 })],
+        ['מאופק יותר', () => ({ rev: 3, hl: -1 })],
+        ['תמציתי יותר', () => ({ rev: 4, hl: -1 })],
+        ['כותרת חדשה', s => ({ hl: (s.hl + 1) % ALT_HEADLINES.length })],
+        ['כתבה חדשה', s => ({ rev: (s.rev + 1) % VERSIONS.length, hl: -1 })]
+      ].map(([label, fn]) => ({ label, onClick: () => this.revise(label, fn) })),
+      backToChat: () => this.setState({ screen: 'chat' }),
+      toPublish: () => !st.revising && this.setState({ screen: 'publish' }),
+      backToDraft: () => this.setState({ screen: 'draft' }),
+      audienceModes: modes.map(m => ({ ...m, active: st.mode === m.id, inactive: st.mode !== m.id, onClick: () => this.setState({ mode: m.id }) })),
+      showPeople: st.mode === 'people', showGroupPick: st.mode === 'group',
+      groupChips: this.allGroups().map(g => ({ name: g.name, onClick: () => this.setState(s => { const sel = { ...s.selected }; g.members.forEach(id => sel[id] = true); return { selected: sel }; }) })),
+      peopleList: PEOPLE.map(p => ({ name: p.name, checked: !!st.selected[p.id], unchecked: !st.selected[p.id], onClick: toggle('selected', p.id) })),
+      groupPick: this.allGroups().map((g, i) => ({ name: g.name, mark: i === st.groupSel ? '✓ נבחרה' : `${g.members.length} אנשים`, onClick: () => this.setState({ groupSel: i }) })),
+      publishLabel: pubLabel, publish: this.publish,
+      showGroupSheet: st.showGroupSheet, groupName: st.groupName, onGroupName: e => this.setState({ groupName: e.target.value }),
+      groupMembers: PEOPLE.filter(p => selIds.includes(p.id)).map(p => ({ name: p.name, checked: !!st.groupMembers[p.id], unchecked: !st.groupMembers[p.id], onClick: toggle('groupMembers', p.id) })),
+      createGroup: () => {
+        const name = st.groupName.trim(); const members = Object.keys(st.groupMembers).filter(k => st.groupMembers[k]);
+        if (!name || !members.length) return;
+        this.setState(s => ({ groups: [...s.groups, { name, members }] })); this.finishPublish();
+      },
+      skipGroup: () => this.finishPublish(),
+      tabs: ['front', ...st.groups.map(g => g.name)].map(id => ({ name: id === 'front' ? 'עמוד ראשי' : id, active: st.tab === id, inactive: st.tab !== id, onClick: () => this.setState({ tab: id }) })),
+      showFlash: (this.props.showNewsflash ?? true) && st.tab === 'front',
+      flashes: all.slice(0, 4).map(a => ({ clock: a.clock, text: a.flash, open: () => this.openArticle(a.id) })),
+      hasMain: list.length > 0, feedEmpty: list.length === 0,
+      main: list[0] ? dec(list[0]) : {},
+      subs: list.slice(1, 4).map(dec),
+      more: list.slice(4, 9).map(dec), hasMore: list.length > 4,
+      pushVisible: st.pushVisible && st.screen === 'feed', pushText: st.published ? st.published.push : '',
+      openMaya: () => this.openArticle('maya'),
+      goFeed: this.goFeed,
+      art: dec(art)
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: Rubik, Heebo, sans-serif;
+  --font-display: Rubik, Heebo, sans-serif;
+  --font-chat: Assistant, sans-serif;
+
+  --color-brand: #c8102e;
+  --color-hot: #d7261e;
+  --color-ink: #16130f;
+  --color-paper: #f3eee4;
+  --color-sand: #cfc6b6;
+  --color-line: #d8cfbf;
+  --color-muted: #5d554a;
+  --color-cream: #fffdf7;
+  --color-beige: #e6dfd1;
+
+  --color-charcoal: #141414;
+  --color-ash: #444444;
+  --color-dim: #555555;
+  --color-faint: #8a8a8a;
+  --color-stone: #8a8072;
+  --color-body: #3d362d;
+  --color-hairline: #ececec;
+  --color-rowline: #f0f0f0;
+  --color-wash: #f6f5f2;
+  --color-chip: #f3f2ef;
+  --color-field: #faf9f7;
+  --color-disabled: #d6d6d6;
+  --color-silver: #b5b5b5;
+  --color-chat: #0d0d0d;
+  --color-bubble: #f2f2f2;
+  --color-input: #f4f4f4;
+  --color-ok: #2a7d3e;
+  --color-factline: #c9d6e8;
+  --color-login: #f1f0ee;
+  --color-soft: #e6e6e6;
+  --color-dash: #dcdcdc;
+
+  --animate-ticker: ticker 40s linear infinite;
+  @keyframes ticker {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
+  }
+}
+
+body {
+  margin: 0;
+  color: var(--color-charcoal);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+button { cursor: pointer; }
+button:disabled { cursor: default; }
+input:focus, textarea:focus { outline: none; }
+h1, h2, h3, h4, p { text-wrap: pretty; }
