@@ -36,7 +36,7 @@ const Row = ({ children }: { children: ReactNode }) => (
 const empty = 'py-4 text-[14.5px] leading-normal text-muted'
 
 export function SettingsTab() {
-  const me = useMe().data!
+  const me = useMe().data
   const { showConfirm, closeConfirm, openInvite, openGroupEditor } = useUiActions()
   const navigate = useNavigate()
   const qc = useQueryClient()
@@ -47,9 +47,8 @@ export function SettingsTab() {
   const prefs = usePrefs().data
   const conn = useConnectionActions()
   const nameOf = useNameOf()
-  const [name, setName] = useState(me.name)
+  const [name, setName] = useState(me?.name ?? '')
   const file = useRef<HTMLInputElement>(null)
-
   const saveName = useAction(updateProfile)
   const upload = useAction(uploadPhoto)
   const dropPhoto = useAction(removePhoto)
@@ -57,6 +56,7 @@ export function SettingsTab() {
   const unhide = useAction(unhideArticle)
   const removeGroup = useAction(deleteGroup)
   const [leaving, setLeaving] = useState(false)
+  if (!me) return null
 
   // Not via useAction: refetching `me` after these would bounce through the auth guard first.
   const leave = async (call: () => Promise<void>, to: string) => {

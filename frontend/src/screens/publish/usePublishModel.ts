@@ -17,6 +17,7 @@ export function usePublishModel() {
   const publish = useAction(publishArticle)
   const [published, setPublished] = useState<Article | null>(null)
   const wasOnboarding = useRef(false)
+  const left = useRef(false)
 
   const np = people.length
   const a = { ...c.audience, mode: np ? c.audience.mode : ('me' as AudienceMode) }
@@ -29,11 +30,14 @@ export function usePublishModel() {
   const toggle = (id: string) => c.setAudience({ selected: sel.includes(id) ? sel.filter((x) => x !== id) : [...sel, id] })
 
   const finish = (art: Article, tab?: Group) => {
+    if (left.current) return
+    left.current = true
     const n = art.audienceIds?.length ?? 0
+    const push = c.draft?.push
     c.reset()
-    nav(tab ? `/feed?tab=${tab.id}` : '/feed')
+    nav(tab ? `/feed?tab=${tab.id}` : '/feed', { replace: true })
     if (wasOnboarding.current) ui.openInvite(true)
-    else ui.showToast({ title: n ? `הכתבה פורסמה ל-${n} אנשים` : 'הכתבה נשמרה אצלכם', sub: n ? `פוש נשלח: ${c.draft!.push}` : undefined })
+    else ui.showToast({ title: n ? `הכתבה פורסמה ל-${n} אנשים` : 'הכתבה נשמרה אצלכם', sub: n && push ? `פוש נשלח: ${push}` : undefined })
   }
 
   const onPublish = () => {
@@ -53,7 +57,7 @@ export function usePublishModel() {
   }
 
   return {
-    blocked: !c.draft || !c.draftReady,
+    blocked: !left.current && (!c.draft || !c.draftReady),
     published,
     sheetPeople: people.filter((p) => sel.includes(p.id)),
     onSheetDone: (tab?: Group) => {
