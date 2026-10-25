@@ -23,8 +23,23 @@ meRouter.get('/me', auth, async (req, res) => {
 })
 
 meRouter.patch('/me', auth, async (req, res) => {
-  const { name } = parse(z.object({ name: z.string().trim().min(1, 'name required') }), req.body)
-  await pool.query('update users set name = $2 where id = $1', [req.userId, name])
+  const year = new Date().getFullYear()
+  const patch = parse(
+    z.object({
+      name: z.string().trim().min(1, 'name required').optional(),
+      gender: z.enum(['male', 'female', 'other'], { error: 'invalid gender' }).optional(),
+      birthYear: z
+        .int('invalid birth year')
+        .min(year - 120, 'invalid birth year')
+        .max(year, 'invalid birth year')
+        .optional(),
+    }),
+    req.body,
+  )
+  await pool.query(
+    'update users set name = coalesce($2, name), gender = coalesce($3, gender), birth_year = coalesce($4, birth_year) where id = $1',
+    [req.userId, patch.name ?? null, patch.gender ?? null, patch.birthYear ?? null],
+  )
   res.json(toMe(await me(req.userId!)))
 })
 

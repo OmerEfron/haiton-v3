@@ -26,4 +26,23 @@ describe('auth', () => {
     const after = await agent.get('/api/me')
     expect(after.status).toBe(401)
   })
+
+  it('starts without gender or birth year, then accepts both', async () => {
+    const { agent, me } = await signIn(freshEmail())
+    expect(me.gender).toBeNull()
+    expect(me.birthYear).toBeNull()
+
+    const bad = await agent.patch('/api/me').send({ gender: 'nope' })
+    expect(bad.status).toBe(400)
+
+    const blank = await agent.patch('/api/me').send({ name: '   ' })
+    expect(blank.status).toBe(400)
+
+    const birthYear = new Date().getFullYear() - 30
+    const ok = await agent.patch('/api/me').send({ name: 'מאיה', gender: 'female', birthYear })
+    expect(ok.status).toBe(200)
+    expect(ok.body.name).toBe('מאיה')
+    expect(ok.body.gender).toBe('female')
+    expect(ok.body.birthYear).toBe(birthYear)
+  })
 })

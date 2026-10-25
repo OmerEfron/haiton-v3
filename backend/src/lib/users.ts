@@ -8,6 +8,8 @@ export interface UserRow {
   photo_type: string | null
   photo_updated_at: Date | null
   onboarding: boolean
+  gender: 'male' | 'female' | 'other' | null
+  birth_year: number | null
   pref_articles: boolean
   pref_joins: boolean
   pref_reactions: boolean
@@ -19,7 +21,15 @@ export function photoUrl(u: Pick<UserRow, 'id' | 'photo_updated_at'>) {
 }
 
 export function toMe(u: UserRow) {
-  return { id: u.id, name: u.name, email: u.email, photoUrl: photoUrl(u), onboarding: u.onboarding }
+  return {
+    id: u.id,
+    name: u.name,
+    email: u.email,
+    photoUrl: photoUrl(u),
+    onboarding: u.onboarding,
+    gender: u.gender,
+    birthYear: u.birth_year,
+  }
 }
 
 export async function getUser(id: string) {

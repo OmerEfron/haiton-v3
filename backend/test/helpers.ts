@@ -9,7 +9,17 @@ export async function signIn(email: string) {
   const agent = request.agent(createApp())
   const res = await agent.post('/api/auth/google').send({ email })
   if (res.status !== 200) throw new Error(`sign-in failed: ${res.status} ${res.text}`)
-  return { agent, me: res.body as { id: string; name: string; email: string; onboarding: boolean } }
+  return {
+    agent,
+    me: res.body as {
+      id: string
+      name: string
+      email: string
+      onboarding: boolean
+      gender: string | null
+      birthYear: number | null
+    },
+  }
 }
 
 export function freshEmail() {

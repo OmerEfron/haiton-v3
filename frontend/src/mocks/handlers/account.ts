@@ -27,7 +27,15 @@ export const accountHandlers = [
           id = uid('u')
           const local = email.split('@')[0].replace(/[._-]+/g, ' ')
           db.accounts[email] = id
-          db.worlds[id] = emptyWorld({ id, name: local, email, photoUrl: null, onboarding: true })
+          db.worlds[id] = emptyWorld({
+            id,
+            name: local,
+            email,
+            photoUrl: null,
+            onboarding: true,
+            gender: null,
+            birthYear: null,
+          })
         }
         db.session = id
         return db.worlds[id].me
@@ -50,9 +58,26 @@ export const accountHandlers = [
   http.patch(
     u('/me'),
     route(({ w, body }) => {
-      const name = String(body?.name ?? '').trim()
-      if (!name) return fail(400, 'name required')
-      w.me.name = name
+      const patch = body ?? {}
+      if ('name' in patch) {
+        const name = String(patch.name ?? '').trim()
+        if (!name) return fail(400, 'name required')
+        w.me.name = name
+      }
+      if ('gender' in patch) {
+        if (patch.gender !== 'male' && patch.gender !== 'female' && patch.gender !== 'other') {
+          return fail(400, 'invalid gender')
+        }
+        w.me.gender = patch.gender
+      }
+      if ('birthYear' in patch) {
+        const now = new Date().getFullYear()
+        const birthYear = patch.birthYear
+        if (typeof birthYear !== 'number' || !Number.isInteger(birthYear) || birthYear < now - 120 || birthYear > now) {
+          return fail(400, 'invalid birth year')
+        }
+        w.me.birthYear = birthYear
+      }
       return w.me
     }),
   ),

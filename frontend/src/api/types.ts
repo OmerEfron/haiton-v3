@@ -1,5 +1,7 @@
 export type Id = string
 
+export type Gender = 'male' | 'female' | 'other'
+
 export interface Me {
   id: Id
   name: string
@@ -7,6 +9,8 @@ export interface Me {
   photoUrl: string | null
   /** true until the first article is published; drives tips and the step-4 invite sheet */
   onboarding: boolean
+  gender: Gender | null
+  birthYear: number | null
 }
 
 export interface NotificationPrefs {

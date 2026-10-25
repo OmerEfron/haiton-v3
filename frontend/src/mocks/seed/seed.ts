@@ -14,6 +14,14 @@ const EMAILS: Record<keyof typeof DATA, string> = {
   shlomo: 'shlomo.ohayon@gmail.com',
 }
 
+const PROFILES: Record<keyof typeof DATA, { gender: 'male' | 'female'; birthYear: number }> = {
+  maya: { gender: 'female', birthYear: 1994 },
+  tamar: { gender: 'female', birthYear: 1991 },
+  omri: { gender: 'male', birthYear: 1988 },
+  mom: { gender: 'female', birthYear: 1962 },
+  shlomo: { gender: 'male', birthYear: 1954 },
+}
+
 /** Striped placeholder like the prototype's, served as an image URL so the UI treats it as a real photo. */
 export function placeholderImage(label: string) {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600"><defs><pattern id="p" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="16" fill="#e6dfd1"/><rect x="8" width="8" height="16" fill="#ddd5c5"/></pattern></defs><rect width="800" height="600" fill="url(#p)"/><text x="400" y="310" font-family="monospace" font-size="28" fill="#6f665a" text-anchor="middle">${label}</text></svg>`
@@ -39,7 +47,7 @@ function toArticle(a: SeedArticle, now: number): DbArticle {
 function toWorld(key: keyof typeof DATA, P: SeedPersona, now: number): World {
   const groupIds = P.groups.map((_, i) => `${P.meId}_g${i + 1}`)
   return {
-    me: { id: P.meId, name: P.meName, email: EMAILS[key], photoUrl: null, onboarding: !!P.onboard },
+    me: { id: P.meId, name: P.meName, email: EMAILS[key], photoUrl: null, onboarding: !!P.onboard, ...PROFILES[key] },
     prefs: { articles: true, joins: true, reactions: true },
     facts: P.facts.map((f, i) => ({ id: `${P.meId}_f${i + 1}`, ...f })),
     connections: P.people.map((p) => ({ ...p, muted: false })),

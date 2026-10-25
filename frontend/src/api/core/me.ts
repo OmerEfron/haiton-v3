@@ -1,11 +1,12 @@
 import { coreApi } from '../http'
-import type { ArticleSummary, Fact, Me, NotificationPrefs } from '../types'
+import type { ArticleSummary, Fact, Gender, Me, NotificationPrefs } from '../types'
 
 export const getMe = () => coreApi.get<Me>('/me')
 export const signInWithGoogle = (email: string) => coreApi.post<Me>('/auth/google', { email })
 export const logout = () => coreApi.post<void>('/auth/logout')
 export const deleteAccount = () => coreApi.del<void>('/me')
-export const updateProfile = (patch: { name: string }) => coreApi.patch<Me>('/me', patch)
+export const updateProfile = (patch: Partial<{ name: string; gender: Gender; birthYear: number }>) =>
+  coreApi.patch<Me>('/me', patch)
 
 export const uploadPhoto = (file: File) => {
   const form = new FormData()

@@ -2,6 +2,7 @@ import { Suspense } from 'react'
 import { createBrowserRouter, Navigate, Outlet, useLocation } from 'react-router'
 import { useMe } from './api/queries'
 import { Overlays } from './components/overlays/Overlays'
+import { ProfileGate } from './components/overlays/ProfileGate'
 import { responsive } from './device/responsive'
 import { ComposeProvider } from './state/ComposeContext'
 import { UiProvider } from './state/UiProvider'
@@ -69,6 +70,7 @@ function RequireAuth() {
   const loc = useLocation()
   if (me.isPending) return null
   if (me.isError) return <Navigate to={`/?next=${encodeURIComponent(loc.pathname + loc.search)}`} replace />
+  if (!me.data?.gender || !me.data.birthYear) return <ProfileGate />
   return <Outlet />
 }
 
