@@ -3,3 +3,6 @@ dist
 .env
 .env.local
 tsconfig.tsbuildinfo
+test-results
+playwright-report
+blob-report

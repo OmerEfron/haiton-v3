@@ -1,0 +1,44 @@
+import { pool } from './db.ts'
+import type { ChatMessage, ReporterJson, SessionRow } from './types.ts'
+
+export const FIXED_OPENER = 'מה קרה?'
+export const MAX_TURNS = 6
+
+export const OPENER: ReporterJson = {
+  known: 'nothing yet',
+  angle: '',
+  target: 'what happened',
+  articleType: 'feature',
+  reply: FIXED_OPENER,
+  canDraft: false,
+}
+
+export function transcript(messages: ChatMessage[]) {
+  return messages.map((m) => `${m.role}: ${m.text}`).join('\n')
+}
+
+export async function insertSession(userId: string) {
+  const messages: ChatMessage[] = [{ role: 'reporter', text: FIXED_OPENER }]
+  const { rows } = await pool.query<{ id: string }>(
+    `insert into ai_sessions (user_id, messages, turns) values ($1, $2::jsonb, $3::jsonb) returning id`,
+    [userId, JSON.stringify(messages), JSON.stringify([OPENER])],
+  )
+  return { id: rows[0].id, messages }
+}
+
+export async function getSession(id: string, userId: string) {
+  const { rows } = await pool.query<SessionRow>(
+    'select id, user_id, messages, turns, article_type, angle from ai_sessions where id = $1 and user_id = $2',
+    [id, userId],
+  )
+  return rows[0] ?? null
+}
+
+export async function saveSession(id: string, userId: string, messages: ChatMessage[], turns: ReporterJson[], articleType: string, angle: string) {
+  await pool.query(
+    `update ai_sessions
+     set messages = $3::jsonb, turns = $4::jsonb, article_type = $5, angle = $6
+     where id = $1 and user_id = $2`,
+    [id, userId, JSON.stringify(messages), JSON.stringify(turns), articleType, angle],
+  )
+}
