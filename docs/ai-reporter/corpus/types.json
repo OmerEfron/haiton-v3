@@ -1,0 +1,809 @@
+[
+ {
+  "id": "straight_news",
+  "name_he": "ידיעה חדשותית",
+  "name_en": "Straight news report",
+  "description": "Event- or announcement-led reporting: the newest development comes first, followed by attributed reactions, background and immediate implications. Includes reaction roundups, press-conference reports and short updates rather than sustained analysis.",
+  "n": 33,
+  "median_paragraphs": 9,
+  "median_chars": 2665,
+  "median_quote_pct": 15,
+  "lede": {
+   "hard_fact": 28,
+   "scene": 1,
+   "quote": 3,
+   "other": 1
+  },
+  "kicker": {
+   "quote": 14,
+   "none": 2,
+   "fact": 12,
+   "next_step": 3,
+   "reflection": 2
+  },
+  "voice": {
+   "third_person": 31,
+   "mixed": 2
+  },
+  "headline_patterns": {
+   "Defiant opposition quote followed by election-day developments and a warning of unrest": 1,
+   "Urgent dismissal quote followed by country-attributed prediction of the manager’s exit": 1,
+   "Alarming quoted prediction pairing personal financial disruption with familiar shopping platforms": 1,
+   "Direct quotation highlighting unfair competition between licensed and unlicensed contractors": 1,
+   "Star’s controversial statement followed by creator’s attributed response and reassuring quote": 1,
+   "Quoted death threat followed by graphic assault details and a viewing warning": 1,
+   "High-tension national election setup followed by a question framing the challenger against an anti-Israel incumbent": 1,
+   "Public figure promised ambitious result—but delivered a smaller one, quantified by runtime": 1,
+   "Question about potential punishment followed by named clubs and a warning of costly consequences": 1,
+   "Delay and frozen-budget framing followed by committee appointment announcement": 1,
+   "Former senior official identified by title and name + fatal workplace accident at home": 1,
+   "Three-part roundup linking a security concern, an ongoing operation, and newly released attack footage": 1,
+   "Celebrity name + future commercial action + unusual supplement ingredient": 1,
+   "Contrast hook challenging a gender norm followed by organization and course-launch announcement": 1,
+   "Named leader plus direct quote making a striking claim about Iranian nuclear facilities": 1,
+   "Pre-match disorder + named fixture + fan confrontation + watch-video prompt": 1,
+   "Executive title + prospective annual compensation figure": 1,
+   "Provocative quoted drug price followed by a school-distribution reveal": 1,
+   "Victim and vehicle type + fatal collision mechanism + location": 1,
+   "Corporate escalation paired with employee protest consequence": 1,
+   "Long-running milestone followed by major brand's sponsorship exit and a reason-reveal hook": 1,
+   "Brand launch announcement plus model name and hyperbolic specification-led hook": 1,
+   "Approximate protester count + community identity + disruptive actions + road and duration": 1,
+   "Company CEO attribution followed by a quotation overturning a widespread fear about AI": 1,
+   "Prominent former officials address national leader: quoted policy demand": 1,
+   "Direct warning to businesses followed by a colon and an unusual corporate message": 1,
+   "Historic national first: named player selected for marquee fixture": 1,
+   "App versus user nuisance: forthcoming feature promises to act on the user’s behalf": 1,
+   "Local-team concern framed as a question, followed by an attributed foreign report and quoted candidacy claim": 1,
+   "Report attribution followed by named Israeli creators and high-profile international writing assignment": 1,
+   "Coach named ahead of fixture, followed by a colon and a high-stakes quote": 1,
+   "Provocative Hungary comparison framed as a question, followed by a quoted takeover label and a precise overnight voting time": 1,
+   "Medical-reason framing followed by prominent officeholder and resignation from inquiry": 1
+  },
+  "quote_positions": {
+   "middle": 19,
+   "late": 17,
+   "closing": 18,
+   "early": 15,
+   "lede": 7
+  },
+  "avg_haiton_fit": 1.52,
+  "roles": [
+   "Polls-close update and introduction of the main electoral contest > Incumbent's leadership history and explanation of his bid to return as prime minister > Protest origins and allegations against the government > Introduction of the student opposition's candidates, leadership structure and platform > Electoral arithmetic, results timetable and record-turnout indicators > Explanation of the opposition's grassroots campaign and appeal > Opposition supporters' quotes conveying hope and defiance > Incumbent's rebuttal, electoral appeal, policy promises and foreign relations > Israeli implications and uncertainty over the opposition's foreign policy, illustrated by a candidate's quote",
+   "Post-match crowd scene framing the manager’s precarious position > Results and league-position context establishing the crisis > Pundit reactions demanding dismissal and diagnosing dressing-room dysfunction (paragraphs 3–4) > Background on the captain’s criticism and omission from the lineup > Online fan reactions broadening criticism to squad construction > Player response accepting responsibility and defending the manager > Manager response rejecting farewell interpretation and acknowledging uncertain future",
+   "News lead: publication of economists’ letter and the remarks prompting it > Navigation links to the full letter and related coverage > Signatories’ alarm and prominent credentials > Warning of systemic economic consequences > Predicted disruption to citizens’ everyday transactions and essential services > International comparisons and implications for living standards and security > Direct criticism of Netanyahu’s leadership and proposed solution > Background: Bank of Israel’s rejection of cryptocurrency as a sanctions workaround > Closing response: Netanyahu maintains his position",
+   "Opening regulatory criticism and conference attribution > Official’s personal anecdote illustrating the shortage of registered contractors > Overview of registration reforms and proposed enforcement measures > Explanation of enforcement gaps and planned financial penalties > Additional official’s explanation of new safety regulations > Subheading introducing foreign-worker skills shortages > Background on the wartime loss of Palestinian workers and replacement options > Contractor representative’s criticism of worker skills and recruitment channels > Government response on recruitment policy and operational adaptations > Clarification of the private recruitment channel’s status > Discussion of Israeli recruitment difficulties and continued reliance on foreign labor > Subheading highlighting unused worker quotas > Union representative’s recruitment figures and advocacy for the manpower-corporation model > Industrial employer’s training example offering a contrasting perspective on foreign-worker integration",
+   "Lead: creator responds to star’s controversial political remarks > Attribution and context for the forthcoming podcast interview > Quoted response: affectionate disagreement and workplace analogy > Quoted reassurance to Jewish viewers and explanation of creative purpose > Quoted conclusion affirming differing opinions > Background: original interview and broader political context > Quoted original remarks on Gaza and a free Palestine > Continuation of original remarks expressing hope for political change > Earlier interview establishing the creator’s commitment to positive Jewish representation > Continuation explaining why the series avoids addressing the conflict > Closing release update and lead actor’s awards credentials",
+   "Assault summary and detailed account of recorded violence > Relatives' condemnation and allegation of abduction > Victim's physical and psychological condition and similar local incident > Police response and investigation announcement"
+  ],
+  "examples": [
+   {
+    "i": 79,
+    "title": "לא רק גברים: מערך כשרות צהר פתח קורס להכשרת משגיחות",
+    "url": "https://www.ynet.co.il/judaism/article/h1o9ddw3ze"
+   },
+   {
+    "i": 146,
+    "title": "ישראלי ראשון אי פעם בקלאסיקו: אוריין גורן בסגל ברצלונה מול ריאל",
+    "url": "https://www.ynet.co.il/sport/worldsoccer/article/7tdcmds23"
+   },
+   {
+    "i": 2,
+    "title": "\"צריך לסיים את זה עוד הערב\": באנגליה משוכנעים שקאריק בדרך החוצה",
+    "url": "https://www.ynet.co.il/sport/worldsoccer/article/rjfky2jhge"
+   },
+   {
+    "i": 20,
+    "title": "\"תתנצל או שתמות\": גררו נער על הקרקע, הכו במקלות וכיוונו אקדח | קשה לצפייה",
+    "url": "https://www.ynet.co.il/news/article/hyi71ndhgl"
+   }
+  ]
+ },
+ {
+  "id": "document_based_report",
+  "name_he": "כתבת חשיפה ודיווח משפטי",
+  "name_en": "Document-based accountability and legal report",
+  "description": "Built around evidence, recordings, interrogation records, allegations or judicial decisions. Paragraphs reconstruct conduct, distinguish competing accounts and explain findings or procedural status; quotations function primarily as evidence rather than personality.",
+  "n": 16,
+  "median_paragraphs": 13,
+  "median_chars": 3657,
+  "median_quote_pct": 31,
+  "lede": {
+   "quote": 3,
+   "hard_fact": 12,
+   "scene": 1
+  },
+  "kicker": {
+   "none": 2,
+   "fact": 8,
+   "quote": 4,
+   "reflection": 1,
+   "next_step": 1
+  },
+  "voice": {
+   "third_person": 16
+  },
+  "headline_patterns": {
+   "Shocking alleged police quote + violence allegation identifying vulnerable detainee + disturbing-footage flag": 1,
+   "Quoted complaint followed by prominent plaintiffs and lawsuit against landlord in affluent location": 1,
+   "Provocative suspect quote followed by exclusive revelation of interrogation in a named political scandal": 1,
+   "Intriguing suspect quote followed by identification, investigative context, and a promise of the competing account": 1,
+   "Suicide-or-murder question followed by a promised twist in a prominent banking death mystery": 1,
+   "Alarm-raising question about local nightlife's future followed by a dramatic court-ruling teaser": 1,
+   "Long-delayed recognition: named celebrity receives workplace-injury status after onstage fall": 1,
+   "Revelation of a leader's deal with a criminal suspect, followed by an incriminating-sounding recorded quote": 1,
+   "Past assurance versus present warning, juxtaposed through contrasting quotations": 1,
+   "Provocative property demand paired with quoted relationship claim": 1,
+   "Former public official + court-imposed restriction: quoted allegations of misconduct": 1,
+   "Wrongdoing followed by an ironic demand for compensation": 1,
+   "Institution + substantial compensation for fatal outcome + accusatory judicial quote": 1,
+   "Individual versus major corporation, followed by a quoted accusation": 1,
+   "Delayed-arrest hook followed by suspect's association, impending charge, victim, and location": 1,
+   "Seized-cash figure and location followed by revelation of prescription-forgery network": 1
+  },
+  "quote_positions": {
+   "lede": 5,
+   "early": 8,
+   "middle": 11,
+   "late": 13,
+   "closing": 7
+  },
+  "avg_haiton_fit": 1.38,
+  "roles": [
+   "Incriminating body-camera quote and significance for dismissal of charges > Incident background and allegations underlying arrest > Arrest chronology and defense account of escalation > Woman’s firsthand account of arrest and requests for help > Personal trauma history and mental-health background (two paragraphs) > Account of distress during detention and lasting psychological impact > Section heading introducing evidentiary turning point > Prosecution account of alleged resistance and offenses > Defense lawyer’s discovery of pivotal body-camera footage > Description of footage and alleged mistreatment > Recorded police statement suggesting earlier violence and camera shutdown > Defense interpretation of evidence, with uncertainty about camera activation > Omitted article section > Police oversight authority’s response explaining complaint closures and referral > Police rebuttal (truncated)",
+   "Lawsuit announcement identifying plaintiffs, defendant and claim amount > Tenancy background, financial terms and alleged property defects > Specific examples supporting tenants' allegations and absence of prior damage claims > Detailed handover chronology and quoted allegations of premature repairs and guarantee seizure > Landlord's damage allegations, tenants' denial and procedural status > Requested repayment and damages",
+   "Scene-setting reconstruction and suspect’s denial > Exclusive revelation and summary of alleged influence operation > Subject’s intelligence-service background > Arrest context, initial denial and admission under questioning > Quoted account of coordination with journalists > Quoted examples of anti-Egypt media briefings and reporter’s contextual challenge > Message evidence and explanation of editorial coordination > Disclosure of sensitive hostage information circulated for publication > Account of the information’s source and reasons for withholding publication > Section heading introducing characterization of Qatar > Quoted assessment of Qatar’s ties to Hamas > Further alleged messaging coordination and request for anonymity > Omission marker indicating an excerpted passage > Interrogator’s accountability questions and suspect’s explanation > Defense lawyer’s denial and confidentiality-based response",
+   "Lead with the mayor’s wife’s sole statement to investigators and identify the investigation > Explain her silence and present her lawyer’s justification > Describe her distress during a detention hearing and its family impact > Outline the alleged bribery mechanism through an investigative source > Explain the mayor’s alleged role and the municipal bodies involved > Establish the financial stakes and summarize other suspects’ status > Update detention restrictions and contrast the mayor’s denial with investigators’ account > Summarize evidence gathered and remaining investigative work > Describe wiretap evidence and allegations of criminal intimidation > Illustrate the alleged scheme through school-renovation contracts and public costs > Introduce the food-truck concession case and an alleged financial arrangement > Indicate omitted material > Explain the legal basis for alleging bribery involving a non-public official > Close with the predecessor’s corruption conviction and the couple’s reported fear of a similar outcome",
+   "Mystery-framing lead and identification of the death > Financial-crisis context and previous suicide findings > New investigative development > Witness account reconstructing the alleged fatal intimidation > Investigation chair's quote urging renewed inquiry > Archival footage and doubts about the suicide finding > Disputed suicide message and contradictory evidence > Forensic reconstruction methodology > Forensic findings suggesting assault > Witness allegations of organized-crime connections > Alleged disclosure motive, intimidation rationale, and accused executive's denial > Alleged recruitment chain and witness quote characterizing the killing > Relationship history and pre-death investigative context > Closing legal-status clarification",
+   "Core ruling and implementation deadline > Nightlife scene-setting and local significance > Legal finding and rationale > Supporting quotation from the judgment > Petition background and challenged municipal decisions > Petitioner's arguments and alleged harm > Municipality's counterarguments > Expanded judicial reasoning with supporting quotation > Implementation instructions and transition arrangements > Rejected claims and limits of the ruling > Remaining permitted seating and court costs > Petitioner's lawyer interprets broader implications > Municipal response"
+  ],
+  "examples": [
+   {
+    "i": 52,
+    "title": "20 שנה אחרי שנפל בהופעה: ירמי קפלן הוכר כנפגע עבודה",
+    "url": "https://www.ynet.co.il/entertainment/article/sk2hhhshzl"
+   },
+   {
+    "i": 3,
+    "title": "\"עובש, נזילות והצפות\": BBC והעיתונאי הבכיר תובעים משכיר וילה בהרצליה פיתוח ",
+    "url": "https://www.ynet.co.il/economy/article/sy0089vj2mg"
+   },
+   {
+    "i": 147,
+    "title": "דרש חצי מהרכוש של אישה סיעודית וטען: \"אנחנו זוג\"",
+    "url": "https://www.ynet.co.il/economy/article/skc3irphme"
+   },
+   {
+    "i": 168,
+    "title": "בנו ללא היתר – ודרשו על כך תמורה בתמ\"א 38",
+    "url": "https://www.ynet.co.il/economy/article/bjwub0khmg"
+   }
+  ]
+ },
+ {
+  "id": "profile_interview",
+  "name_he": "ריאיון וכתבת דיוקן",
+  "name_en": "Interview and personality profile",
+  "description": "A person or small family unit supplies the organizing spine. Anecdotal or scene-setting openings lead into biography and extended interview quotations, either interwoven with narration or presented as Q&A; endings commonly return to the subject's outlook.",
+  "n": 21,
+  "median_paragraphs": 27,
+  "median_chars": 9256,
+  "median_quote_pct": 60,
+  "lede": {
+   "question": 1,
+   "anecdote": 7,
+   "scene": 5,
+   "quote": 1,
+   "hard_fact": 4,
+   "other": 3
+  },
+  "kicker": {
+   "call_to_action": 1,
+   "quote": 5,
+   "none": 7,
+   "reflection": 7,
+   "next_step": 1
+  },
+  "voice": {
+   "q_and_a": 2,
+   "mixed": 19
+  },
+  "headline_patterns": {
+   "Extended first-person quote contrasting glamorous professional achievement with an everyday domestic frustration": 1,
+   "Provocative first-person celebrity comparison in quotation marks, followed by the subject’s name and a disappearance-explanation hook": 1,
+   "Celebrity name followed by a revealing direct quote about a famous former partner": 1,
+   "First-person pull quote contrasting appearance-based judgment with hidden emotional depth": 1,
+   "Book-title hook followed by a colon and the central character’s double-life mystery": 1,
+   "Provocative interview quote posing a rhetorical question about AI and humanity": 1,
+   "Direct expert quotation pairing an emotionally engaging observation with a corrective claim": 1,
+   "First-person identity-conflict quote foregrounding rejection by two communities": 1,
+   "Direct quote expressing a personal demand for collective belonging": 1,
+   "Universal existential question followed by a named expert's promised answer": 1,
+   "Dramatic midlife identity discovery followed by a quote explaining parental secrecy": 1,
+   "Sensational incident list followed by the band’s anniversary milestone": 1,
+   "Emotionally charged maternal quote contrasting social rejection with the daughter's self-belief": 1,
+   "Provocative first-person quotation challenging a culinary legend": 1,
+   "Striking domestic activity paired with provocative clothing detail, followed by a viral-personality reveal": 1,
+   "Athlete name + disclosure verb + emotional first-person quote invoking a famous sporting parallel": 1,
+   "Childhood Olympic dream followed by a colon and the sacrifices behind sporting success": 1,
+   "Entrepreneur identified by an ambitious numerical expansion target, followed by a bold first-person quote": 1,
+   "Celebrity name followed by a provocative personal quotation about childlessness and animals": 1,
+   "Provocative political quote followed by the prominent interviewee's name and its intended recipient": 1,
+   "Three-stage biographical reversal: childhood trauma, young-adult financial collapse, present-day restaurant ownership": 1
+  },
+  "quote_positions": {
+   "early": 19,
+   "middle": 19,
+   "late": 18,
+   "lede": 7,
+   "closing": 16
+  },
+  "avg_haiton_fit": 2,
+  "roles": [
+   "Recurring-column introduction and featured-family identification > Photo caption identifying family members > Housing arrangements and financial context > Neighborhood appreciation illustrated by a wartime apple-cake anecdote > Couple's meeting and courtship story > Father's career history and transition away from stressful work > New museum role and first curated exhibition > Mother's childhood musical inspiration and training > Mother's teaching, performing career and music-filled home life > Sons' musical ambitions and shared family passion > Household financial habits, spending priorities and leisure plans > Invitation to readers to participate in the column",
+   "Opening anecdote illustrating the overwhelming scale of his former fame > Biographical background and introduction to his reality-TV breakthrough > Subject’s account of his authenticity on camera > Recollection of sudden celebrity and comparison with today’s reality contestants > Career-success summary and introduction to his relationship with fans > Interviewer follow-up about fans visiting his home > Answer explaining his reciprocal relationship with audiences > Question about staying grounded > Answer illustrated by an anecdote about embracing fans at an awards ceremony > Question about reality television’s psychological effects > Answer contrasting his ease with fame against other contestants’ struggles > Question about earnings > Answer describing financial comfort and celebrity perks > Section heading introducing his search for a different life > Account of pursuing formal training to establish himself as an actor > Turning point explaining his decision to step away from entertainment > Omitted passage > Return to his reality-TV origins through an annual rewatching ritual > Closing reflection setting conditions for a possible return to reality television",
+   "Personal scene linking post-divorce displacement, fatherhood and an album lyric > Quoted reflection qualifying the lyric and contrasting past distress with present recovery > Album-launch concert dates and venues > Biographical and professional background establishing the transition from supporting musician to solo artist > Quoted account of emotional release, the first song’s creation and listeners’ responses > Interviewer question about Hebrew writing enabling vulnerability > Extended answer recounting spontaneous songwriting and the decision to record an album > Writer’s assessment of the album’s coherence and self-produced instrumentation > Quoted explanation of the need to record emotionally charged material alone > Omitted section indicated in supplied text > Interviewer question probing irony in a lyric about taxes > Quoted response shifting toward criticism of Israeli reality; supplied ending is incomplete",
+   "Opening anecdote: a personal Instagram post becomes a secret-child controversy > Background: public reaction and accusations of a publicity stunt > Subject's quoted reconstruction of the misunderstanding > Question challenging the publicity-stunt explanation > Answer defending his intentions > Question about his apology > Answer accepting responsibility while rejecting malicious intent > Question about damage to the song's reception > Brief answer confirming disappointment > Personal development: the controversy prompts thoughts of fatherhood > Quote-led section heading introducing reality television > Transition: Survivor as an opportunity to reveal his personality > Quoted explanation of his decision to participate > Question about his on-screen personality > Answer contrasting his authentic self with public perceptions > Question about feeling offended by those perceptions > Answer using a light anecdote about language assumptions > Question contrasting sensitivity with stage confidence > Answer illustrating sensitivity and social awareness > Excerpt omission marker > Return to central theme: appearance obscures emotional depth > Closing quote advocating looking beyond appearances",
+   "Retrospective podcast anecdote establishing the subject’s investigative credentials and popular appeal > Present-day interview scene and appraisal of the subject’s literary reputation > Quoted anecdote about losing a reader’s attention > Brief interviewer reaction > Quoted reflection on reader engagement and resistance to automated summaries > Interview question about turning lengthy investigations into readable books > Answer explaining preparation, writing speed and narrative momentum > Biographical background and early journalistic ambition > Early books and development of a breakthrough investigation > Breakthrough book’s reception and personal career significance > Account of a subsequent investigation and its public impact > Quoted reflection on journalism, advocacy and the lasting value of books > Transition to the new book and the intriguing case that inspired it",
+   "Literary anecdote establishing the film’s central metaphor > Interpretation of the literary metaphor > Introduction of filmmaker, film premise and release peg > Interview quote explaining literary inspiration > Cultural context for the literary reference > Interview quote connecting symbolism and title > Career background tracing recurring themes of death and grief > Interview quote explaining the film’s approach to mourning > Origin anecdote linking the film to AI resurrection services > Direct interview question about artificial intelligence > Interview answer describing first use of ChatGPT > Omitted interview material > Transition to another new film and plot summary > Closing quote reflecting on creative renewal"
+  ],
+  "examples": [
+   {
+    "i": 6,
+    "title": "\"ניגנתי עם ברי ונינט, זה טירוף. אבל כשאני חוזרת ורוצה שקט - אין. זה בית מוזיקלי\"",
+    "url": "https://www.ynet.co.il/economy/article/8p4zniuqa"
+   },
+   {
+    "i": 35,
+    "title": "\"ילדים כמוני צריכים לדעת שהם שייכים\"",
+    "url": "https://www.ynet.co.il/activism/article/h1lpwfw3gx"
+   },
+   {
+    "i": 90,
+    "title": "גילתה באמצע החיים שהיא יהודייה: \"הוריי פחדו שהשואה תקרה שוב\"",
+    "url": "https://www.ynet.co.il/judaism/article/s1tnapzozl"
+   },
+   {
+    "i": 10,
+    "title": "\"בחו\"ל היו פרינס ומדונה, בישראל היה אותי\": צ'ינו חושף למה נעלם",
+    "url": "https://www.ynet.co.il/entertainment/article/skwuzll3fg"
+   }
+  ]
+ },
+ {
+  "id": "reported_feature",
+  "name_he": "כתבת צבע ושטח",
+  "name_en": "Reported human-interest and field feature",
+  "description": "Scenes, lived experiences and testimony carry a broader social story. Reporting moves between individuals, local conditions and institutional responses, using emotional quotations and concrete detail rather than an announcement or a single interviewee's biography as its spine.",
+  "n": 21,
+  "median_paragraphs": 15,
+  "median_chars": 4331,
+  "median_quote_pct": 60,
+  "lede": {
+   "anecdote": 6,
+   "hard_fact": 7,
+   "scene": 5,
+   "quote": 3
+  },
+  "kicker": {
+   "none": 4,
+   "fact": 3,
+   "reflection": 2,
+   "call_to_action": 3,
+   "quote": 8,
+   "next_step": 1
+  },
+  "voice": {
+   "mixed": 5,
+   "third_person": 16
+  },
+  "headline_patterns": {
+   "Extended first-person emotional quote moving from loss of private ownership to intimate rediscovery": 1,
+   "Alarmed resident quote followed by a colon and a citywide spreading-problem frame": 1,
+   "Urgent resident quote followed by a dramatic characterization of a city overtaken by criminals": 1,
+   "Emotional quotation followed by a descriptive institutional hook and a recovery metaphor": 1,
+   "Vivid historical anecdote in quotation marks followed by a collective veteran-voter profile hook": 1,
+   "Patriotic belonging quote followed by cohort numbers and a Hebrew-training premise": 1,
+   "First-person distress quote expressing a parent's inability to tell her children they face homelessness": 1,
+   "Emotionally paradoxical first-person quotation linking a funeral smile to a poem written during shiva": 1,
+   "Evocative quote about normalized danger followed by a locality-specific reality statement": 1,
+   "Contrasting maternal quotes juxtapose the farm's benefits with distress in welfare placements": 1,
+   "First-person quote highlighting extraordinary solidarity with an ordinary Israeli abroad": 1,
+   "Unattributed parental protest quote framing wartime normalization as a danger to children": 1,
+   "Vivid identifying anecdote about a professional who emigrated, followed by a withheld reason for returning": 1,
+   "Distressed child’s quote followed by the news trigger and parental backlash": 1,
+   "Qualified personal testimonial in quotation marks followed by a collective trend description": 1,
+   "Compounding personal abandonment and institutional failure, followed by disability and duration of detention": 1,
+   "Contrasting practical benefits followed by identification of the beneficiary group": 1,
+   "Named victim and fatal event followed by father's farewell quote describing the final moments": 1,
+   "Contrasting military and civilian roles followed by a protective-mission quote": 1,
+   "Individual medical grievance as hook, followed by a colon introducing official complaint rankings": 1,
+   "School-themed wordplay followed by a mobilization count and emphasis on the principal": 1
+  },
+  "quote_positions": {
+   "lede": 7,
+   "early": 18,
+   "middle": 20,
+   "late": 14,
+   "closing": 16
+  },
+  "avg_haiton_fit": 2.52,
+  "roles": [
+   "Opening anecdote quoting the son's first-election message > Present-day news peg linking his memorial anniversary to election day > Mother's reflection on remembrance and voting > Biographical background and introduction to his photography > Quote subheading introducing the emotional work of remembrance > Account of his death and discovery of his final wishes > Father's account of memorial activity leading to the archive, exhibition, and book > Mother's testimony about reviewing the photographs and mourning unrealized artistic potential > Interview question inviting personal discovery > Mother's answer describing renewed intimacy through the archive > Quote subheading introducing stewardship of his artistic legacy > Book-release announcement, cut off in the supplied text",
+   "Personal-impact lead introducing a new mother’s neighborhood safety fears > Specific building incidents and resident testimony > Pull quote previewing a second resident’s complaints > Citywide context broadening the individual story into a reported trend > Extended first resident testimony on deterioration, inadequate enforcement and possible departure > Subheading introducing sanitation complaints > Second resident’s account linking neighborhood conditions to gaps in shelter provision > Concrete sanitation incident and escalating safety complaints > Resident advocates humane solutions rather than displacement > Criticism of municipal responsiveness and resource allocation > Subheading framing the timing of deterioration > Third resident’s introduction and recent incident anecdotes > Omitted passage indicated in supplied text > Municipal complaint statistics and service-response figures > Police response assigning responsibility to local authorities; supplied text cuts off",
+   "Crisis overview and introduction to perpetrators’ video evidence > Recent incident count and criticism of police inaction > Video-based account of a child narrowly escaping gunfire > Quote subheading highlighting criticism of police > Business owner’s testimony on lost income and insecurity > Mother’s testimony about her child’s near miss > Broader targeting pattern and testimony from a community mediator > Business owner’s criticism of police and demand for urgent intervention > Residents’ comparison with other communities and warning of escalation > Summary of residents’ demands for protection and enforcement > Police response asserting enforcement efforts and citing seizures, prosecutions and arrests",
+   "Scene-setting exterior of the treatment center > Frame invisible war injuries and the struggle to regain everyday functioning > Observe the confidential group setting and illustrate belonging through a silent female participant > Explain the effort to destigmatize seeking psychological help > Present a soldier's experience of family concern versus the understanding found in the group, ending with his quote > Introduce the center's founding and target patients > Introduce the clinical leader and summarize the treatment model > Quote the clinical leader on weekly intake and the group's military command structure > Explain the counterintuitive therapeutic value of military structure > Unprovided middle section marked by an ellipsis > Broaden to gaps in national identification, access and rehabilitation > Close with a normative test of success: timely intervention and sustained support beyond military service",
+   "Opening quotation recounting the first subject’s improvised army ballot in 1949 > First subject’s birthplace and pioneering family background > Quoted voting history and explanation of a past political departure > Quoted observations on changing community loyalties and political diversity within the family > Further election anecdote and lifelong commitment to voting > Section heading introducing the second subject through nostalgia > Second subject introduction emphasizing age and uninterrupted voting participation > Family and kibbutz background with a nostalgic quotation > Youth-movement career and advocacy background > Present-day home setting and ongoing educational volunteering > Quoted historical clarification and first-vote memory > Interviewer question about party choice > Quoted answer expressing party loyalty and nostalgia for past leaders > Quoted criticism of contemporary party fragmentation > Omission marker > Family generations and grandson’s first vote > Closing quoted appeal to vote",
+   "Soldier introduction through childhood anecdote > Continuation of formative anecdote and enlistment motivation > Interviewer question about immigration > Personal response about family concerns and military support > Timely context for lone-soldier appreciation week > Event details and organizing partners > Training cohort size, origins, and language needs > Course duration, composition, and curriculum > Recruit profile with immigration background and service aspirations > Recruit introduction and naval-service ambition > Continuation stressing determination to serve in combat > Recruit profile emphasizing family tradition and elite-unit ambitions > Contrasting recruit profile introducing uncertainty about enlistment > Support officer introduction and professional challenge > Support staffing, caseload, and parental-care closing quote"
+  ],
+  "examples": [
+   {
+    "i": 182,
+    "title": "לוחם שריון, וגנן בגן ילדים: \"המשימה שלי היא לשמור עליהם\"",
+    "url": "https://www.ynet.co.il/parents/article/yokra13754697"
+   },
+   {
+    "i": 198,
+    "title": "שיעור לא חופשי: תשעה מורים, והמנהל, גויסו ללחימה",
+    "url": "https://www.ynet.co.il/parents/article/bjphrhmop"
+   },
+   {
+    "i": 23,
+    "title": "\"ב-1949 הביאו קופסת קרטון, וקראו לה קלפי\": הוותיקים שמצביעים מקום המדינה",
+    "url": "https://www.ynet.co.il/activism/article/yokra14932646"
+   },
+   {
+    "i": 25,
+    "title": "\"ישראל היא הבית שלנו\": הטירונות שבה 630 חיילים בודדים מ-30 מדינות - לומדים עברית",
+    "url": "https://www.ynet.co.il/activism/article/yokra14931354"
+   }
+  ]
+ },
+ {
+  "id": "explainer_service",
+  "name_he": "כתבת הסבר ומדריך",
+  "name_en": "Explainer, analysis and service guide",
+  "description": "Organized around how, why, what changes or what readers should do. Research, figures, expert interpretation or practical steps structure the body; quotations clarify mechanisms and implications. Includes reported guides and analytical previews, but not bare directories or pure listicles.",
+  "n": 45,
+  "median_paragraphs": 17,
+  "median_chars": 4939,
+  "median_quote_pct": 4,
+  "lede": {
+   "other": 6,
+   "hard_fact": 24,
+   "question": 8,
+   "scene": 4,
+   "number": 2,
+   "anecdote": 1
+  },
+  "kicker": {
+   "reflection": 10,
+   "call_to_action": 5,
+   "fact": 12,
+   "none": 7,
+   "quote": 5,
+   "next_step": 6
+  },
+  "voice": {
+   "mixed": 18,
+   "third_person": 25,
+   "second_person": 2
+  },
+  "headline_patterns": {
+   "Election-eve hook + first-person experiment + provocative discovery": 1,
+   "Treatment topic followed by a question challenging its presumed obsolescence": 1,
+   "Destination dining question followed by an enthusiastic recommendation promise": 1,
+   "Metaphorical market-entry hook followed by project cost, station count and financing-gap figures": 1,
+   "Failed-safeguards framing followed by company name and decisive access restriction": 1,
+   "Market trend followed by a colon and a disclosure-driven question about pricing and who bears the discount": 1,
+   "Useful tool + quantified personal financial threat + conditional national scenario": 1,
+   "Threat-focused infinitive phrase followed by a colon and identification of Iran's plan": 1,
+   "Named product alternatives followed by a personalized choice question and caution hook": 1,
+   "Reader-directed relocation question followed by a promise of essential tax and investment guidance": 1,
+   "Simple test + cautiously framed potential benefit + striking time horizon": 1,
+   "Everyday exposure warning followed by a proposed product ban": 1,
+   "Provocative everyday health question followed by a promise to reveal the truth": 1,
+   "National first announcement: controversial substance linked to familiar illicit drug will be given to a defined patient group": 1,
+   "List of familiar ingredients followed by a health-benefit question and comprehensive-guide promise": 1,
+   "Numerical question plus winners-and-losers question, followed by a teaser about a projected record and its significance": 1,
+   "Business threat framed as a question, followed by a practical preparation promise": 1,
+   "Global institutional actors + disruptive action + critical security cause": 1,
+   "Reassuring numerical hook below a familiar benchmark followed by a practical health question": 1,
+   "Early-childhood exposure framed as a consequential influence decades later": 1,
+   "Dramatic personal blow to a prominent executive: enormous penalty and alleged wrongdoing": 1,
+   "Relatable sensory-change question followed by an explanatory question about weight-loss injections": 1,
+   "Audience-targeted good-news hook followed by a teased health-beneficial food category": 1,
+   "High-stakes punishment hook followed by identification teaser introducing the appointed prosecutor": 1,
+   "Emotive expert reaction followed by a dramatic treatment benefit": 1,
+   "Relatable parenting problem posed as a question, followed by a practical how-to promise": 1,
+   "Positive medical breakthrough claim followed by a contrasting investor-reaction question": 1,
+   "Coach-management tension followed by a why-question about a stalled signing": 1,
+   "Privacy-concern question followed by a new-solution promise": 1,
+   "Benefit-versus-risk contrast followed by a practical how-to promise": 1,
+   "Huge spending figure plus alarming AI risk, followed by company plans revealed": 1,
+   "Conversational benefit-versus-body contrast followed by a seasonal practical-guide promise": 1,
+   "Range of technological capabilities followed by a practical how-to question": 1,
+   "Multiplicative comparison with previous election + large petition count + named judicial decision-maker": 1,
+   "Two practical benefit questions followed by an invitation to learn election-day rights": 1,
+   "Familiar age-perception claim followed by a scientific complexity reversal": 1,
+   "Quoted everyday parental threat followed by a warning about harm to children": 1,
+   "Reader-directed health-goal question followed by a concealed everyday habit and qualified benefit": 1,
+   "Vivid nightmare examples followed by a question about their meaning": 1,
+   "Contrasting team strengths and weaknesses followed by a colon and key-figures match-preview promise": 1,
+   "Not just X: the next government’s tasks in a named policy sector": 1,
+   "Conversational things-to-know headline challenging familiar wellness advice": 1,
+   "How-to question with a wartime complication and explicit guide label": 1,
+   "Striking method and technological leverage followed by quantified hacking outcome": 1,
+   "Why everyday cues reactivate trauma: explanatory question": 1
+  },
+  "quote_positions": {
+   "early": 19,
+   "middle": 22,
+   "late": 18,
+   "lede": 6,
+   "closing": 9
+  },
+  "avg_haiton_fit": 1.11,
+  "roles": [
+   "Election-eve topical framing of AI influence on voters > Experiment overview and central question > Initial findings: successful political mapping and shared shortlist > Section heading introducing the neutrality critique > Divergent recommendations across models > Interpretation of divergence as evidence of non-neutral weighting > International research context on chatbot use, informational benefits, inconsistency and regulatory concerns > First-person methodology: initial refusals and preference-questionnaire approach > Omitted article section indicated by ellipsis > Practical takeaway on useful applications for voters > Closing warning about false precision and affirmation of personal responsibility",
+   "Sponsorship disclosure > Disease prevalence, mortality and late-diagnosis context > Overview of treatment-selection factors and available therapies > Framing questions and introduction of the interviewed specialist > Section heading introducing disease heterogeneity > Expert explanation of lung cancer subtypes > Treatment implications of genetic alterations > Late-diagnosis challenge explained through expert commentary > Screening eligibility and benefits of early detection > Expert explanation of personalized targeted therapies > Explanation of targeted treatment mechanisms > Explanation of immunotherapy with an accessible expert analogy > Omitted article section indicated in supplied text > Medical advice disclaimer > Sponsor disclosure and referral to treating physician",
+   "Regional tourism context, official quote and timely walking-event hook > Official assessment of culinary revival and reporter's assignment framing > Restaurant-section heading > Restaurant opening story and owner's motivation > Owner's migration and local settlement backstory > Owner's culinary credentials and signature-dish recommendations > Firsthand atmosphere assessment, prices and drinks > Complementary activities and celebrity-customer anecdote > Nearby exhibition recommendation > Restaurant location listing > Restaurant-section heading > Second restaurateur's relocation and lifestyle-change story > Current dining concept, personal benefits and service format > Dining packages and prices > Omitted article section; paragraph roles unavailable > Walking-route options, distances and suitability > Closing roundup of accompanying tourist activities",
+   "News peg linking tender qualification and share-price jump to the broader investment thesis > Tender details and joint-venture structure > Market reaction and corporate uncertainty caveat > Section heading introducing project costs > Budget estimates and cost escalation > Project scale, funding sources and financing shortfall > Implementation timetable and initial delays > Market-size comparison and dependence on foreign contractors > Section heading introducing construction-sector diversification > Housing slowdown contrasted with infrastructure contract activity > Stock-performance comparison and author's valuation thesis > Counterexamples, execution risks and partnership rationale > Section heading introducing property implications > Property levies and author's assessment of valuation uncertainty > Congestion-cost comparison and claimed economic payback > Concluding section heading with omitted content > Author website link > Affiliation and investment-advice disclaimer",
+   "Lead announcing the training-access restriction and its immediate rationale > Background on earlier breaches and security measures > Escalating incident and resulting training suspension > Incident reconstruction: the ordinary research task that triggered the breach > Incident reconstruction: exploitation of a network configuration flaw > Incident reconstruction: monitoring alert and delayed shutdown > Company response: model discontinuation and additional safeguards > Explanation of the new internet-access policy > Explanation of the offline training environment and its scope > Authorized security testing and a successful isolation bypass > Caveat distinguishing directed security tests from spontaneous circumvention > Industry comparison: Anthropic’s restrictions and reported incidents > Illustrative Anthropic incident and broader behavioral pattern > Closing qualification: necessary external connections prevent complete isolation",
+   "Opening transaction example establishing bulk-buying mechanics > Reporting scope and methodological caveat > Section heading introducing REIT background > Sector overview and identification of relevant funds > Legal requirements explaining bulk purchases and rental restrictions > Section heading introducing transaction-price taxonomy > Transaction totals and analytical framework > Loss-making sale illustrating discounts for liquidity > Equity-linked purchases illustrating seller reinvestment > Valuation comparison quantifying the rental restriction discount > Section heading introducing yields and financing costs > Rental-yield pricing explanation with transaction examples > Financing-cost comparison and dependence on rent growth and revaluation > Section heading introducing inventory impact > Market-scale assessment and author interpretation > Section heading introducing investor implications > Investor takeaway distinguishing paper gains from cash returns > Omission marker > External website link > Conflict-of-interest and investment-advice disclaimer"
+  ],
+  "examples": [
+   {
+    "i": 45,
+    "title": "מה אוכלים באזור ים המלח? המלצות טעימות במיוחד",
+    "url": "https://www.ynet.co.il/food/article/yokra14929864"
+   },
+   {
+    "i": 102,
+    "title": "עבודות הרכבת מאיימות על העסק? כך מתכוננים",
+    "url": "https://www.ynet.co.il/economy/article/skbu6bjnmx"
+   },
+   {
+    "i": 126,
+    "title": "הילדים לא רוצים לזוז מהמסך? ככה תעודדו אותם להיות יותר פעילים",
+    "url": "https://www.ynet.co.il/wellness/article/syopja2ozx"
+   },
+   {
+    "i": 132,
+    "title": "החיסון נגד מלנומה הצליח בניסוי הגדול: אז למה המשקיעים חמוצים?",
+    "url": "https://www.ynet.co.il/health/article/ryoc8h00nml"
+   }
+  ]
+ },
+ {
+  "id": "column_review",
+  "name_he": "טור וביקורת",
+  "name_en": "Opinion column and critical review",
+  "description": "The writer's judgment, argument or personal experience drives the piece. Examples, cultural interpretation or hands-on testing support an explicit position; the voice is distinctive and the kicker often delivers a verdict, reflection, joke or appeal.",
+  "n": 24,
+  "median_paragraphs": 12,
+  "median_chars": 4165,
+  "median_quote_pct": 2,
+  "lede": {
+   "quote": 1,
+   "other": 9,
+   "anecdote": 8,
+   "hard_fact": 2,
+   "number": 2,
+   "scene": 1,
+   "question": 1
+  },
+  "kicker": {
+   "twist": 3,
+   "none": 5,
+   "reflection": 10,
+   "next_step": 2,
+   "call_to_action": 3,
+   "fact": 1
+  },
+  "voice": {
+   "first_person": 9,
+   "mixed": 13,
+   "third_person": 2
+  },
+  "headline_patterns": {
+   "First-person rejection of a life change overturned by war": 1,
+   "Topical framing followed by a first-person rhetorical question asserting a business philosophy": 1,
+   "Celebratory claim about an iconic album followed by a tragic qualification about its inability to save its creator": 1,
+   "Genre-question hook followed by film title and a qualified negative verdict.": 1,
+   "Contrarian declarative contrast: sale ends at delivery, not payment | opinion tag": 1,
+   "Contrarian evaluative claim turning the show's strategic premise against its producers": 1,
+   "Playful functional hook followed by product name and testing designation": 1,
+   "Biblical-name wordplay suggesting an unfinished story, followed by the columnist’s byline": 1,
+   "Evocative quotation from a prayer followed by the columnist's byline": 1,
+   "Directional travel phrase / columnist’s name": 1,
+   "Practical moral question followed by columnist byline": 1,
+   "Provocative comparative verdict contrasting sporting humiliation with armchair excuse-making": 1,
+   "Metaphorical hook followed by a colon and an explicit public-interest thesis": 1,
+   "Teacher-authority framing followed by a superlative promise about the most important lesson for readers' children": 1,
+   "Personal religious-ritual metaphor in first person + explicit column label": 1,
+   "Provocative categorical religious ruling presented as a declarative headline": 1,
+   "Illustrative parental quote followed by a why-question challenging a common parenting habit": 1,
+   "Sensational subject setup followed by an escalating judgment about the film": 1,
+   "Dismissal of an inadequate response followed by an urgent demand for action": 1,
+   "Rhetorical question followed by a mocking metaphor about a star's diminishing appeal": 1,
+   "Admonitory wordplay followed by a colon and an explicit warning about trial and error": 1,
+   "Playful camera-versus-phone contrast followed by product name and review designation": 1,
+   "Daily screen-time number followed by a reader-directed question teasing a bodily upgrade": 1,
+   "Number of products tested followed by a winner-reveal question": 1
+  },
+  "quote_positions": {
+   "lede": 5,
+   "early": 11,
+   "late": 7,
+   "middle": 11,
+   "closing": 2
+  },
+  "avg_haiton_fit": 1.5,
+  "roles": [
+   "Song-lyric opening announcing departure and undercutting expectations of escape (paragraphs 1–4) > Introduction of family travel companions and satire of relocation euphemisms > Contrast between hoped-for midlife comfort and the war-driven desire for respite > Personal background explaining resistance to change, followed by a mock job interview about maternal shortcomings > Turning-point anecdote: the family shelters beneath a bridge during an Iranian attack and subsequently decides to leave > Brief anticipatory conclusion with a self-deprecating punchline > Author biography",
+   "Diagnose social media's distorted portrayal of success > State the central argument and introduce the entrepreneur associated with it > Section heading: redefine genuine success > Historical contrast describing needs-based entrepreneurship > Illustrate the daily effort behind building a business > Describe gradual business growth and reinforce the entrepreneur's viewpoint > Section heading: value skilled trades > Identify a shortage of practical professionals > Defend trades as a foundation for business growth and reiterate the entrepreneur's position > Section heading: accept entry-level beginnings > Criticize attempts to skip foundational work experience > Explain the practical lessons of a first job > Section heading: pair ambition with a plan > Qualify the argument and distinguish exits from career strategies > Restate the long-term business-building thesis and the entrepreneur's mission > Section heading: time as a business partner > Omitted-content marker > Author identification > Professional credentials and website",
+   "Biographical opening linking the Rehab lyric to Winehouse's breakup and escalating drinking > Intervention anecdote establishing her resistance to treatment > Song-origin story expanding into commercial success and awards > Tragic pivot contrasting musical triumph with personal survival > Section heading introducing the album's enduring appeal > Critical interpretation of the album as an intimate record of self-destruction > Thematic synthesis contrasting bright musical arrangements with addiction and despair > Section heading introducing musical legacy > Production analysis explaining the album's cohesive sound > Close readings of overlooked tracks supporting its artistic legacy > Return to biography tracing marriage, drug use and unsuccessful rehabilitation > Escalation into a friend's eyewitness account of a personal crisis; supplied text cuts off mid-quotation",
+   "Establish the film’s place in the rebooted DC franchise. > Explain the modest budget, standalone villain premise and franchise continuity. > Assess the commercial gamble and introduce the body-horror approach. > Provide the comic-book villain’s publication history and defining powers. > Trace adaptation sources, screenwriting credentials and cinematic influences. > Introduce the protagonist and recount the incident that triggers his downfall. > Summarize his disfigurement, professional abandonment and return home. > Introduce the experimental treatment and assess the romantic subplot. > Describe the transformation and interpret its body-horror themes. > Evaluate visual direction, practical concealment and digital effects. > Assess the lead actor’s performance; the supplied text ends mid-sentence.",
+   "1: Seasonal shopping hook and central thesis > 2–3: Reframe delivery as a brand promise and explain customer attribution of responsibility > 4: Business implications and recommended performance metrics > 5: Illustrate hidden operational costs of delivery failures > 6–7: Recommend reliability, transparency and flexible delivery options over speed alone > 8: Recommend integrated logistics planning and outcome-focused automation > 9: Seasonal stress-test warning > 10: Restate thesis and conclude with customer-loyalty payoff > 11: Author credentials and industry affiliation > 12: Publisher disclaimer and investment-advice caveat",
+   "Topical satirical opening introducing the season premiere > Premise recap and critique of the personal-advantage twist > Criticism of prematurely exposing contestants' advantages > First-elimination recap and rejected rescue offer > Critique of an opening-episode elimination's lack of emotional stakes > Strategic analysis disputing the supposed rescue dilemma > Rejection of production's moral framing of individual competition > Initial cast assessment focused on a potentially compelling antagonist > Broader cast appraisal and humorous viewing outlook > Mock next-episode teaser and topical sign-off"
+  ],
+  "examples": [
+   {
+    "i": 127,
+    "title": "מילה של מורה: זה השיעור הכי חשוב עבור הילדים שלכם",
+    "url": "https://www.ynet.co.il/parents/article/bya6ag430"
+   },
+   {
+    "i": 48,
+    "title": "מעולם לא חלמתי על רילוקיישן, אבל אז פרצה המלחמה",
+    "url": "https://www.ynet.co.il/parents/article/rjh00m2xw1g"
+   },
+   {
+    "i": 87,
+    "title": "עושה את העבודה המלוכלכת: MOVA LR10 Prime במבחן",
+    "url": "https://www.ynet.co.il/digital/reviews/article/byfirkpnzl"
+   },
+   {
+    "i": 97,
+    "title": "רות, לא סוף / חנוך דאום",
+    "url": "https://www.ynet.co.il/judaism/article/yokra14772864"
+   }
+  ]
+ },
+ {
+  "id": "match_report",
+  "name_he": "דיווח משחק וסיכום מחזור",
+  "name_en": "Live match report and results recap",
+  "description": "Score, match status or outcome anchors the lede. The body follows periods, decisive plays, turning points or successive fixtures, with statistics and postgame reactions subordinate to the sporting action.",
+  "n": 7,
+  "median_paragraphs": 13,
+  "median_chars": 2599,
+  "median_quote_pct": 0,
+  "lede": {
+   "hard_fact": 7
+  },
+  "kicker": {
+   "fact": 5,
+   "none": 1,
+   "quote": 1
+  },
+  "voice": {
+   "third_person": 7
+  },
+  "headline_patterns": {
+   "Live status and match phase: home team versus away team plus current score": 1,
+   "Sport category followed by dramatic victories and winning teams": 1,
+   "Live quarter and clock marker followed by team names and current score": 1,
+   "Season milestone hook followed by winner and defeated opponent": 1,
+   "Stoppage-time goal count: emotive comeback teaser naming the winner | watch invitation": 1,
+   "Israeli player's minutes played followed by his team's defeat and score": 1,
+   "Contrast between peak performance and unexpected confrontation, followed by a provocative direct quote": 1
+  },
+  "quote_positions": {
+   "early": 1,
+   "closing": 1
+  },
+  "avg_haiton_fit": 1.43,
+  "roles": [
+   "Live match introduction and venue > Barcelona form and league record > Real Madrid form and title-race stakes > Coaching history and goalkeeper absence > Recent head-to-head record > Israeli player milestone and Barcelona injury context > Match-action section heading > Chronological minute-by-minute chances and injury substitution > Omitted-content marker > Starting lineups for both teams",
+   "Lead game result and updated league record > Lead game comeback and decisive missed shot > Lead game individual scoring totals > Second game result, comeback and decisive missed shots > Second game individual scoring totals",
+   "Live matchup introduction and previous-season rivalry context > Home-team form, coaching record and player milestones > Away-team form and season-opening stakes > Historical head-to-head statistics > First-quarter score heading > Starting lineups for both teams > First-quarter play-by-play recap > Second-quarter score heading > Second-quarter play-by-play recap with courtside incident > Third-quarter score heading > Third-quarter play-by-play recap > Fourth-quarter heading awaiting updates",
+   "Final score, match setting and season context > Losing team’s weaknesses and standout players > Winning team’s performance and key contributors > Upcoming fixtures and implications for both teams > Individual scoring totals for both teams > First-quarter score heading > Starting lineups for both teams > First-quarter narrative recap > Second-quarter score heading > Second-quarter narrative recap > Third-quarter score heading and omitted recap > Fourth-quarter score heading > Closing game narrative confirming the visitors’ victory",
+   "Result summary, unbeaten-run context and league standing > Match setup and Fiorentina's opening goal > Substitutions and chronological account of the stoppage-time comeback > Losing team's form and season record",
+   "Round overview and main results > Match heading and score > Crystal Palace–Newcastle match summary > Chronological goal descriptions > Match heading and score > Liverpool–Brighton match summary and table implications > Chronological goal descriptions > Match heading and score > Manchester United–Bournemouth match summary and crisis framing > Chronological goal descriptions > Additional results in brief"
+  ],
+  "examples": [
+   {
+    "i": 61,
+    "title": "כדורסל נשים: ניצחונות דרמטיים לירושלים ופ\"ת",
+    "url": "https://www.ynet.co.il/sport/israelibasketball/article/s1cwwaj2gl"
+   },
+   {
+    "i": 109,
+    "title": "שני שערים בתוספת הזמן: הדרמה המטורפת של אינטר | צפו",
+    "url": "https://www.ynet.co.il/sport/worldsoccer/article/rkaot9o3mx"
+   },
+   {
+    "i": 192,
+    "title": "דווקא אחרי משחק השיא - ניקולה יוקיץ' נגד אוהדי דנבר: \"שלא יבואו\"",
+    "url": "https://www.ynet.co.il/sport/worldbasketball/article/hkcv14i2fg"
+   },
+   {
+    "i": 39,
+    "title": "חי, מחצית ראשונה: ברצלונה - ריאל מדריד 0:0",
+    "url": "https://www.ynet.co.il/sport/worldsoccer/article/rysiloj3fl"
+   }
+  ]
+ },
+ {
+  "id": "initiative_testimonial",
+  "name_he": "כתבת מיזם ועדות אישית",
+  "name_en": "Initiative showcase and testimonial feature",
+  "description": "Introduces a program, organization, campaign or offering through a need-and-response narrative. Beneficiary testimony, founder or executive quotations, milestones and promised benefits organize the body, often ending with a mission statement or invitation. Includes conversion testimonials built around a personal turning point.",
+  "n": 16,
+  "median_paragraphs": 13,
+  "median_chars": 2824,
+  "median_quote_pct": 55,
+  "lede": {
+   "hard_fact": 7,
+   "question": 2,
+   "quote": 2,
+   "other": 3,
+   "scene": 1,
+   "anecdote": 1
+  },
+  "kicker": {
+   "quote": 5,
+   "fact": 7,
+   "none": 1,
+   "next_step": 1,
+   "call_to_action": 1,
+   "reflection": 1
+  },
+  "voice": {
+   "third_person": 14,
+   "mixed": 2
+  },
+  "headline_patterns": {
+   "Promotional executive quote followed by a why-question about a growing consumer trend": 1,
+   "Provocative testimony quote followed by a personalized question about voting intentions": 1,
+   "Turning-point quote followed by a question about a named individual's political change": 1,
+   "Mission quote followed by an organization-focused explanatory promise and partnership teaser": 1,
+   "Provocative quote followed by a question about a named individual's changed vote": 1,
+   "Rhetorical political quote followed by the named subject's change of direction": 1,
+   "Emotional question quote followed by a trauma survivor's sense of abandonment": 1,
+   "Quoted reserve-service tally followed by a question about a disillusioned soldier's voting choice": 1,
+   "Aspirational generational encounter: tomorrow’s generation meets tomorrow’s technology": 1,
+   "Aspirational founder quote followed by a milestone framing of the president’s initiative": 1,
+   "Annual funding figure and white-elephant warning followed by location and youth-center announcement": 1,
+   "Memorial initiative framed as continuing a loved one's light, followed by an uplifting mission quote": 1,
+   "Aspirational present-to-future slogan linking today's challenges to tomorrow's health": 1,
+   "Contrasting slogan and concrete reform demand, followed by election-related framing": 1,
+   "Metaphorical relationship hook followed by a broad digital-transformation claim": 1,
+   "Shift from injections to a natural alternative, followed by a vivid first-person success quote": 1
+  },
+  "quote_positions": {
+   "early": 14,
+   "middle": 15,
+   "late": 14,
+   "closing": 6,
+   "lede": 3
+  },
+  "avg_haiton_fit": 1.69,
+  "roles": [
+   "Opening sponsorship disclosure > Trend lead linking rising rental demand to barriers to homeownership and limited supply > Policy context and international comparison > Executive quote presenting tenure security as the central benefit > Explanation of lease duration and rent-adjustment rules > Illustration of family needs and flexibility to change apartments within a development > Sponsor’s project portfolio and waiting lists as evidence of demand > Target tenant groups and community and maintenance benefits > Executive explanation of demand for larger rental apartments > Explanation of whole-building management, amenities and tenant exit flexibility > Executive quote on service obligations and tenant retention > Demand anecdote followed by a recommendation for state assistance > Closing executive reflection framing renting as a bridge to homeownership > Closing sponsorship disclosure",
+   "Opening sponsorship disclosure > Introduce the subject's unresolved trauma and demand for answers through a short quote > Establish personal background, previous party loyalty and the event that changed her outlook > Develop her demand for an inquiry and criticism of the prime minister through extended quotations > Question subheading introduces her voting dilemma; quotations explain possible alternatives and the difficulty of switching parties > Explain the wider editorial project and its partnership > Closing sponsorship disclosure",
+   "Sponsorship disclosure > Opening question, voter background and initial explanation of political disillusionment > Personal loss and family conflict as catalysts for changing allegiance > Transition question introducing the new electoral choice > Defense of the preferred candidate's political positioning > Voting intention and concluding rejection of the former political home > Explanation of the sponsored project's scope > Repeated sponsorship disclosure",
+   "Sponsorship disclosure > Founder quote introducing the organization’s origins and mission > Expert diagnosis of technological gaps in mental-health care > Executive reassurance that technology complements human treatment > Section heading highlighting the winning suicide-prevention app > Awards-event recap, winning project explanation, and founder endorsement > Technology partner testimonial validating the collaboration > Executive closing vision linking national innovation to mental-health needs > Sponsorship disclosure",
+   "Sponsorship disclosure > Subject introduction and former party loyalty > Qualified retrospective and initial political rupture > Decisive breaking point and demand for accountability > Subheading introducing voting choice > Call for government departure and personal voting endorsement > Critique of leadership-dependency argument > Project description and partnership context > Sponsorship disclosure",
+   "Sponsorship disclosure > Personal introduction and previous voting allegiance > Disillusionment with former political choice > Subheading teasing new voting choice > Personal security experience and reasons for new allegiance > Concluding rhetorical quote framing the voting decision > Project description and sponsorship context > Sponsorship disclosure"
+  ],
+  "examples": [
+   {
+    "i": 44,
+    "title": "כשדור העתיד נחשף לטכנולוגיית המחר",
+    "url": "https://www.ynet.co.il/activism/article/syan6umhze"
+   },
+   {
+    "i": 77,
+    "title": "המיזם שממשיך להפיץ את האור של ליבי: \"רוצים להראות כמה טוב העם שלנו יודע לעשות\"",
+    "url": "https://www.ynet.co.il/activism/article/rkflxs72ml"
+   },
+   {
+    "i": 5,
+    "title": "\"אנשים מחפשים את הפתרון הזה\": למה יותר ישראלים מחפשים שכירות ארוכת טווח?",
+    "url": "https://www.ynet.co.il/economy/article/lejyiupii"
+   },
+   {
+    "i": 22,
+    "title": "\"אנחנו לא יודעים מה קרה שם ב-7 באוקטובר\": למי סוזי תצביע בבחירות?",
+    "url": "https://www.ynet.co.il/activism/Changingdirection/article/54g1ijtwf"
+   }
+  ]
+ },
+ {
+  "id": "other",
+  "name_he": "אחר",
+  "name_en": "Other",
+  "description": "Fiction installments, recipes and recipe-led cooking packages, pure listicles, schedules, directories and bare item roundups that do not provide a usable reported-article structure.",
+  "n": 17,
+  "median_paragraphs": 31,
+  "median_chars": 6260,
+  "median_quote_pct": 0,
+  "lede": {
+   "other": 11,
+   "anecdote": 2,
+   "scene": 3,
+   "number": 1
+  },
+  "kicker": {
+   "call_to_action": 5,
+   "fact": 6,
+   "none": 2,
+   "reflection": 2,
+   "next_step": 2
+  },
+  "voice": {
+   "mixed": 7,
+   "second_person": 2,
+   "third_person": 5,
+   "first_person": 3
+  },
+  "headline_patterns": {
+   "Topical wordplay linking voting and leisure, followed by a descriptive family-activities promise": 1,
+   "Evocative holiday phrase followed by a descriptive cake title and festive occasion": 1,
+   "Recurring service keyword + weekly Torah portion | Gregorian date": 1,
+   "Dish name naming the main ingredient and garnish": 1,
+   "Straightforward seasonal service headline naming the audience and holiday activities": 1,
+   "Everyday leftovers plus a simple cooking action promise a surprisingly magical meal": 1,
+   "Evocative destination reference followed by a seasonal dish promise": 1,
+   "Evocative examples of vanished childhood culture followed by a numbered promise of things lost forever.": 1,
+   "Playful descriptive hook followed by a practical one-pan meal promise": 1,
+   "Food name with nutritional benefit and ease-of-preparation promise": 1,
+   "Novel title followed by numbered installment": 1,
+   "Specific quick-meal promise followed by broader seasonal tips": 1,
+   "Novel title followed by installment number": 1,
+   "Imperative make-ahead hook followed by a complete-meal benefit": 1,
+   "Prohibition question followed by a promise of essential rules for every gymgoer": 1,
+   "Conversational declaration of a worldwide food craze followed by an emphatic ubiquity claim": 1,
+   "Notable property specifications followed by a sale-price question": 1
+  },
+  "quote_positions": {
+   "middle": 4,
+   "lede": 1,
+   "early": 1
+  },
+  "avg_haiton_fit": 1.35,
+  "roles": [
+   "Opening civic reminder and advice on making voting an educational family experience > Related-link referral to a voter information guide > Transition from voting to family leisure and overview of available activities > Venue heading: free children's theater in Kiryat Ata > Activity listing with show descriptions, times and free admission > Venue heading: National Maritime Museum > Activity listing with exhibition context, tour times, children's attractions and ticket referral > Venue heading: Haifa City Museum > Activity listing with exhibition theme, guide, children's activities, start time and booking referral > Venue heading: Haifa Museum of Art > Activity listing with tours, creative workshops, toddler facilities and booking referral > Venue heading: Tikotin Museum of Japanese Art > Activity listing with exhibition background, tour times and booking referral > Venue heading: Hermann Struck Museum > Activity listing with exhibition description and free admission > Venue heading: Ramat Hanadiv > Activity listing with mock voting, concert, schedule, price, parking, accessibility and booking details > Venue heading: Kochav Hayarden National Park > Activity listing with bird migration tours, kite workshop and practical-information referral > Venue heading: Ein Afek Nature Reserve > Activity listing with walking route, children's workshops, mock voting and practical-information referral > Venue heading: Beit She'an National Park > Omitted article section; paragraph roles cannot be determined from the supplied excerpt > Network-wide activity heading: Nature and Parks Authority mystery game > Closing activity listing explaining the interactive game and advising readers to check participating sites, hours and admission conditions",
+   "Festive introduction linking the cake to renewal and traditional apples and honey > Dietary variation advice and serving suggestions > Recipe title > Ingredients section heading > Ingredient list > Preparation instructions (partially omitted in supplied text) > Final baking directions and doneness test",
+   "Candle-lighting blessing section heading > Text of the candle-lighting blessing and subsequent personal prayer > Explanatory section heading posing the reason for lighting candles > Source-based explanation of candle lighting as Sabbath honor, enjoyment, and domestic harmony > Rabbinic contributor credit > Challah recipe heading and contributor attribution > Recipe yield and quantity-adjustment guidance > Dough ingredients subheading > Dough ingredient quantities > Egg-wash ingredients subheading > Egg-wash ingredient quantities > Preparation-method heading > Sequential mixing, proofing, oven preparation, and baking instructions, with intermediate steps omitted in the supplied text",
+   "Preparation section heading > Initial cooking instruction > Technique caution > Sequential soup preparation instructions > Leek garnish section heading > Garnish preparation instruction > Plating instruction > Serving suggestion heading > Alternative garnish and accompaniment suggestions > Recipe source credit",
+   "Attraction heading > Activity description > Location > Dates and opening hours > Admission price > Further-information link > Attraction heading > Activity description > Location > Dates and opening hours > Admission price > Further-information link > Attraction heading > Activity description > Location > Dates and opening hours > Admission price > Further-information link > Attraction heading > Activity description and additional programming > Location > Dates, opening hours and security-related capacity limit > Admission price and inclusions > Further-information link > Attraction heading > Activity description > Location > Dates and opening hours > Admission price > Further-information link > Next attraction heading > Omitted directory entries > Further-information link > Final attraction heading > Activity description and participation instructions > Locations > Dates > Free admission information",
+   "First-person domestic frustration introducing the one-tray solution > Basic preparation method > Transition to ingredient suggestions > Flexible vegetable and protein suggestions > Optional additions with humorous aside > Seasoning and roasting instructions > Cooking-time guidance for different ingredients > Sensory explanation of roasting results > Serving scene and humorous cleanup payoff > Recipe heading > Appetizing recipe introduction and serving advice > Ingredient-list heading > Ingredient quantity entry > Omitted recipe material > Smoked-paprika recommendation and invitation for reader feedback > Correction and clarification of a previously published recipe, with personal endorsement"
+  ],
+  "examples": [
+   {
+    "i": 89,
+    "title": "שמים מה שנשאר במקרר בתבנית אחת - ויוצאת ארוחת קסם",
+    "url": "https://www.ynet.co.il/food/article/yokra14875660"
+   },
+   {
+    "i": 99,
+    "title": "שירים ושערים, אסימונים ושיחת גוביינא: 15 דברים שאיבדנו לנצח",
+    "url": "https://www.ynet.co.il/parents/article/bjzkcc1mje"
+   },
+   {
+    "i": 106,
+    "title": "טעימה ועצלנית: ארוחה בתבנית אחת",
+    "url": "https://www.ynet.co.il/food/article/yokra14867728"
+   },
+   {
+    "i": 115,
+    "title": "לחם מלא בחלבון - וקל להכנה",
+    "url": "https://www.ynet.co.il/food/article/yokra14867724"
+   }
+  ]
+ }
+]
