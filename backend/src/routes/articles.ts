@@ -6,6 +6,7 @@ import { HttpError } from '../errors.ts'
 import { getVisible, loadFull, summary, type ArticleRow } from '../lib/articles.ts'
 import { notify } from '../lib/notify.ts'
 import { getUser } from '../lib/users.ts'
+import { writeLimit } from '../limits.ts'
 import { IN_GROUP, NOT_HIDDEN, NOT_MUTED, VISIBLE } from '../lib/visible.ts'
 import { parse } from '../parse.ts'
 
@@ -56,23 +57,25 @@ articlesRouter.get('/users/:id/articles', auth, async (req, res) => {
   res.json(rows.map((a) => summary(a, u.id, u.name)))
 })
 
+const id = z.string().max(80)
+
 const publishBody = z.object({
-  draftId: z.string().optional(),
+  draftId: id.optional(),
   content: z.object({
-    headline: z.string().min(1, 'content required'),
-    sub: z.string().default(''),
-    summary: z.string().optional(),
-    body: z.array(z.string()).min(1, 'content required'),
-    flash: z.string().default(''),
-    push: z.string().optional(),
+    headline: z.string().min(1, 'content required').max(200),
+    sub: z.string().max(400).default(''),
+    summary: z.string().max(300).optional(),
+    body: z.array(z.string().max(4000)).min(1, 'content required').max(12),
+    flash: z.string().max(200).default(''),
+    push: z.string().max(200).optional(),
   }),
-  prevId: z.string().nullable().optional(),
+  prevId: id.nullable().optional(),
   audience: z.object({
     mode: z.enum(['circle', 'me', 'people', 'group']),
-    personIds: z.array(z.string()).optional(),
-    groupId: z.string().optional(),
+    personIds: z.array(id).max(200).optional(),
+    groupId: id.optional(),
   }),
-  saveFacts: z.array(z.object({ k: z.string(), v: z.string() })).default([]),
+  saveFacts: z.array(z.object({ k: z.string().max(40), v: z.string().max(200) })).max(20).default([]),
 })
 
 async function audienceIds(userId: string, aud: z.infer<typeof publishBody>['audience']) {
@@ -92,7 +95,7 @@ async function audienceIds(userId: string, aud: z.infer<typeof publishBody>['aud
   return []
 }
 
-articlesRouter.post('/articles', auth, async (req, res) => {
+articlesRouter.post('/articles', auth, writeLimit, async (req, res) => {
   const u = await viewer(req.userId!)
   const body = parse(publishBody, req.body)
   const aud = await audienceIds(u.id, body.audience)
@@ -132,8 +135,8 @@ articlesRouter.delete('/articles/:id', auth, async (req, res) => {
   res.status(204).end()
 })
 
-articlesRouter.put('/articles/:id/reaction', auth, async (req, res) => {
-  const { label } = parse(z.object({ label: z.string().nullable() }), req.body)
+articlesRouter.put('/articles/:id/reaction', auth, writeLimit, async (req, res) => {
+  const { label } = parse(z.object({ label: z.string().max(20, 'label too long').nullable() }), req.body)
   const u = await viewer(req.userId!)
   const a = await getVisible(u.id, param(req, 'id'))
   if (!a) throw new HttpError(404, 'not found')
@@ -162,9 +165,12 @@ articlesRouter.put('/articles/:id/reaction', auth, async (req, res) => {
   res.status(204).end()
 })
 
-articlesRouter.post('/articles/:id/report', auth, async (req, res) => {
+articlesRouter.post('/articles/:id/report', auth, writeLimit, async (req, res) => {
   const { reason, note } = parse(
-    z.object({ reason: z.string().min(1, 'reason required'), note: z.string().default('') }),
+    z.object({
+      reason: z.string().min(1, 'reason required').max(80),
+      note: z.string().max(500).default(''),
+    }),
     req.body,
   )
   const a = await getVisible(req.userId!, param(req, 'id'))

@@ -9,7 +9,7 @@ export class HttpError extends Error {
   }
 }
 
-export const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
+export const errorHandler: ErrorRequestHandler = (err, req, res, _next) => {
   if (err instanceof HttpError) {
     res.status(err.status).json({ message: err.message })
     return
@@ -22,6 +22,6 @@ export const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
     res.status(400).json({ message: 'photo too large' })
     return
   }
-  console.error(err)
+  req.log.error({ err })
   res.status(500).json({ message: 'internal error' })
 }

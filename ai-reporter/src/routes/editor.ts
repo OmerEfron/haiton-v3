@@ -5,6 +5,7 @@ import { loadContext } from '../context.ts'
 import { pool } from '../db.ts'
 import { asDraft, contentOf, toDraft } from '../draft.ts'
 import { HttpError } from '../errors.ts'
+import { aiDay, aiMinute } from '../limits.ts'
 import { chat, SCHEMA } from '../openai.ts'
 import { parse } from '../parse.ts'
 import { fill, prompts, reviseBlock, reviseSystem } from '../prompts.ts'
@@ -52,7 +53,7 @@ async function requireStory(userId: string, sessionId: string) {
   return { session, ctx, editor }
 }
 
-editorRouter.post('/editor/drafts', requireAuth, async (req, res) => {
+editorRouter.post('/editor/drafts', requireAuth, aiMinute, aiDay, async (req, res) => {
   const { sessionId } = parse(z.object({ sessionId: z.string().min(1, 'sessionId required') }), req.body)
   const { session, ctx, editor } = await requireStory(req.userId!, sessionId)
   const chatText = 'CHAT:\n' + transcript(session.messages)
@@ -73,7 +74,7 @@ editorRouter.post('/editor/drafts', requireAuth, async (req, res) => {
   res.json(toDraft(rows[0].id, session.id, contentOf(draft), draft.usedFacts, draft.newFacts, ctx))
 })
 
-editorRouter.post('/editor/drafts/:id/revise', requireAuth, async (req, res) => {
+editorRouter.post('/editor/drafts/:id/revise', requireAuth, aiMinute, aiDay, async (req, res) => {
   const { kind } = parse(z.object({ kind: z.enum(KINDS, { error: 'unknown revision' }) }), req.body)
   const { rows } = await pool.query<DraftRow>(
     'select id, session_id, content, used_facts, new_facts from ai_drafts where id = $1 and user_id = $2',

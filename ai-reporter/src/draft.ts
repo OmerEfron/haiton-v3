@@ -10,7 +10,14 @@ export function asReporter(raw: unknown): ReporterJson {
   if (typeof o.known !== 'string' || typeof o.angle !== 'string' || typeof o.target !== 'string') throw new UpstreamError('bad reporter json')
   if (typeof articleType !== 'string' || !(TYPES as readonly string[]).includes(articleType)) throw new UpstreamError('bad reporter json')
   if (!(typeof o.reply === 'string' || o.reply === null) || typeof o.canDraft !== 'boolean') throw new UpstreamError('bad reporter json')
-  return { known: o.known, angle: o.angle, target: o.target, articleType, reply: o.reply, canDraft: o.canDraft }
+  return {
+    known: o.known.slice(0, 500),
+    angle: o.angle.slice(0, 300),
+    target: o.target.slice(0, 300),
+    articleType,
+    reply: o.reply,
+    canDraft: o.canDraft,
+  }
 }
 
 function strings(v: unknown, label: string) {
@@ -26,10 +33,11 @@ export function asDraft(raw: unknown): ModelDraft {
   if (!Array.isArray(o.newFacts)) throw new UpstreamError('bad draft facts')
   const newFacts: NewFact[] = []
   for (const f of o.newFacts) {
+    if (newFacts.length >= 10) break
     if (!f || typeof f !== 'object') throw new UpstreamError('bad draft facts')
     const fact = f as Record<string, unknown>
     if (typeof fact.k !== 'string' || typeof fact.v !== 'string' || !fact.k || !fact.v) throw new UpstreamError('bad draft facts')
-    newFacts.push({ k: fact.k, v: fact.v })
+    newFacts.push({ k: fact.k.slice(0, 40), v: fact.v.slice(0, 200) })
   }
   const headline = strings(o.headline, 'headline')
   if (!headline.trim()) throw new UpstreamError('bad draft headline')

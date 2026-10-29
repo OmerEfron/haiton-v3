@@ -83,8 +83,8 @@ peopleRouter.get('/groups', auth, async (req, res) => {
 })
 
 const groupBody = z.object({
-  name: z.string().trim().min(1, 'name required'),
-  memberIds: z.array(z.string()).min(1, 'members required'),
+  name: z.string().trim().min(1, 'name required').max(60, 'name too long'),
+  memberIds: z.array(z.string().max(80)).min(1, 'members required').max(200, 'too many members'),
 })
 
 async function cleanMembers(userId: string, ids: string[]) {

@@ -11,6 +11,12 @@ declare global {
 
 export const COOKIE = 'sid'
 
+export function cookieSecret() {
+  const secret = process.env.COOKIE_SECRET
+  if (!secret && process.env.NODE_ENV === 'production') throw new Error('COOKIE_SECRET is required')
+  return secret || 'dev-cookie-secret'
+}
+
 export function cookieOpts() {
   return { httpOnly: true, signed: true, sameSite: 'lax' as const, path: '/' }
 }

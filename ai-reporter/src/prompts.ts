@@ -12,6 +12,7 @@ export const prompts = {
 }
 
 const GENDER = { male: 'male (זכר)', female: 'female (נקבה)', unknown: 'unknown' }
+const CTRL = /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g
 
 export interface FillUser {
   name: string
@@ -20,14 +21,33 @@ export interface FillUser {
   previous: string
 }
 
+function clean(s: string, max: number, multiline = false) {
+  const flat = (multiline ? s : s.replace(/[\r\n\u2028\u2029]+/g, ' '))
+    .replace(CTRL, '')
+    .replaceAll('</facts>', '')
+    .replaceAll('</previous_story>', '')
+    .replaceAll('{{', '')
+    .replaceAll('}}', '')
+  return flat.slice(0, max).trim()
+}
+
+function tagged(tag: 'facts' | 'previous_story', body: string) {
+  return `<${tag}>\n${body || '(none)'}\n</${tag}>`
+}
+
 export function fill(tpl: string, user: FillUser, st: { articleType?: string; angle?: string; asked?: number } = {}) {
+  const factLines = user.facts
+    .slice(0, 50)
+    .map((f) => `${clean(f.k, 40)}: ${clean(f.v, 200)}`)
+    .filter((line) => line !== ':')
+    .join('\n')
   const values: Record<string, string> = {
-    '{{name}}': user.name,
+    '{{name}}': clean(user.name, 60),
     '{{gender}}': GENDER[user.gender],
-    '{{facts}}': user.facts.map((f) => `${f.k}: ${f.v}`).join('\n') || '(none)',
-    '{{previous}}': user.previous || '(none)',
-    '{{articleType}}': st.articleType || 'feature',
-    '{{angle}}': st.angle || '(none)',
+    '{{facts}}': tagged('facts', clean(factLines, 4000, true)),
+    '{{previous}}': tagged('previous_story', clean(user.previous, 4000, true)),
+    '{{articleType}}': clean(st.articleType || 'feature', 40),
+    '{{angle}}': clean(st.angle || '(none)', 300),
     '{{asked}}': String(st.asked ?? 0),
   }
   // Replacer function so a name containing "$&" is not treated as a replacement pattern.

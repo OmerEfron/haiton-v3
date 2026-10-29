@@ -4,6 +4,7 @@ import { param, requireAuth } from '../auth.ts'
 import { loadContext } from '../context.ts'
 import { asReporter } from '../draft.ts'
 import { HttpError, UpstreamError } from '../errors.ts'
+import { aiDay, aiMinute, sessionLimit } from '../limits.ts'
 import { chat, SCHEMA } from '../openai.ts'
 import { parse } from '../parse.ts'
 import { fill, prompts } from '../prompts.ts'
@@ -12,7 +13,7 @@ import type { ChatMessage, ReporterJson } from '../types.ts'
 
 export const reporterRouter = Router()
 
-const textBody = z.object({ text: z.string().trim().min(1, 'text required') })
+const textBody = z.object({ text: z.string().trim().min(1, 'text required').max(1000, 'text too long') })
 
 function modelMessages(system: string, messages: ChatMessage[], turns: ReporterJson[], text: string) {
   const opener = turns[0]
@@ -33,13 +34,13 @@ function modelMessages(system: string, messages: ChatMessage[], turns: ReporterJ
   return msgs
 }
 
-reporterRouter.post('/reporter/sessions', requireAuth, async (req, res) => {
+reporterRouter.post('/reporter/sessions', requireAuth, sessionLimit, async (req, res) => {
   const ctx = await loadContext(req.userId!)
   if (!ctx) throw new HttpError(401, 'unauthorized')
   res.json(await insertSession(req.userId!))
 })
 
-reporterRouter.post('/reporter/sessions/:id/messages', requireAuth, async (req, res) => {
+reporterRouter.post('/reporter/sessions/:id/messages', requireAuth, aiMinute, aiDay, async (req, res) => {
   const text = parse(textBody, req.body).text
   const session = await getSession(param(req, 'id'), req.userId!)
   if (!session) throw new HttpError(404, 'session not found')

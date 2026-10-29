@@ -12,13 +12,13 @@ export class HttpError extends Error {
 /** OpenAI failed or returned something we cannot store. The client sees a generic 502. */
 export class UpstreamError extends Error {}
 
-export const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
+export const errorHandler: ErrorRequestHandler = (err, req, res, _next) => {
   if (err instanceof HttpError) {
     res.status(err.status).json({ message: err.message })
     return
   }
   if (err instanceof UpstreamError) {
-    console.error(err)
+    req.log.error({ err })
     res.status(502).json({ message: 'reporter unavailable' })
     return
   }
@@ -26,6 +26,6 @@ export const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
     res.status(400).json({ message: err.issues[0]?.message ?? 'invalid' })
     return
   }
-  console.error(err)
+  req.log.error({ err })
   res.status(500).json({ message: 'internal error' })
 }

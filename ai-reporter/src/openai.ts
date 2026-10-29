@@ -1,6 +1,7 @@
 // Port of docs/ai-reporter/evals/lib/openai.mjs + schemas.mjs.
 // Strict json_schema, reasoning_effort low, one retry. Base URL is overridable for the test stub.
 import { UpstreamError } from './errors.ts'
+import { logger } from './log.ts'
 
 const KEY = process.env.OPENAI_API_KEY
 const BASE = (process.env.OPENAI_BASE_URL || 'https://api.openai.com').replace(/\/$/, '')
@@ -47,6 +48,7 @@ export interface ChatMessage {
 
 export async function chat(messages: ChatMessage[], name: string, props: Record<string, object>, attempt = 0): Promise<unknown> {
   if (!KEY) throw new UpstreamError('OPENAI_API_KEY missing')
+  const started = Date.now()
   const body = {
     model: MODEL,
     messages,
@@ -62,16 +64,21 @@ export async function chat(messages: ChatMessage[], name: string, props: Record<
       body: JSON.stringify(body),
     })
   } catch (err) {
+    logger.warn({ model: MODEL, name, ms: Date.now() - started, err }, 'openai error')
     throw new UpstreamError(err instanceof Error ? err.message : 'openai request failed')
   }
+  const ms = Date.now() - started
   if (!res.ok) {
     const t = await res.text()
     if (attempt < 1 && (res.status === 429 || res.status >= 500)) {
+      logger.warn({ model: MODEL, name, status: res.status, ms }, 'openai retry')
       await new Promise((s) => setTimeout(s, 3000))
       return chat(messages, name, props, 1)
     }
+    logger.warn({ model: MODEL, name, status: res.status, ms }, 'openai error')
     throw new UpstreamError(`${MODEL} ${res.status}: ${t.slice(0, 300)}`)
   }
+  logger.info({ model: MODEL, name, status: res.status, ms }, 'openai')
   const json = (await res.json()) as { choices?: { message?: { content?: string } }[] }
   const content = json.choices?.[0]?.message?.content
   if (!content) throw new UpstreamError('empty completion')

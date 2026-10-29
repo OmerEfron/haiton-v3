@@ -25,7 +25,7 @@ export const OPENER: ReporterJson = {
 }
 
 export function transcript(messages: ChatMessage[]) {
-  return messages.map((m) => `${m.role}: ${m.text}`).join('\n')
+  return messages.map((m) => `${m.role}: ${m.text.replace(/[\r\n\u2028\u2029]+/g, ' ')}`).join('\n')
 }
 
 export async function insertSession(userId: string) {

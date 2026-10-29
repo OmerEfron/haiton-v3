@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import multer from 'multer'
 import { z } from 'zod'
-import { COOKIE, cookieOpts, requireAuth } from '../auth.ts'
+import { COOKIE, cookieOpts, param, requireAuth } from '../auth.ts'
 import { pool } from '../db.ts'
 import { HttpError } from '../errors.ts'
 import { summary, type ArticleRow } from '../lib/articles.ts'
@@ -26,7 +26,7 @@ meRouter.patch('/me', auth, async (req, res) => {
   const year = new Date().getFullYear()
   const patch = parse(
     z.object({
-      name: z.string().trim().min(1, 'name required').optional(),
+      name: z.string().trim().min(1, 'name required').max(60, 'name too long').optional(),
       gender: z.enum(['male', 'female', 'other'], { error: 'invalid gender' }).optional(),
       birthYear: z
         .int('invalid birth year')
@@ -105,7 +105,7 @@ meRouter.get('/me/facts', auth, async (req, res) => {
 })
 
 meRouter.delete('/me/facts/:id', auth, async (req, res) => {
-  await pool.query('delete from facts where id = $1 and user_id = $2', [req.params.id, req.userId])
+  await pool.query('delete from facts where id = $1 and user_id = $2', [param(req, 'id'), req.userId])
   res.status(204).end()
 })
 
