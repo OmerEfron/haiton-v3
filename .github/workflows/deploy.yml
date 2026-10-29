@@ -49,8 +49,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only
-        working-directory: ${{ matrix.dir }}
+      # Repo root as build context: ai-reporter needs docs/ai-reporter/prompts.
+      - run: flyctl deploy --remote-only --config ${{ matrix.dir }}/fly.toml --dockerfile ${{ matrix.dir }}/Dockerfile
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 

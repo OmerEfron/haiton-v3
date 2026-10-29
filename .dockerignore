@@ -1,0 +1,6 @@
+*
+!backend/package*.json
+!backend/src
+!ai-reporter/package*.json
+!ai-reporter/src
+!docs/ai-reporter/prompts
