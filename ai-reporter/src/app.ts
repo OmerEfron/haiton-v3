@@ -9,7 +9,7 @@ import { reporterRouter } from './routes/reporter.ts'
 
 export function createApp() {
   const app = express()
-  if (process.env.TRUST_PROXY) app.set('trust proxy', 1)
+  if (process.env.TRUST_PROXY) app.set('trust proxy', Number(process.env.TRUST_PROXY))
   app.use(express.json({ limit: '1mb' }))
   app.use(cookieParser(cookieSecret()))
   app.use(httpLog)

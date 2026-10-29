@@ -1,0 +1,21 @@
+app = "haiton-api"
+primary_region = "fra"
+
+[env]
+  PORT = "4000"
+  TRUST_PROXY = "2" # Vercel -> Fly proxy
+  LOG_LEVEL = "info"
+
+[http_service]
+  internal_port = 4000
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+
+  [[http_service.checks]]
+    method = "GET"
+    path = "/api/health"
+    interval = "30s"
+    timeout = "5s"
+    grace_period = "10s"

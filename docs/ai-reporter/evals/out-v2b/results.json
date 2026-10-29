@@ -1,0 +1,2731 @@
+[
+ {
+  "id": "maya_tahini",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?"
+   },
+   {
+    "role": "user",
+    "text": "כמעט שפכתי על עצמי רוטב טחינה בהפסקת צהריים במשרד, זה נפל על הרצפה"
+   },
+   {
+    "role": "reporter",
+    "text": "מי במשרד ראה את הטחינה נופלת, ומה אמר?"
+   },
+   {
+    "role": "user",
+    "text": "לא ממש זוכרת מי ראה, ולא זוכרת שמישהו אמר משהו."
+   },
+   {
+    "role": "reporter",
+    "text": "איך הטחינה הגיעה לרצפה?"
+   },
+   {
+    "role": "user",
+    "text": "היא נפלה לי בזמן שאכלתי שווארמה ואורז בהפסקת הצהריים."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "Office lunch near miss: Maya escaped the tahini, the floor did not",
+    "articleType": "quirky"
+   },
+   {
+    "angle": "Tahini missed Maya at office lunch; the spill itself may hold the punchline",
+    "articleType": "quirky"
+   },
+   {
+    "angle": "Office lunch near miss: tahini landed on the floor instead of Maya",
+    "articleType": "quirky"
+   }
+  ],
+  "articleType": "quirky",
+  "angle": "Office lunch near miss: tahini landed on the floor instead of Maya",
+  "draft": {
+   "headline": "בהפסקת הצהריים: הטחינה נפלה על הרצפה במקום על מאיה",
+   "sub": "היא אכלה שווארמה ואורז במשרד, וכמעט שפכה על עצמה את הרוטב",
+   "summary": "רוטב טחינה נפל למאיה כהן על הרצפה בזמן ארוחת צהריים במשרד.",
+   "body": [
+    "רוטב הטחינה של מאיה כהן נפל על הרצפה במשרד, אחרי שכמעט נשפך עליה.",
+    "היא אכלה שווארמה ואורז בהפסקת הצהריים. \"כמעט שפכתי על עצמי רוטב טחינה בהפסקת צהריים במשרד, זה נפל על הרצפה\", סיפרה."
+   ],
+   "flash": "מאיה כהן הפילה רוטב טחינה על הרצפה בהפסקת הצהריים במשרד",
+   "push": "הטחינה נפלה לרצפה, מאיה נשארה מחוץ לטווח",
+   "usedFacts": [],
+   "newFacts": []
+  },
+  "typeOk": true,
+  "checks": {
+   "reporter": [],
+   "draft": []
+  },
+  "revisions": {
+   "funnier": {
+    "draft": {
+     "headline": "תקרית בצהריים: הטחינה נפלה על הרצפה, לא על מאיה",
+     "sub": "במהלך ארוחת שווארמה ואורז במשרד, הרוטב כמעט נשפך עליה והגיע לרצפה",
+     "summary": "מאיה כהן כמעט שפכה על עצמה טחינה בארוחת צהריים במשרד, אך הרוטב נפל על הרצפה",
+     "body": [
+      "הטחינה הגיעה לרצפה במשרד, ולא למאיה כהן. היא נפלה לה בזמן שאכלה שווארמה ואורז בהפסקת הצהריים",
+      "\"כמעט שפכתי על עצמי רוטב טחינה בהפסקת צהריים במשרד, זה נפל על הרצפה\", סיפרה"
+     ],
+     "flash": "רוטב טחינה נפל למאיה כהן על הרצפה בארוחת הצהריים במשרד",
+     "push": "הטחינה פספסה את מאיה, הרצפה לא",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "dramatic": {
+    "draft": {
+     "headline": "כמעט על מאיה: רוטב הטחינה סיים את דרכו על רצפת המשרד",
+     "sub": "באמצע השווארמה והאורז בהפסקת הצהריים, הרוטב נפל לה מהידיים כמעט עליה, אבל הגיע לרצפה",
+     "summary": "מאיה כהן כמעט שפכה על עצמה טחינה בזמן ארוחת צהריים במשרד, והרוטב נפל לרצפה",
+     "body": [
+      "הטחינה נפלה לרצפה, ולא על מאיה כהן. זה קרה בזמן שאכלה שווארמה ואורז בהפסקת הצהריים במשרד",
+      "\"כמעט שפכתי על עצמי רוטב טחינה בהפסקת צהריים במשרד, זה נפל על הרצפה\", סיפרה"
+     ],
+     "flash": "מאיה כהן כמעט שפכה על עצמה טחינה במשרד, הרוטב נפל לרצפה",
+     "push": "מאיה כמעט ספגה את הטחינה: הרוטב נחת במקום אחר",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "restrained": {
+    "draft": {
+     "headline": "בארוחת הצהריים במשרד: מאיה הפילה רוטב טחינה על הרצפה",
+     "sub": "הרוטב כמעט נשפך עליה בזמן שאכלה שווארמה ואורז",
+     "summary": "מאיה כהן הפילה רוטב טחינה על הרצפה בהפסקת הצהריים במשרד",
+     "body": [
+      "מאיה כהן הפילה רוטב טחינה על הרצפה בהפסקת הצהריים במשרד. הרוטב כמעט נשפך עליה",
+      "היא אכלה שווארמה ואורז כשהטחינה נפלה"
+     ],
+     "flash": "מאיה כהן הפילה טחינה על הרצפה במהלך ארוחה במשרד",
+     "push": "מאיה כמעט שפכה על עצמה רוטב טחינה",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "concise": {
+    "draft": {
+     "headline": "כמעט על מאיה: הטחינה נחתה על רצפת המשרד",
+     "sub": "רוטב הטחינה נפל בזמן שאכלה שווארמה ואורז בהפסקת הצהריים",
+     "summary": "מאיה כהן כמעט שפכה על עצמה טחינה במשרד, אך הרוטב נפל לרצפה",
+     "body": [
+      "הטחינה נפלה על רצפת המשרד במקום על מאיה כהן, שכמעט שפכה אותה על עצמה",
+      "\"היא נפלה לי בזמן שאכלתי שווארמה ואורז בהפסקת הצהריים.\", סיפרה"
+     ],
+     "flash": "מאיה כהן הפילה טחינה על רצפת המשרד",
+     "push": "הטחינה נפלה לרצפה במקום על מאיה",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "headline": {
+    "draft": {
+     "headline": "מאיה כמעט ספגה את הטחינה, הרוטב נפל על רצפת המשרד",
+     "sub": "היא אכלה שווארמה ואורז במשרד, וכמעט שפכה על עצמה את הרוטב",
+     "summary": "רוטב טחינה נפל למאיה כהן על הרצפה בזמן ארוחת צהריים במשרד.",
+     "body": [
+      "רוטב הטחינה של מאיה כהן נפל על הרצפה במשרד, אחרי שכמעט נשפך עליה.",
+      "היא אכלה שווארמה ואורז בהפסקת הצהריים. \"כמעט שפכתי על עצמי רוטב טחינה בהפסקת צהריים במשרד, זה נפל על הרצפה\", סיפרה."
+     ],
+     "flash": "מאיה כהן הפילה רוטב טחינה על הרצפה בהפסקת הצהריים במשרד",
+     "push": "הטחינה נפלה לרצפה, מאיה נשארה מחוץ לטווח",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "alternate": {
+    "draft": {
+     "headline": "השווארמה והאורז נשארו בארוחה: הטחינה של מאיה נפלה לרצפה",
+     "sub": "בהפסקת הצהריים במשרד הרוטב כמעט נשפך עליה. \"זה נפל על הרצפה\", סיפרה",
+     "summary": "מאיה כהן כמעט שפכה על עצמה טחינה בזמן שאכלה שווארמה ואורז במשרד, והרוטב נפל לרצפה",
+     "body": [
+      "הטחינה נפלה לרצפה ולא על מאיה כהן, שאכלה שווארמה ואורז בהפסקת הצהריים במשרד",
+      "\"כמעט שפכתי על עצמי רוטב טחינה בהפסקת צהריים במשרד, זה נפל על הרצפה\", סיפרה"
+     ],
+     "flash": "רוטב טחינה נפל למאיה כהן לרצפה בזמן ארוחת צהריים במשרד",
+     "push": "מאיה כמעט שפכה על עצמה טחינה, הרוטב נפל לרצפה",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "type": {
+    "draft": {
+     "headline": "כמעט שפכתי על עצמי טחינה: הרוטב נחת על הרצפה",
+     "sub": "אכלתי שווארמה ואורז בהפסקת הצהריים במשרד, והטחינה נפלה לי",
+     "summary": "מאיה כהן כמעט שפכה על עצמה טחינה בזמן ארוחת צהריים במשרד, והרוטב נפל על הרצפה",
+     "body": [
+      "כמעט שפכתי על עצמי רוטב טחינה בהפסקת הצהריים במשרד",
+      "אכלתי שווארמה ואורז כשהטחינה נפלה לי. היא נפלה על הרצפה, לא עליי"
+     ],
+     "flash": "מאיה כהן כמעט שפכה על עצמה טחינה, שנפלה לרצפה במשרד",
+     "push": "כמעט שפכתי על עצמי טחינה, היא נחתה על הרצפה",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   }
+  },
+  "judge": {
+   "israeli_feel": 4,
+   "human_feel": 3,
+   "hebrew_correctness": 5,
+   "gender_agreement": 5,
+   "type_fit": 3,
+   "interview_quality": 2,
+   "story_fidelity": true,
+   "question_presumes": false,
+   "buried_fact_surfaced": false,
+   "problems": [
+    "\"מי במשרד ראה את הטחינה נופלת, ומה אמר?\" chases a peripheral witness rather than the stakes of the near miss.",
+    "\"איך הטחינה הגיעה לרצפה?\" yields little beyond the already established spill; the questions miss the new-shirt connection.",
+    "\"רוטב הטחינה של מאיה כהן נפל על הרצפה במשרד\" repeats the headline and summary without developing the quirky angle.",
+    "\"מאיה נשארה מחוץ לטווח\" is a strained hook for a minor spill."
+   ]
+  }
+ },
+ {
+  "id": "orit_cake",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?"
+   },
+   {
+    "role": "user",
+    "text": "אפיתי היום עוגת שמרים לפי המתכון מהיומן של סבתא"
+   },
+   {
+    "role": "reporter",
+    "text": "פעם ראשונה שאת אופה מהיומן של סבתא?"
+   },
+   {
+    "role": "user",
+    "text": "לא ממש בטוחה."
+   },
+   {
+    "role": "reporter",
+    "text": "מה גרם לך לבחור היום במתכון של סבתא?"
+   },
+   {
+    "role": "user",
+    "text": "לא יודעת, פשוט בחרתי בו היום."
+   },
+   {
+    "role": "reporter",
+    "text": "ועוגת השמרים, תפחה כמו שצריך?"
+   },
+   {
+    "role": "user",
+    "text": "כן, הבצק תפח בדיוק כמו שסבתא תיארה."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "Grandmother's handwritten recipe returns to the oven",
+    "articleType": "feature"
+   },
+   {
+    "angle": "A recipe from grandma's diary prompted today's baking",
+    "articleType": "feature"
+   },
+   {
+    "angle": "An ordinary baking day using grandma's diary recipe; result still unknown",
+    "articleType": "feature"
+   },
+   {
+    "angle": "Grandma's diary instructions matched today's dough, just as written",
+    "articleType": "news_brief"
+   }
+  ],
+  "articleType": "news_brief",
+  "angle": "Grandma's diary instructions matched today's dough, just as written",
+  "draft": {
+   "headline": "לפי היומן של סבתא: אורית אפתה והבצק תפח בדיוק כמתואר",
+   "sub": "אורית בחרה היום במתכון לעוגת שמרים מהיומן. \"הבצק תפח בדיוק כמו שסבתא תיארה\", סיפרה",
+   "summary": "אורית שמש אפתה היום עוגת שמרים לפי מתכון מיומנה של סבתה.",
+   "body": [
+    "אורית שמש אפתה היום עוגת שמרים לפי המתכון מהיומן של סבתה. הבצק תפח בהתאם לתיאור שהופיע בו.",
+    "\"כן, הבצק תפח בדיוק כמו שסבתא תיארה\", סיפרה."
+   ],
+   "flash": "אורית שמש אפתה עוגת שמרים לפי המתכון ביומן של סבתה",
+   "push": "אורית בדקה במטבח: הבצק תפח בדיוק כמו שסבתא תיארה",
+   "usedFacts": [],
+   "newFacts": []
+  },
+  "typeOk": false,
+  "checks": {
+   "reporter": [],
+   "draft": []
+  },
+  "revisions": {
+   "funnier": {
+    "draft": {
+     "headline": "היומן תיאר, הבצק תפח: אורית אפתה עוגת שמרים של סבתא",
+     "sub": "אורית בחרה היום במתכון מהיומן של סבתה. גם שלב התפיחה התנהל לפי הכתוב",
+     "summary": "אורית שמש אפתה היום עוגת שמרים מיומנה של סבתה, והבצק תפח כפי שתואר בו",
+     "body": [
+      "אורית שמש אפתה היום עוגת שמרים לפי המתכון מהיומן של סבתה. התיאור ביומן התאים לתפיחת הבצק במטבח שלה",
+      "\"כן, הבצק תפח בדיוק כמו שסבתא תיארה\", סיפרה"
+     ],
+     "flash": "אורית שמש אפתה עוגת שמרים לפי המתכון ביומן של סבתה",
+     "push": "סבתא תיארה, הבצק תפח",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "dramatic": {
+    "draft": {
+     "headline": "היומן של סבתא, הבצק של אורית: התיאור מהמתכון התממש במטבח",
+     "sub": "אורית בחרה היום לאפות עוגת שמרים מהיומן של סבתה. כשהבצק תפח, התברר שהתיאור הכתוב היה מדויק",
+     "summary": "אורית שמש אפתה היום עוגת שמרים מיומנה של סבתה, והבצק תפח בדיוק כפי שתואר בו",
+     "body": [
+      "אורית שמש אפתה היום עוגת שמרים לפי מתכון מהיומן של סבתה. גם תפיחת הבצק תאמה את התיאור ביומן",
+      "\"כן, הבצק תפח בדיוק כמו שסבתא תיארה\", סיפרה"
+     ],
+     "flash": "אורית שמש אפתה עוגת שמרים לפי מתכון מהיומן של סבתה",
+     "push": "אורית אפתה מהיומן של סבתא: ואז הבצק תפח בדיוק כמתואר",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "restrained": {
+    "draft": {
+     "headline": "אורית אפתה היום עוגת שמרים לפי מתכון מהיומן של סבתה",
+     "sub": "הבצק תפח בדיוק כפי שסבתה תיארה ביומן המתכונים",
+     "summary": "אורית שמש אפתה עוגת שמרים ממתכון ביומן של סבתה, והבצק תפח כמתואר בו",
+     "body": [
+      "אורית שמש אפתה היום עוגת שמרים. היא השתמשה במתכון מהיומן של סבתה",
+      "\"כן, הבצק תפח בדיוק כמו שסבתא תיארה\", סיפרה"
+     ],
+     "flash": "אורית שמש אפתה היום עוגת שמרים ממתכון של סבתה",
+     "push": "הבצק של אורית תפח כפי שתואר ביומן של סבתה",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "concise": {
+    "draft": {
+     "headline": "המתכון מהיומן: הבצק של אורית תפח כמו שסבתא תיארה",
+     "sub": "אורית אפתה היום עוגת שמרים לפי המתכון מיומנה של סבתה",
+     "summary": "אורית אפתה עוגת שמרים מהיומן של סבתה, והבצק תפח כמתואר בו",
+     "body": [
+      "אורית שמש אפתה היום עוגת שמרים לפי המתכון ביומן של סבתה.",
+      "\"כן, הבצק תפח בדיוק כמו שסבתא תיארה\", סיפרה."
+     ],
+     "flash": "אורית שמש אפתה עוגת שמרים מהיומן של סבתה",
+     "push": "הבצק של אורית תפח בדיוק כמתואר ביומן",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "headline": {
+    "draft": {
+     "headline": "\"כן, הבצק תפח בדיוק כמו שסבתא תיארה\": אורית אפתה מהיומן",
+     "sub": "אורית בחרה היום במתכון לעוגת שמרים מהיומן. \"הבצק תפח בדיוק כמו שסבתא תיארה\", סיפרה",
+     "summary": "אורית שמש אפתה היום עוגת שמרים לפי מתכון מיומנה של סבתה.",
+     "body": [
+      "אורית שמש אפתה היום עוגת שמרים לפי המתכון מהיומן של סבתה. הבצק תפח בהתאם לתיאור שהופיע בו.",
+      "\"כן, הבצק תפח בדיוק כמו שסבתא תיארה\", סיפרה."
+     ],
+     "flash": "אורית שמש אפתה עוגת שמרים לפי המתכון ביומן של סבתה",
+     "push": "אורית בדקה במטבח: הבצק תפח בדיוק כמו שסבתא תיארה",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "alternate": {
+    "draft": {
+     "headline": "מהיומן לתנור: אורית אפתה עוגת שמרים לפי המתכון של סבתא",
+     "sub": "גם תיאור התפיחה התאים לבצק שהכינה היום: \"כן, הבצק תפח בדיוק כמו שסבתא תיארה\", סיפרה",
+     "summary": "אורית שמש הכינה עוגת שמרים ממתכון ביומן של סבתה, והבצק תפח כפי שתואר בו",
+     "body": [
+      "אורית שמש בחרה היום במתכון לעוגת שמרים מהיומן של סבתה ואפתה לפיו",
+      "תיאור התפיחה ביומן התאים לתוצאה במטבח. \"כן, הבצק תפח בדיוק כמו שסבתא תיארה\", סיפרה"
+     ],
+     "flash": "אורית שמש אפתה היום עוגת שמרים ממתכון ביומן סבתה",
+     "push": "אורית אפתה מהיומן: התפיחה תאמה לתיאור של סבתא",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "type": {
+    "draft": {
+     "headline": "אפיתי מהיומן של סבתא: הבצק תפח בדיוק כמו שתיארה",
+     "sub": "היום בחרתי במתכון לעוגת שמרים מהיומן של סבתא, ואפיתי לפיו",
+     "summary": "אורית שמש אפתה היום עוגת שמרים מהיומן של סבתה, והבצק תפח בדיוק כפי שסבתה תיארה",
+     "body": [
+      "אפיתי היום עוגת שמרים לפי המתכון מהיומן של סבתא",
+      "הבצק תפח בדיוק כמו שסבתא תיארה"
+     ],
+     "flash": "אורית שמש אפתה מהיומן של סבתה והבצק תפח כמתואר",
+     "push": "פתחתי את היומן של סבתא ואפיתי עוגת שמרים",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   }
+  },
+  "judge": {
+   "israeli_feel": 3,
+   "human_feel": 2,
+   "hebrew_correctness": 5,
+   "gender_agreement": 5,
+   "type_fit": 3,
+   "interview_quality": 2,
+   "story_fidelity": true,
+   "question_presumes": false,
+   "buried_fact_surfaced": false,
+   "problems": [
+    "\"מה גרם לך לבחור היום במתכון של סבתא?\" is a generic motivation question that misses the diary's specific potential.",
+    "\"תפחה כמו שצריך?\" gets a basic outcome but is not followed up to uncover the distinctive recipe detail.",
+    "\"אורית אפתה והבצק תפח בדיוק כמתואר\" is a flat, mechanical headline rather than a compelling personal-news angle.",
+    "\"כן, הבצק תפח בדיוק כמו שסבתא תיארה\" repeats the preceding sentence without adding information; the same detail dominates the headline, sub and push."
+   ]
+  }
+ },
+ {
+  "id": "omri_quiet",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?"
+   },
+   {
+    "role": "user",
+    "text": "היתה לי משמרת שקטה בתחנה, אף אחד לא התקשר"
+   },
+   {
+    "role": "reporter",
+    "text": "מתי הייתה לך לאחרונה משמרת בלי שיחה אחת?"
+   },
+   {
+    "role": "user",
+    "text": "אחרי שבוע שלם של תיקים בלי הפסקה."
+   },
+   {
+    "role": "reporter",
+    "text": "אז מה עשית במשמרת כשהטלפון שתק?"
+   },
+   {
+    "role": "user",
+    "text": "ישבנו בתחנה וראינו סרט, פעם ראשונה מתחילת השנה."
+   },
+   {
+    "role": "reporter",
+    "text": "איזה סרט ראיתם בתחנה?"
+   },
+   {
+    "role": "user",
+    "text": "לא זוכר."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "A police shift with no calls, potentially a rare first.",
+    "articleType": "feature"
+   },
+   {
+    "angle": "A silent police shift breaks a week of nonstop cases.",
+    "articleType": "feature"
+   },
+   {
+    "angle": "After a relentless week, a call-free shift finally allowed the year's first station movie.",
+    "articleType": "feature"
+   },
+   {
+    "angle": "After nonstop cases, the year's first station movie mattered more than its forgettable title.",
+    "articleType": "feature"
+   }
+  ],
+  "articleType": "feature",
+  "angle": "After nonstop cases, the year's first station movie mattered more than its forgettable title.",
+  "draft": {
+   "headline": "אחרי שבוע של תיקים: עמרי ראה סרט בתחנה לראשונה השנה",
+   "sub": "במשמרת השקטה לא התקבלה אפילו שיחת טלפון אחת. \"ישבנו בתחנה וראינו סרט, פעם ראשונה מתחילת השנה\", סיפר",
+   "summary": "עמרי דהן צפה עם אחרים בסרט בתחנה במשמרת ללא שיחות, אחרי שבוע של תיקים בלי הפסקה.",
+   "body": [
+    "הטלפון בתחנה לא צלצל במשמרת של עמרי דהן. אחרי שבוע שלם של תיקים בלי הפסקה, השוטר ישב עם האחרים וצפה בסרט.",
+    "\"ישבנו בתחנה וראינו סרט, פעם ראשונה מתחילת השנה\", סיפר עמרי."
+   ],
+   "flash": "עמרי דהן עבר משמרת שקטה בתחנה ללא שיחת טלפון אחת",
+   "push": "הטלפון שתק: עמרי ראה סרט ראשון השנה בתחנה",
+   "usedFacts": [
+    "עבודה"
+   ],
+   "newFacts": []
+  },
+  "typeOk": true,
+  "checks": {
+   "reporter": [],
+   "draft": []
+  },
+  "revisions": {
+   "funnier": {
+    "draft": {
+     "headline": "אפס שיחות, סרט אחד: עמרי עבר משמרת שקטה בתחנה",
+     "sub": "אחרי שבוע שלם של תיקים בלי הפסקה, התפנה מקום לסרט בתחנה, לראשונה מתחילת השנה",
+     "summary": "עמרי דהן צפה בסרט בתחנה במשמרת ללא שיחות, אחרי שבוע של תיקים בלי הפסקה",
+     "body": [
+      "במשמרת של עמרי דהן לא התקבלה אפילו שיחת טלפון אחת. השוטר והאחרים ישבו בתחנה וראו סרט.",
+      "המשמרת השקטה הגיעה אחרי שבוע שלם של תיקים בלי הפסקה. \"ישבנו בתחנה וראינו סרט, פעם ראשונה מתחילת השנה\", סיפר עמרי."
+     ],
+     "flash": "עמרי דהן צפה בסרט בתחנה במשמרת ללא שיחות",
+     "push": "איש לא התקשר: עמרי והאחרים הספיקו לראות סרט",
+     "usedFacts": [
+      "עבודה"
+     ],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "dramatic": {
+    "draft": {
+     "headline": "אחרי התיקים, הטלפון שתק: עמרי והסרט הראשון השנה בתחנה",
+     "sub": "שבוע שלם של תיקים בלי הפסקה הסתיים במשמרת ללא שיחה אחת. הפעם, בתחנה התפנה מקום גם לסרט",
+     "summary": "אחרי שבוע של תיקים בלי הפסקה, עמרי דהן צפה בסרט בתחנה במשמרת ללא שיחות",
+     "body": [
+      "אף אחד לא התקשר לתחנה במשמרת של עמרי דהן. אחרי שבוע שלם של תיקים בלי הפסקה, השוטר עבר משמרת שקטה.",
+      "השקט הזה כלל גם צפייה בסרט בתחנה, לראשונה מתחילת השנה. \"ישבנו בתחנה וראינו סרט, פעם ראשונה מתחילת השנה\", סיפר עמרי"
+     ],
+     "flash": "עמרי דהן צפה בסרט בתחנה במשמרת ללא שיחות",
+     "push": "אחרי שבוע של תיקים: הטלפון של עמרי סוף סוף שתק",
+     "usedFacts": [
+      "עבודה"
+     ],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "restrained": {
+    "draft": {
+     "headline": "ללא שיחות במשמרת: עמרי צפה בסרט בתחנה לראשונה השנה",
+     "sub": "המשמרת ללא שיחות הטלפון הגיעה אחרי שבוע שלם של תיקים בלי הפסקה",
+     "summary": "עמרי דהן צפה בסרט בתחנה במהלך משמרת ללא שיחות טלפון",
+     "body": [
+      "עמרי דהן, שוטר, עבר משמרת בתחנה ללא שיחת טלפון אחת. המשמרת הגיעה אחרי שבוע שלם של תיקים בלי הפסקה",
+      "\"ישבנו בתחנה וראינו סרט, פעם ראשונה מתחילת השנה\", סיפר עמרי"
+     ],
+     "flash": "עמרי דהן צפה בסרט בתחנה במהלך משמרת ללא שיחות",
+     "push": "עמרי עבר משמרת ללא שיחת טלפון אחת",
+     "usedFacts": [
+      "עבודה"
+     ],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "concise": {
+    "draft": {
+     "headline": "בלי שיחה אחת: עמרי התפנה לסרט ראשון השנה בתחנה",
+     "sub": "המשמרת השקטה הגיעה אחרי שבוע שלם של תיקים בלי הפסקה",
+     "summary": "עמרי דהן צפה בסרט בתחנה במשמרת ללא שיחות",
+     "body": [
+      "הטלפון לא צלצל במשמרת של השוטר עמרי דהן, אחרי שבוע של תיקים בלי הפסקה.",
+      "\"ישבנו בתחנה וראינו סרט, פעם ראשונה מתחילת השנה\", סיפר."
+     ],
+     "flash": "עמרי דהן צפה בסרט במשמרת שקטה",
+     "push": "הטלפון שתק, עמרי צפה בסרט",
+     "usedFacts": [
+      "עבודה"
+     ],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "headline": {
+    "draft": {
+     "headline": "הטלפון שתק ועמרי ראה סרט בתחנה לראשונה מתחילת השנה",
+     "sub": "במשמרת השקטה לא התקבלה אפילו שיחת טלפון אחת. \"ישבנו בתחנה וראינו סרט, פעם ראשונה מתחילת השנה\", סיפר",
+     "summary": "עמרי דהן צפה עם אחרים בסרט בתחנה במשמרת ללא שיחות, אחרי שבוע של תיקים בלי הפסקה.",
+     "body": [
+      "הטלפון בתחנה לא צלצל במשמרת של עמרי דהן. אחרי שבוע שלם של תיקים בלי הפסקה, השוטר ישב עם האחרים וצפה בסרט.",
+      "\"ישבנו בתחנה וראינו סרט, פעם ראשונה מתחילת השנה\", סיפר עמרי."
+     ],
+     "flash": "עמרי דהן עבר משמרת שקטה בתחנה ללא שיחת טלפון אחת",
+     "push": "הטלפון שתק: עמרי ראה סרט ראשון השנה בתחנה",
+     "usedFacts": [
+      "עבודה"
+     ],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "alternate": {
+    "draft": {
+     "headline": "בלי שיחה אחת במשמרת: עמרי והאחרים התפנו לסרט בתחנה",
+     "sub": "אחרי שבוע שלם של תיקים בלי הפסקה, השוטר צפה עם האחרים בסרט בתחנה, לראשונה מתחילת השנה",
+     "summary": "במשמרת של עמרי דהן לא התקבלה אף שיחה, והוא צפה עם האחרים בסרט בתחנה לראשונה מתחילת השנה",
+     "body": [
+      "עמרי דהן והאחרים ישבו בתחנה וראו סרט. באותה משמרת איש לא התקשר, אחרי שבוע שלם של תיקים בלי הפסקה.",
+      "זו הייתה הפעם הראשונה מתחילת השנה שבה צפו בסרט בתחנה. \"היתה לי משמרת שקטה בתחנה, אף אחד לא התקשר\", סיפר השוטר"
+     ],
+     "flash": "עמרי דהן צפה עם האחרים בסרט בתחנה לראשונה מתחילת השנה",
+     "push": "אחרי שבוע של תיקים: הטלפון בתחנה שתק",
+     "usedFacts": [
+      "עבודה"
+     ],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "type": {
+    "draft": {
+     "headline": "אחרי שבוע בלי הפסקה: במשמרת שלי היה מקום לסרט",
+     "sub": "אף אחד לא התקשר לתחנה במהלך המשמרת השקטה, וישבנו לראות סרט בפעם הראשונה מתחילת השנה",
+     "summary": "עמרי דהן עבר משמרת ללא שיחות וצפה בסרט בתחנה אחרי שבוע של תיקים בלי הפסקה",
+     "body": [
+      "היתה לי משמרת שקטה בתחנה, אף אחד לא התקשר. זה קרה אחרי שבוע שלם של תיקים בלי הפסקה",
+      "ישבנו בתחנה וראינו סרט, פעם ראשונה מתחילת השנה"
+     ],
+     "flash": "עמרי דהן צפה בסרט בתחנה במשמרת שבה לא התקבלו שיחות",
+     "push": "אחרי שבוע של תיקים, ישבנו בתחנה וראינו סרט",
+     "usedFacts": [
+      "עבודה"
+     ],
+     "newFacts": []
+    },
+    "checks": []
+   }
+  },
+  "judge": {
+   "israeli_feel": 4,
+   "human_feel": 4,
+   "hebrew_correctness": 5,
+   "gender_agreement": 5,
+   "type_fit": 3,
+   "interview_quality": 4,
+   "story_fidelity": true,
+   "question_presumes": false,
+   "buried_fact_surfaced": true,
+   "problems": [
+    "\"ישבנו בתחנה וראינו סרט, פעם ראשונה מתחילת השנה\" is repeated in the sub and body without adding depth.",
+    "\"עמרי ראה סרט ראשון השנה בתחנה\" is awkward and less precise than saying this was the first station movie session of the year.",
+    "\"לא זוכר\" is the revealing answer the story omits; the miniature feature lacks a kicker."
+   ]
+  }
+ },
+ {
+  "id": "shlomo_faucet",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?"
+   },
+   {
+    "role": "user",
+    "text": "היום סוף סוף תיקנתי לבד את הברז במטבח, הוא מטפטף כבר חודשיים"
+   },
+   {
+    "role": "reporter",
+    "text": "מה גרם לך לתקן את הברז דווקא היום?"
+   },
+   {
+    "role": "user",
+    "text": "לא יודע, היום פשוט החלטתי לנסות."
+   },
+   {
+    "role": "reporter",
+    "text": "מה בסוף היה צריך לתקן בברז?"
+   },
+   {
+    "role": "user",
+    "text": "ראיתי סרטון ביוטיוב והחלפתי גומייה."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "Two months of dripping ended with a do-it-yourself repair.",
+    "articleType": "feature"
+   },
+   {
+    "angle": "After two months of dripping, a spontaneous DIY attempt solved the problem.",
+    "articleType": "feature"
+   },
+   {
+    "angle": "Two months of dripping ended with a YouTube video and one replacement washer.",
+    "articleType": "feature"
+   }
+  ],
+  "articleType": "feature",
+  "angle": "Two months of dripping ended with a YouTube video and one replacement washer.",
+  "draft": {
+   "headline": "אחרי חודשיים של טפטוף: שלמה תיקן לבד את הברז במטבח",
+   "sub": "סרטון ביוטיוב והחלפת גומייה הספיקו לתיקון. \"היום פשוט החלטתי לנסות\", סיפר שלמה",
+   "summary": "שלמה אוחיון תיקן בעצמו את הברז במטבח לאחר שטפטף במשך חודשיים.",
+   "body": [
+    "היום ניגש שלמה אוחיון לברז במטבח שטפטף כבר חודשיים, ותיקן אותו לבד. הוא צפה בסרטון ביוטיוב והחליף גומייה.",
+    "\"היום פשוט החלטתי לנסות\", סיפר."
+   ],
+   "flash": "שלמה אוחיון החליף גומייה ותיקן את הברז במטבח",
+   "push": "שלמה עצר חודשיים של טפטוף בעזרת סרטון ביוטיוב",
+   "usedFacts": [],
+   "newFacts": []
+  },
+  "typeOk": true,
+  "checks": {
+   "reporter": [
+    "repeated opener word: מה בסוף היה צריך לתקן בברז?"
+   ],
+   "draft": []
+  },
+  "revisions": {},
+  "judge": {
+   "israeli_feel": 4,
+   "human_feel": 4,
+   "hebrew_correctness": 5,
+   "gender_agreement": 5,
+   "type_fit": 3,
+   "interview_quality": 3,
+   "story_fidelity": true,
+   "question_presumes": false,
+   "buried_fact_surfaced": false,
+   "problems": [
+    "The feature body is underdeveloped: \"היום פשוט החלטתי לנסות\" repeats the sub rather than providing a meaningful kicker.",
+    "\"מה גרם לך לתקן את הברז דווקא היום?\" gets a vague answer, but the reporter never follows up on the two-month delay."
+   ]
+  }
+ },
+ {
+  "id": "gym_squat",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?"
+   },
+   {
+    "role": "user",
+    "text": "שברתי שיא אישי בסקוואט היום"
+   },
+   {
+    "role": "reporter",
+    "text": "כמה קילו, ומה היה השיא הקודם?"
+   },
+   {
+    "role": "user",
+    "text": "100 קילו, את השיא הקודם אני לא זוכר."
+   },
+   {
+    "role": "reporter",
+    "text": "כמה זמן לקח לך להגיע ל־100 קילו?"
+   },
+   {
+    "role": "user",
+    "text": "חצי שנה של אימונים כל יום בשש בבוקר."
+   },
+   {
+    "role": "reporter",
+    "text": "ומה עשית מיד אחרי שהצלחת להרים 100?"
+   },
+   {
+    "role": "user",
+    "text": "הסתכלתי על המשקולות ולא האמנתי."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "New squat personal best; size of the improvement is the lead",
+    "articleType": "sports_report"
+   },
+   {
+    "angle": "Reaching the 100-kilogram squat milestone",
+    "articleType": "sports_report"
+   },
+   {
+    "angle": "Six months of daily 6 a.m. training culminate in a 100-kilogram squat",
+    "articleType": "sports_report"
+   },
+   {
+    "angle": "Six months of 6 a.m. training end with 100 kilograms and a disbelieving stare",
+    "articleType": "sports_report"
+   }
+  ],
+  "articleType": "sports_report",
+  "angle": "Six months of 6 a.m. training end with 100 kilograms and a disbelieving stare",
+  "draft": {
+   "headline": "חצי שנה בשש בבוקר: שחר שבר שיא בסקוואט עם 100 קילו",
+   "sub": "אחרי אימונים בכל יום, הוא עצר מול המשקולות: \"הסתכלתי על המשקולות ולא האמנתי\", סיפר",
+   "summary": "שחר לוי שבר היום שיא אישי בסקוואט כשהרים 100 קילו, אחרי חצי שנה של אימונים.",
+   "body": [
+    "שחר לוי שבר היום שיא אישי בסקוואט כשהרים 100 קילו.",
+    "הוא הגיע למשקל הזה אחרי חצי שנה של אימונים בכל יום בשש בבוקר.",
+    "\"הסתכלתי על המשקולות ולא האמנתי\", סיפר על מה שעשה מיד אחרי ההרמה."
+   ],
+   "flash": "שחר לוי הרים 100 קילו בסקוואט ושבר שיא אישי",
+   "push": "שחר הרים 100 קילו: \"הסתכלתי על המשקולות ולא האמנתי\"",
+   "usedFacts": [],
+   "newFacts": [
+    {
+     "k": "תחביב",
+     "v": "אימוני כוח"
+    }
+   ]
+  },
+  "typeOk": true,
+  "checks": {
+   "reporter": [
+    "repeated opener word: כמה זמן לקח לך להגיע ל־100 קילו?"
+   ],
+   "draft": []
+  },
+  "revisions": {},
+  "judge": {
+   "israeli_feel": 4,
+   "human_feel": 4,
+   "hebrew_correctness": 5,
+   "gender_agreement": 5,
+   "type_fit": 4,
+   "interview_quality": 4,
+   "story_fidelity": false,
+   "question_presumes": false,
+   "buried_fact_surfaced": false,
+   "problems": [
+    "\"הוא עצר מול המשקולות\" adds a physical action not stated by the user.",
+    "\"שחר לוי שבר היום שיא אישי בסקוואט כשהרים 100 קילו\" repeats the summary verbatim in the body, making the short report feel mechanical."
+   ]
+  }
+ },
+ {
+  "id": "football_goal",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?"
+   },
+   {
+    "role": "user",
+    "text": "הבקעתי היום בליגת השכונה מחצי מגרש"
+   },
+   {
+    "role": "reporter",
+    "text": "מחצי מגרש, כיוונת לשער או שזו הייתה מסירה?"
+   },
+   {
+    "role": "user",
+    "text": "כיוונתי לשער, אבל אף אחד לא האמין שזה ייכנס."
+   },
+   {
+    "role": "reporter",
+    "text": "ומה אמרו במגרש כשהכדור נכנס?"
+   },
+   {
+    "role": "user",
+    "text": "כולם היו בהלם, גם אני."
+   },
+   {
+    "role": "reporter",
+    "text": "כמה הייתה התוצאה לפני הגול שלך?"
+   },
+   {
+    "role": "user",
+    "text": "היה תיקו ונשארו שתי דקות."
+   },
+   {
+    "role": "reporter",
+    "text": "היתרון החזיק בשתי הדקות שנשארו?"
+   },
+   {
+    "role": "user",
+    "text": "לא זוכר."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "Halfway-line goal: deliberate strike or accidental long ball",
+    "articleType": "sports_report"
+   },
+   {
+    "angle": "Deliberate halfway-line goal defied everyone's expectations",
+    "articleType": "sports_report"
+   },
+   {
+    "angle": "Intentional halfway-line strike stunned even the scorer",
+    "articleType": "sports_report"
+   },
+   {
+    "angle": "Halfway-line goal broke a tie with just two minutes remaining",
+    "articleType": "sports_report"
+   },
+   {
+    "angle": "Deliberate halfway-line goal stunned even Dudu; he cannot recall the final result",
+    "articleType": "sports_report"
+   }
+  ],
+  "articleType": "sports_report",
+  "angle": "Deliberate halfway-line goal stunned even Dudu; he cannot recall the final result",
+  "draft": {
+   "headline": "2 דקות לסיום: דודו הבקיע מחצי מגרש ושבר את התיקו",
+   "sub": "זו לא הייתה מסירה: הוא כיוון לשער, והכדור נכנס. \"כולם היו בהלם, גם אני.\", סיפר דודו",
+   "summary": "דודו פרץ הבקיע היום מחצי מגרש בליגת השכונה, במצב תיקו וכשנותרו 2 דקות לסיום.",
+   "body": [
+    "דודו פרץ הבקיע היום מחצי מגרש בליגת השכונה והעלה את קבוצתו ליתרון, 2 דקות לסיום.",
+    "הוא כיוון לשער ולא ניסה למסור, אבל לדבריו איש לא האמין שהכדור ייכנס.",
+    "\"כולם היו בהלם, גם אני.\", סיפר דודו."
+   ],
+   "flash": "דודו פרץ הבקיע מחצי מגרש בליגת השכונה",
+   "push": "דודו כיוון מחצי מגרש, והפתיע גם את עצמו",
+   "usedFacts": [],
+   "newFacts": []
+  },
+  "typeOk": true,
+  "checks": {
+   "reporter": [],
+   "draft": []
+  },
+  "revisions": {},
+  "judge": {
+   "israeli_feel": 4,
+   "human_feel": 4,
+   "hebrew_correctness": 4,
+   "gender_agreement": 5,
+   "type_fit": 4,
+   "interview_quality": 4,
+   "story_fidelity": true,
+   "question_presumes": false,
+   "buried_fact_surfaced": false,
+   "problems": [
+    "Incorrect punctuation in '\"כולם היו בהלם, גם אני.\", סיפר דודו': the period inside the quote clashes with the following comma.",
+    "The flash 'דודו פרץ הבקיע מחצי מגרש בליגת השכונה' omits the stronger hook: breaking a tie with two minutes left."
+   ]
+  }
+ },
+ {
+  "id": "first_10k",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?"
+   },
+   {
+    "role": "user",
+    "text": "סיימתי היום את הריצה הראשונה שלי של 10 קילומטר"
+   },
+   {
+    "role": "reporter",
+    "text": "כמה הצלחת לרוץ כשהתחלת להתאמן?"
+   },
+   {
+    "role": "user",
+    "text": "התחלתי מאפס."
+   },
+   {
+    "role": "reporter",
+    "text": "מאפס לעשרה קילומטר, בכמה זמן?"
+   },
+   {
+    "role": "user",
+    "text": "ארבעה חודשים."
+   },
+   {
+    "role": "reporter",
+    "text": "למי סיפרת על עשרת הקילומטרים, ומה כתבת?"
+   },
+   {
+    "role": "user",
+    "text": "לא ממש זוכרת למי סיפרתי או מה כתבתי."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "First ten-kilometer finish; discover the starting point",
+    "articleType": "sports_report"
+   },
+   {
+    "angle": "From zero to ten kilometers; establish how long the climb took",
+    "articleType": "sports_report"
+   },
+   {
+    "angle": "From zero to a first ten-kilometer finish in four months",
+    "articleType": "sports_report"
+   },
+   {
+    "angle": "From zero to a first ten-kilometer finish in four months",
+    "articleType": "sports_report"
+   }
+  ],
+  "articleType": "sports_report",
+  "angle": "From zero to a first ten-kilometer finish in four months",
+  "draft": {
+   "headline": "מאפס ל-10 קילומטר: נועה סיימה ריצה ראשונה במרחק בתוך 4 חודשים",
+   "sub": "היא התחילה להתאמן בלי קילומטרים ברגליים, והיום השלימה לראשונה את המרחק. \"התחלתי מאפס.\", סיפרה",
+   "summary": "נועה בר השלימה היום לראשונה ריצה של 10 קילומטר, אחרי 4 חודשי אימונים.",
+   "body": [
+    "נועה בר סיימה היום לראשונה ריצה של 10 קילומטר.",
+    "היא הגיעה למרחק אחרי 4 חודשי אימונים. \"התחלתי מאפס.\", סיפרה."
+   ],
+   "flash": "נועה בר סיימה היום לראשונה ריצה של 10 קילומטר",
+   "push": "נועה השלימה 10 קילומטר: לפני 4 חודשים התחילה מאפס",
+   "usedFacts": [],
+   "newFacts": [
+    {
+     "k": "תחביב",
+     "v": "ריצה"
+    }
+   ]
+  },
+  "typeOk": true,
+  "checks": {
+   "reporter": [],
+   "draft": []
+  },
+  "revisions": {},
+  "judge": {
+   "israeli_feel": 3,
+   "human_feel": 3,
+   "hebrew_correctness": 3,
+   "gender_agreement": 5,
+   "type_fit": 3,
+   "interview_quality": 3,
+   "story_fidelity": true,
+   "question_presumes": false,
+   "buried_fact_surfaced": false,
+   "problems": [
+    "\"ריצה ראשונה במרחק\" is awkward, compressed headline Hebrew.",
+    "\"\\\"התחלתי מאפס.\\\", סיפרה\" incorrectly combines a full stop inside the quotation with a following comma.",
+    "\"למי סיפרת על עשרת הקילומטרים, ומה כתבת?\" abandons the training angle for a formulaic sharing question.",
+    "\"נועה בר סיימה היום לראשונה ריצה של 10 קילומטר\" is repeated across fields without developing the sports report."
+   ]
+  }
+ },
+ {
+  "id": "driving_test",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?"
+   },
+   {
+    "role": "user",
+    "text": "עברתי טסט! בפעם הרביעית"
+   },
+   {
+    "role": "reporter",
+    "text": "ברביעי היה רגע שחשבת ששוב נכשלת?"
+   },
+   {
+    "role": "user",
+    "text": "לא ממש, פשוט חיכיתי לתוצאה."
+   },
+   {
+    "role": "reporter",
+    "text": "התוצאה הגיעה. למי הודעת ראשון, ומה כתבת?"
+   },
+   {
+    "role": "user",
+    "text": "לא זוכר למי הודעתי ראשון או מה כתבתי."
+   },
+   {
+    "role": "reporter",
+    "text": "על מה נפלת בשלושת הטסטים הקודמים?"
+   },
+   {
+    "role": "user",
+    "text": "בראשון עברתי שלט עצור, ובשניים האחרים אני לא זוכר."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "Fourth attempt finally ends the driving test streak",
+    "articleType": "feature"
+   },
+   {
+    "angle": "After three failed tests, the fourth ended with a quiet wait for confirmation",
+    "articleType": "feature"
+   },
+   {
+    "angle": "Fourth driving test succeeds after three failures; earlier obstacles remain unclear",
+    "articleType": "feature"
+   },
+   {
+    "angle": "Passed on the fourth attempt after missing a stop sign on the first",
+    "articleType": "feature"
+   }
+  ],
+  "articleType": "feature",
+  "angle": "Passed on the fourth attempt after missing a stop sign on the first",
+  "draft": {
+   "headline": "אחרי שפספס שלט עצור בראשון: איתי עבר טסט בניסיון הרביעי",
+   "sub": "בטסט הרביעי הוא לא חשב ששוב נכשל: \"לא ממש, פשוט חיכיתי לתוצאה\", סיפר איתי",
+   "summary": "איתי מזרחי עבר טסט בפעם הרביעית, לאחר שבטסט הראשון נכשל בגלל שלט עצור.",
+   "body": [
+    "בטסט הראשון איתי מזרחי עבר שלט עצור ונכשל. בניסיון הרביעי הוא עבר את מבחן הנהיגה.",
+    "כשנשאל אם בטסט הרביעי היה רגע שבו חשב ששוב נכשל, השיב: \"לא ממש, פשוט חיכיתי לתוצאה.\""
+   ],
+   "flash": "איתי מזרחי עבר את מבחן הנהיגה בניסיון הרביעי",
+   "push": "עבר שלט עצור בראשון, עבר טסט ברביעי: איתי הצליח",
+   "usedFacts": [],
+   "newFacts": []
+  },
+  "typeOk": true,
+  "checks": {
+   "reporter": [],
+   "draft": []
+  },
+  "revisions": {},
+  "judge": {
+   "israeli_feel": 4,
+   "human_feel": 3,
+   "hebrew_correctness": 5,
+   "gender_agreement": 5,
+   "type_fit": 3,
+   "interview_quality": 3,
+   "story_fidelity": true,
+   "question_presumes": false,
+   "buried_fact_surfaced": true,
+   "problems": [
+    "\"התוצאה הגיעה. למי הודעת ראשון, ומה כתבת?\" feels scripted rather than responsive to his uneventful wait.",
+    "\"כשנשאל אם בטסט הרביעי היה רגע שבו חשב ששוב נכשל\" reproduces the interview mechanics instead of developing a feature.",
+    "\"איתי מזרחי עבר את מבחן הנהיגה בניסיון הרביעי\" repeats the basic announcement; the very short body never develops the richer intended angle."
+   ]
+  }
+ },
+ {
+  "id": "grandma_90",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?"
+   },
+   {
+    "role": "user",
+    "text": "סבתא שלי חגגה היום 90 והגיעו ארבעים איש"
+   },
+   {
+    "role": "reporter",
+    "text": "מה סבתא אמרה על ארבעים האורחים?"
+   },
+   {
+    "role": "user",
+    "text": "היא לא אמרה משהו על האורחים."
+   },
+   {
+    "role": "reporter",
+    "text": "אז מה סבתא עשתה בחגיגה?"
+   },
+   {
+    "role": "user",
+    "text": "היא עמדה באמצע הסלון והכריזה שהיא עדיין לא מתכננת לפרוש מהמטבח, וכמובן הכינה את הקובה בעצמה."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "Forty guests for her ninetieth; grandmother's reaction could carry the celebration",
+    "articleType": "feature"
+   },
+   {
+    "angle": "Grandmother at ninety, with forty guests; her part in the celebration remains the focus",
+    "articleType": "feature"
+   },
+   {
+    "angle": "At ninety, grandmother makes the birthday kubbeh herself and rules out kitchen retirement",
+    "articleType": "feature"
+   }
+  ],
+  "articleType": "feature",
+  "angle": "At ninety, grandmother makes the birthday kubbeh herself and rules out kitchen retirement",
+  "draft": {
+   "headline": "בגיל 90: סבתא של רונית הכינה בעצמה את הקובה לחגיגה",
+   "sub": "40 איש הגיעו ליום ההולדת. באמצע הסלון הכריזה כלת השמחה שהיא עדיין לא מתכננת לפרוש מהמטבח",
+   "summary": "סבתה של רונית אביטל חגגה היום 90 עם 40 אורחים והכינה בעצמה את הקובה.",
+   "body": [
+    "באמצע הסלון עמדה היום סבתה של רונית אביטל והכריזה שהיא עדיין לא מתכננת לפרוש מהמטבח. היא חגגה יום הולדת 90, ואת הקובה לחגיגה הכינה בעצמה.",
+    "40 איש הגיעו לחגוג איתה את יום ההולדת."
+   ],
+   "flash": "סבתה של רונית אביטל חגגה 90 והכינה בעצמה קובה",
+   "push": "סבתא של רונית חגגה 90 ושללה פרישה מהמטבח",
+   "usedFacts": [],
+   "newFacts": [
+    {
+     "k": "סבתא",
+     "v": "בת 90, הכינה בעצמה קובה לחגיגת יום הולדתה"
+    }
+   ]
+  },
+  "typeOk": true,
+  "checks": {
+   "reporter": [],
+   "draft": []
+  },
+  "revisions": {},
+  "judge": {
+   "israeli_feel": 4,
+   "human_feel": 4,
+   "hebrew_correctness": 5,
+   "gender_agreement": 5,
+   "type_fit": 3,
+   "interview_quality": 3,
+   "story_fidelity": true,
+   "question_presumes": false,
+   "buried_fact_surfaced": false,
+   "problems": [
+    "\"אז מה סבתא עשתה בחגיגה?\" gets the angle, but there is no follow-up on her kitchen declaration or cooking.",
+    "\"40 איש הגיעו לחגוג איתה את יום ההולדת.\" repeats established information as the ending; the body reads like a brief rather than a feature."
+   ]
+  }
+ },
+ {
+  "id": "first_grade",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?"
+   },
+   {
+    "role": "user",
+    "text": "הבת שלי התחילה היום כיתה א'"
+   },
+   {
+    "role": "reporter",
+    "text": "איך נגמרה הפרידה בשער בית הספר?"
+   },
+   {
+    "role": "user",
+    "text": "היא לא נתנה לי נשיקה, אמרה שהחברות מסתכלות."
+   },
+   {
+    "role": "reporter",
+    "text": "ומה ענית לה על החברות שמסתכלות?"
+   },
+   {
+    "role": "user",
+    "text": "לא ממש עניתי לה."
+   },
+   {
+    "role": "reporter",
+    "text": "אז איך נפרדת ממנה בסוף, בלי נשיקה?"
+   },
+   {
+    "role": "user",
+    "text": "פשוט נפרדנו בלי נשיקה."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "First school morning; the goodbye may reveal who struggled to leave",
+    "articleType": "feature"
+   },
+   {
+    "angle": "On her first school day, daughter already vetoes public goodbye kisses",
+    "articleType": "feature"
+   },
+   {
+    "angle": "First grade begins with a public-kiss veto; father's quiet response carries the moment",
+    "articleType": "feature"
+   },
+   {
+    "angle": "First day of first grade brings a new rule: no kisses in front of friends",
+    "articleType": "feature"
+   }
+  ],
+  "articleType": "feature",
+  "angle": "First day of first grade brings a new rule: no kisses in front of friends",
+  "draft": {
+   "headline": "כבר ביום הראשון בכיתה א': הבת של אבי ויתרה על נשיקת פרידה",
+   "sub": "בשער בית הספר היא הסבירה שהחברות מסתכלות. אבי ובתו נפרדו בלי נשיקה",
+   "summary": "בתו של אבי כהן התחילה כיתה א' ונפרדה ממנו בלי נשיקה כי החברות הסתכלו.",
+   "body": [
+    "בשער בית הספר, ביום שבו בתו התחילה כיתה א', אבי כהן לא קיבל נשיקת פרידה. היא אמרה לו שהחברות מסתכלות.",
+    "\"פשוט נפרדנו בלי נשיקה.\", סיפר אבי."
+   ],
+   "flash": "בתו של אבי כהן התחילה היום כיתה א'",
+   "push": "החברות מסתכלות: הבת של אבי ויתרה על הנשיקה",
+   "usedFacts": [],
+   "newFacts": []
+  },
+  "typeOk": true,
+  "checks": {
+   "reporter": [],
+   "draft": []
+  },
+  "revisions": {},
+  "judge": {
+   "israeli_feel": 4,
+   "human_feel": 3,
+   "hebrew_correctness": 4,
+   "gender_agreement": 5,
+   "type_fit": 3,
+   "interview_quality": 2,
+   "story_fidelity": false,
+   "question_presumes": true,
+   "buried_fact_surfaced": false,
+   "problems": [
+    "\"בשער בית הספר\" introduces a location supplied only by the reporter, not confirmed by the user.",
+    "\"פשוט נפרדנו בלי נשיקה.\", has an unnecessary period before the closing quotation mark and comma.",
+    "\"אז איך נפרדת ממנה בסוף, בלי נשיקה?\" repeats the established outcome instead of pursuing a new detail.",
+    "\"בתו של אבי כהן התחילה היום כיתה א'\" drops the actual hook from the flash; the feature itself is little more than repeated summary."
+   ]
+  }
+ },
+ {
+  "id": "promotion",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?"
+   },
+   {
+    "role": "user",
+    "text": "קיבלתי היום קידום, אני מנהלת צוות"
+   },
+   {
+    "role": "reporter",
+    "text": "פעם ראשונה שאת מנהלת צוות?"
+   },
+   {
+    "role": "user",
+    "text": "כן, אחרי שלוש שנים באותו תפקיד."
+   },
+   {
+    "role": "reporter",
+    "text": "ומה אמרו לך כשהודיעו על הקידום?"
+   },
+   {
+    "role": "user",
+    "text": "המנהל קרא לי לחדר ואמר: „סוף סוף“."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "First management role after working in accounting.",
+    "articleType": "feature"
+   },
+   {
+    "angle": "Three years in the same role end with her first management position.",
+    "articleType": "feature"
+   },
+   {
+    "angle": "After three years, her first management promotion came with the boss saying finally.",
+    "articleType": "feature"
+   }
+  ],
+  "articleType": "feature",
+  "angle": "After three years, her first management promotion came with the boss saying finally.",
+  "draft": {
+   "headline": "אחרי שלוש שנים באותו תפקיד: מיכל קודמה לראשונה לניהול צוות",
+   "sub": "המנהל קרא לה לחדר ובישר על הקידום עם שתי מילים: \"סוף סוף\"",
+   "summary": "מיכל לוי קודמה היום לראשונה לניהול צוות, אחרי שלוש שנים באותו תפקיד.",
+   "body": [
+    "המנהל קרא היום למיכל לוי לחדר ואמר לה: \"סוף סוף\". היא קיבלה קידום לניהול צוות.",
+    "זה היה תפקיד ניהול הצוות הראשון שלה, אחרי שלוש שנים באותו תפקיד."
+   ],
+   "flash": "מיכל לוי קודמה היום לראשונה לתפקיד מנהלת צוות",
+   "push": "\"סוף סוף\": כך בישר המנהל למיכל על הקידום",
+   "usedFacts": [],
+   "newFacts": [
+    {
+     "k": "עבודה",
+     "v": "מנהלת צוות"
+    }
+   ]
+  },
+  "typeOk": true,
+  "checks": {
+   "reporter": [],
+   "draft": []
+  },
+  "revisions": {},
+  "judge": {
+   "israeli_feel": 4,
+   "human_feel": 3,
+   "hebrew_correctness": 4,
+   "gender_agreement": 5,
+   "type_fit": 3,
+   "interview_quality": 4,
+   "story_fidelity": true,
+   "question_presumes": false,
+   "buried_fact_surfaced": false,
+   "problems": [
+    "\"זה היה תפקיד ניהול הצוות הראשון שלה\" is clunky; natural Hebrew would describe this as her first time managing a team.",
+    "\"אחרי שלוש שנים באותו תפקיד\" repeats across headline, summary and body without developing a feature.",
+    "\"מיכל לוי קודמה היום לראשונה לתפקיד מנהלת צוות\" is a flat flash that omits the distinctive manager quote."
+   ]
+  }
+ },
+ {
+  "id": "zoom_singing",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?"
+   },
+   {
+    "role": "user",
+    "text": "בישיבת זום של המחלקה שכחתי להשתיק ושרתי באמבטיה"
+   },
+   {
+    "role": "reporter",
+    "text": "מה אמרו בזום כששמעו את השירה?"
+   },
+   {
+    "role": "user",
+    "text": "המנכ״לית כתבה בצ׳אט: ״יפה מאוד״."
+   },
+   {
+    "role": "reporter",
+    "text": "איך הגבת ל״יפה מאוד״ של המנכ״לית?"
+   },
+   {
+    "role": "user",
+    "text": "לא זוכר בדיוק."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "A private bath concert accidentally reached the department meeting.",
+    "articleType": "quirky"
+   },
+   {
+    "angle": "An accidental bath concert earned written praise from the CEO.",
+    "articleType": "quirky"
+   },
+   {
+    "angle": "An accidental bath concert earned the CEO's 'very nice' in the department chat.",
+    "articleType": "quirky"
+   }
+  ],
+  "articleType": "quirky",
+  "angle": "An accidental bath concert earned the CEO's 'very nice' in the department chat.",
+  "draft": {
+   "headline": "הזום נשאר פתוח: גיל שר באמבטיה וקיבל מחמאה מהמנכ\"לית",
+   "sub": "הוא שכח להשתיק את המיקרופון בישיבת המחלקה. \"יפה מאוד\", כתבה המנכ\"לית בצ'אט",
+   "summary": "גיל רוזן שר באמבטיה בלי להשתיק את המיקרופון בישיבת זום מחלקתית, והמנכ\"לית החמיאה בצ'אט.",
+   "body": [
+    "השירה של גיל רוזן באמבטיה נשמעה בישיבת הזום של המחלקה, אחרי ששכח להשתיק את המיקרופון.",
+    "\"יפה מאוד\", כתבה המנכ\"לית בצ'אט."
+   ],
+   "flash": "גיל רוזן שכח להשתיק את המיקרופון ושר באמבטיה בזום המחלקתי",
+   "push": "שר באמבטיה בזום וקיבל \"יפה מאוד\" מהמנכ\"לית",
+   "usedFacts": [],
+   "newFacts": []
+  },
+  "typeOk": true,
+  "checks": {
+   "reporter": [],
+   "draft": []
+  },
+  "revisions": {},
+  "judge": {
+   "israeli_feel": 5,
+   "human_feel": 4,
+   "hebrew_correctness": 5,
+   "gender_agreement": 5,
+   "type_fit": 5,
+   "interview_quality": 3,
+   "story_fidelity": true,
+   "question_presumes": false,
+   "buried_fact_surfaced": false,
+   "problems": [
+    "\"איך הגבת ל״יפה מאוד״ של המנכ״לית?\" is a routine reaction question rather than a specific follow-up about the accidental performance; the song remains undiscovered."
+   ]
+  }
+ },
+ {
+  "id": "keys_fridge",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?"
+   },
+   {
+    "role": "user",
+    "text": "איבדתי את המפתחות ומצאתי אותם במקרר"
+   },
+   {
+    "role": "reporter",
+    "text": "איך המפתחות הגיעו למקרר?"
+   },
+   {
+    "role": "user",
+    "text": "שמתי אותם שם כשהכנסתי קניות, כשהטלפון ביד השנייה."
+   },
+   {
+    "role": "reporter",
+    "text": "וכמה זמן חיפשת את המפתחות?"
+   },
+   {
+    "role": "user",
+    "text": "חיפשתי בערך ארבעים דקות, יחד עם השכנה מלמטה."
+   },
+   {
+    "role": "reporter",
+    "text": "מה אמרה השכנה כשהמפתחות נמצאו במקרר?"
+   },
+   {
+    "role": "user",
+    "text": "היא אמרה: ״את בטוחה שבדקת במקרר?״ ואז צחקנו עד שהתחלנו לבכות."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "Missing keys turn up in the least useful cold storage",
+    "articleType": "quirky"
+   },
+   {
+    "angle": "Groceries went in with the keys while the phone occupied her other hand",
+    "articleType": "quirky"
+   },
+   {
+    "angle": "Two neighbors spent forty minutes searching for keys put away with groceries",
+    "articleType": "quirky"
+   },
+   {
+    "angle": "Forty-minute key hunt ends in the fridge, with the neighbor laughing to tears",
+    "articleType": "quirky"
+   }
+  ],
+  "articleType": "quirky",
+  "angle": "Forty-minute key hunt ends in the fridge, with the neighbor laughing to tears",
+  "draft": {
+   "headline": "אחרי כ-40 דקות חיפוש: ענת מצאה את המפתחות במקרר",
+   "sub": "היא הניחה אותם כשהכניסה קניות, עם הטלפון ביד השנייה. השכנה מלמטה עזרה לחפש, ובסוף שתיהן צחקו עד דמעות",
+   "summary": "ענת שפירא מצאה את המפתחות במקרר לאחר שחיפשה אותם כ-40 דקות עם השכנה מלמטה.",
+   "body": [
+    "המפתחות של ענת שפירא נמצאו במקרר, אחרי כ-40 דקות של חיפושים יחד עם השכנה מלמטה.",
+    "ענת הניחה אותם שם כשהכניסה קניות, בזמן שהטלפון היה בידה השנייה.",
+    "\"את בטוחה שבדקת במקרר?\", אמרה השכנה, לדברי ענת. \"ואז צחקנו עד שהתחלנו לבכות\", סיפרה ענת."
+   ],
+   "flash": "ענת שפירא מצאה במקרר את המפתחות שאיבדה",
+   "push": "ענת חיפשה כ-40 דקות: המפתחות חיכו במקרר",
+   "usedFacts": [],
+   "newFacts": []
+  },
+  "typeOk": true,
+  "checks": {
+   "reporter": [],
+   "draft": []
+  },
+  "revisions": {},
+  "judge": {
+   "israeli_feel": 5,
+   "human_feel": 4,
+   "hebrew_correctness": 5,
+   "gender_agreement": 5,
+   "type_fit": 5,
+   "interview_quality": 4,
+   "story_fidelity": true,
+   "question_presumes": false,
+   "buried_fact_surfaced": true,
+   "problems": [
+    "The flash \"ענת שפירא מצאה במקרר את המפתחות שאיבדה\" omits the forty-minute hunt, weakening the hook."
+   ]
+  }
+ },
+ {
+  "id": "flat_tire",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?"
+   },
+   {
+    "role": "user",
+    "text": "פנצ'ר בכביש 6 בדרך לחתונה של אחי"
+   },
+   {
+    "role": "reporter",
+    "text": "כמה זמן נשאר עד החופה?"
+   },
+   {
+    "role": "user",
+    "text": "היו לי בערך 50 דקות עד החופה."
+   },
+   {
+    "role": "reporter",
+    "text": "ואיך נגמר הפנצ'ר, הגעת לחופה?"
+   },
+   {
+    "role": "user",
+    "text": "נהג משאית עצר לעזור, ובסוף הגעתי בדיוק כשהחופה התחילה, עם ידיים שחורות מגריז."
+   },
+   {
+    "role": "reporter",
+    "text": "מה אחיך אמר כשראה את הידיים?"
+   },
+   {
+    "role": "user",
+    "text": "לא זוכר."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "A flat tire threatens arrival at his brother's wedding",
+    "articleType": "feature"
+   },
+   {
+    "angle": "Fifty minutes to the ceremony, stranded with a flat tire",
+    "articleType": "feature"
+   },
+   {
+    "angle": "A trucker's help gets the groom's brother to the ceremony with grease-blackened hands",
+    "articleType": "feature"
+   },
+   {
+    "angle": "Fifty minutes before the wedding, a trucker helps him arrive just in time, grease-handed",
+    "articleType": "feature"
+   }
+  ],
+  "articleType": "feature",
+  "angle": "Fifty minutes before the wedding, a trucker helps him arrive just in time, grease-handed",
+  "draft": {
+   "headline": "50 דקות לחופה ופנצ'ר: נהג משאית עזר ליוני להגיע בזמן",
+   "sub": "בדרך לחתונה של אחיו בכביש 6, יוני נזקק לעזרה. לחופה הוא הגיע בדיוק כשהתחילה, עם ידיים שחורות מגריז",
+   "summary": "יוני ברק נתקע עם פנצ'ר בדרך לחתונת אחיו, ונעזר בנהג משאית כדי להגיע בזמן לחופה.",
+   "body": [
+    "כשהיו לו בערך 50 דקות עד החופה של אחיו, יוני ברק נתקע עם פנצ'ר בכביש 6. נהג משאית עצר לעזור לו.",
+    "\"נהג משאית עצר לעזור, ובסוף הגעתי בדיוק כשהחופה התחילה, עם ידיים שחורות מגריז.\", סיפר יוני."
+   ],
+   "flash": "יוני ברק הגיע לחופת אחיו לאחר פנצ'ר בכביש 6",
+   "push": "יוני הספיק לחופה של אחיו, הגריז הגיע איתו",
+   "usedFacts": [],
+   "newFacts": []
+  },
+  "typeOk": true,
+  "checks": {
+   "reporter": [],
+   "draft": []
+  },
+  "revisions": {},
+  "judge": {
+   "israeli_feel": 4,
+   "human_feel": 4,
+   "hebrew_correctness": 4,
+   "gender_agreement": 5,
+   "type_fit": 3,
+   "interview_quality": 4,
+   "story_fidelity": true,
+   "question_presumes": true,
+   "buried_fact_surfaced": true,
+   "problems": [
+    "\"מה אחיך אמר כשראה את הידיים?\" assumes the brother saw the greasy hands.",
+    "\"ואיך נגמר הפנצ'ר\" is an awkward way to ask how the situation was resolved.",
+    "\"מגריז.\\\", סיפר יוני.\" has incorrect punctuation at the end of the quotation.",
+    "\"נהג משאית עצר לעזור לו.\" is immediately repeated in the quote; the two-paragraph body reads as a brief rather than a feature."
+   ]
+  }
+ },
+ {
+  "id": "shakshuka_fail",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?"
+   },
+   {
+    "role": "user",
+    "text": "ניסיתי להכין שקשוקה כמו של אמא ויצא שלא"
+   },
+   {
+    "role": "reporter",
+    "text": "מה יצא במקום השקשוקה של אמא?"
+   },
+   {
+    "role": "user",
+    "text": "שקשוקה עם כמון פי שלוש ובלי פלפל."
+   },
+   {
+    "role": "reporter",
+    "text": "איך הגעת לפי שלוש כמון?"
+   },
+   {
+    "role": "user",
+    "text": "פשוט שמתי יותר מדי בלי לשים לב."
+   },
+   {
+    "role": "reporter",
+    "text": "ואחרי כל הכמון, מה אמרת בביס הראשון?"
+   },
+   {
+    "role": "user",
+    "text": "לא זוכרת שאמרתי משהו."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "Trying to recreate mother's shakshuka ends in a kitchen mismatch.",
+    "articleType": "feature"
+   },
+   {
+    "angle": "Mother's shakshuka became a triple-cumin version; find how the recipe went astray.",
+    "articleType": "quirky"
+   },
+   {
+    "angle": "Recreating mother's shakshuka went off recipe with an accidental triple dose of cumin.",
+    "articleType": "quirky"
+   },
+   {
+    "angle": "An attempt at mother's shakshuka became an accidental triple-cumin version without pepper.",
+    "articleType": "quirky"
+   }
+  ],
+  "articleType": "quirky",
+  "angle": "An attempt at mother's shakshuka became an accidental triple-cumin version without pepper.",
+  "draft": {
+   "headline": "לא כמו של אמא: תמר הכינה שקשוקה עם פי שלוש כמון",
+   "sub": "בניסיון להכין את השקשוקה של אמא, הפלפל נשאר בחוץ. \"פשוט שמתי יותר מדי בלי לשים לב\", סיפרה תמר על הכמון",
+   "summary": "תמר גולן ניסתה להכין שקשוקה כמו של אמה, והכינה שקשוקה עם פי שלוש כמון ובלי פלפל.",
+   "body": [
+    "פי שלוש כמון ובלי פלפל: זו הייתה השקשוקה שהכינה תמר גולן כשניסתה להכין שקשוקה כמו של אמא שלה.",
+    "\"פשוט שמתי יותר מדי בלי לשים לב\", סיפרה על כמות הכמון."
+   ],
+   "flash": "תמר גולן הכינה שקשוקה עם פי שלוש כמון ובלי פלפל",
+   "push": "ניסתה לבשל כמו אמא: תמר שילשה את הכמון",
+   "usedFacts": [],
+   "newFacts": []
+  },
+  "typeOk": true,
+  "checks": {
+   "reporter": [],
+   "draft": []
+  },
+  "revisions": {},
+  "judge": {
+   "israeli_feel": 4,
+   "human_feel": 3,
+   "hebrew_correctness": 5,
+   "gender_agreement": 5,
+   "type_fit": 4,
+   "interview_quality": 3,
+   "story_fidelity": true,
+   "question_presumes": false,
+   "buried_fact_surfaced": false,
+   "problems": [
+    "The body repeats \"פי שלוש כמון ובלי פלפל\" without developing the quirky angle.",
+    "\"ואחרי כל הכמון, מה אמרת בביס הראשון?\" fishes for a quote rather than investigating the outcome; the husband's reaction and two plates remain undiscovered."
+   ]
+  }
+ },
+ {
+  "id": "dog_paw",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?"
+   },
+   {
+    "role": "user",
+    "text": "הכלבה שלי למדה לתת כף"
+   },
+   {
+    "role": "reporter",
+    "text": "כמה זמן לקח לה ללמוד לתת כף?"
+   },
+   {
+    "role": "user",
+    "text": "שבועיים, עם חטיפים כל ערב."
+   },
+   {
+    "role": "reporter",
+    "text": "ובלי חטיפים היא גם נותנת כף?"
+   },
+   {
+    "role": "user",
+    "text": "רק כשיש חטיף ביד."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "A new trick; the training time may carry the story.",
+    "articleType": "feature"
+   },
+   {
+    "angle": "Two weeks of nightly treats; does the trick work without payment?",
+    "articleType": "feature"
+   },
+   {
+    "angle": "Two weeks of training produced a strictly treat-for-paw arrangement.",
+    "articleType": "quirky"
+   }
+  ],
+  "articleType": "quirky",
+  "angle": "Two weeks of training produced a strictly treat-for-paw arrangement.",
+  "draft": {
+   "headline": "שבועיים של אימונים: הכלבה של שרון נותנת כף רק תמורת חטיף",
+   "sub": "האימונים כללו חטיפים בכל ערב. גם אחרי שלמדה, הכלבה נתנה כף רק כשהיה חטיף ביד",
+   "summary": "הכלבה של שרון אזולאי למדה לתת כף אחרי שבועיים של אימונים עם חטיפים.",
+   "body": [
+    "הכלבה של שרון אזולאי למדה לתת כף, אבל נתנה אותה רק כשהיה חטיף ביד.",
+    "הלימוד נמשך שבועיים, עם חטיפים בכל ערב. על השאלה אם הכלבה נתנה כף גם בלי חטיפים, התשובה של שרון הייתה: \"רק כשיש חטיף ביד.\""
+   ],
+   "flash": "הכלבה של שרון אזולאי למדה לתת כף בתוך שבועיים",
+   "push": "הכלבה של שרון למדה לתת כף, אבל לא בחינם",
+   "usedFacts": [],
+   "newFacts": [
+    {
+     "k": "חיית מחמד",
+     "v": "כלבה"
+    }
+   ]
+  },
+  "typeOk": true,
+  "checks": {
+   "reporter": [],
+   "draft": []
+  },
+  "revisions": {},
+  "judge": {
+   "israeli_feel": 4,
+   "human_feel": 4,
+   "hebrew_correctness": 5,
+   "gender_agreement": 5,
+   "type_fit": 4,
+   "interview_quality": 4,
+   "story_fidelity": true,
+   "question_presumes": false,
+   "buried_fact_surfaced": true,
+   "problems": [
+    "\"על השאלה אם הכלבה נתנה כף גם בלי חטיפים, התשובה של שרון הייתה\" is cumbersome attribution for such a short, light story.",
+    "\"הכלבה של שרון אזולאי למדה לתת כף בתוך שבועיים\" leaves the treat-only hook out of the flash."
+   ]
+  }
+ },
+ {
+  "id": "new_sofa",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?"
+   },
+   {
+    "role": "user",
+    "text": "הספה הגיעה אחרי שלושה שבועות על כריות"
+   },
+   {
+    "role": "reporter",
+    "text": "איך נתקעת שלושה שבועות בלי ספה?"
+   },
+   {
+    "role": "user",
+    "text": "ישבנו על כריות עד שהיא הגיעה."
+   },
+   {
+    "role": "reporter",
+    "text": "ומה היה בסלון לפני הכריות?"
+   },
+   {
+    "role": "user",
+    "text": "לא זוכרת בדיוק."
+   },
+   {
+    "role": "reporter",
+    "text": "מי התיישב ראשון על הספה, ומה אמר?"
+   },
+   {
+    "role": "user",
+    "text": "לא זוכרת מי התיישבה ראשונה, ולא זוכרת מה אמרו."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "Three weeks on cushions ended with the sofa's arrival",
+    "articleType": "feature"
+   },
+   {
+    "angle": "A sofa delivery ends three weeks of makeshift seating",
+    "articleType": "feature"
+   },
+   {
+    "angle": "Three weeks on cushions end with the first proper seat",
+    "articleType": "feature"
+   },
+   {
+    "angle": "Sofa arrival ends three weeks of sitting on cushions",
+    "articleType": "news_brief"
+   }
+  ],
+  "articleType": "news_brief",
+  "angle": "Sofa arrival ends three weeks of sitting on cushions",
+  "draft": {
+   "headline": "אחרי שלושה שבועות: הספה של רוני הגיעה לסלון",
+   "sub": "עד להגעת הספה ישבו על כריות. \"ישבנו על כריות עד שהיא הגיעה\", סיפרה רוני",
+   "summary": "הספה של רוני אברהם הגיעה אחרי שלושה שבועות של ישיבה על כריות.",
+   "body": [
+    "הספה של רוני אברהם הגיעה אחרי שלושה שבועות שבהם ישבו על כריות.",
+    "\"ישבנו על כריות עד שהיא הגיעה.\", סיפרה רוני."
+   ],
+   "flash": "רוני אברהם קיבלה את הספה אחרי שלושה שבועות",
+   "push": "הספה הגיעה: הסתיימו שלושה שבועות על כריות",
+   "usedFacts": [],
+   "newFacts": []
+  },
+  "typeOk": true,
+  "checks": {
+   "reporter": [],
+   "draft": []
+  },
+  "revisions": {},
+  "judge": {
+   "israeli_feel": 4,
+   "human_feel": 2,
+   "hebrew_correctness": 4,
+   "gender_agreement": 5,
+   "type_fit": 4,
+   "interview_quality": 2,
+   "story_fidelity": false,
+   "question_presumes": false,
+   "buried_fact_surfaced": false,
+   "problems": [
+    "\"הספה של רוני הגיעה לסלון\" adds a destination not established by the user's messages.",
+    "\"ישבנו על כריות עד שהיא הגיעה.\", סיפרה רוני.\" has an unnecessary period before the closing quotation mark and comma.",
+    "\"ומה היה בסלון לפני הכריות?\" pursues background rather than the delivery; the elevator incident never surfaces.",
+    "\"עד להגעת הספה ישבו על כריות\" is immediately repeated in the quote, and the same fact fills nearly every field."
+   ]
+  }
+ },
+ {
+  "id": "terse_bike",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?"
+   },
+   {
+    "role": "user",
+    "text": "קניתי אופניים"
+   },
+   {
+    "role": "reporter",
+    "text": "אופניים ראשונים, או שהיו כבר קודם?"
+   },
+   {
+    "role": "user",
+    "text": "היו כבר קודם."
+   },
+   {
+    "role": "reporter",
+    "text": "מה קרה לאופניים הקודמים?"
+   },
+   {
+    "role": "user",
+    "text": "לא ממש זכור לי."
+   },
+   {
+    "role": "reporter",
+    "text": "האופניים שקנית, חדשים או יד שנייה?"
+   },
+   {
+    "role": "user",
+    "text": "חדשים."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "A bicycle purchase, possibly a return to riding",
+    "articleType": "feature"
+   },
+   {
+    "angle": "Replacing a previous bicycle; reason for buying may carry the story",
+    "articleType": "feature"
+   },
+   {
+    "angle": "A new bicycle purchase, with the previous bicycle long forgotten",
+    "articleType": "news_brief"
+   },
+   {
+    "angle": "A new bicycle purchase after earlier bicycles whose fate is forgotten",
+    "articleType": "news_brief"
+   }
+  ],
+  "articleType": "news_brief",
+  "angle": "A new bicycle purchase after earlier bicycles whose fate is forgotten",
+  "draft": {
+   "headline": "רכישה נוספת על שני גלגלים: לדנה יש אופניים חדשים",
+   "sub": "האופניים נקנו כחדשים ולא מיד שנייה; גם לפני הרכישה היו לדנה אופניים",
+   "summary": "דנה שחר קנתה אופניים חדשים, לאחר שכבר היו בבעלותה אופניים בעבר.",
+   "body": [
+    "האופניים החדשים של דנה שחר נקנו כחדשים, ולא מיד שנייה.",
+    "גם לפני הרכישה הזו היו לדנה אופניים."
+   ],
+   "flash": "לדנה שחר נוספו אופניים שנקנו כחדשים",
+   "push": "דנה עם אופניים חדשים: לא בפעם הראשונה",
+   "usedFacts": [],
+   "newFacts": []
+  },
+  "typeOk": false,
+  "checks": {
+   "reporter": [],
+   "draft": []
+  },
+  "revisions": {},
+  "judge": {
+   "israeli_feel": 3,
+   "human_feel": 2,
+   "hebrew_correctness": 4,
+   "gender_agreement": 2,
+   "type_fit": 3,
+   "interview_quality": 2,
+   "story_fidelity": true,
+   "question_presumes": false,
+   "buried_fact_surfaced": false,
+   "problems": [
+    "\"קנתה\" and \"בבעלותה\" assume feminine gender without support from the user's words.",
+    "\"נקנו כחדשים\" is stiff and unnatural here; the user simply bought new bicycles.",
+    "\"גם לפני הרכישה הזו היו לדנה אופניים\" repeats background already exhausted in the sub and summary.",
+    "\"אופניים ראשונים, או שהיו כבר קודם?\" opens a low-yield ownership checklist; the questions never reach the purchase's purpose or the electric-bike angle."
+   ]
+  }
+ },
+ {
+  "id": "chatty_neighbor",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?"
+   },
+   {
+    "role": "user",
+    "text": "בסוף השכן מלמעלה ואני התפייסנו אחרי שנתיים של ויכוחים על רעש. הוא הגיע עם בקבוק יין ואמר שהוא מתנצל, קוראים לו זאב ועד היום לא ידעתי את השם שלו. שתינו על המרפסת עד אחת בלילה"
+   },
+   {
+    "role": "reporter",
+    "text": "אחרי שנתיים של ויכוחים, מה גרם לזאב להגיע דווקא עכשיו?"
+   },
+   {
+    "role": "user",
+    "text": "לא ממש יודע, הוא פשוט הגיע עם בקבוק יין והתנצל."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "Two years of noise disputes ended over wine with a neighbor whose name was unknown.",
+    "articleType": "feature"
+   },
+   {
+    "angle": "After two years of noise disputes, Eran learned his neighbor's name over reconciliation wine.",
+    "articleType": "feature"
+   }
+  ],
+  "articleType": "feature",
+  "angle": "After two years of noise disputes, Eran learned his neighbor's name over reconciliation wine.",
+  "draft": {
+   "headline": "אחרי שנתיים של ויכוחים: ערן התפייס עם השכן וגילה שקוראים לו זאב",
+   "sub": "השכן מלמעלה הגיע עם בקבוק יין והתנצל על הרעש. השניים שתו על המרפסת עד אחת בלילה",
+   "summary": "ערן כץ והשכן מלמעלה התפייסו אחרי שנתיים של ויכוחים על רעש, ובמפגש ערן למד ששמו זאב.",
+   "body": [
+    "השכן מלמעלה הגיע אל ערן כץ עם בקבוק יין והתנצל. אחרי שנתיים של ויכוחים על רעש, השניים התפייסו וערן גילה שלשכן קראו זאב.",
+    "\"קוראים לו זאב ועד היום לא ידעתי את השם שלו\", סיפר ערן. השניים שתו על המרפסת עד אחת בלילה."
+   ],
+   "flash": "ערן כץ התפייס עם השכן מלמעלה אחרי שנתיים של ויכוחים על רעש",
+   "push": "ערן גילה איך קוראים לשכן רק כשהגיע להתנצל",
+   "usedFacts": [],
+   "newFacts": []
+  },
+  "typeOk": true,
+  "checks": {
+   "reporter": [],
+   "draft": []
+  },
+  "revisions": {},
+  "judge": {
+   "israeli_feel": 4,
+   "human_feel": 3,
+   "hebrew_correctness": 5,
+   "gender_agreement": 5,
+   "type_fit": 3,
+   "interview_quality": 3,
+   "story_fidelity": true,
+   "question_presumes": false,
+   "buried_fact_surfaced": false,
+   "problems": [
+    "\"מה גרם לזאב להגיע דווקא עכשיו?\" asks for an explanation Eran may not know; no follow-up explores the reconciliation itself.",
+    "\"ערן כץ התפייס עם השכן מלמעלה אחרי שנתיים של ויכוחים על רעש\" leaves the wine and newly learned name out of the flash, weakening its hook.",
+    "\"אחרי שנתיים של ויכוחים על רעש, השניים התפייסו\" repeats the setup rather than developing a feature."
+   ]
+  }
+ },
+ {
+  "id": "surprise_party",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?"
+   },
+   {
+    "role": "user",
+    "text": "הפתעתי את בעלי ליום ההולדת ה-40 עם חברים מהצבא"
+   },
+   {
+    "role": "reporter",
+    "text": "כמה זמן הוא לא ראה את החברים מהצבא?"
+   },
+   {
+    "role": "user",
+    "text": "הוא לא ראה אותם 15 שנה."
+   },
+   {
+    "role": "reporter",
+    "text": "ומה הוא אמר כשראה אותם?"
+   },
+   {
+    "role": "user",
+    "text": "הוא עמד בדלת ואמר: ״מה אתם עושים פה?״"
+   }
+  ],
+  "trail": [
+   {
+    "angle": "Fortieth birthday brings an unexpected reunion with army friends",
+    "articleType": "feature"
+   },
+   {
+    "angle": "Fifteen-year separation ends with a surprise fortieth birthday reunion",
+    "articleType": "feature"
+   },
+   {
+    "angle": "Army friends appear at his fortieth after fifteen years: What are you doing here?",
+    "articleType": "feature"
+   }
+  ],
+  "articleType": "feature",
+  "angle": "Army friends appear at his fortieth after fifteen years: What are you doing here?",
+  "draft": {
+   "headline": "אחרי 15 שנה: יעל הפתיעה את בעלה עם החברים מהצבא",
+   "sub": "ליום הולדתו ה-40 הגיעו החברים שלא ראה שנים. הוא עמד בדלת ואמר: \"מה אתם עושים פה?\"",
+   "summary": "יעל מלכה הפתיעה את בעלה ביום הולדתו ה-40 עם חברים מהצבא שלא ראה 15 שנה.",
+   "body": [
+    "בעלה של יעל מלכה עמד בדלת וראה את חבריו מהצבא, שאותם לא פגש 15 שנה. יעל הפתיעה אותו איתם ליום הולדתו ה-40.",
+    "\"מה אתם עושים פה?\", אמר כשראה אותם."
+   ],
+   "flash": "יעל מלכה הפתיעה את בעלה ליום הולדת 40 עם חבריו מהצבא",
+   "push": "\"מה אתם עושים פה?\": החברים מהצבא הפתיעו אחרי 15 שנה",
+   "usedFacts": [],
+   "newFacts": []
+  },
+  "typeOk": true,
+  "checks": {
+   "reporter": [],
+   "draft": []
+  },
+  "revisions": {},
+  "judge": {
+   "israeli_feel": 4,
+   "human_feel": 4,
+   "hebrew_correctness": 5,
+   "gender_agreement": 5,
+   "type_fit": 3,
+   "interview_quality": 3,
+   "story_fidelity": true,
+   "question_presumes": false,
+   "buried_fact_surfaced": false,
+   "problems": [
+    "\"מה קרה?\" is a generic opener rather than an angle-seeking question.",
+    "\"יעל הפתיעה אותו איתם ליום הולדתו ה-40\" is clunky and repeats the summary rather than developing a feature.",
+    "\"מה אתם עושים פה?\" supplies a good reaction, but the reporter stops without pursuing the reunion's logistics or the friends' journeys."
+   ]
+  }
+ },
+ {
+  "id": "column_apology",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?"
+   },
+   {
+    "role": "user",
+    "text": "החזרתי היום צלחת פסטה קרה במסעדה בלי להתנצל, בפעם הראשונה בחיי"
+   },
+   {
+    "role": "reporter",
+    "text": "מה בדיוק אמרת כשהחזרת את הפסטה?"
+   },
+   {
+    "role": "user",
+    "text": "אמרתי למלצר: זה קר, תחממו בבקשה."
+   },
+   {
+    "role": "reporter",
+    "text": "ומה המלצר ענה?"
+   },
+   {
+    "role": "user",
+    "text": "הוא חימם אותה."
+   },
+   {
+    "role": "reporter",
+    "text": "למה דווקא היום ויתרת על ההתנצלות?"
+   },
+   {
+    "role": "user",
+    "text": "הבנתי שאנחנו מתנצלות יותר מדי גם כשמגיע לנו שירות."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "First unapologetic restaurant complaint; what she actually said carries the change",
+    "articleType": "feature"
+   },
+   {
+    "angle": "A first-ever unapologetic complaint, delivered in five plain Hebrew words",
+    "articleType": "feature"
+   },
+   {
+    "angle": "First unapologetic restaurant complaint met with a simple fix, not a confrontation",
+    "articleType": "feature"
+   },
+   {
+    "angle": "A cold pasta dish becomes Naama's first refusal to apologize for expecting service",
+    "articleType": "column"
+   }
+  ],
+  "articleType": "column",
+  "angle": "A cold pasta dish becomes Naama's first refusal to apologize for expecting service",
+  "draft": {
+   "headline": "בפעם הראשונה בחיי: החזרתי פסטה קרה בלי להתנצל",
+   "sub": "ביקשתי מהמלצר לחמם את המנה, והוא חימם אותה. הבנתי שאנחנו מתנצלות יותר מדי גם כשמגיע לנו שירות",
+   "summary": "נעמה ארד החזירה במסעדה צלחת פסטה קרה וביקשה לחמם אותה, לראשונה בחייה בלי להתנצל.",
+   "body": [
+    "החזרתי היום צלחת פסטה קרה במסעדה בלי להתנצל, בפעם הראשונה בחיי.",
+    "אמרתי למלצר שזה קר וביקשתי שיחמם. הוא חימם אותה.",
+    "הבנתי שאנחנו מתנצלות יותר מדי גם כשמגיע לנו שירות."
+   ],
+   "flash": "נעמה ארד החזירה פסטה קרה במסעדה וביקשה לחמם אותה",
+   "push": "החזרתי את הפסטה, ויתרתי על ההתנצלות",
+   "usedFacts": [],
+   "newFacts": []
+  },
+  "typeOk": true,
+  "checks": {
+   "reporter": [],
+   "draft": []
+  },
+  "revisions": {},
+  "judge": {
+   "israeli_feel": 4,
+   "human_feel": 3,
+   "hebrew_correctness": 5,
+   "gender_agreement": 5,
+   "type_fit": 3,
+   "interview_quality": 3,
+   "story_fidelity": true,
+   "question_presumes": false,
+   "buried_fact_surfaced": false,
+   "problems": [
+    "\"הבנתי שאנחנו מתנצלות יותר מדי גם כשמגיע לנו שירות.\" ends the piece with a moral rather than a developed column.",
+    "\"נעמה ארד החזירה פסטה קרה במסעדה וביקשה לחמם אותה\" drops the distinctive no-apology hook from the flash.",
+    "\"ומה המלצר ענה?\" is relevant but the interview never follows up on the personal history behind this first.",
+    "\"החזרתי היום צלחת פסטה קרה במסעדה בלי להתנצל, בפעם הראשונה בחיי.\" largely repeats the headline; the body is a transcript condensation rather than a developed column."
+   ]
+  }
+ },
+ {
+  "id": "profile_watch",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?"
+   },
+   {
+    "role": "user",
+    "text": "הדוד שלי יוסי מתקן שעונים מ-1978 באותה חנות בשוק הכרמל"
+   },
+   {
+    "role": "reporter",
+    "text": "איזה שעון הכי ותיק עדיין מגיע ליוסי לתיקון?"
+   },
+   {
+    "role": "user",
+    "text": "לא ממש זוכר."
+   },
+   {
+    "role": "reporter",
+    "text": "כשאתה נכנס לחנות של יוסי, מה הוא אומר?"
+   },
+   {
+    "role": "user",
+    "text": "פעם הוא אמר לי: ״שעון זה לא מכונה, זה זמן שמישהו סומך עליך״."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "Nearly five decades of watch repairs in one market shop",
+    "articleType": "profile"
+   },
+   {
+    "angle": "Yossi's enduring watch repair shop amid changing times",
+    "articleType": "profile"
+   },
+   {
+    "angle": "Since 1978, Yossi repairs not just watches but time people entrust to him",
+    "articleType": "profile"
+   }
+  ],
+  "articleType": "profile",
+  "angle": "Since 1978, Yossi repairs not just watches but time people entrust to him",
+  "draft": {
+   "headline": "מאז 1978 באותה חנות: יוסי מתקן שעונים בשוק הכרמל",
+   "sub": "מיכאל מספר על הדוד יוסי ועל הגישה שלו לתיקון: \"שעון זה לא מכונה, זה זמן שמישהו סומך עליך\", אמר לאחיינו",
+   "summary": "יוסי, דודו של מיכאל דנינו, מתקן שעונים מאז 1978 באותה חנות בשוק הכרמל.",
+   "body": [
+    "באחת הפעמים אמר יוסי לאחיינו מיכאל דנינו: \"שעון זה לא מכונה, זה זמן שמישהו סומך עליך\".",
+    "יוסי, דודו של מיכאל, מתקן שעונים מ-1978 באותה חנות בשוק הכרמל."
+   ],
+   "flash": "מיכאל דנינו סיפר על דודו יוסי, שמתקן שעונים מ-1978",
+   "push": "יוסי לאחיינו: \"שעון זה לא מכונה, זה זמן שמישהו סומך עליך\"",
+   "usedFacts": [],
+   "newFacts": [
+    {
+     "k": "דוד",
+     "v": "יוסי, מתקן שעונים מ-1978 באותה חנות בשוק הכרמל"
+    }
+   ]
+  },
+  "typeOk": true,
+  "checks": {
+   "reporter": [],
+   "draft": []
+  },
+  "revisions": {},
+  "judge": {
+   "israeli_feel": 4,
+   "human_feel": 3,
+   "hebrew_correctness": 5,
+   "gender_agreement": 5,
+   "type_fit": 3,
+   "interview_quality": 2,
+   "story_fidelity": true,
+   "question_presumes": false,
+   "buried_fact_surfaced": false,
+   "problems": [
+    "\"כשאתה נכנס לחנות של יוסי, מה הוא אומר?\" seeks a stock quote rather than following up on his work or principles.",
+    "\"יוסי, דודו של מיכאל, מתקן שעונים מ-1978 באותה חנות בשוק הכרמל.\" repeats the headline and summary; the profile has no further development.",
+    "\"מיכאל דנינו סיפר על דודו יוסי, שמתקן שעונים מ-1978\" is a flat flash without the shop detail or a distinctive hook."
+   ]
+  }
+ },
+ {
+  "id": "interview_driving_teacher",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?"
+   },
+   {
+    "role": "user",
+    "text": "המורה לנהיגה שלי פרש היום אחרי 31 שנה, הוא הביא עוגה לכולם ונאום קצר, ובסוף כולנו בכינו קצת"
+   },
+   {
+    "role": "reporter",
+    "text": "מה הוא אמר בנאום שגרם לכולכם לבכות?"
+   },
+   {
+    "role": "user",
+    "text": "הוא אמר שהתלמיד הכי קשה שלו היה אחי, וזה ממש ריגש אותנו."
+   },
+   {
+    "role": "reporter",
+    "text": "מה אחיך עשה בשיעורים שזיכה אותו בתואר?"
+   },
+   {
+    "role": "user",
+    "text": "לא ממש יודעת, הוא רק אמר שאחי היה התלמיד הכי קשה שלו."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "Driving instructor's 31-year career ends with cake and shared tears",
+    "articleType": "feature"
+   },
+   {
+    "angle": "Retiring instructor singles out her brother as his hardest student in an emotional farewell",
+    "articleType": "feature"
+   },
+   {
+    "angle": "After 31 years teaching, instructor's farewell tribute to her brother brings shared tears",
+    "articleType": "feature"
+   }
+  ],
+  "articleType": "feature",
+  "angle": "After 31 years teaching, instructor's farewell tribute to her brother brings shared tears",
+  "draft": {
+   "headline": "אחרי 31 שנה: מורה הנהיגה של שיר פרש והזכיר את התלמיד הכי קשה",
+   "sub": "המורה הביא עוגה לכולם ונשא נאום קצר. התלמיד שהזכיר היה אחיה של שיר, והפרידה הסתיימה בדמעות משותפות",
+   "summary": "מורה הנהיגה של שיר אלון פרש אחרי 31 שנה והזכיר בנאום הפרידה את אחיה כתלמידו הקשה ביותר.",
+   "body": [
+    "מורה הנהיגה של שיר אלון הביא היום עוגה לכולם ונשא נאום קצר לרגל פרישתו אחרי 31 שנה. בנאום הוא אמר שהתלמיד הכי קשה שלו היה אחיה של שיר.",
+    "האזכור ריגש את שיר ואת הנוכחים. \"ובסוף כולנו בכינו קצת\", סיפרה."
+   ],
+   "flash": "מורה הנהיגה של שיר אלון פרש אחרי 31 שנה",
+   "push": "פרש אחרי 31 שנה: מורה הנהיגה הזכיר את אחיה של שיר",
+   "usedFacts": [],
+   "newFacts": []
+  },
+  "typeOk": true,
+  "checks": {
+   "reporter": [
+    "repeated opener word: מה אחיך עשה בשיעורים שזיכה אותו בתואר?"
+   ],
+   "draft": []
+  },
+  "revisions": {},
+  "judge": {
+   "israeli_feel": 4,
+   "human_feel": 4,
+   "hebrew_correctness": 5,
+   "gender_agreement": 5,
+   "type_fit": 3,
+   "interview_quality": 4,
+   "story_fidelity": true,
+   "question_presumes": false,
+   "buried_fact_surfaced": false,
+   "problems": [
+    "The push, \"מורה הנהיגה הזכיר את אחיה של שיר\", omits the actual hook: he called her brother his hardest student.",
+    "The headline phrase \"התלמיד הכי קשה\" supplies an angle, but the two-paragraph story never develops it enough for a feature."
+   ]
+  }
+ },
+ {
+  "id": "flash_parking",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?"
+   },
+   {
+    "role": "user",
+    "text": "קיבלתי היום דוח חניה על חניה שבדיוק שילמתי עליה"
+   },
+   {
+    "role": "reporter",
+    "text": "מה נרשם קודם, התשלום או הדוח?"
+   },
+   {
+    "role": "user",
+    "text": "התשלום נרשם קודם, ב-9:02, והדוח ב-9:05."
+   },
+   {
+    "role": "reporter",
+    "text": "על איזו עבירה הדוח, חניה בלי תשלום?"
+   },
+   {
+    "role": "user",
+    "text": "כן, על חניה בלי תשלום."
+   },
+   {
+    "role": "reporter",
+    "text": "ומה עשית עם הדוח והאישור מ־9:02?"
+   },
+   {
+    "role": "user",
+    "text": "לא זוכר מה עשיתי איתם."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "Paid parking still produced a ticket; timing may explain the contradiction",
+    "articleType": "quirky"
+   },
+   {
+    "angle": "Parking ticket issued three minutes after payment was registered",
+    "articleType": "quirky"
+   },
+   {
+    "angle": "Charged with unpaid parking three minutes after paying; documented contradiction",
+    "articleType": "quirky"
+   },
+   {
+    "angle": "Unpaid-parking ticket issued three minutes after payment was registered",
+    "articleType": "quirky"
+   }
+  ],
+  "articleType": "quirky",
+  "angle": "Unpaid-parking ticket issued three minutes after payment was registered",
+  "draft": {
+   "headline": "3 דקות אחרי שהתשלום נרשם: אסף קיבל דוח על חניה בלי תשלום",
+   "sub": "התשלום נרשם ב-9:02, הדוח ב-9:05. בשניהם דובר באותה חניה שעליה אסף כבר שילם",
+   "summary": "אסף ברגר קיבל דוח על חניה בלי תשלום, 3 דקות אחרי שתשלום החניה נרשם.",
+   "body": [
+    "התשלום על החניה של אסף ברגר נרשם היום ב-9:02. ב-9:05 נרשם לו דוח על חניה בלי תשלום.",
+    "\"התשלום נרשם קודם, ב-9:02, והדוח ב-9:05.\", סיפר אסף."
+   ],
+   "flash": "אסף ברגר קיבל היום דוח על חניה שכבר שילם עליה",
+   "push": "אסף שילם על החניה, וכעבור 3 דקות קיבל דוח",
+   "usedFacts": [],
+   "newFacts": []
+  },
+  "typeOk": true,
+  "checks": {
+   "reporter": [],
+   "draft": []
+  },
+  "revisions": {},
+  "judge": {
+   "israeli_feel": 4,
+   "human_feel": 3,
+   "hebrew_correctness": 4,
+   "gender_agreement": 5,
+   "type_fit": 4,
+   "interview_quality": 3,
+   "story_fidelity": true,
+   "question_presumes": true,
+   "buried_fact_surfaced": false,
+   "problems": [
+    "'ומה עשית עם הדוח והאישור מ־9:02?' presumes a confirmation document that the user never mentioned.",
+    "'בשניהם דובר באותה חניה' is stiff and unnatural news Hebrew.",
+    "'והדוח ב-9:05.\", סיפר אסף.' incorrectly combines a period inside the quotation with a comma outside it.",
+    "'התשלום נרשם' is repeated across the headline, subheadline, summary and body without developing the story."
+   ]
+  }
+ },
+ {
+  "id": "sports_kids",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?"
+   },
+   {
+    "role": "user",
+    "text": "הבת שלי בת 9 קלעה סל ראשון בקריירה במשחק הליגה"
+   },
+   {
+    "role": "reporter",
+    "text": "כמה זמן היא משחקת עד שהגיע הסל הראשון?"
+   },
+   {
+    "role": "user",
+    "text": "אחרי 14 משחקים בלי לקלוע נקודה."
+   },
+   {
+    "role": "reporter",
+    "text": "ומה היא עשתה כשהסל נכנס?"
+   },
+   {
+    "role": "user",
+    "text": "לא זוכר בדיוק."
+   },
+   {
+    "role": "reporter",
+    "text": "איך קוראים לבת שלך?"
+   },
+   {
+    "role": "user",
+    "text": "לא ממש משנה."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "A nine-year-old's first league basket ends a wait of unknown length.",
+    "articleType": "sports_report"
+   },
+   {
+    "angle": "Fourteen scoreless games ended with a nine-year-old's first league basket.",
+    "articleType": "sports_report"
+   },
+   {
+    "angle": "A nine-year-old broke a 14-game scoring drought with her first league basket.",
+    "articleType": "sports_report"
+   },
+   {
+    "angle": "A nine-year-old ended a 14-game scoring drought with her first league basket.",
+    "articleType": "sports_report"
+   }
+  ],
+  "articleType": "sports_report",
+  "angle": "A nine-year-old ended a 14-game scoring drought with her first league basket.",
+  "draft": {
+   "headline": "אחרי 14 משחקים ללא נקודה: בתו של גלעד קלעה סל ראשון",
+   "sub": "בת ה-9 קלעה את הסל הראשון בקריירה במשחק ליגה, אחרי 14 משחקים שבהם לא קלעה נקודה",
+   "summary": "בתו בת ה-9 של גלעד פרידמן קלעה סל ראשון בקריירה במשחק ליגה, אחרי 14 משחקים ללא נקודה.",
+   "body": [
+    "בתו בת ה-9 של גלעד פרידמן קלעה את הסל הראשון בקריירה במשחק ליגה, ושברה רצף של 14 משחקים ללא נקודה.",
+    "הסל פתח את מאזן הנקודות שלה. \"אחרי 14 משחקים בלי לקלוע נקודה.\", סיפר גלעד."
+   ],
+   "flash": "בתו של גלעד פרידמן קלעה סל ראשון בקריירה במשחק ליגה",
+   "push": "בת 9 שברה בצורת: סל ראשון אחרי 14 משחקים",
+   "usedFacts": [],
+   "newFacts": [
+    {
+     "k": "בת",
+     "v": "בת 9, משחקת כדורסל בליגה"
+    }
+   ]
+  },
+  "typeOk": true,
+  "checks": {
+   "reporter": [],
+   "draft": []
+  },
+  "revisions": {},
+  "judge": {
+   "israeli_feel": 4,
+   "human_feel": 3,
+   "hebrew_correctness": 4,
+   "gender_agreement": 5,
+   "type_fit": 4,
+   "interview_quality": 3,
+   "story_fidelity": true,
+   "question_presumes": false,
+   "buried_fact_surfaced": false,
+   "problems": [
+    "\"כמה זמן היא משחקת עד שהגיע הסל הראשון?\" mixes present and past awkwardly.",
+    "\"הסל פתח את מאזן הנקודות שלה\" is redundant padding after the lede.",
+    "\"אחרי 14 משחקים בלי לקלוע נקודה.\", uses an unnecessary period before the closing quotation mark and comma.",
+    "\"איך קוראים לבת שלך?\" abandons the sporting angle for an administrative detail."
+   ]
+  }
+ },
+ {
+  "id": "column_train",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?"
+   },
+   {
+    "role": "user",
+    "text": "אני כבר חצי שנה נוסע ברכבת במקום באוטו וזה שינה לי את הבוקר"
+   },
+   {
+    "role": "reporter",
+    "text": "מה אתה עושה ברכבת שלא יכולת באוטו?"
+   },
+   {
+    "role": "user",
+    "text": "אני קורא שם ספר בשבוע."
+   },
+   {
+    "role": "reporter",
+    "text": "וכמה ספרים קראת כשעוד נסעת באוטו?"
+   },
+   {
+    "role": "user",
+    "text": "לא זוכר כמה."
+   },
+   {
+    "role": "reporter",
+    "text": "איזה ספר פתוח אצלך עכשיו ברכבת?"
+   },
+   {
+    "role": "user",
+    "text": "לא זוכר איזה ספר בדיוק."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "Six months off the road changed the morning routine.",
+    "articleType": "feature"
+   },
+   {
+    "angle": "Trading the car for the train created a book-a-week reading habit.",
+    "articleType": "feature"
+   },
+   {
+    "angle": "The train commute turned travel time into a book a week.",
+    "articleType": "feature"
+   },
+   {
+    "angle": "Six months commuting by train made room for a book a week.",
+    "articleType": "feature"
+   }
+  ],
+  "articleType": "feature",
+  "angle": "Six months commuting by train made room for a book a week.",
+  "draft": {
+   "headline": "חצי שנה בלי האוטו בבוקר: דן קורא ספר בשבוע ברכבת",
+   "sub": "הנסיעה קיבלה תפקיד נוסף מאז המעבר מהאוטו. \"זה שינה לי את הבוקר\", סיפר דן",
+   "summary": "דן מימון נוסע כבר חצי שנה ברכבת במקום באוטו וקורא בה ספר בשבוע.",
+   "body": [
+    "בדרך ברכבת, דן מימון קרא ספר בשבוע. הנסיעות החליפו את הנסיעה באוטו כבר לפני חצי שנה.",
+    "\"אני כבר חצי שנה נוסע ברכבת במקום באוטו וזה שינה לי את הבוקר\", סיפר."
+   ],
+   "flash": "דן מימון עבר מאוטו לרכבת לפני חצי שנה",
+   "push": "דן החליף את האוטו ברכבת והספיק ספר בשבוע",
+   "usedFacts": [],
+   "newFacts": [
+    {
+     "k": "תחביב",
+     "v": "קריאה, ספר בשבוע בנסיעות ברכבת"
+    }
+   ]
+  },
+  "typeOk": true,
+  "checks": {
+   "reporter": [],
+   "draft": []
+  },
+  "revisions": {},
+  "judge": {
+   "israeli_feel": 3,
+   "human_feel": 3,
+   "hebrew_correctness": 3,
+   "gender_agreement": 5,
+   "type_fit": 2,
+   "interview_quality": 2,
+   "story_fidelity": true,
+   "question_presumes": false,
+   "buried_fact_surfaced": false,
+   "problems": [
+    "\"הנסיעות החליפו את הנסיעה באוטו\" is repetitive and unnatural Hebrew.",
+    "\"דן מימון קרא ספר בשבוע\" shifts an ongoing habit into the past without reason.",
+    "\"וכמה ספרים קראת כשעוד נסעת באוטו?\" pursues a numerical comparison rather than exploring the changed morning.",
+    "\"הנסיעה קיבלה תפקיד נוסף\" is abstract padding; the two-paragraph body repeats the premise instead of developing a feature."
+   ]
+  }
+ }
+]

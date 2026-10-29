@@ -1,0 +1,946 @@
+[
+ {
+  "id": "first_10k",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?",
+    "generated": false
+   },
+   {
+    "role": "user",
+    "text": "סיימתי היום את הריצה הראשונה שלי של 10 קילומטר"
+   },
+   {
+    "role": "reporter",
+    "text": "ועד היום, באיזה מרחק היית נעצרת?",
+    "generated": true
+   },
+   {
+    "role": "user",
+    "text": "בקילומטר השמיני כבר רציתי לעצור."
+   },
+   {
+    "role": "reporter",
+    "text": "מה החזיק אותך בריצה אחרי הקילומטר השמיני?",
+    "generated": true
+   },
+   {
+    "role": "user",
+    "text": "חבר צעק לי: „עוד קצת, יש שם קפה“, וזה נתן לי כוח להמשיך."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "First ten-kilometer run breaks a previous distance barrier",
+    "articleType": "sports_report"
+   },
+   {
+    "angle": "First ten kilometers depended on pushing past the urge to stop at eight",
+    "articleType": "sports_report"
+   },
+   {
+    "angle": "A friend's shout about coffee carried Noa through her first ten-kilometer run",
+    "articleType": "sports_report"
+   }
+  ],
+  "articleType": "sports_report",
+  "angle": "A friend's shout about coffee carried Noa through her first ten-kilometer run",
+  "draft": {
+   "headline": "בזכות הקריאה על הקפה: נועה השלימה לראשונה ריצת 10 קילומטר",
+   "sub": "בקילומטר השמיני היא כבר רצתה לעצור. חבר צעק לה שיש קפה בהמשך, והיא מצאה כוח להמשיך",
+   "summary": "נועה בר סיימה היום לראשונה ריצה של 10 קילומטר, בעידודו של חבר.",
+   "body": [
+    "נועה בר השלימה היום לראשונה ריצת 10 קילומטר. בקילומטר השמיני היא כבר רצתה לעצור.",
+    "\"עוד קצת, יש שם קפה\", צעק לה חבר. הקריאה נתנה לה כוח להמשיך עד להשלמת המרחק."
+   ],
+   "flash": "נועה בר רצתה לעצור בקילומטר השמיני והשלימה 10 קילומטר",
+   "push": "\"עוד קצת, יש שם קפה\": הקריאה שהחזיקה את נועה בריצה",
+   "usedFacts": [],
+   "newFacts": []
+  },
+  "typeOk": true,
+  "checks": {
+   "reporter": [],
+   "draft": []
+  },
+  "revisions": {
+   "funnier": {
+    "draft": {
+     "headline": "10 קילומטר לראשונה: נועה רצתה לעצור, החבר הזכיר קפה",
+     "sub": "בקילומטר השמיני היא כבר רצתה לעצור. הקריאה \"עוד קצת, יש שם קפה\" נתנה לה כוח להמשיך",
+     "summary": "נועה בר השלימה היום את ריצת 10 הקילומטרים הראשונה שלה לאחר שחבר עודד אותה בקריאה על קפה",
+     "body": [
+      "נועה בר השלימה היום לראשונה ריצה של 10 קילומטר. בקילומטר השמיני היא כבר רצתה לעצור, ואז חבר צעק לה על קפה בהמשך.",
+      "\"עוד קצת, יש שם קפה\", צעק החבר. לדבריה, זה נתן לה כוח להמשיך"
+     ],
+     "flash": "נועה בר השלימה 10 קילומטר אחרי קריאת עידוד על קפה",
+     "push": "נועה רצתה לעצור: \"עוד קצת, יש שם קפה\"",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "dramatic": {
+    "draft": {
+     "headline": "בקילומטר השמיני רצתה לעצור: נועה המשיכה עד ל-10 בזכות קריאה על קפה",
+     "sub": "בריצת 10 הקילומטר הראשונה שלה, נועה כבר רצתה לעצור בקילומטר השמיני. אז חבר צעק משפט שנתן לה כוח להמשיך",
+     "summary": "נועה בר השלימה היום ריצת 10 קילומטר ראשונה אחרי שקריאה של חבר על קפה נתנה לה כוח להמשיך",
+     "body": [
+      "נועה בר סיימה היום לראשונה ריצה של 10 קילומטר. בקילומטר השמיני היא כבר רצתה לעצור, אבל קריאה של חבר נתנה לה כוח להמשיך",
+      "החבר צעק לה: \"עוד קצת, יש שם קפה\""
+     ],
+     "flash": "נועה בר השלימה 10 קילומטר אחרי עידוד של חבר על קפה",
+     "push": "נועה רצתה לעצור בקילומטר השמיני, ואז חבר צעק לה",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "restrained": {
+    "draft": {
+     "headline": "נועה סיימה היום לראשונה ריצה של 10 קילומטר",
+     "sub": "קריאה של חבר על קפה בהמשך נתנה לה כוח להמשיך אחרי שבקילומטר השמיני רצתה לעצור",
+     "summary": "נועה בר השלימה היום את ריצת 10 הקילומטרים הראשונה שלה",
+     "body": [
+      "נועה בר סיימה היום לראשונה ריצה של 10 קילומטר. בקילומטר השמיני היא רצתה לעצור.",
+      "\"עוד קצת, יש שם קפה\", צעק לה חבר. לדבריה, הקריאה נתנה לה כוח להמשיך."
+     ],
+     "flash": "נועה בר רצתה לעצור בקילומטר השמיני והשלימה 10 קילומטר",
+     "push": "קריאה של חבר על קפה עזרה לנועה להמשיך בריצה",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "concise": {
+    "draft": {
+     "headline": "הקריאה על הקפה עזרה: נועה סיימה לראשונה 10 קילומטר",
+     "sub": "בקילומטר השמיני היא רצתה לעצור, עד שחבר צעק על קפה בהמשך",
+     "summary": "נועה בר סיימה היום את ריצת 10 הקילומטר הראשונה שלה",
+     "body": [
+      "נועה בר סיימה היום לראשונה ריצת 10 קילומטר. בקילומטר השמיני היא רצתה לעצור, אבל קריאה של חבר נתנה לה כוח להמשיך.",
+      "\"עוד קצת, יש שם קפה\", צעק לה החבר"
+     ],
+     "flash": "נועה בר רצתה לעצור בקילומטר השמיני",
+     "push": "\"עוד קצת, יש שם קפה\": נועה המשיכה",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "headline": {
+    "draft": {
+     "headline": "\"עוד קצת, יש שם קפה\": נועה סיימה לראשונה ריצת 10 קילומטר",
+     "sub": "בקילומטר השמיני היא כבר רצתה לעצור. חבר צעק לה שיש קפה בהמשך, והיא מצאה כוח להמשיך",
+     "summary": "נועה בר סיימה היום לראשונה ריצה של 10 קילומטר, בעידודו של חבר.",
+     "body": [
+      "נועה בר השלימה היום לראשונה ריצת 10 קילומטר. בקילומטר השמיני היא כבר רצתה לעצור.",
+      "\"עוד קצת, יש שם קפה\", צעק לה חבר. הקריאה נתנה לה כוח להמשיך עד להשלמת המרחק."
+     ],
+     "flash": "נועה בר רצתה לעצור בקילומטר השמיני והשלימה 10 קילומטר",
+     "push": "\"עוד קצת, יש שם קפה\": הקריאה שהחזיקה את נועה בריצה",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "alternate": {
+    "draft": {
+     "headline": "10 קילומטר בפעם הראשונה: נועה המשיכה אחרי הקריאה על הקפה",
+     "sub": "היא רצתה לעצור בקילומטר השמיני, ואז הגיע העידוד מחבר: \"עוד קצת, יש שם קפה\"",
+     "summary": "נועה בר השלימה היום ריצת 10 קילומטר ראשונה אחרי שקריאה של חבר נתנה לה כוח להמשיך",
+     "body": [
+      "נועה בר סיימה היום לראשונה ריצה של 10 קילומטר. הרצון לעצור הגיע בקילומטר השמיני, אבל היא המשיכה והשלימה את המרחק.",
+      "\"עוד קצת, יש שם קפה\", צעק לה חבר. לדבריה, הקריאה נתנה לה כוח להמשיך."
+     ],
+     "flash": "נועה בר השלימה 10 קילומטר אחרי עידוד בקריאה על קפה",
+     "push": "רצתה לעצור, שמעה שיש קפה והמשיכה ל-10 קילומטר",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "type": {
+    "draft": {
+     "headline": "בקילומטר השמיני רציתי לעצור: קריאה על קפה החזיקה אותי עד 10",
+     "sub": "סיימתי היום לראשונה ריצה של 10 קילומטר. בדרך, כשכבר רציתי לעצור, חבר צעק לי שיש שם קפה ונתן לי כוח להמשיך",
+     "summary": "נועה בר השלימה היום את ריצת 10 הקילומטר הראשונה שלה אחרי שחבר עודד אותה בקריאה על קפה",
+     "body": [
+      "בקילומטר השמיני כבר רציתי לעצור. זאת הייתה הריצה הראשונה שלי של 10 קילומטר, והיום סיימתי אותה",
+      "חבר צעק לי: עוד קצת, יש שם קפה. וזה נתן לי כוח להמשיך"
+     ],
+     "flash": "נועה בר המשיכה מקילומטר 8 אחרי קריאה של חבר על קפה",
+     "push": "רציתי לעצור, אבל הקריאה על הקפה נתנה לי כוח להמשיך",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   }
+  },
+  "judge": {
+   "israeli_feel": 5,
+   "human_feel": 4,
+   "hebrew_correctness": 5,
+   "gender_agreement": 5,
+   "type_fit": 4,
+   "interview_quality": 4,
+   "story_fidelity": true,
+   "question_presumes": false,
+   "buried_fact_surfaced": false,
+   "problems": [
+    "The opening follow-up, \"ועד היום, באיזה מרחק היית נעצרת?\", assumes a habitual stopping point rather than asking about her training progression.",
+    "\"נועה בר השלימה היום לראשונה ריצת 10 קילומטר\" repeats the headline and summary; the sports report remains a thin brief.",
+    "The questions pursue \"מה החזיק אותך בריצה אחרי הקילומטר השמיני?\" but never uncover the four-month progression or her sister's final kilometer."
+   ]
+  }
+ },
+ {
+  "id": "driving_test",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?",
+    "generated": false
+   },
+   {
+    "role": "user",
+    "text": "עברתי טסט! בפעם הרביעית"
+   },
+   {
+    "role": "reporter",
+    "text": "מה היה שונה בטסט הרביעי?",
+    "generated": true
+   },
+   {
+    "role": "user",
+    "text": "הבוחן אמר לי רק ״עברת״, בלי חיוך."
+   },
+   {
+    "role": "reporter",
+    "text": "ומה ענית לבוחן?",
+    "generated": true
+   },
+   {
+    "role": "user",
+    "text": "לא עניתי משהו מיוחד."
+   },
+   {
+    "role": "reporter",
+    "text": "על מה נכשלת בטסטים הקודמים?",
+    "generated": true
+   },
+   {
+    "role": "user",
+    "text": "בטסט הראשון נכשלתי כי עברתי שלט עצור; על השניים האחרים אני לא זוכר בדיוק."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "Fourth attempt succeeded; what changed after three failures",
+    "articleType": "feature"
+   },
+   {
+    "angle": "Fourth-attempt victory met with a completely deadpan examiner",
+    "articleType": "feature"
+   },
+   {
+    "angle": "Fourth attempt ended three failures; the earlier obstacle remains unclear",
+    "articleType": "feature"
+   },
+   {
+    "angle": "Fourth-attempt pass after a stop-sign failure, delivered with a deadpan verdict",
+    "articleType": "news_brief"
+   }
+  ],
+  "articleType": "news_brief",
+  "angle": "Fourth-attempt pass after a stop-sign failure, delivered with a deadpan verdict",
+  "draft": {
+   "headline": "בפעם הרביעית: איתי עבר טסט, הבוחן הסתפק במילה אחת",
+   "sub": "בטסט הראשון הוא נכשל בגלל שלט עצור. ברביעי שמע מהבוחן רק \"עברת\", בלי חיוך",
+   "summary": "איתי מזרחי עבר את מבחן הנהיגה בניסיון הרביעי.",
+   "body": [
+    "איתי מזרחי עבר טסט בפעם הרביעית. בטסט הראשון הוא נכשל כי עבר שלט עצור.",
+    "\"הבוחן אמר לי רק ׳עברת׳, בלי חיוך\", סיפר איתי."
+   ],
+   "flash": "איתי מזרחי עבר טסט בניסיון הרביעי",
+   "push": "איתי עבר טסט: הבוחן אמר \"עברת\", בלי חיוך",
+   "usedFacts": [],
+   "newFacts": []
+  },
+  "typeOk": false,
+  "checks": {
+   "reporter": [],
+   "draft": []
+  },
+  "revisions": {
+   "funnier": {
+    "draft": {
+     "headline": "בטסט הרביעי: איתי עבר, הבוחן לא חייך",
+     "sub": "אחרי שבטסט הראשון נכשל כי עבר שלט עצור, איתי מזרחי עבר בניסיון הרביעי וקיבל מהבוחן הודעה בת מילה אחת",
+     "summary": "איתי מזרחי עבר טסט בפעם הרביעית, לאחר שנכשל בראשון בגלל מעבר שלט עצור",
+     "body": [
+      "איתי מזרחי עבר את מבחן הנהיגה בניסיון הרביעי. הבוחן אמר לו רק \"עברת\", בלי חיוך",
+      "בטסט הראשון הוא נכשל כי עבר שלט עצור"
+     ],
+     "flash": "איתי מזרחי קיבל מהבוחן \"עברת\", בלי חיוך",
+     "push": "איתי עבר ברביעי: הבוחן הסתפק ב\"עברת\", בלי חיוך",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "dramatic": {
+    "draft": {
+     "headline": "שלושה כישלונות, ואז מילה אחת: איתי עבר בטסט הרביעי",
+     "sub": "הניסיון הראשון נגמר בכישלון אחרי שעבר שלט עצור. ברביעי הגיע פסק הדין של הבוחן, בלי חיוך",
+     "summary": "איתי מזרחי עבר את מבחן הנהיגה בניסיון הרביעי",
+     "body": [
+      "איתי מזרחי עבר טסט בניסיון הרביעי, אחרי שלושה כישלונות. בראשון הוא נכשל כי עבר שלט עצור.",
+      "גם כשהגיעה התשובה החיובית, הבוחן לא חייך. הוא אמר לאיתי רק \"עברת\""
+     ],
+     "flash": "איתי מזרחי עבר את הטסט הרביעי, אחרי כישלון בראשון בגלל שלט עצור",
+     "push": "איתי עבר ברביעי: הבוחן סגר את העניין במילה אחת",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "restrained": {
+    "draft": {
+     "headline": "בניסיון הרביעי: איתי עבר את מבחן הנהיגה",
+     "sub": "הבוחן הודיע לאיתי על המעבר במילה \"עברת\", בלי חיוך",
+     "summary": "איתי מזרחי עבר טסט לאחר שנכשל בשלושה ניסיונות קודמים",
+     "body": [
+      "איתי מזרחי עבר את מבחן הנהיגה בניסיון הרביעי. בטסט הראשון הוא נכשל כי עבר שלט עצור",
+      "הבוחן אמר לו רק \"עברת\", בלי חיוך"
+     ],
+     "flash": "איתי מזרחי עבר טסט בפעם הרביעית",
+     "push": "איתי עבר טסט, הבוחן הודיע על כך בלי לחייך",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "concise": {
+    "draft": {
+     "headline": "בטסט הרביעי: איתי עבר, הבוחן נשאר בלי חיוך",
+     "sub": "בראשון נכשל בגלל שלט עצור; ברביעי הבוחן הסתפק ב\"עברת\"",
+     "summary": "איתי מזרחי עבר טסט בפעם הרביעית",
+     "body": [
+      "איתי מזרחי עבר טסט בניסיון הרביעי. בראשון נכשל כי עבר שלט עצור.",
+      "\"עברת\", אמר לו הבוחן, בלי חיוך"
+     ],
+     "flash": "איתי מזרחי עבר טסט בניסיון הרביעי",
+     "push": "הבוחן לאיתי: \"עברת\", בלי חיוך",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "headline": {
+    "draft": {
+     "headline": "איתי עבר טסט בניסיון הרביעי - הבוחן לא חייך",
+     "sub": "בטסט הראשון הוא נכשל בגלל שלט עצור. ברביעי שמע מהבוחן רק \"עברת\", בלי חיוך",
+     "summary": "איתי מזרחי עבר את מבחן הנהיגה בניסיון הרביעי.",
+     "body": [
+      "איתי מזרחי עבר טסט בפעם הרביעית. בטסט הראשון הוא נכשל כי עבר שלט עצור.",
+      "\"הבוחן אמר לי רק ׳עברת׳, בלי חיוך\", סיפר איתי."
+     ],
+     "flash": "איתי מזרחי עבר טסט בניסיון הרביעי",
+     "push": "איתי עבר טסט: הבוחן אמר \"עברת\", בלי חיוך",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "alternate": {
+    "draft": {
+     "headline": "אחרי הכישלון בשלט עצור: איתי עבר בטסט הרביעי",
+     "sub": "ההודעה מהבוחן הייתה קצרה: רק \"עברת\", בלי חיוך. איתי לא השיב משהו מיוחד",
+     "summary": "איתי מזרחי עבר טסט בניסיון הרביעי, לאחר שבטסט הראשון נכשל בגלל מעבר שלט עצור",
+     "body": [
+      "איתי מזרחי עבר את מבחן הנהיגה בפעם הרביעית. את הטסט הראשון סיים בכישלון, לאחר שעבר שלט עצור",
+      "הבוחן אמר לו רק \"עברת\", בלי חיוך, סיפר איתי. הוא לא השיב משהו מיוחד"
+     ],
+     "flash": "איתי מזרחי עבר את מבחן הנהיגה בפעם הרביעית",
+     "push": "הבוחן אמר לאיתי רק \"עברת\", בלי חיוך",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "type": {
+    "draft": {
+     "headline": "עברתי טסט בפעם הרביעית: הבוחן בישר לי בלי חיוך",
+     "sub": "בראשון נכשלתי כי עברתי שלט עצור. בניסיון הרביעי הבוחן הסתפק במילה אחת: עברת",
+     "summary": "איתי מזרחי עבר טסט בניסיון הרביעי, אחרי שבטסט הראשון נכשל בגלל שלט עצור",
+     "body": [
+      "בטסט הראשון נכשלתי כי עברתי שלט עצור. בפעם הרביעית עברתי את הטסט",
+      "הבוחן אמר לי רק עברת, בלי חיוך"
+     ],
+     "flash": "איתי מזרחי עבר בטסט הרביעי וקיבל מהבוחן הודעה בלי חיוך",
+     "push": "עברתי ברביעי: הבוחן הסתפק במילה אחת, בלי חיוך",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   }
+  },
+  "judge": {
+   "israeli_feel": 5,
+   "human_feel": 4,
+   "hebrew_correctness": 5,
+   "gender_agreement": 5,
+   "type_fit": 4,
+   "interview_quality": 4,
+   "story_fidelity": true,
+   "question_presumes": false,
+   "buried_fact_surfaced": true,
+   "problems": [
+    "The flash \"איתי מזרחי עבר טסט בניסיון הרביעי\" drops the examiner's deadpan hook.",
+    "The body repeats \"איתי מזרחי עבר טסט בפעם הרביעית\" rather than developing the personal angle; the mother's reaction was never pursued."
+   ]
+  }
+ },
+ {
+  "id": "new_sofa",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?",
+    "generated": false
+   },
+   {
+    "role": "user",
+    "text": "הספה הגיעה אחרי שלושה שבועות על כריות"
+   },
+   {
+    "role": "reporter",
+    "text": "מה עיכב את המשלוח של הספה?",
+    "generated": true
+   },
+   {
+    "role": "user",
+    "text": "המשלוח התעכב פעמיים, ובסוף השליח נתקע במעלית עם הספה."
+   },
+   {
+    "role": "reporter",
+    "text": "איך נגמרה התקיעה במעלית עם הספה?",
+    "generated": true
+   },
+   {
+    "role": "user",
+    "text": "השליח יצא בסוף."
+   },
+   {
+    "role": "reporter",
+    "text": "והספה, איפה היא עכשיו?",
+    "generated": true
+   },
+   {
+    "role": "user",
+    "text": "היא בסלון, עדיין עטופה בניילון."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "Delayed sofa ends three weeks of sitting on cushions",
+    "articleType": "news_brief"
+   },
+   {
+    "angle": "After weeks on cushions, sofa and courier get stuck in elevator",
+    "articleType": "quirky"
+   },
+   {
+    "angle": "Courier escaped the elevator, but the long-awaited sofa's arrival remains unresolved",
+    "articleType": "quirky"
+   },
+   {
+    "angle": "Three weeks on cushions ended with a sofa still wrapped in plastic",
+    "articleType": "quirky"
+   }
+  ],
+  "articleType": "quirky",
+  "angle": "Three weeks on cushions ended with a sofa still wrapped in plastic",
+  "draft": {
+   "headline": "אחרי שלושה שבועות על כריות: הספה של רוני הגיעה ונשארה בניילון",
+   "sub": "המשלוח התעכב פעמיים, ובסוף השליח נתקע במעלית עם הספה. הוא יצא, והספה הגיעה לסלון",
+   "summary": "הספה של רוני אברהם הגיעה אחרי שלושה שבועות על כריות ושני עיכובים במשלוח.",
+   "body": [
+    "הספה של רוני אברהם הגיעה לסלון, אבל נשארה עטופה בניילון. לפני הגעתה עברו על רוני שלושה שבועות על כריות.",
+    "המשלוח התעכב פעמיים, ובסוף השליח נתקע במעלית עם הספה. הוא יצא בסוף.",
+    "\"היא בסלון, עדיין עטופה בניילון\", סיפרה רוני."
+   ],
+   "flash": "הספה של רוני אברהם הגיעה לסלון ונשארה עטופה בניילון",
+   "push": "השליח נתקע במעלית עם הספה, הניילון הגיע עד הסלון",
+   "usedFacts": [],
+   "newFacts": []
+  },
+  "typeOk": true,
+  "checks": {
+   "reporter": [],
+   "draft": []
+  },
+  "revisions": {
+   "funnier": {
+    "draft": {
+     "headline": "השליח יצא מהמעלית: הספה של רוני עדיין בניילון",
+     "sub": "אחרי שלושה שבועות על כריות ושני עיכובים במשלוח, הספה הגיעה לסלון. בדרך נתקע איתה השליח במעלית",
+     "summary": "הספה של רוני אברהם הגיעה אחרי שני עיכובים ותקיעה של השליח איתה במעלית",
+     "body": [
+      "הספה של רוני אברהם הגיעה לסלון, עדיין עטופה בניילון. קדמו לה שלושה שבועות על כריות.",
+      "המשלוח התעכב פעמיים. כשהגיע, השליח נתקע במעלית עם הספה ויצא בסוף.",
+      "\"היא בסלון, עדיין עטופה בניילון\", סיפרה רוני."
+     ],
+     "flash": "אחרי שלושה שבועות על כריות, הספה של רוני אברהם הגיעה בניילון",
+     "push": "השליח יצא מהמעלית, הספה עדיין לא יצאה מהניילון",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "dramatic": {
+    "draft": {
+     "headline": "שלושה שבועות על כריות, ואז המעלית: הספה של רוני הגיעה לסלון",
+     "sub": "אחרי שני עיכובים במשלוח, השליח נתקע במעלית עם הספה. הוא יצא בסוף, אבל בסלון חיכה עוד פרט",
+     "summary": "הספה של רוני אברהם הגיעה לאחר שני עיכובים ותקיעה של השליח במעלית, והיא עדיין עטופה בניילון",
+     "body": [
+      "בסלון של רוני אברהם עמדה הספה שהגיעה, עדיין עטופה בניילון. קדמו לה שלושה שבועות על כריות.",
+      "המשלוח התעכב פעמיים. כשכבר הגיע, השליח נתקע במעלית עם הספה, ובסוף יצא.",
+      "\"היא בסלון, עדיין עטופה בניילון\", סיפרה רוני."
+     ],
+     "flash": "אצל רוני אברהם, הספה הגיעה לסלון ונשארה בניילון",
+     "push": "השליח נתקע עם הספה במעלית: וזה לא נגמר בהסרת הניילון",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "restrained": {
+    "draft": {
+     "headline": "הספה של רוני הגיעה לאחר שלושה שבועות על כריות",
+     "sub": "המשלוח התעכב פעמיים לפני שהשליח נתקע במעלית עם הספה",
+     "summary": "רוני אברהם קיבלה את הספה לאחר שני עיכובים במשלוח",
+     "body": [
+      "הספה של רוני אברהם הגיעה לסלון ונשארה עטופה בניילון. רוני העבירה שלושה שבועות על כריות עד להגעתה.",
+      "המשלוח התעכב פעמיים. השליח נתקע במעלית עם הספה ויצא בסוף.",
+      "\"היא בסלון, עדיין עטופה בניילון\", סיפרה רוני."
+     ],
+     "flash": "הספה של רוני אברהם הגיעה לסלון כשהיא עדיין עטופה בניילון",
+     "push": "השליח נתקע במעלית עם הספה של רוני ויצא בסוף",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "concise": {
+    "draft": {
+     "headline": "שלושה שבועות על כריות: הספה של רוני עדיין בניילון",
+     "sub": "אחרי שני עיכובים במשלוח, השליח נתקע במעלית עם הספה ויצא לבסוף",
+     "summary": "הספה של רוני הגיעה אחרי שלושה שבועות על כריות ושני עיכובים במשלוח",
+     "body": [
+      "הספה של רוני אברהם הגיעה ונשארה עטופה בניילון, אחרי שלושה שבועות על כריות. המשלוח התעכב פעמיים, והשליח נתקע במעלית עם הספה ויצא לבסוף.",
+      "\"היא בסלון, עדיין עטופה בניילון\", סיפרה רוני."
+     ],
+     "flash": "הספה של רוני אברהם הגיעה ונשארה בניילון",
+     "push": "השליח נתקע במעלית עם הספה",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "headline": {
+    "draft": {
+     "headline": "הספה של רוני הגיעה אחרי שלושה שבועות על כריות - ועדיין בניילון",
+     "sub": "המשלוח התעכב פעמיים, ובסוף השליח נתקע במעלית עם הספה. הוא יצא, והספה הגיעה לסלון",
+     "summary": "הספה של רוני אברהם הגיעה אחרי שלושה שבועות על כריות ושני עיכובים במשלוח.",
+     "body": [
+      "הספה של רוני אברהם הגיעה לסלון, אבל נשארה עטופה בניילון. לפני הגעתה עברו על רוני שלושה שבועות על כריות.",
+      "המשלוח התעכב פעמיים, ובסוף השליח נתקע במעלית עם הספה. הוא יצא בסוף.",
+      "\"היא בסלון, עדיין עטופה בניילון\", סיפרה רוני."
+     ],
+     "flash": "הספה של רוני אברהם הגיעה לסלון ונשארה עטופה בניילון",
+     "push": "השליח נתקע במעלית עם הספה, הניילון הגיע עד הסלון",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "alternate": {
+    "draft": {
+     "headline": "השליח נתקע במעלית: הספה של רוני הגיעה לסלון, עדיין בניילון",
+     "sub": "אחרי שלושה שבועות על כריות ושני עיכובים במשלוח, הספה הגיעה לביתה של רוני. \"היא בסלון, עדיין עטופה בניילון\", סיפרה",
+     "summary": "השליח שהביא את הספה של רוני נתקע איתה במעלית ויצא בסוף",
+     "body": [
+      "השליח נתקע במעלית עם הספה של רוני אברהם, ובסוף יצא. הספה הגיעה לסלון ונשארה עטופה בניילון.",
+      "עוד לפני התקיעה במעלית, המשלוח התעכב פעמיים. רוני העבירה שלושה שבועות על כריות עד שהספה הגיעה.",
+      "\"היא בסלון, עדיין עטופה בניילון\", סיפרה רוני."
+     ],
+     "flash": "אצל רוני אברהם, הספה הגיעה אחרי שלושה שבועות ונשארה בניילון",
+     "push": "נתקע במעלית עם הספה: השליח יצא, הניילון נשאר",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   },
+   "type": {
+    "draft": {
+     "headline": "שלושה שבועות על כריות: הספה שלי הגיעה, הניילון נשאר",
+     "sub": "המשלוח התעכב פעמיים, ואז השליח נתקע במעלית עם הספה. הוא יצא בסוף, והספה עכשיו בסלון",
+     "summary": "רוני אברהם קיבלה את הספה אחרי שלושה שבועות על כריות ושני עיכובים במשלוח",
+     "body": [
+      "אחרי שלושה שבועות על כריות, הספה שלי הגיעה. המשלוח התעכב פעמיים, ובסוף השליח נתקע במעלית עם הספה",
+      "השליח יצא בסוף. הספה עכשיו בסלון, עדיין עטופה בניילון"
+     ],
+     "flash": "רוני אברהם קיבלה את הספה, שעדיין עטופה בניילון",
+     "push": "עברתי שלושה שבועות על כריות, הספה עדיין בניילון",
+     "usedFacts": [],
+     "newFacts": []
+    },
+    "checks": []
+   }
+  },
+  "judge": {
+   "israeli_feel": 4,
+   "human_feel": 4,
+   "hebrew_correctness": 5,
+   "gender_agreement": 5,
+   "type_fit": 4,
+   "interview_quality": 3,
+   "story_fidelity": true,
+   "question_presumes": false,
+   "buried_fact_surfaced": false,
+   "problems": [
+    "The push's \"הניילון הגיע עד הסלון\" feels like a forced punchline.",
+    "\"איך נגמרה התקיעה במעלית עם הספה?\" gets a minimal answer, but the reporter abandons the elevator angle without establishing duration.",
+    "\"הספה של רוני אברהם הגיעה לסלון ונשארה עטופה בניילון\" overlooks the stronger elevator hook in the flash."
+   ]
+  }
+ },
+ {
+  "id": "terse_bike",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?",
+    "generated": false
+   },
+   {
+    "role": "user",
+    "text": "קניתי אופניים"
+   },
+   {
+    "role": "reporter",
+    "text": "איזה אופניים?",
+    "generated": true
+   },
+   {
+    "role": "user",
+    "text": "אופניים חשמליים, שחורים וחדשים."
+   },
+   {
+    "role": "reporter",
+    "text": "בשביל מה דווקא אופניים חשמליים?",
+    "generated": true
+   },
+   {
+    "role": "user",
+    "text": "כדי להפסיק לחפש חניה לרכב."
+   },
+   {
+    "role": "reporter",
+    "text": "כמה זמן היה נשרף על חניה ביום?",
+    "generated": true
+   },
+   {
+    "role": "user",
+    "text": "אין לי מספר מדויק, רק שחיפושי החניה היו הסיבה לקנות אופניים."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "A bicycle purchase, with the kind still unknown",
+    "articleType": "flash"
+   },
+   {
+    "angle": "An electric bicycle may replace a troublesome daily journey",
+    "articleType": "feature"
+   },
+   {
+    "angle": "Trading car parking searches for an electric bicycle",
+    "articleType": "feature"
+   },
+   {
+    "angle": "Electric bicycle bought to avoid searching for car parking",
+    "articleType": "news_brief"
+   }
+  ],
+  "articleType": "news_brief",
+  "angle": "Electric bicycle bought to avoid searching for car parking",
+  "draft": {
+   "headline": "במקום לחפש חניה לרכב: דנה עם אופניים חשמליים חדשים",
+   "sub": "הבחירה הייתה באופניים שחורים וחדשים, עם מטרה אחת: להפסיק לחפש מקום חניה לרכב",
+   "summary": "דנה שחר קנה אופניים חשמליים כדי לחסוך את חיפושי החניה לרכב.",
+   "body": [
+    "הרכישה החדשה של דנה שחר הייתה זוג אופניים חשמליים שחורים וחדשים. הסיבה לקנייה הייתה חיפושי החניה לרכב.",
+    "ההסבר של דנה לרכישה: \"כדי להפסיק לחפש חניה לרכב\"."
+   ],
+   "flash": "אופניים חשמליים שחורים וחדשים נקנו בידי דנה שחר",
+   "push": "דנה: \"כדי להפסיק לחפש חניה לרכב\"",
+   "usedFacts": [],
+   "newFacts": [
+    {
+     "k": "אופניים",
+     "v": "אופניים חשמליים שחורים"
+    }
+   ]
+  },
+  "typeOk": false,
+  "checks": {
+   "reporter": [],
+   "draft": []
+  },
+  "revisions": {},
+  "judge": {
+   "israeli_feel": 3,
+   "human_feel": 3,
+   "hebrew_correctness": 4,
+   "gender_agreement": 1,
+   "type_fit": 4,
+   "interview_quality": 4,
+   "story_fidelity": true,
+   "question_presumes": false,
+   "buried_fact_surfaced": true,
+   "problems": [
+    "\"דנה שחר קנה\" assumes masculine gender despite unknown gender and no supporting user wording.",
+    "\"אופניים חשמליים שחורים וחדשים נקנו בידי דנה שחר\" is stiff passive copy and buries the parking hook.",
+    "\"הרכישה החדשה של דנה שחר הייתה זוג אופניים חשמליים שחורים וחדשים\" is cumbersome and repeats details already given.",
+    "\"כמה זמן היה נשרף על חניה ביום?\" follows the angle but shifts toward quantification rather than a sharper concrete detail."
+   ]
+  }
+ },
+ {
+  "id": "profile_watch",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?",
+    "generated": false
+   },
+   {
+    "role": "user",
+    "text": "הדוד שלי יוסי מתקן שעונים מ-1978 באותה חנות בשוק הכרמל"
+   },
+   {
+    "role": "reporter",
+    "text": "איך יוסי קובע ששעון כבר אבוד?",
+    "generated": true
+   },
+   {
+    "role": "user",
+    "text": "הוא לא לוקח כסף על שעון שלא הצליח לתקן."
+   },
+   {
+    "role": "reporter",
+    "text": "ומה הוא אומר ללקוח כשהשעון חוזר לא מתוקן?",
+    "generated": true
+   },
+   {
+    "role": "user",
+    "text": "הוא לא לוקח כסף על שעון שלא הצליח לתקן."
+   },
+   {
+    "role": "reporter",
+    "text": "ממי יוסי למד לתקן שעונים?",
+    "generated": true
+   },
+   {
+    "role": "user",
+    "text": "לא ממש."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "Yossi's decades at the repair bench reveal a craftsman's unwritten rule.",
+    "articleType": "profile"
+   },
+   {
+    "angle": "Decades in the same shop, with payment tied strictly to a working watch.",
+    "articleType": "profile"
+   },
+   {
+    "angle": "A longtime Carmel Market watchmaker charges only when the repair succeeds.",
+    "articleType": "profile"
+   },
+   {
+    "angle": "Since 1978, Yossi's rule in the same shop: no repair, no payment.",
+    "articleType": "profile"
+   }
+  ],
+  "articleType": "profile",
+  "angle": "Since 1978, Yossi's rule in the same shop: no repair, no payment.",
+  "draft": {
+   "headline": "מאז 1978 באותה חנות: יוסי לא גובה כסף אם השעון לא תוקן",
+   "sub": "הדוד של מיכאל מתקן שעונים בשוק הכרמל. \"הוא לא לוקח כסף על שעון שלא הצליח לתקן\", סיפר אחיינו",
+   "summary": "יוסי, דודו של מיכאל דנינו, מתקן שעונים באותה חנות בשוק הכרמל מאז 1978.",
+   "body": [
+    "שעון שיוסי לא הצליח לתקן לא עלה ללקוח כסף. כך סיפר אחיינו, מיכאל דנינו, על הכלל בחנות של דודו.",
+    "יוסי מתקן שעונים מאז 1978 באותה חנות בשוק הכרמל.",
+    "\"הוא לא לוקח כסף על שעון שלא הצליח לתקן\", סיפר מיכאל."
+   ],
+   "flash": "מיכאל דנינו סיפר: דודו יוסי מתקן שעונים באותה חנות מאז 1978",
+   "push": "לא תיקן, לא גבה: הכלל של יוסי בחנות השעונים",
+   "usedFacts": [],
+   "newFacts": [
+    {
+     "k": "דוד",
+     "v": "יוסי, מתקן שעונים מאז 1978 באותה חנות בשוק הכרמל"
+    }
+   ]
+  },
+  "typeOk": true,
+  "checks": {
+   "reporter": [
+    "unsupported object in question: איך יוסי קובע ששעון כבר אבוד?"
+   ],
+   "draft": []
+  },
+  "revisions": {},
+  "judge": {
+   "israeli_feel": 4,
+   "human_feel": 3,
+   "hebrew_correctness": 4,
+   "gender_agreement": 5,
+   "type_fit": 3,
+   "interview_quality": 3,
+   "story_fidelity": true,
+   "question_presumes": false,
+   "buried_fact_surfaced": true,
+   "problems": [
+    "\"שעון שיוסי לא הצליח לתקן לא עלה ללקוח כסף\" awkwardly suggests the watch itself was free, rather than the repair attempt.",
+    "\"ממי יוסי למד לתקן שעונים?\" abandons the payment-policy angle instead of developing it.",
+    "\"הוא לא לוקח כסף על שעון שלא הצליח לתקן\" is repeated verbatim in a very short, thin profile.",
+    "\"מיכאל דנינו סיפר: דודו יוסי מתקן שעונים באותה חנות מאז 1978\" leaves the distinctive no-payment rule out of the flash."
+   ]
+  }
+ },
+ {
+  "id": "column_train",
+  "model": "gpt-6.1-sol",
+  "variant": "full",
+  "chatLog": [
+   {
+    "role": "reporter",
+    "text": "מה קרה?",
+    "generated": false
+   },
+   {
+    "role": "user",
+    "text": "אני כבר חצי שנה נוסע ברכבת במקום באוטו וזה שינה לי את הבוקר"
+   },
+   {
+    "role": "reporter",
+    "text": "מה הנסיעה באוטו הייתה עושה לך לבוקר?",
+    "generated": true
+   },
+   {
+    "role": "user",
+    "text": "הייתי צופר מהר, עד שהבנתי שאין לי על מי."
+   },
+   {
+    "role": "reporter",
+    "text": "וברכבת, מה אתה עושה במקום לצפור?",
+    "generated": true
+   },
+   {
+    "role": "user",
+    "text": "קורא ספר, בערך ספר בשבוע."
+   },
+   {
+    "role": "reporter",
+    "text": "הספר ממשיך איתך גם אחרי הירידה מהרכבת?",
+    "generated": true
+   },
+   {
+    "role": "user",
+    "text": "את הראשון סיימתי כבר בשבוע הראשון."
+   }
+  ],
+  "trail": [
+   {
+    "angle": "Six months off the road changed his morning routine.",
+    "articleType": "column"
+   },
+   {
+    "angle": "Leaving the car ended mornings spent honking at nobody.",
+    "articleType": "column"
+   },
+   {
+    "angle": "The morning commute went from futile honking to a book a week.",
+    "articleType": "column"
+   },
+   {
+    "angle": "Six months of train mornings turned pointless honking into a book a week.",
+    "articleType": "column"
+   }
+  ],
+  "articleType": "column",
+  "angle": "Six months of train mornings turned pointless honking into a book a week.",
+  "draft": {
+   "headline": "חצי שנה ברכבת במקום באוטו: החלפתי את הצפירות בספר בשבוע",
+   "sub": "במכונית הייתי צופר מהר, עד שהבנתי שאין לי על מי. ברכבת סיימתי את הספר הראשון כבר בשבוע הראשון",
+   "summary": "דן מימון נוסע ברכבת במקום באוטו כבר חצי שנה וקורא בנסיעות בערך ספר בשבוע.",
+   "body": [
+    "הייתי צופר מהר, עד שהבנתי שאין לי על מי. לפני חצי שנה עברתי מהאוטו לרכבת, וזה שינה לי את הבוקר.",
+    "במקום לצפור אני קורא ספר, בערך ספר בשבוע.",
+    "את הראשון סיימתי כבר בשבוע הראשון."
+   ],
+   "flash": "דן מימון סיים ספר כבר בשבוע הראשון לנסיעות ברכבת",
+   "push": "הפסקתי לצפור, התחלתי לקרוא: בערך ספר בשבוע",
+   "usedFacts": [],
+   "newFacts": [
+    {
+     "k": "הרגל נסיעה",
+     "v": "נוסע ברכבת במקום באוטו"
+    },
+    {
+     "k": "קריאה",
+     "v": "קורא ברכבת בערך ספר בשבוע"
+    }
+   ]
+  },
+  "typeOk": true,
+  "checks": {
+   "reporter": [],
+   "draft": []
+  },
+  "revisions": {},
+  "judge": {
+   "israeli_feel": 4,
+   "human_feel": 4,
+   "hebrew_correctness": 5,
+   "gender_agreement": 5,
+   "type_fit": 3,
+   "interview_quality": 4,
+   "story_fidelity": true,
+   "question_presumes": false,
+   "buried_fact_surfaced": true,
+   "problems": [
+    "\"מה הנסיעה באוטו הייתה עושה לך לבוקר?\" is slightly clunky conversational Hebrew.",
+    "\"הספר ממשיך איתך גם אחרי הירידה מהרכבת?\" shifts away from the stronger angle of changed mornings.",
+    "\"את הראשון סיימתי כבר בשבוע הראשון.\" repeats the subheading rather than delivering a column's developed ending; the body is essentially a stitched transcript."
+   ]
+  }
+ }
+]

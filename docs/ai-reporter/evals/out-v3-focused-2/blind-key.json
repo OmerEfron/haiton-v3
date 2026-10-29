@@ -1,0 +1,8 @@
+{
+ "first_10k/A": "gpt-6.1-sol/full",
+ "driving_test/A": "gpt-6.1-sol/full",
+ "new_sofa/A": "gpt-6.1-sol/full",
+ "terse_bike/A": "gpt-6.1-sol/full",
+ "profile_watch/A": "gpt-6.1-sol/full",
+ "column_train/A": "gpt-6.1-sol/full"
+}

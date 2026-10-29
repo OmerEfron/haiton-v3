@@ -1,0 +1,22 @@
+app = "haiton-ai"
+primary_region = "fra"
+
+[env]
+  PORT = "4100"
+  TRUST_PROXY = "2" # Vercel -> Fly proxy
+  LOG_LEVEL = "info"
+  AI_MODEL = "gpt-6.1-sol"
+
+[http_service]
+  internal_port = 4100
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+
+  [[http_service.checks]]
+    method = "GET"
+    path = "/ai/health"
+    interval = "30s"
+    timeout = "5s"
+    grace_period = "10s"

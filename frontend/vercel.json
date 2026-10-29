@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "https://haiton-api.fly.dev/api/:path*" },
+    { "source": "/ai/:path*", "destination": "https://haiton-ai.fly.dev/ai/:path*" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

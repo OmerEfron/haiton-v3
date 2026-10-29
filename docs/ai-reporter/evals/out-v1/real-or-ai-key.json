@@ -1,0 +1,102 @@
+[
+ {
+  "n": 1,
+  "ai": true,
+  "config": "gpt-6-luna/full"
+ },
+ {
+  "n": 2,
+  "ai": false,
+  "config": "real"
+ },
+ {
+  "n": 3,
+  "ai": false,
+  "config": "real"
+ },
+ {
+  "n": 4,
+  "ai": true,
+  "config": "gpt-6-luna/full"
+ },
+ {
+  "n": 5,
+  "ai": false,
+  "config": "real"
+ },
+ {
+  "n": 6,
+  "ai": false,
+  "config": "real"
+ },
+ {
+  "n": 7,
+  "ai": true,
+  "config": "gpt-6-luna/full"
+ },
+ {
+  "n": 8,
+  "ai": true,
+  "config": "gpt-6-luna/full"
+ },
+ {
+  "n": 9,
+  "ai": false,
+  "config": "real"
+ },
+ {
+  "n": 10,
+  "ai": false,
+  "config": "real"
+ },
+ {
+  "n": 11,
+  "ai": true,
+  "config": "gpt-6-luna/full"
+ },
+ {
+  "n": 12,
+  "ai": true,
+  "config": "gpt-6-luna/full"
+ },
+ {
+  "n": 13,
+  "ai": true,
+  "config": "gpt-6-luna/full"
+ },
+ {
+  "n": 14,
+  "ai": true,
+  "config": "gpt-6-luna/full"
+ },
+ {
+  "n": 15,
+  "ai": true,
+  "config": "gpt-6-luna/full"
+ },
+ {
+  "n": 16,
+  "ai": false,
+  "config": "real"
+ },
+ {
+  "n": 17,
+  "ai": false,
+  "config": "real"
+ },
+ {
+  "n": 18,
+  "ai": false,
+  "config": "real"
+ },
+ {
+  "n": 19,
+  "ai": false,
+  "config": "real"
+ },
+ {
+  "n": 20,
+  "ai": true,
+  "config": "gpt-6-luna/full"
+ }
+]

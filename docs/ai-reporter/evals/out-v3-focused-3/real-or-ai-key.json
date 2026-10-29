@@ -1,0 +1,82 @@
+[
+ {
+  "n": 1,
+  "ai": true,
+  "config": "gpt-6.1-sol/full"
+ },
+ {
+  "n": 2,
+  "ai": true,
+  "config": "gpt-6.1-sol/full"
+ },
+ {
+  "n": 3,
+  "ai": false,
+  "config": "real"
+ },
+ {
+  "n": 4,
+  "ai": true,
+  "config": "gpt-6.1-sol/full"
+ },
+ {
+  "n": 5,
+  "ai": true,
+  "config": "gpt-6.1-sol/full"
+ },
+ {
+  "n": 6,
+  "ai": false,
+  "config": "real"
+ },
+ {
+  "n": 7,
+  "ai": false,
+  "config": "real"
+ },
+ {
+  "n": 8,
+  "ai": false,
+  "config": "real"
+ },
+ {
+  "n": 9,
+  "ai": false,
+  "config": "real"
+ },
+ {
+  "n": 10,
+  "ai": true,
+  "config": "gpt-6.1-sol/full"
+ },
+ {
+  "n": 11,
+  "ai": false,
+  "config": "real"
+ },
+ {
+  "n": 12,
+  "ai": false,
+  "config": "real"
+ },
+ {
+  "n": 13,
+  "ai": false,
+  "config": "real"
+ },
+ {
+  "n": 14,
+  "ai": true,
+  "config": "gpt-6.1-sol/full"
+ },
+ {
+  "n": 15,
+  "ai": false,
+  "config": "real"
+ },
+ {
+  "n": 16,
+  "ai": false,
+  "config": "real"
+ }
+]
