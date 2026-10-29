@@ -3,11 +3,11 @@ import { z } from 'zod'
 import { param, requireAuth } from '../auth.ts'
 import { loadContext } from '../context.ts'
 import { asReporter } from '../draft.ts'
-import { HttpError } from '../errors.ts'
+import { HttpError, UpstreamError } from '../errors.ts'
 import { chat, SCHEMA } from '../openai.ts'
 import { parse } from '../parse.ts'
 import { fill, prompts } from '../prompts.ts'
-import { getSession, insertSession, MAX_TURNS, saveSession } from '../sessions.ts'
+import { askedCount, answeredCount, getSession, insertSession, MAX_QUESTIONS, MIN_QUESTIONS, saveSession } from '../sessions.ts'
 import type { ChatMessage, ReporterJson } from '../types.ts'
 
 export const reporterRouter = Router()
@@ -47,19 +47,28 @@ reporterRouter.post('/reporter/sessions/:id/messages', requireAuth, async (req, 
   if (!ctx) throw new HttpError(401, 'unauthorized')
 
   const messages: ChatMessage[] = [...session.messages, { role: 'user', text }]
+  const asked = askedCount(messages)
+  const answered = answeredCount(messages)
   // ponytail: last write wins if two sends overlap; the chat UI sends one message at a time.
-  const generated = session.turns.length - 1
   await saveSession(session.id, req.userId!, messages, session.turns, session.article_type, session.angle)
-  if (generated >= MAX_TURNS) {
+  if (asked >= MAX_QUESTIONS) {
     res.json({ reply: null, canDraft: true })
     return
   }
 
-  const system = fill(prompts.reporter, ctx)
-  const raw = await chat(modelMessages(system, session.messages, session.turns, text), 'reporter', SCHEMA.reporter)
-  const turn = asReporter(raw)
+  const system = fill(prompts.reporter, ctx, { asked })
+  const history = modelMessages(system, session.messages, session.turns, text)
+  let turn = asReporter(await chat(history, 'reporter', SCHEMA.reporter))
+  if (!turn.reply && asked < MIN_QUESTIONS) {
+    turn = asReporter(await chat(
+      [...history, { role: 'system', content: 'You have asked fewer than 2 questions after the opener. Ask another question. reply must be a Hebrew question, not null.' }],
+      'reporter',
+      SCHEMA.reporter,
+    ))
+    if (!turn.reply) throw new UpstreamError('reporter stopped before 2 questions')
+  }
   const turns = [...session.turns, turn]
   if (turn.reply) messages.push({ role: 'reporter', text: turn.reply })
   await saveSession(session.id, req.userId!, messages, turns, turn.articleType, turn.angle)
-  res.json({ reply: turn.reply, canDraft: turn.canDraft })
+  res.json({ reply: turn.reply, canDraft: answered >= MIN_QUESTIONS })
 })

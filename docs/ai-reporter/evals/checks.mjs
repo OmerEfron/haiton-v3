@@ -9,8 +9,9 @@ const BANNED_REPORTER = /איך הרגשת|איך הרגשתם|איך זה מר�
 const CURLY = /[“”„]|(?<=^|[\s(])״|״(?=[\s.,:;)]|$)/m
 const BAD_CHARS = /[—–!]|\p{Extended_Pictographic}/u
 export const RANGES = { headline: [35, 90], sub: [45, 180], flash: [25, 80], push: [20, 90] }
-/** body paragraphs per article type (interview = intro + 2-4 Q&A) */
-export const BODY = { flash: [1, 2], news_brief: [2, 3], feature: [2, 4], profile: [2, 4], interview: [3, 5], column: [2, 4], sports_report: [2, 3], quirky: [2, 3] }
+/** body paragraphs per article type (interview = intro + every Q&A) */
+export const BODY = { feature: [3, 5], profile: [3, 5], interview: [3, 8], column: [3, 5], sports_report: [3, 4], quirky: [3, 4] }
+const MIN_BODY_CHARS = 350
 
 const words = (s) => s.trim().split(/\s+/).length
 const norm = (s) => s.replace(/[^\p{L}\p{N}\s]/gu, ' ').replace(/\s+/g, ' ').trim()
@@ -26,6 +27,8 @@ export function checkDraft(d, userText, type = 'feature', reporterQs = []) {
   for (const [k, [lo, hi]] of Object.entries(RANGES)) if (d[k].length < lo || d[k].length > hi) fails.push(`${k} length ${d[k].length}`)
   const [bLo, bHi] = BODY[type] || BODY.feature
   if (!Array.isArray(d.body) || d.body.length < bLo || d.body.length > bHi) fails.push(`${type} body paragraphs ${d.body?.length}`)
+  const bodyChars = Array.isArray(d.body) ? d.body.reduce((n, p) => n + p.length, 0) : 0
+  if (bodyChars < MIN_BODY_CHARS) fails.push(`body chars ${bodyChars}`)
   if (/[.]$/.test(d.headline.trim())) fails.push('headline ends with period')
   const all = [d.headline, d.sub, d.summary, d.flash, d.push, ...d.body].join('\n')
   if (BANNED_STORY.test(all)) fails.push('banned phrase: ' + all.match(BANNED_STORY)[0])
@@ -52,7 +55,7 @@ export function checkDraft(d, userText, type = 'feature', reporterQs = []) {
 export function checkReporter(replies, userMsgs = []) {
   const fails = []
   const asked = replies.filter(Boolean)
-  if (asked.length > 4) fails.push(`asked ${asked.length} questions`)
+  if (asked.length > 7) fails.push(`asked ${asked.length} questions`)
   asked.forEach((r, i) => { if (i && r.trim().split(/\s+/)[0] === asked[i - 1].trim().split(/\s+/)[0]) fails.push(`repeated opener word: ${r}`) })
   for (let i = 0; i < replies.length; i++) {
     const r = replies[i]
@@ -69,7 +72,7 @@ export function checkReporter(replies, userMsgs = []) {
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const ok = { headline: 'אחרי חודשיים של טפטוף: שלמה תיקן לבד את הברז במטבח', sub: 'סרטון אחד ביוטיוב וגומייה חדשה הספיקו. "לא האמנתי שתצליח", אמרה אשתו', summary: 'שלמה תיקן ברז.', body: ['אחת.', 'שתיים.', 'שלוש "לא האמנתי שתצליח".'], flash: 'שלמה אוחיון תיקן לבד את הברז המטפטף', push: '"לא האמנתי שתצליח": שלמה ניצח את הברז' }
+  const ok = { headline: 'אחרי חודשיים של טפטוף: שלמה תיקן לבד את הברז במטבח', sub: 'סרטון אחד ביוטיוב וגומייה חדשה הספיקו. "לא האמנתי שתצליח", אמרה אשתו', summary: 'שלמה תיקן ברז.', body: ['אחרי חודשיים של טפטוף תיקן שלמה אוחיון לבד את הברז במטבח. סרטון אחד ביוטיוב וגומייה חדשה הספיקו לו. העבודה נגמרה באותו ערב, והברז חזר לעבוד.', 'הברז במטבח טפטף חודשיים, והתיקון נעשה בלי בעל מקצוע. הגומייה החדשה נכנסה למקום של הישנה. שלמה עשה את כל העבודה לבד, מהסרטון ועד הסגירה.', 'אשתו עמדה לידו בסיום. "לא האמנתי שתצליח", אמרה. הברז הפסיק לטפטף באותו ערב, אחרי חודשיים שבהם הוא לא הפסיק.'], flash: 'שלמה אוחיון תיקן לבד את הברז המטפטף', push: '"לא האמנתי שתצליח": שלמה ניצח את הברז' }
   assert.deepEqual(checkDraft(ok, 'אשתי אמרה: לא האמנתי שתצליח'), [])
   assert.ok(checkDraft({ ...ok, sub: ok.sub.replace('לא האמנתי שתצליח', 'לא האמנתי בכלל שתצליח') }, 'אשתי אמרה: לא האמנתי שתצליח').some((f) => f.startsWith('quote')))
   assert.ok(checkDraft({ ...ok, headline: ok.headline + '.' }, '').some((f) => f.includes('period')))
@@ -83,7 +86,8 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   assert.ok(checkReporter(['כמה עלו האופניים?'], ['קניתי אופניים']).some((f) => f.startsWith('unsupported price')))
   assert.deepEqual(checkReporter(['כמה עלו האופניים?'], ['קניתי אופניים ב-200 שקל']), [])
   assert.ok(checkReporter(['מה עשית כשהשעון הראה עשרה קילומטרים?'], ['רצתי 10 קילומטר']).some((f) => f.startsWith('unsupported object')))
-  assert.ok(checkDraft({ ...ok, body: ['אחת.'] }, '', 'flash').every((f) => !f.includes('body')))
+  assert.ok(checkDraft({ ...ok, body: ['אחת.', 'שתיים.', 'שלוש.'] }, '').some((f) => f.startsWith('body chars')))
+  assert.ok(checkDraft({ ...ok, body: ['אחת.'] }, '', 'feature').some((f) => f.includes('body')))
   assert.ok(checkDraft({ ...ok, body: ['הדר פתחה.', 'חלום ישן?\nכן', 'מה אמרו?'] }, '', 'interview', ['חלום ישן?']).some((f) => f.includes('not question?')))
   assert.ok(checkDraft({ ...ok, body: ['הדר פתחה.', 'חלום ישן?\nכן', 'מי בא?\nאמא'] }, '', 'interview', ['חלום ישן?']).some((f) => f.includes('not asked')))
   assert.ok(checkDraft(ok, '', 'sports_report').some((f) => f.includes('number')))

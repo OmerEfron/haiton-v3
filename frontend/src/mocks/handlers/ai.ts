@@ -6,7 +6,7 @@ import { fail } from './util'
 import { DATA } from '../seed/haiton-data.js'
 
 const u = (p: string) => AI_API_URL + p
-const REV_INDEX: Partial<Record<RevisionKind, number>> = { funnier: 1, dramatic: 2, restrained: 3, concise: 4 }
+const REV_INDEX: Partial<Record<RevisionKind, number>> = { funnier: 1, dramatic: 2, restrained: 3 }
 const clip = (s: string, n: number) => (s.length > n ? s.slice(0, n).trimEnd() + '…' : s)
 const GENERIC: Script = { replies: ['איזה יופי. ספרו עוד, איך זה התחיל?', 'ואיך הרגשתם כשזה קרה?'] }
 
@@ -35,13 +35,13 @@ async function coreGet<T>(path: string, request: Request): Promise<T | null> {
 function content(sc: Script, s: DbSession, d: DbDraft): DraftContent {
   if (sc.versions?.length && sc.body) {
     const v = sc.versions[d.rev % sc.versions.length]
-    const body = d.rev === 4 ? [sc.body[0], sc.body[sc.body.length - 1]] : sc.body
+    const body = sc.body
     const headline = d.hl >= 0 && sc.alts?.length ? sc.alts[d.hl % sc.alts.length] : v.headline
     return { headline, sub: v.sub, summary: sc.summary ?? '', body, flash: sc.flash ?? headline, push: sc.push ?? headline }
   }
   const said = s.messages.filter((m) => m.role === 'user').map((m) => m.text)
   const headline = clip(said[0] ?? '', 70)
-  return { headline, sub: said[1] ?? '', summary: said[0] ?? '', body: d.rev === 4 ? said.slice(0, 1) : said, flash: headline, push: headline }
+  return { headline, sub: said[1] ?? '', summary: said[0] ?? '', body: said, flash: headline, push: headline }
 }
 
 function toDraft(me: Me, facts: Fact[], articles: ArticleSummary[], id: string, d: DbDraft): Draft {
@@ -93,7 +93,7 @@ export const aiHandlers = [
       const n = s.messages.filter((m) => m.role === 'user').length
       const reply = scriptFor(me.id).replies[n - 1] ?? null
       if (reply) s.messages.push({ role: 'reporter', text: reply })
-      return { reply, canDraft: n >= 1 }
+      return { reply, canDraft: n >= 3 }
     }, 1300),
   ),
 
@@ -102,7 +102,7 @@ export const aiHandlers = [
     aiRoute(async ({ me, body, request }) => {
       const s = db.sessions[body?.sessionId]
       if (!s || s.userId !== me.id) return fail(404, 'session not found')
-      if (!s.messages.some((m) => m.role === 'user')) return fail(400, 'nothing to write about')
+      if (s.messages.filter((m) => m.role === 'user').length < 3) return fail(400, 'interview too short')
       const [facts, articles] = await Promise.all([
         coreGet<Fact[]>('/me/facts', request),
         coreGet<ArticleSummary[]>(`/users/${me.id}/articles`, request),

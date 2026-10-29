@@ -4,8 +4,9 @@ import { chat } from './openai.mjs'
 import { SCHEMA } from './schemas.mjs'
 import { checkDraft, checkReporter } from '../checks.mjs'
 
-export const KINDS = ['funnier', 'dramatic', 'restrained', 'concise', 'headline', 'alternate']
-const MAX_TURNS = 6
+export const KINDS = ['funnier', 'dramatic', 'restrained', 'headline', 'alternate']
+const MIN_QUESTIONS = 2
+const MAX_QUESTIONS = 7
 const FIXED_OPENER = 'מה קרה?'
 const AUDIENCE = { male: 'male (זכר)', female: 'female (נקבה)', unknown: 'unknown' }
 
@@ -17,6 +18,7 @@ export function fill(tpl, s, variant, st = {}) {
   return t.replace('{{name}}', s.name).replace('{{gender}}', AUDIENCE[s.gender])
     .replace('{{facts}}', s.facts.map((f) => `${f.k}: ${f.v}`).join('\n') || '(none)').replace('{{previous}}', s.previous || '(none)')
     .replace('{{articleType}}', st.articleType || 'feature').replace('{{angle}}', st.angle || '(none)')
+    .replace('{{asked}}', String(st.asked ?? 0))
 }
 
 function simPrompt(s) {
@@ -44,15 +46,18 @@ async function simulate(s, simModel, chatLog) {
 }
 
 async function converse(s, model, variant, ctx) {
-  const sys = fill(ctx.prompts.reporter, s, variant)
   const opener = { known: 'nothing yet', angle: '', target: 'what happened', articleType: 'feature', reply: FIXED_OPENER, canDraft: false }
   const chatLog = [{ role: 'reporter', text: opener.reply, generated: false }, { role: 'user', text: s.user[0] }]
-  const msgs = [{ role: 'system', content: sys }, { role: 'assistant', content: JSON.stringify(opener) }, { role: 'user', content: s.user[0] }]
+  const msgs = [{ role: 'system', content: '' }, { role: 'assistant', content: JSON.stringify(opener) }, { role: 'user', content: s.user[0] }]
   const replies = [], trail = []
-  for (let i = 0; i < MAX_TURNS; i++) {
-    const t = await chat(model, msgs, 'reporter', SCHEMA.reporter)
+  for (let i = 0; i < MAX_QUESTIONS; i++) {
+    msgs[0] = { role: 'system', content: fill(ctx.prompts.reporter, s, variant, { asked: i }) }
+    let t = await chat(model, msgs, 'reporter', SCHEMA.reporter)
+    if (!t.reply && i < MIN_QUESTIONS) {
+      t = await chat(model, [...msgs, { role: 'system', content: 'You have asked fewer than 2 questions after the opener. Ask another question. reply must be a Hebrew question, not null.' }], 'reporter', SCHEMA.reporter)
+    }
     msgs.push({ role: 'assistant', content: JSON.stringify(t) }); replies.push(t.reply); trail.push({ angle: t.angle, articleType: t.articleType })
-    if (!t.reply || i === MAX_TURNS - 1) break
+    if (!t.reply || i === MAX_QUESTIONS - 1) break
     chatLog.push({ role: 'reporter', text: t.reply, generated: true })
     const ans = await simulate(s, ctx.simModel, chatLog)
     chatLog.push({ role: 'user', text: ans }); msgs.push({ role: 'user', content: ans })

@@ -20,7 +20,7 @@ export interface FillUser {
   previous: string
 }
 
-export function fill(tpl: string, user: FillUser, st: { articleType?: string; angle?: string } = {}) {
+export function fill(tpl: string, user: FillUser, st: { articleType?: string; angle?: string; asked?: number } = {}) {
   const values: Record<string, string> = {
     '{{name}}': user.name,
     '{{gender}}': GENDER[user.gender],
@@ -28,6 +28,7 @@ export function fill(tpl: string, user: FillUser, st: { articleType?: string; an
     '{{previous}}': user.previous || '(none)',
     '{{articleType}}': st.articleType || 'feature',
     '{{angle}}': st.angle || '(none)',
+    '{{asked}}': String(st.asked ?? 0),
   }
   // Replacer function so a name containing "$&" is not treated as a replacement pattern.
   return Object.entries(values).reduce((out, [key, value]) => out.replaceAll(key, () => value), tpl)

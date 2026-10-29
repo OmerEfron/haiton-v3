@@ -2,7 +2,18 @@ import { pool } from './db.ts'
 import type { ChatMessage, ReporterJson, SessionRow } from './types.ts'
 
 export const FIXED_OPENER = 'מה קרה?'
-export const MAX_TURNS = 6
+export const MIN_QUESTIONS = 2
+export const MAX_QUESTIONS = 7
+
+/** Reporter lines after the fixed opener. */
+export function askedCount(messages: ChatMessage[]) {
+  return Math.max(0, messages.filter((m) => m.role === 'reporter').length - 1)
+}
+
+/** User answers to those questions. The first user message answers the opener. */
+export function answeredCount(messages: ChatMessage[]) {
+  return Math.max(0, messages.filter((m) => m.role === 'user').length - 1)
+}
 
 export const OPENER: ReporterJson = {
   known: 'nothing yet',

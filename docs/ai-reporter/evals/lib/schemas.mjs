@@ -1,6 +1,6 @@
 import { str, arr, obj, enm } from './openai.mjs'
 
-export const TYPES = ['flash', 'news_brief', 'feature', 'profile', 'interview', 'column', 'sports_report', 'quirky']
+export const TYPES = ['feature', 'profile', 'interview', 'column', 'sports_report', 'quirky']
 
 export const SCHEMA = {
   // key order matters: the model writes the reasoning fields before the reply

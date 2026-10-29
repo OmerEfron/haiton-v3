@@ -6,7 +6,7 @@ Return only JSON with these fields:
 - `headline`: 35-90 characters, 6-14 words. No final period.
 - `sub`: 45-180 characters. Adds what the headline held back. Often ends with a short quote and attribution, like `"...", היא מספרת`.
 - `summary`: one plain sentence, up to 140 characters, no flourish. Used for search and previews.
-- `body`: array of 2-4 short paragraphs, each 1-3 sentences. Past tense. First paragraph is the lede with the event. The quote goes in its own paragraph or ends one.
+- `body`: array of 3-5 paragraphs, each 2-3 sentences, at least 350 characters in total. Past tense. First paragraph is the lede with the event. The quote goes in its own paragraph or ends one.
 - `flash`: 25-80 characters, plain factual one-liner for the news ticker, past tense, name of the person included. Must not repeat the push.
 - `push`: 20-90 characters, 4-15 words. A sharper, shorter angle than the headline, built on a strong verb. Variants: the person's best quote in quotation marks; "X: Y"; a teaser that holds back one detail. No emoji, no exclamation mark.
 - `usedFacts`: array of the `k` of KNOWN FACTS you actually used in the story. Use a fact only if it helps the story (age, city, job when it matters). Most stories use 0-3.
@@ -25,7 +25,7 @@ Return only JSON with these fields:
 - Do not add a moral, a summary sentence or a closing flourish ("וכך למדה ש..."). End the body on the last fact or the last quote.
 - Banned: "בסופו של יום", "מסע", "רגע מרגש", "לקחת החלטה" (use "להחליט"), "שיתף/ה" (use "סיפר/ה"), "חשוב לציין", "אין ספק", "חוויה בלתי נשכחת", adjective stacks, three-part lists for rhythm, em dashes, exclamation marks, emojis, hashtags.
 - A non-answer is not a fact. If the user said "לא זוכרת", "לא יודע", "לא שמתי לב" or similar, leave that out of the story completely (never write "X לא זכר כמה", never quote it).
-- Thin material means a short story. If the chat has little, use fewer paragraphs (down to the type's minimum), shorter fields, and no restating of the same fact in the sub, body and summary. If a `feature`, `profile` or `column` has enough material for only two paragraphs, each paragraph must carry a different beat. Never pad with filler like "התקרית אירעה במשרד". Present tense for something ongoing ("פותח בשבע בבוקר"), never past. Do not turn "נראה לי" or "כנראה" into a flat "first ever" claim.
+- A short chat still gets a full article. Use every detail the user gave, one beat per paragraph: the scene, the background or the before, the contrast or the number, the quote, the closing fact. Do not pad with filler, invented facts or a sentence that restates the one before it. Never write filler like "התקרית אירעה במשרד". Present tense for something ongoing ("פותח בשבע בבוקר"), never past. Do not turn "נראה לי" or "כנראה" into a flat "first ever" claim.
 - Do not infer motives, plans, promises or causes the user did not state (no "waited three years for", "promised", "decided to" unless said). A remark stays a remark.
 - Every field adds something: the sub carries a detail the headline does not; the body must not simply repeat the summary sentence; the flash states the plain fact and the push picks the sharpest angle. `body[0]` and `sub` must not copy the `summary` sentence, even reworded into the same clause order. Each of headline, sub, summary, body and flash carries a different detail. The flash keeps the single sharpest hook or number (the 40 minutes, the 14 games, the 3 minutes, the sofa still in nylon, the seven-year shelf), not a stripped restatement of the headline. The push must not drop the strongest odd detail just to summarize the event.
 - Do not start every sentence with the name. Use "היא", "הוא", "בעלה", "המשרד" etc.
@@ -34,14 +34,12 @@ Return only JSON with these fields:
 
 You receive ARTICLE TYPE and ANGLE (the reporter's working angle). Write in the structure of that type. The angle decides the headline, the sub and the push: put the angle's best detail there. All fact rules above still apply to every type. Details: `article-types.md`.
 
-- `flash`: body is one paragraph of 1-2 sentences, plain fact, past tense. No quote unless the user gave one. Sub adds only the place or time. Headline and flash both keep the one number or hook.
-- `news_brief`: lede opens on who did what, when. Then one detail or number, then a reaction quote if there is one. Headline is "X: Y" or fact-first. No scene-setting.
-- `feature` (default): lede opens on a moment, a time span or one concrete detail, never a dry repeat of the summary. Then the number or background, then the quote. Use 3 paragraphs when there are three distinct beats; use 2 only for genuinely thin material. Headline is "X: Y" with a time anchor or quote-led. End on the last quote or fact.
-- `profile`: the person is the spine. Lede is an anecdote that shows who they are, then a short line of age, role or relation, then quotes. Use 3 paragraphs when the chat has ritual + trait + quote. Ongoing habits stay in the present ("פותח בשבע בבוקר", not "פתח"). Headline, flash and push should foreground the subject's distinctive rule or gesture, not the user's relation to them. The kicker is the subject's principle or habit, not a repeat of the headline.
-- `interview`: `body[0]` is a short intro (1-2 sentences, who and what). Every other body string is `question?\nanswer` using exactly the reporter's questions from the chat and the user's answers, trimmed lightly for length. Never invent or rephrase a question. Headline is the sharpest answer in quotes and the name.
-- `column`: first person as the user, no quotation marks, no invented opinions. A short confession lede, the anecdote that earned it, then the user's own turn or punchline. Use 3 paragraphs when there is habit + concrete anecdote + current rule. Do not write it as a stitched transcript of the interview answers. Do not end on a moral you wrote for them or a sentence that merely repeats the headline payoff; the last paragraph needs the newest concrete image or the user's own turn. Headline and push carry the strongest personal hook, not a generic summary. Name is not used in the body.
-- `sports_report`: result and number in the first sentence, then how it got there, then a late quote, ending on a fact. Sports register ("הבקיע", "שיא אישי", "קאמבק"). Headline carries the number.
-- `quirky`: the odd detail in the first line, told deadpan, the reaction last. 2-3 short paragraphs. For delayed deliveries or objects, lead with the absurd physical detail (courier stuck, sofa still in nylon), then the delay, then the reaction. Flash and push must keep that odd detail, not only the wait. No jokes of your own.
+- `feature` (default): 3-5 paragraphs. Lede opens on a moment, a time span or one concrete detail, never a dry repeat of the summary. Then the number or background, then the quote. Headline is "X: Y" with a time anchor or quote-led. End on the last quote or fact. A plain event with no better type is still a feature.
+- `profile`: 3-5 paragraphs. The person is the spine. Lede is an anecdote that shows who they are, then a line of age, role or relation, then quotes. Ongoing habits stay in the present ("פותח בשבע בבוקר", not "פתח"). Headline, flash and push should foreground the subject's distinctive rule or gesture, not the user's relation to them. The kicker is the subject's principle or habit, not a repeat of the headline.
+- `interview`: `body[0]` is an intro of 2 sentences, who and what. Every other body string is `question?\nanswer` using exactly the reporter's questions from the chat and the user's answers. Include every question the reporter asked. Never invent or rephrase a question. Headline is the sharpest answer in quotes and the name.
+- `column`: 3-5 paragraphs. First person as the user, no quotation marks, no invented opinions. A confession lede, the anecdote that earned it, then the user's own turn or punchline. Do not write it as a stitched transcript of the interview answers. Do not end on a moral you wrote for them or a sentence that merely repeats the headline payoff; the last paragraph needs the newest concrete image or the user's own turn. Headline and push carry the strongest personal hook, not a generic summary. Name is not used in the body.
+- `sports_report`: 3-4 paragraphs. Result and number in the first sentence, then how it got there, then a late quote, ending on a fact. Sports register ("הבקיע", "שיא אישי", "קאמבק"). Headline carries the number.
+- `quirky`: 3-4 paragraphs. The odd detail in the first line, told deadpan, the reaction last. For delayed deliveries or objects, lead with the absurd physical detail (courier stuck, sofa still in nylon), then the delay, then the reaction. Flash and push must keep that odd detail, not only the wait. No jokes of your own.
 
 ## Context you receive
 
@@ -66,7 +64,7 @@ user: שמתי בצנצנת. אם הוא יקרוס, אדע למה
 KNOWN FACTS: (none)
 USER NAME: הילה דור
 OUTPUT:
-{"headline": "ארבע שעות ושלושה ברגים עודפים: הילה הרכיבה לבד ארון איקאה", "sub": "הארון עומד, הברגים בצנצנת. \"אם הוא יקרוס, אדע למה\"", "summary": "הילה דור הרכיבה לבד ארון איקאה בארבע שעות ונשארו לה שלושה ברגים.", "body": ["ארבע שעות לקח להילה דור להרכיב לבד ארון איקאה. בסוף הארון עמד.", "שלושה ברגים נשארו מחוץ לארון ונכנסו לצנצנת.", "\"שמתי אותם בצנצנת. אם הוא יקרוס, אדע למה\", אמרה הילה."], "flash": "הילה דור הרכיבה לבד ארון איקאה ונשארו לה שלושה ברגים", "push": "\"אם הוא יקרוס, אדע למה\": הילה והברגים העודפים", "usedFacts": [], "newFacts": []}
+{"headline": "ארבע שעות ושלושה ברגים עודפים: הילה הרכיבה לבד ארון איקאה", "sub": "הארון עומד, הברגים בצנצנת. \"אם הוא יקרוס, אדע למה\"", "summary": "הילה דור הרכיבה לבד ארון איקאה בארבע שעות ונשארו לה שלושה ברגים.", "body": ["הילה דור סיימה להרכיב לבד ארון איקאה. העבודה נמשכה ארבע שעות, והיא עשתה אותה בלי עזרה. בסוף הארון עמד.", "שלושה ברגים נשארו מחוץ לארון אחרי שכבר עמד. הילה לא זרקה אותם, והם לא חזרו לתוך הארון.", "את שלושת הברגים העודפים היא שמה בצנצנת. שם נשארו הברגים שלא נכנסו לארון.", "\"שמתי בצנצנת. אם הוא יקרוס, אדע למה\", אמרה הילה. שלושת הברגים העודפים נשארו בצנצנת, לא בארון."], "flash": "הילה דור הרכיבה לבד ארון איקאה ונשארו לה שלושה ברגים", "push": "\"אם הוא יקרוס, אדע למה\": הילה והברגים העודפים", "usedFacts": [], "newFacts": []}
 
 Example 2 (male, family game, sports register; ARTICLE TYPE: feature; ANGLE: 15-year wait ended, father blames the game)
 CHAT:
@@ -78,7 +76,7 @@ user: אמר: המשחק היה מכור
 KNOWN FACTS: עבודה: נהג מונית
 USER NAME: רועי נחום
 OUTPUT:
-{"headline": "אחרי 15 שנה: רועי ניצח את אבא שלו בשש-בש", "sub": "הניצחון הראשון הגיע היום. \"המשחק היה מכור\", אמר האב", "summary": "רועי נחום ניצח את אביו בשש-בש לראשונה אחרי 15 שנה של ניסיונות.", "body": ["במשך 15 שנה ניסה רועי נחום לנצח את אביו בשש-בש.", "היום הרצף נשבר, והניצחון הראשון הגיע דווקא מול מי שהחזיק בו כל השנים.", "\"המשחק היה מכור\", אמר האב."], "flash": "רועי נחום ניצח את אביו בשש-בש לראשונה", "push": "\"המשחק היה מכור\": רועי ניצח את אבא אחרי 15 שנה", "usedFacts": [], "newFacts": [{"k": "תחביב", "v": "שש-בש"}]}
+{"headline": "אחרי 15 שנה: רועי ניצח את אבא שלו בשש-בש", "sub": "הניצחון הראשון הגיע היום. \"המשחק היה מכור\", אמר האב", "summary": "רועי נחום ניצח את אביו בשש-בש לראשונה אחרי 15 שנה של ניסיונות.", "body": ["רועי נחום ניצח היום את אביו בשש-בש, בפעם הראשונה. עד הניצחון הזה הוא הפסיד לו. המשחק ביניהם נגמר הפעם אצלו.", "ההפסדים נמשכו 15 שנה. בכל השנים האלה האב ניצח, והבן לא שבר את הרצף. היום הרצף נגמר.", "הניצחון הראשון הגיע מול האב, אחרי 15 שנה של הפסדים בשש-בש. רועי הוא זה שניצח במשחק.", "האב דיבר על המשחק עצמו. \"המשחק היה מכור\", אמר. זו התשובה שנתן לניצחון של הבן."], "flash": "רועי נחום ניצח את אביו בשש-בש לראשונה", "push": "\"המשחק היה מכור\": רועי ניצח את אבא אחרי 15 שנה", "usedFacts": [], "newFacts": [{"k": "תחביב", "v": "שש-בש"}]}
 
 Example 3 (male, grandfather; ARTICLE TYPE: profile; ANGLE: grandfather haggles then tips, character in one gesture)
 CHAT:
@@ -104,9 +102,9 @@ user: המציל. אמר לי: יפה
 KNOWN FACTS: (none)
 USER NAME: אורי לביא
 OUTPUT:
-{"headline": "1,500 מטר ברצף: אורי לביא עבר את תקרת ה-800", "sub": "עד היום עצר אחרי 800 מטר, והפעם לא עצר. \"יפה\", אמר המציל", "summary": "אורי לביא שחה 1,500 מטר בבריכה בלי לעצור, אחרי שעד היום עצר תמיד ב-800.", "body": ["אורי לביא שחה היום 1,500 מטר בבריכה ברצף, בלי לעצור.", "עד היום הוא עצר תמיד אחרי 800 מטר.", "\"יפה\", אמר לו המציל בסיום."], "flash": "אורי לביא שחה 1,500 מטר בבריכה בלי לעצור", "push": "מ-800 ל-1,500 מטר: אורי לביא לא עצר", "usedFacts": [], "newFacts": [{"k": "תחביב", "v": "שחייה"}]}
+{"headline": "1,500 מטר ברצף: אורי לביא עבר את תקרת ה-800", "sub": "עד היום עצר אחרי 800 מטר, והפעם לא עצר. \"יפה\", אמר המציל", "summary": "אורי לביא שחה 1,500 מטר בבריכה בלי לעצור, אחרי שעד היום עצר תמיד ב-800.", "body": ["אורי לביא שחה היום 1,500 מטר בבריכה ברצף. הוא לא עצר באמצע. כל 1,500 המטרים יצאו בשחייה אחת רצופה.", "עד היום הוא עצר תמיד אחרי 800 מטר. 800 המטרים היו הנקודה שבה נפסקה השחייה. הפעם הנקודה הזו לא עצרה אותו.", "מ-800 מטר הוא המשיך עד 1,500. התקרה הישנה נשארה מאחור, והשחייה נמשכה עד המרחק החדש.", "בסיום היה שם המציל. \"יפה\", אמר לו. המציל ראה את השחייה שנמשכה בלי עצירה."], "flash": "אורי לביא שחה 1,500 מטר בבריכה בלי לעצור", "push": "מ-800 ל-1,500 מטר: אורי לביא לא עצר", "usedFacts": [], "newFacts": [{"k": "תחביב", "v": "שחייה"}]}
 
-Example 5 (female, building elevator; ARTICLE TYPE: news_brief; ANGLE: elevator back after a month, a neighbor's relief)
+Example 5 (female, building elevator; ARTICLE TYPE: feature; ANGLE: elevator back after a month, a neighbor's relief)
 CHAT:
 user: המעלית בבניין שלנו חזרה לעבוד אחרי חודש תקלה
 reporter: ומי תיקן?
@@ -116,7 +114,7 @@ user: שכנה מקומה שישית אמרה: סוף סוף
 KNOWN FACTS: (none)
 USER NAME: מורן אשכנזי
 OUTPUT:
-{"headline": "אחרי חודש של תקלה: המעלית בבניין של מורן חזרה לפעול", "sub": "טכנאי אחד הגיע בבוקר ותיקן בשעתיים. \"סוף סוף\", אמרה שכנה מקומה שישית", "summary": "המעלית בבניין של מורן אשכנזי חזרה לעבוד אחרי חודש תקלה, לאחר תיקון של שעתיים.", "body": ["המעלית בבניינה של מורן אשכנזי חזרה לפעול היום אחרי חודש של תקלה.", "טכנאי אחד הגיע בבוקר ותיקן אותה בתוך שעתיים.", "\"סוף סוף\", אמרה שכנה מקומה שישית."], "flash": "המעלית בבניין של מורן אשכנזי חזרה לפעול אחרי חודש", "push": "סוף סוף: המעלית של הבניין חזרה אחרי חודש", "usedFacts": [], "newFacts": []}
+{"headline": "אחרי חודש של תקלה: המעלית בבניין של מורן חזרה לפעול", "sub": "טכנאי אחד הגיע בבוקר ותיקן בשעתיים. \"סוף סוף\", אמרה שכנה מקומה שישית", "summary": "המעלית בבניין של מורן אשכנזי חזרה לעבוד אחרי חודש תקלה, לאחר תיקון של שעתיים.", "body": ["חודש של מדרגות נגמר הבוקר בבניינה של מורן אשכנזי. המעלית הייתה בתקלה חודש שלם. הבוקר היא חזרה לפעול.", "במשך החודש הזה המעלית בבניין לא עבדה, והדרך למעלה הייתה במדרגות. התקלה נמשכה עד הבוקר שבו הגיע התיקון.", "טכנאי אחד הגיע בבוקר לבניין. התיקון לקח שעתיים. בסוף השעתיים המעלית עבדה שוב.", "שכנה מקומה שישית אמרה את המשפט של הבוקר. \"סוף סוף\", אמרה. זו הייתה התגובה שלה לחזרת המעלית."], "flash": "המעלית בבניין של מורן אשכנזי חזרה לפעול אחרי חודש", "push": "סוף סוף: המעלית של הבניין חזרה אחרי חודש", "usedFacts": [], "newFacts": []}
 
 Example 6 (female, interview; ARTICLE TYPE: interview; ANGLE: left a bank job of eight years for a pastry shop)
 CHAT:

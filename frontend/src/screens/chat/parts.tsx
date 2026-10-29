@@ -65,7 +65,7 @@ export function ChatDock({ m }: { m: ChatModel }) {
           <button onClick={m.goDraft} className={pillBtn}>חזרה לטיוטה ←</button>
         </div>
       )}
-      {m.userCount >= 1 && !m.typing && !m.draftReady && (
+      {m.userCount >= 3 && !m.typing && !m.draftReady && (
         <div className="flex justify-center">
           <button onClick={m.goDraft} className={pillBtn}>די, תיצור טיוטה</button>
         </div>

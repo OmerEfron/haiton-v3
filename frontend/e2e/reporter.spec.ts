@@ -30,6 +30,12 @@ test('chat, revise, and publish a story', async ({ page }) => {
   await expect(page.getByRole('button', { name: 'שליחה' })).toBeEnabled()
   await page.getByRole('button', { name: 'שליחה' }).click()
   await expect(page.getByText('רגע, ומה קרה אחר כך?')).toBeVisible()
+  await expect(page.getByRole('button', { name: 'די, תיצור טיוטה' })).toHaveCount(0)
+  await page.getByLabel('הודעה לכתב').fill('הארון עומד')
+  await page.getByRole('button', { name: 'שליחה' }).click()
+  await expect(page.getByText('רגע, ומה קרה אחר כך?')).toHaveCount(2)
+  await page.getByLabel('הודעה לכתב').fill('נשארו ברגים')
+  await page.getByRole('button', { name: 'שליחה' }).click()
   await page.getByRole('button', { name: 'די, תיצור טיוטה' }).click()
 
   await expect(page.getByRole('heading', { name: FIRST })).toBeVisible()

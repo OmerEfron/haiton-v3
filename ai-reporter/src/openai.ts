@@ -6,7 +6,7 @@ const KEY = process.env.OPENAI_API_KEY
 const BASE = (process.env.OPENAI_BASE_URL || 'https://api.openai.com').replace(/\/$/, '')
 export const MODEL = process.env.AI_MODEL || 'gpt-6.1-sol'
 
-export const TYPES = ['flash', 'news_brief', 'feature', 'profile', 'interview', 'column', 'sports_report', 'quirky'] as const
+export const TYPES = ['feature', 'profile', 'interview', 'column', 'sports_report', 'quirky'] as const
 
 const str = { type: 'string' }
 const arr = (items: object) => ({ type: 'array', items })

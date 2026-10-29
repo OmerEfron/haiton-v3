@@ -99,7 +99,7 @@ Rules:
 5. Ask for something quotable once, tied to the scene and only if the user has not quoted anyone. About another person: "ומה היא אמרה?". Otherwise use a reality check that makes the user answer in their own words. Fixed stock phrases ("יש משפט שנשאר לך מזה?", "מה אמרת לעצמך?", "מה עבר לך בראש?", "מה יצא לך מהפה?") read as a form once they repeat across stories, so they are banned in the prompt. This is the quote source for the editor.
 6. Never ask feeling-questions in therapy phrasing: "איך הרגשת?", "איך זה מרגיש?", "ספר/י עוד על הרגשות". If feelings are needed, ask for the behavior: "ומה עשית אחרי זה?".
 7. Never invent a detail inside the question ("אז הבעל שלך צחק?" when no husband was mentioned).
-8. `canDraft` is true from the first answer that says who did what (the user may draft any time, like the current mock). The reporter keeps asking until it has a hook, a number or twist and a quotable line, usually 2-3 answers and at most 4 questions. If it only has a number plus a generic reaction, it asks one more angle-deepening question. Then `reply` becomes null (the UI stops the chat) or a short closer ("יש לי מספיק, אפשר לכתוב.").
+8. The reporter asks at least 2 and at most 7 questions after the opener. `canDraft` is true only after the user has answered 2 of those questions, and the draft button stays hidden until then. The reporter keeps asking while a new concrete detail is still worth a line. If it only has a number plus a generic reaction, it asks one more angle-deepening question. Then `reply` becomes null (the UI stops the chat) or a short closer ("יש לי מספיק, אפשר לכתוב.").
 9. If the user gives a very short or flat answer, ask a concrete follow-up, not an open one. "מה אכלת?" beats "ספר עוד".
 10. Gender: address with the user's gender if known (profile `gender`). If unknown use infinitive or plural-neutral forms ("אז מה קרה אחר כך?" works for everyone). Never mix forms.
 
@@ -147,7 +147,6 @@ Each revision keeps the facts and rewrites style. Headline, sub, body, flash and
 | `funnier` | מצחיק יותר | Dry deadpan newsroom humor, the funny comes from the understatement and the specific detail. Headline plays on the event: "הטחינה נפלה, החולצה שרדה". No jokes added from outside, no emoji, no "חחח". Body keeps a straight face. |
 | `dramatic` | דרמטי יותר | Tabloid/weekend-supplement hook with a twist or time pressure: "האסון שלא קרה: הטחינה פספסה את מאיה בסנטימטרים". Strong verbs, one cliffhanger in the sub. Never claim danger that did not happen. |
 | `restrained` | מאופק יותר | Wire-service tone: who, what, when, one fact per sentence. "משמרת שקטה לעמרי דהן אחרי שבוע עמוס". No quote in the headline, minimal adjectives. |
-| `concise` | תמציתי יותר | Body cut to the first and last paragraph (like the mock), headline 35-60 chars, sub one short sentence. |
 | `headline` | כותרת חדשה | Only the headline changes: another structure from section 2 (swap colon-form for quote-led or the other way). Same facts as before, never repeating the previous headline. |
 | `alternate` | נוסח אחר | A full second version of headline, sub, body with a different lede angle (for example start from the quote, or from the number). |
 

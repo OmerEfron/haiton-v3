@@ -27,6 +27,11 @@ test('reporter rejects missing auth, other users, and empty text', async ({ play
   const empty = await a.post(`/ai/reporter/sessions/${id}/messages`, { data: { text: '  ' } })
   expect(empty.status()).toBe(400)
 
+  const one = await a.post(`/ai/reporter/sessions/${id}/messages`, { data: { text: 'שלום' } })
+  expect(one.status()).toBe(200)
+  const early = await a.post('/ai/editor/drafts', { data: { sessionId: id } })
+  expect(early.status()).toBe(400)
+
   await a.dispose()
   await b.dispose()
 })

@@ -307,8 +307,7 @@
    "יצאתי מהחדר ושאלתי את עצמי אם זה אמיתי"
   ],
   "expectedTypes": [
-   "feature",
-   "news_brief"
+   "feature"
   ],
   "bestAngle": "three years in one role, and the manager just said סוף סוף",
   "buriedFact": "היא הלכה לשירותים וחייכה לעצמה במראה",
@@ -383,8 +382,7 @@
    "נהג משאית עצר לעזור ולא שאל כלום, ובסוף הגעתי לפני החתן"
   ],
   "expectedTypes": [
-   "feature",
-   "news_brief"
+   "feature"
   ],
   "bestAngle": "race against the wedding clock with a flat tire",
   "buriedFact": "הוא הגיע בדיוק כשהחופה התחילה, עם ידיים שחורות מגריז",
@@ -460,8 +458,7 @@
    "התיישבנו עליה עוד לפני שהורדנו את הניילון"
   ],
   "expectedTypes": [
-   "quirky",
-   "news_brief"
+   "quirky"
   ],
   "bestAngle": "the sofa finally arrived after the courier got stuck in the elevator",
   "buriedFact": "השליח נשאר תקוע במעלית עשרים דקות עם הספה",
@@ -486,7 +483,6 @@
    "בסדר"
   ],
   "expectedTypes": [
-   "flash",
    "feature"
   ],
   "bestAngle": "a terse user, an electric bike purchase",
@@ -642,9 +638,8 @@
    "הפקח עמד שם כשיצאתי מהאוטו"
   ],
   "expectedTypes": [
-   "news_brief",
-   "quirky",
-   "flash"
+   "feature",
+   "quirky"
   ],
   "bestAngle": "got a ticket three minutes after paying",
   "buriedFact": "הפקח הראה לו שהאפליקציה עדיין הציגה טעינה",

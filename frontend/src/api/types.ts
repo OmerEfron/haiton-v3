@@ -154,4 +154,4 @@ export interface Draft extends DraftContent {
   newFacts: NewFact[]
 }
 
-export type RevisionKind = 'funnier' | 'dramatic' | 'restrained' | 'concise' | 'headline' | 'alternate'
+export type RevisionKind = 'funnier' | 'dramatic' | 'restrained' | 'headline' | 'alternate'

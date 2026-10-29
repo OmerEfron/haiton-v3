@@ -56,11 +56,13 @@ test('one chat and a draft against OpenAI', async ({ request }) => {
     const session = await request.post(`${base}/ai/reporter/sessions`, { headers: { cookie } })
     expect(session.ok()).toBeTruthy()
     const id = (await session.json()).id as string
-    const turn = await request.post(`${base}/ai/reporter/sessions/${id}/messages`, {
-      headers: { cookie },
-      data: { text: 'סיימתי להרכיב ארון איקאה לבד' },
-    })
-    expect(turn.ok()).toBeTruthy()
+    for (const text of ['סיימתי להרכיב ארון איקאה לבד', 'הארון עומד', 'נשארו שלושה ברגים']) {
+      const turn = await request.post(`${base}/ai/reporter/sessions/${id}/messages`, {
+        headers: { cookie },
+        data: { text },
+      })
+      expect(turn.ok()).toBeTruthy()
+    }
     const draft = await request.post(`${base}/ai/editor/drafts`, { headers: { cookie }, data: { sessionId: id } })
     expect(draft.ok()).toBeTruthy()
     const body = (await draft.json()) as { headline: string; body: string[] }

@@ -6,7 +6,7 @@ import type { DraftModel } from './useDraftModel'
 
 const REVS: [string, RevisionKind][] = [
   ['מצחיק יותר', 'funnier'], ['דרמטי יותר', 'dramatic'], ['מאופק יותר', 'restrained'],
-  ['תמציתי יותר', 'concise'], ['כותרת חדשה', 'headline'], ['נוסח אחר', 'alternate'],
+  ['כותרת חדשה', 'headline'], ['נוסח אחר', 'alternate'],
 ]
 const STEPS = ['מגדיר את הסיפור', 'בודק בכרטסת העובדות', 'מחפש כתבות קודמות שלכם']
 

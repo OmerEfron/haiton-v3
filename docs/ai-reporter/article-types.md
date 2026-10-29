@@ -15,45 +15,30 @@ Clusters from the corpus and what happened to them:
 | reported_feature, "כתבת צבע ושטח" (21) | 2.5, the best | Kept: `feature` |
 | profile_interview (21) | 2.0 | Split: `profile` (person is the spine) and `interview` (Q&A) |
 | column_review (24) | 1.5 | Kept: `column` (first-person voice) |
-| straight_news (33) | 1.5 | Kept, shrunk: `news_brief` |
+| straight_news (33) | 1.5 | Dropped: `news_brief` made every story too short |
 | match_report (7) | 1.4 | Kept: `sports_report` |
 | document_based_report (16), initiative_testimonial (16), explainer_service (45), other (17) | 1.1-1.7 | Dropped: investigations, sponsored testimonials, how-to guides, recipes and fiction cannot carry a private life event honestly |
-| (from feeds) flash | n/a | Added: `flash` |
+| (from feeds) flash | n/a | Dropped: a one-paragraph ticker cannot carry an interview |
 | (from feeds) "סיפור בדקה" | n/a | Added: `quirky` |
 
-"Dramatic news break" is not a separate type. It is a tone applied to `flash` or `news_brief` (the `dramatic` revision). Real flashes in the corpus are flat: ynet flash median 55 characters, no sub-headline.
+"Dramatic news break" is not a separate type. The `dramatic` revision is that tone. Real flashes in the corpus are flat: ynet flash median 55 characters, no sub-headline.
 
-Type ids: `flash`, `news_brief`, `feature`, `profile`, `interview`, `column`, `sports_report`, `quirky`. Default when unsure: `feature`.
+Type ids: `feature`, `profile`, `interview`, `column`, `sports_report`, `quirky`. Default when unsure: `feature`.
 
 ## 2. Measured shape per type (corpus) and the Haiton scale
 
-Real articles are long (median 9-27 paragraphs). Haiton stories keep the structure but are 1-4 paragraphs.
+Real articles are long (median 9-27 paragraphs). Haiton stories keep the structure but run 3-5 paragraphs, at least 350 characters.
 
 | Type | Corpus lede | Corpus quote share | Corpus kicker | Haiton body |
 |---|---|---|---|---|
-| flash | hard fact, one sentence | none | none | 1 short paragraph |
-| news_brief | hard fact 28 of 33 | 15% | quote 14, fact 12 | 2-3 paragraphs |
-| feature | anecdote 6, hard fact 7, scene 5, quote 3 | 60% | quote 8 of 21 | 3-4 paragraphs, 2 only if thin |
-| profile | anecdote 7, scene 5, hard fact 4 | 60% | reflection 7, none 7 | 3-4 paragraphs, 2 only if thin |
-| interview | short intro, then Q&A | 100% (answers) | last answer | 1 intro + 3-4 Q&A |
-| column | anecdote 8, other 9 | 2% | reflection 10, twist 3 | 3-4 paragraphs, first person; 2 only if thin |
-| sports_report | hard fact 7 of 7 (score) | 0% | fact 5 of 7 | 2-3 paragraphs |
-| quirky | the odd detail | one line | none | 2-3 paragraphs |
+| feature | anecdote 6, hard fact 7, scene 5, quote 3 | 60% | quote 8 of 21 | 3-5 paragraphs |
+| profile | anecdote 7, scene 5, hard fact 4 | 60% | reflection 7, none 7 | 3-5 paragraphs |
+| interview | short intro, then Q&A | 100% (answers) | last answer | intro of 2 sentences plus every Q&A |
+| column | anecdote 8, other 9 | 2% | reflection 10, twist 3 | 3-5 paragraphs, first person |
+| sports_report | hard fact 7 of 7 (score) | 0% | fact 5 of 7 | 3-4 paragraphs |
+| quirky | the odd detail | one line | none | 3-4 paragraphs |
 
 ## 3. The types
-
-### flash (מבזק)
-- Fits when: a one-fact event, nothing to dig into, the user gave one line. Also the base for the `dramatic` news-break tone.
-- Headline: plain fact, past tense, 40-70 characters, optional "X: Y". Sub: one line adding the place or time. Body: one paragraph of 1-2 sentences. No quote unless the user gave one.
-- Flash/push: flash = the headline's fact. Push = the sharpest word of it.
-- Real: `2 פצועים קשה בתאונת דרכים בחיפה`, `כביש 6 באזור מנהרת רכסים נפתח לתנועה בשני הכיוונים`.
-- Haiton: `ענת שפירא מצאה את המפתחות במקרר`.
-
-### news_brief (ידיעה)
-- Fits when: a single event with a clear what/who/when, no emotional spine, someone else's action.
-- Headline: fact first, "X: Y" or quote-led. Sub: the second most important fact. Lede: hard fact (who did what, when). Paragraph order: lede, one detail or number, a reaction quote. Kicker: a quote or the plain next step.
-- Real: `ישראלי ראשון אי פעם בקלאסיקו: אוריין גורן בסגל ברצלונה מול ריאל`.
-- Haiton: `יוני ברק הגיע לחופה לפני החתן, אחרי פנצ'ר בכביש 6`.
 
 ### feature (כתבת צבע)  [default]
 - Fits when: the story is an experience or a small drama with a person, a detail and a quote: waited, tried, finally, a surprise, a reaction.
@@ -88,7 +73,7 @@ Real articles are long (median 9-27 paragraphs). Haiton stories keep the structu
 
 ### quirky (סיפור בדקה)
 - Fits when: the event is odd or absurd and told straight (a dog trick, a Zoom mistake, a sofa stuck in an elevator).
-- Headline: "הדבר המוזר: מי עשה אותו", deadpan. Sub: the one detail that makes it funny. Body: 2-3 short paragraphs, the odd detail in the first line, the reaction in the last. No jokes from the writer.
+- Headline: "הדבר המוזר: מי עשה אותו", deadpan. Sub: the one detail that makes it funny. Body: 3-4 paragraphs, the odd detail in the first line, the reaction in the last. No jokes from the writer.
 - Real: `החדשות בדקה | אוסטרליה: שר המשטרה צילם כבשה בזמן נהיגה - ונקנס`, `סיפור בדקה: הצעיר שריחף מעל העיר עם בלוני הליום לא מתחרט`.
 - Haiton: `גיל שכח להשתיק בזום ושר באמבטיה בפני המחלקה`.
 
@@ -96,8 +81,7 @@ Real articles are long (median 9-27 paragraphs). Haiton stories keep the structu
 
 | Signal in the chat | Type |
 |---|---|
-| One fact, nothing more to say | flash |
-| Something happened to or was done by someone else, no feelings | news_brief |
+| One fact, or something that happened to someone else, with no stronger signal | feature |
 | A wait, a first time, a surprise, a reaction from someone | feature |
 | The person (not the event) is the story, a relative's trait | profile |
 | Three or more vivid answers, several beats, user is talkative | interview |
@@ -111,13 +95,13 @@ Tie-breakers: a number plus a competition beats everything (sports_report). An a
 ## 5. How the editor and revisions use the type
 
 - The editor gets `articleType` and the reporter's `angle` and follows the section of that type. Headline, sub and push must reflect the angle.
-- `funnier`, `dramatic`, `restrained`, `concise`, `headline`, `alternate` apply inside the type. `dramatic` on `flash` or `news_brief` gives the dramatic news-break tone.
+- `funnier`, `dramatic`, `restrained`, `headline`, `alternate` apply inside the type. `dramatic` is the news-break tone.
 - A new revision `type` rewrites the same facts in another type. It must keep the facts and never turn on a quote the user did not say.
 
 ## 6. API contract change (frontend and mocks are a follow-up)
 
 ```ts
-export type ArticleType = 'flash' | 'news_brief' | 'feature' | 'profile' | 'interview' | 'column' | 'sports_report' | 'quirky'
+export type ArticleType = 'feature' | 'profile' | 'interview' | 'column' | 'sports_report' | 'quirky'
 
 // ReporterTurn gains hidden fields, never shown to the user:
 // (known and target are reasoning fields the model writes before the reply; keep them hidden or drop them in production)
