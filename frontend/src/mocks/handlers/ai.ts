@@ -6,6 +6,13 @@ import { fail } from './util'
 import { DATA } from '../seed/haiton-data.js'
 
 const u = (p: string) => AI_API_URL + p
+const INTRO_OPENER = 'ספרו לי קצת על עצמכם. במה אתם עובדים?'
+const INTRO_TURNS = [
+  { reply: 'נחמד. ואיפה אתם גרים?', k: 'עבודה' },
+  { reply: 'ומי גר איתכם?', k: 'עיר' },
+  { reply: 'מה אתם עושים כשיש שעה פנויה?', k: 'תחביב' },
+]
+const intros: Record<string, DbSession> = {}
 const REV_INDEX: Partial<Record<RevisionKind, number>> = { funnier: 1, dramatic: 2, restrained: 3 }
 const clip = (s: string, n: number) => (s.length > n ? s.slice(0, n).trimEnd() + '…' : s)
 const GENERIC: Script = { replies: ['איזה יופי. ספרו עוד, איך זה התחיל?', 'ואיך הרגשתם כשזה קרה?'] }
@@ -154,5 +161,32 @@ export const aiHandlers = [
       ])
       return toDraft(me, facts ?? [], articles ?? [], params.id, d)
     }, 1400),
+  ),
+
+  http.post(
+    u('/intro/sessions'),
+    aiRoute(({ me }) => {
+      const id = uid('i')
+      intros[id] = { userId: me.id, messages: [{ role: 'reporter', text: INTRO_OPENER }] }
+      return { id, messages: intros[id].messages }
+    }),
+  ),
+
+  http.post(
+    u('/intro/sessions/:id/messages'),
+    aiRoute(async ({ me, params, body, request }) => {
+      const s = intros[params.id]
+      const text = String(body?.text ?? '').trim()
+      if (!s || s.userId !== me.id) return fail(404, 'session not found')
+      if (!text || text.length > 1000) return fail(400, 'text required')
+      if (s.messages.filter((m) => m.role === 'user').length >= 20) return { reply: null, newFacts: [] }
+      s.messages.push({ role: 'user', text })
+      const n = s.messages.filter((m) => m.role === 'user').length - 1
+      const turn = INTRO_TURNS[n] ?? { reply: 'עוד משהו שכדאי שאדע?', k: 'עוד' }
+      s.messages.push({ role: 'reporter', text: turn.reply })
+      const v = text.length > 80 ? text.slice(0, 80).trimEnd() : text
+      const facts = (await coreGet<Fact[]>('/me/facts', request)) ?? []
+      return { reply: turn.reply, newFacts: facts.some((f) => f.k === turn.k && f.v === v) ? [] : [{ k: turn.k, v }] }
+    }, 800),
   ),
 ]

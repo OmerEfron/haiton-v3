@@ -4,6 +4,7 @@ import { param, requireAuth } from '../auth.ts'
 import { pool } from '../db.ts'
 import { HttpError } from '../errors.ts'
 import { getVisible, loadFull, summary, type ArticleRow } from '../lib/articles.ts'
+import { saveFacts } from '../lib/facts.ts'
 import { notify } from '../lib/notify.ts'
 import { getUser } from '../lib/users.ts'
 import { writeLimit } from '../limits.ts'
@@ -119,14 +120,7 @@ articlesRouter.post('/articles', auth, writeLimit, async (req, res) => {
       [id, aud],
     )
   }
-  for (const f of body.saveFacts) {
-    const exists = await pool.query('select 1 from facts where user_id = $1 and k = $2 and v = $3', [u.id, f.k, f.v])
-    if (!exists.rowCount)
-      await pool.query(
-        `insert into facts (user_id, k, v, src, is_new) values ($1, $2, $3, 'נוסף היום, מתוך השיחה', true)`,
-        [u.id, f.k, f.v],
-      )
-  }
+  await saveFacts(u.id, body.saveFacts, 'נוסף היום, מתוך השיחה')
   await pool.query('update users set onboarding = false where id = $1', [u.id])
   const a = await getVisible(u.id, id)
   if (!a) throw new HttpError(500, 'internal error')

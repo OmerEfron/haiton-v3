@@ -1,14 +1,18 @@
+import { useNavigate } from 'react-router'
 import { deleteFact } from '../../api/core/me'
 import { useAction, useFacts } from '../../api/queries'
+import { btn } from '../../components/ui'
 
 export function FactsTab({ name }: { name: string }) {
   const facts = useFacts().data ?? []
   const remove = useAction(deleteFact)
+  const nav = useNavigate()
   return (
     <div className="flex flex-col gap-4 pt-4">
       <div className="text-sm leading-relaxed text-muted">
         הכרטסת נבנית ממה שסיפרתם לכתב, ורק לכם יש גישה אליה. הכתב משתמש בה כדי לדייק את הכתבות שלכם. אפשר למחוק כל פרט.
       </div>
+      <button onClick={() => nav('/me/intro')} className={`${btn.pillOutline} self-start`}>ספרו לכתב עוד עליכם</button>
       <div className="border border-ink bg-cream shadow-[5px_5px_0_var(--color-ink)]">
         <div className="flex items-baseline justify-between gap-2.5 border-b-2 border-hot px-4 pt-3.5 pb-3">
           <span className="font-display text-[23px] font-black text-ink">כרטסת עובדות</span>

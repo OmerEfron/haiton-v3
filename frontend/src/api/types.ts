@@ -146,6 +146,11 @@ export interface ReporterTurn {
   canDraft: boolean
 }
 
+export interface IntroTurn {
+  reply: string | null
+  newFacts: NewFact[]
+}
+
 export interface DraftContent {
   headline: string
   sub: string

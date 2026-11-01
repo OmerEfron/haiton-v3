@@ -25,20 +25,32 @@ function strings(v: unknown, label: string) {
   return v
 }
 
-export function asDraft(raw: unknown): ModelDraft {
-  if (!raw || typeof raw !== 'object') throw new UpstreamError('bad draft json')
-  const o = raw as Record<string, unknown>
-  if (!Array.isArray(o.body) || o.body.length < 1 || o.body.some((p) => typeof p !== 'string')) throw new UpstreamError('bad draft body')
-  if (!Array.isArray(o.usedFacts) || o.usedFacts.some((k) => typeof k !== 'string')) throw new UpstreamError('bad draft facts')
-  if (!Array.isArray(o.newFacts)) throw new UpstreamError('bad draft facts')
+export function asNewFacts(raw: unknown): NewFact[] {
+  if (!Array.isArray(raw)) throw new UpstreamError('bad draft facts')
   const newFacts: NewFact[] = []
-  for (const f of o.newFacts) {
+  for (const f of raw) {
     if (newFacts.length >= 10) break
     if (!f || typeof f !== 'object') throw new UpstreamError('bad draft facts')
     const fact = f as Record<string, unknown>
     if (typeof fact.k !== 'string' || typeof fact.v !== 'string' || !fact.k || !fact.v) throw new UpstreamError('bad draft facts')
     newFacts.push({ k: fact.k.slice(0, 40), v: fact.v.slice(0, 200) })
   }
+  return newFacts
+}
+
+export function asIntro(raw: unknown): { reply: string | null; newFacts: NewFact[] } {
+  if (!raw || typeof raw !== 'object') throw new UpstreamError('bad intro json')
+  const o = raw as Record<string, unknown>
+  if (!(typeof o.reply === 'string' || o.reply === null)) throw new UpstreamError('bad intro json')
+  return { reply: o.reply, newFacts: asNewFacts(o.newFacts) }
+}
+
+export function asDraft(raw: unknown): ModelDraft {
+  if (!raw || typeof raw !== 'object') throw new UpstreamError('bad draft json')
+  const o = raw as Record<string, unknown>
+  if (!Array.isArray(o.body) || o.body.length < 1 || o.body.some((p) => typeof p !== 'string')) throw new UpstreamError('bad draft body')
+  if (!Array.isArray(o.usedFacts) || o.usedFacts.some((k) => typeof k !== 'string')) throw new UpstreamError('bad draft facts')
+  const newFacts = asNewFacts(o.newFacts)
   const headline = strings(o.headline, 'headline')
   if (!headline.trim()) throw new UpstreamError('bad draft headline')
   return {

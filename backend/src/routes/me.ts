@@ -5,7 +5,9 @@ import { COOKIE, cookieOpts, param, requireAuth } from '../auth.ts'
 import { pool } from '../db.ts'
 import { HttpError } from '../errors.ts'
 import { summary, type ArticleRow } from '../lib/articles.ts'
+import { saveFacts } from '../lib/facts.ts'
 import { getUser, toMe } from '../lib/users.ts'
+import { writeLimit } from '../limits.ts'
 import { parse } from '../parse.ts'
 
 export const meRouter = Router()
@@ -96,12 +98,27 @@ meRouter.patch('/me/notification-prefs', auth, async (req, res) => {
   res.json(next)
 })
 
-meRouter.get('/me/facts', auth, async (req, res) => {
+async function listFacts(userId: string) {
   const { rows } = await pool.query<{ id: string; k: string; v: string; src: string; is_new: boolean }>(
     'select id, k, v, src, is_new from facts where user_id = $1',
-    [req.userId],
+    [userId],
   )
-  res.json(rows.map((f) => ({ id: f.id, k: f.k, v: f.v, src: f.src, isNew: f.is_new })))
+  return rows.map((f) => ({ id: f.id, k: f.k, v: f.v, src: f.src, isNew: f.is_new }))
+}
+
+meRouter.get('/me/facts', auth, async (req, res) => {
+  res.json(await listFacts(req.userId!))
+})
+
+const factInput = z.object({
+  k: z.string().trim().min(1, 'fact required').max(40),
+  v: z.string().trim().min(1, 'fact required').max(200),
+})
+
+meRouter.post('/me/facts', auth, writeLimit, async (req, res) => {
+  const { facts } = parse(z.object({ facts: z.array(factInput).min(1, 'facts required').max(20) }), req.body)
+  await saveFacts(req.userId!, facts, 'מתוך היכרות עם הכתב')
+  res.json(await listFacts(req.userId!))
 })
 
 meRouter.delete('/me/facts/:id', auth, async (req, res) => {

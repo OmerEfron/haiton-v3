@@ -5,6 +5,7 @@ import { errorHandler } from './errors.ts'
 import { perIp } from './limits.ts'
 import { httpLog } from './log.ts'
 import { editorRouter } from './routes/editor.ts'
+import { introRouter } from './routes/intro.ts'
 import { reporterRouter } from './routes/reporter.ts'
 
 export function createApp() {
@@ -19,6 +20,7 @@ export function createApp() {
   app.use('/ai', perIp(120, 60_000))
   app.use('/ai', reporterRouter)
   app.use('/ai', editorRouter)
+  app.use('/ai', introRouter)
   app.use(errorHandler)
   return app
 }

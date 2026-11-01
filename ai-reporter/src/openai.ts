@@ -39,6 +39,10 @@ export const SCHEMA = {
     usedFacts: arr(str),
     newFacts: arr(obj({ k: str, v: str })),
   },
+  intro: {
+    reply: str,
+    newFacts: arr(obj({ k: str, v: str })),
+  },
 }
 
 export interface ChatMessage {

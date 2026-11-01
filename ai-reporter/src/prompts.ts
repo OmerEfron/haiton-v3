@@ -9,6 +9,7 @@ export const prompts = {
   reporter: read('reporter.md'),
   editor: read('editor.md'),
   revise: read('revise.md'),
+  intro: read('intro.md'),
 }
 
 const GENDER = { male: 'male (זכר)', female: 'female (נקבה)', unknown: 'unknown' }

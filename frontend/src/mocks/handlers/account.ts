@@ -98,6 +98,21 @@ export const accountHandlers = [
   http.patch(u('/me/notification-prefs'), route(({ w, body }) => Object.assign(w.prefs, body))),
 
   http.get(u('/me/facts'), route(({ w }) => w.facts)),
+  http.post(
+    u('/me/facts'),
+    route(({ w, body }) => {
+      const facts = body?.facts
+      if (!Array.isArray(facts) || facts.length < 1 || facts.length > 20) return fail(400, 'facts required')
+      for (const f of facts) {
+        const k = String(f?.k ?? '').trim()
+        const v = String(f?.v ?? '').trim()
+        if (!k || k.length > 40 || !v || v.length > 200) return fail(400, 'fact required')
+        if (!w.facts.some((x) => x.k === k && x.v === v))
+          w.facts.push({ id: uid('f'), k, v, isNew: true, src: 'מתוך היכרות עם הכתב' })
+      }
+      return w.facts
+    }),
+  ),
   http.delete(u('/me/facts/:id'), route(({ w, params }) => { w.facts = w.facts.filter((f) => f.id !== params.id) })),
 
   http.get(u('/me/hidden'), route(({ w }) => w.articles.filter((a) => w.hidden.includes(a.id)).sort(byNewest).map((a) => summary(w, a)))),

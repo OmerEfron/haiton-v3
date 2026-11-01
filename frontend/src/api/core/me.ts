@@ -1,5 +1,5 @@
 import { coreApi } from '../http'
-import type { ArticleSummary, Fact, Gender, Me, NotificationPrefs } from '../types'
+import type { ArticleSummary, Fact, Gender, Me, NewFact, NotificationPrefs } from '../types'
 
 export const getMe = () => coreApi.get<Me>('/me')
 export const signInWithGoogle = (email: string) => coreApi.post<Me>('/auth/google', { email })
@@ -20,6 +20,7 @@ export const updatePrefs = (patch: Partial<NotificationPrefs>) =>
   coreApi.patch<NotificationPrefs>('/me/notification-prefs', patch)
 
 export const getFacts = () => coreApi.get<Fact[]>('/me/facts')
+export const addFacts = (facts: NewFact[]) => coreApi.post<Fact[]>('/me/facts', { facts })
 export const deleteFact = (id: string) => coreApi.del<void>(`/me/facts/${id}`)
 
 export const getHidden = () => coreApi.get<ArticleSummary[]>('/me/hidden')

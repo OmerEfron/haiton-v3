@@ -1,4 +1,4 @@
-import { Suspense } from 'react'
+import { lazy, Suspense } from 'react'
 import { createBrowserRouter, Navigate, Outlet, useLocation } from 'react-router'
 import { useMe } from './api/queries'
 import { Overlays } from './components/overlays/Overlays'
@@ -55,6 +55,7 @@ const User = responsive(
   () => import('./screens/user/User.mobile'),
   () => import('./screens/user/User.desktop'),
 )
+const Intro = lazy(() => import('./screens/intro/Intro'))
 
 function Root() {
   return (
@@ -103,6 +104,7 @@ export const router = createBrowserRouter([
           { path: '/compose/publish', element: <Publish /> },
           { path: '/article/:id', element: <Article /> },
           { path: '/u/:id', element: <User /> },
+          { path: '/me/intro', element: <Intro /> },
         ],
       },
       { path: '*', element: <Navigate to="/" replace /> },
