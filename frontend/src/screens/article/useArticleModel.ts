@@ -22,6 +22,7 @@ export function useArticleModel() {
   const confirmRemove = useConfirmRemoveArticle()
   const startStory = useStartStory()
   const [reporting, setReporting] = useState(false)
+  const [editingAudience, setEditingAudience] = useState(false)
   const back = useBack()
 
   const article = q.data
@@ -48,6 +49,8 @@ export function useArticleModel() {
     react: (label: string) => reaction.mutate(reacted === label ? null : label),
     reporting,
     setReporting,
+    editingAudience,
+    setEditingAudience,
     back,
     askRemove,
     startStory,

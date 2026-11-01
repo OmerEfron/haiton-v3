@@ -8,7 +8,7 @@ import { aiDay, aiMinute, sessionLimit } from '../limits.ts'
 import { chat, SCHEMA } from '../openai.ts'
 import { parse } from '../parse.ts'
 import { fill, prompts } from '../prompts.ts'
-import { askedCount, answeredCount, getSession, insertSession, MAX_QUESTIONS, MIN_QUESTIONS, saveSession } from '../sessions.ts'
+import { askedCount, answeredCount, getSession, insertSession, listSessions, MAX_QUESTIONS, MIN_QUESTIONS, saveSession } from '../sessions.ts'
 import type { ChatMessage, ReporterJson } from '../types.ts'
 
 export const reporterRouter = Router()
@@ -33,6 +33,10 @@ function modelMessages(system: string, messages: ChatMessage[], turns: ReporterJ
   msgs.push({ role: 'user', content: text })
   return msgs
 }
+
+reporterRouter.get('/reporter/sessions', requireAuth, async (req, res) => {
+  res.json(await listSessions(req.userId!))
+})
 
 reporterRouter.post('/reporter/sessions', requireAuth, sessionLimit, async (req, res) => {
   const ctx = await loadContext(req.userId!)

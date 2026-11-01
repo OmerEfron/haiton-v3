@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { PaperBar } from '../../components/ui'
+import { AudienceSheet } from './AudienceSheet'
 import { ArticleBody } from './parts'
 import { ReportSheet } from './ReportSheet'
 import { useArticleModel } from './useArticleModel'
@@ -30,6 +31,7 @@ export default function ArticleMobile() {
         </div>
       </article>
       {m.reporting && <ReportSheet article={m.article} onClose={() => m.setReporting(false)} />}
+      {m.editingAudience && <AudienceSheet article={m.article} onClose={() => m.setEditingAudience(false)} />}
     </Frame>
   )
 }

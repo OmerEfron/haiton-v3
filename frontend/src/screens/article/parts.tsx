@@ -28,7 +28,7 @@ export function ArticleBody({ m, headlineClass }: { m: ArticleModel; headlineCla
       {a.history.length > 0 && <History items={a.history} note={m.historyNote} />}
       {!m.mine && <Reactions m={m} />}
       {!m.mine && <ReportButton reported={a.reported} onReport={() => m.setReporting(true)} />}
-      {m.mine && <OwnerBox a={a} audienceLabel={m.audienceLabel} onRemove={m.askRemove} />}
+      {m.mine && <OwnerBox a={a} audienceLabel={m.audienceLabel} onRemove={m.askRemove} onEdit={() => m.setEditingAudience(true)} />}
       {!m.mine && (
         <div className="mt-3 flex flex-col items-start gap-3.5 bg-ink p-[22px] text-paper">
           <div className="font-display text-2xl leading-tight font-black">גם לכם קרה משהו היום?</div>
@@ -95,10 +95,13 @@ function ReportButton({ reported, onReport }: { reported: boolean; onReport: () 
   )
 }
 
-function OwnerBox({ a, audienceLabel, onRemove }: { a: Article; audienceLabel: string; onRemove: () => void }) {
+function OwnerBox({ a, audienceLabel, onRemove, onEdit }: { a: Article; audienceLabel: string; onRemove: () => void; onEdit: () => void }) {
   return (
     <div className="mt-2 flex flex-col gap-2.5 rounded border border-ink bg-cream px-4 py-3.5">
-      <div className="text-[13px] font-extrabold text-charcoal">מי קיבל את הכתבה</div>
+      <div className="flex items-center justify-between gap-2">
+        <div className="text-[13px] font-extrabold text-charcoal">מי קיבל את הכתבה</div>
+        <button onClick={onEdit} className="text-[13px] font-semibold text-ink underline">שינוי</button>
+      </div>
       <div className="text-[14.5px] leading-normal text-body">{audienceLabel}</div>
       {!!a.audienceIds?.length && (
         <div className="flex flex-col gap-1.5 border-t border-beige pt-2.5">

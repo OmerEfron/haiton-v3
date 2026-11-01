@@ -47,7 +47,7 @@ export function useChatModel() {
     canSend,
     send,
     scroller,
-    goFeed: () => nav('/feed'),
+    openHistory: () => nav('/compose/history'),
     openFacts: () => {
       if (me) nav(`/u/${me.id}?tab=facts`)
     },

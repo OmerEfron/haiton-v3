@@ -43,6 +43,10 @@ const Publish = responsive(
   () => import('./screens/publish/Publish.mobile'),
   () => import('./screens/publish/Publish.desktop'),
 )
+const History = responsive(
+  () => import('./screens/history/History.mobile'),
+  () => import('./screens/history/History.desktop'),
+)
 const Article = responsive(
   () => import('./screens/article/Article.mobile'),
   () => import('./screens/article/Article.desktop'),
@@ -94,6 +98,7 @@ export const router = createBrowserRouter([
           { path: '/welcome', element: <Welcome /> },
           { path: '/feed', element: <Feed /> },
           { path: '/compose', element: <Chat /> },
+          { path: '/compose/history', element: <History /> },
           { path: '/compose/draft', element: <Draft /> },
           { path: '/compose/publish', element: <Publish /> },
           { path: '/article/:id', element: <Article /> },

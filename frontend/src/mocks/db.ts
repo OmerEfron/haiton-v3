@@ -15,6 +15,7 @@ export interface DbArticle {
   prevId: Id | null
   /** my articles only: who it was sent to (empty = only me) */
   audienceIds: Id[] | null
+  draftId?: Id
 }
 
 /** Canned AI behaviour for an account (the prototype's scripted conversation). */
@@ -56,6 +57,7 @@ export interface DbInvite {
 
 export interface DbSession {
   userId: Id
+  createdAt?: string
   messages: { role: 'reporter' | 'user'; text: string }[]
 }
 

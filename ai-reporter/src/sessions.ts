@@ -1,5 +1,5 @@
 import { pool } from './db.ts'
-import type { ChatMessage, ReporterJson, SessionRow } from './types.ts'
+import type { ChatMessage, DraftContent, ReporterJson, SessionRow } from './types.ts'
 
 export const FIXED_OPENER = 'מה קרה?'
 export const MIN_QUESTIONS = 2
@@ -43,6 +43,39 @@ export async function getSession(id: string, userId: string) {
     [id, userId],
   )
   return rows[0] ?? null
+}
+
+interface PastSessionRow {
+  id: string
+  created_at: Date
+  messages: ChatMessage[]
+  draft: DraftContent | null
+  article_id: string | null
+}
+
+/** Newest sessions the user actually answered, with the latest draft and published article. */
+export async function listSessions(userId: string) {
+  const { rows } = await pool.query<PastSessionRow>(
+    `select s.id, s.created_at, s.messages,
+            (select d.content from ai_drafts d
+              where d.session_id = s.id order by d.created_at desc limit 1) as draft,
+            (select a.id from articles a
+              join ai_drafts d on d.id = a.draft_id
+              where d.session_id = s.id order by a.created_at desc limit 1) as article_id
+     from ai_sessions s
+     where s.user_id = $1
+       and exists (select 1 from jsonb_array_elements(s.messages) m where m->>'role' = 'user')
+     order by s.created_at desc
+     limit 20`,
+    [userId],
+  )
+  return rows.map((r) => ({
+    id: r.id,
+    createdAt: r.created_at.toISOString(),
+    messages: r.messages,
+    draft: r.draft,
+    articleId: r.article_id,
+  }))
 }
 
 export async function saveSession(id: string, userId: string, messages: ChatMessage[], turns: ReporterJson[], articleType: string, angle: string) {

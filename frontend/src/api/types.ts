@@ -133,6 +133,14 @@ export interface ReporterSession {
   messages: ChatMessage[]
 }
 
+export interface PastSession {
+  id: Id
+  createdAt: string
+  messages: ChatMessage[]
+  draft: DraftContent | null
+  articleId: Id | null
+}
+
 export interface ReporterTurn {
   reply: string | null
   canDraft: boolean

@@ -59,6 +59,12 @@ articlesRouter.get('/users/:id/articles', auth, async (req, res) => {
 
 const id = z.string().max(80)
 
+const audience = z.object({
+  mode: z.enum(['circle', 'me', 'people', 'group']),
+  personIds: z.array(id).max(200).optional(),
+  groupId: id.optional(),
+})
+
 const publishBody = z.object({
   draftId: id.optional(),
   content: z.object({
@@ -70,15 +76,11 @@ const publishBody = z.object({
     push: z.string().max(200).optional(),
   }),
   prevId: id.nullable().optional(),
-  audience: z.object({
-    mode: z.enum(['circle', 'me', 'people', 'group']),
-    personIds: z.array(id).max(200).optional(),
-    groupId: id.optional(),
-  }),
+  audience,
   saveFacts: z.array(z.object({ k: z.string().max(40), v: z.string().max(200) })).max(20).default([]),
 })
 
-async function audienceIds(userId: string, aud: z.infer<typeof publishBody>['audience']) {
+async function audienceIds(userId: string, aud: z.infer<typeof audience>) {
   const connected = (
     await pool.query<{ other_id: string }>('select other_id from connections where user_id = $1', [userId])
   ).rows.map((r) => r.other_id)
@@ -100,10 +102,15 @@ articlesRouter.post('/articles', auth, writeLimit, async (req, res) => {
   const body = parse(publishBody, req.body)
   const aud = await audienceIds(u.id, body.audience)
   if (body.audience.mode !== 'me' && !aud.length) throw new HttpError(400, 'empty audience')
+  let draftId: string | null = null
+  if (body.draftId) {
+    const owned = await pool.query('select 1 from ai_drafts where id = $1 and user_id = $2', [body.draftId, u.id])
+    if (owned.rowCount) draftId = body.draftId
+  }
   const { rows } = await pool.query<{ id: string }>(
-    `insert into articles (author_id, headline, sub, flash, push, body, prev_id)
-     values ($1, $2, $3, $4, $5, $6, $7) returning id`,
-    [u.id, body.content.headline, body.content.sub, body.content.flash, body.content.push ?? null, body.content.body, body.prevId ?? null],
+    `insert into articles (author_id, headline, sub, flash, push, body, prev_id, draft_id)
+     values ($1, $2, $3, $4, $5, $6, $7, $8) returning id`,
+    [u.id, body.content.headline, body.content.sub, body.content.flash, body.content.push ?? null, body.content.body, body.prevId ?? null, draftId],
   )
   const id = rows[0].id
   if (aud.length) {
@@ -122,6 +129,40 @@ articlesRouter.post('/articles', auth, writeLimit, async (req, res) => {
   }
   await pool.query('update users set onboarding = false where id = $1', [u.id])
   const a = await getVisible(u.id, id)
+  if (!a) throw new HttpError(500, 'internal error')
+  res.json(await loadFull(u.id, u.name, a))
+})
+
+async function replaceAudience(articleId: string, userIds: string[]) {
+  const client = await pool.connect()
+  try {
+    await client.query('begin')
+    await client.query('delete from article_audience where article_id = $1', [articleId])
+    if (userIds.length) {
+      await client.query(
+        'insert into article_audience (article_id, user_id) select $1, unnest($2::text[])',
+        [articleId, userIds],
+      )
+    }
+    await client.query('commit')
+  } catch (err) {
+    await client.query('rollback')
+    throw err
+  } finally {
+    client.release()
+  }
+}
+
+articlesRouter.put('/articles/:id/audience', auth, writeLimit, async (req, res) => {
+  const u = await viewer(req.userId!)
+  const articleId = param(req, 'id')
+  const owned = await pool.query('select 1 from articles where id = $1 and author_id = $2', [articleId, u.id])
+  if (!owned.rowCount) throw new HttpError(404, 'not found')
+  const { audience: next } = parse(z.object({ audience }), req.body)
+  const aud = await audienceIds(u.id, next)
+  if (next.mode !== 'me' && !aud.length) throw new HttpError(400, 'empty audience')
+  await replaceAudience(articleId, aud)
+  const a = await getVisible(u.id, articleId)
   if (!a) throw new HttpError(500, 'internal error')
   res.json(await loadFull(u.id, u.name, a))
 })

@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { publishArticle } from '../../api/core/articles'
-import { useAction, useConnections, useGroups, useMe } from '../../api/queries'
-import type { Article, AudienceMode, Group } from '../../api/types'
-import { audienceModes, canPublish, pickedGroup, publishLabel, selectedIds } from '../../lib/audience'
+import { useAction, useMe } from '../../api/queries'
+import type { Article, Group } from '../../api/types'
+import { useAudiencePicker } from '../../lib/useAudiencePicker'
 import { useCompose } from '../../state/ComposeContext'
 import { useUiActions } from '../../state/UiProvider'
 
@@ -12,22 +12,11 @@ export function usePublishModel() {
   const ui = useUiActions()
   const nav = useNavigate()
   const me = useMe().data
-  const people = useConnections().data ?? []
-  const groups = useGroups().data ?? []
+  const picker = useAudiencePicker(c.audience, c.setAudience)
   const publish = useAction(publishArticle)
   const [published, setPublished] = useState<Article | null>(null)
   const wasOnboarding = useRef(false)
   const left = useRef(false)
-
-  const np = people.length
-  const a = { ...c.audience, mode: np ? c.audience.mode : ('me' as AudienceMode) }
-  const sel = selectedIds(a, people)
-  const group = pickedGroup(a, groups)
-  const ok = canPublish(a, people, groups) && !publish.isPending
-
-  const chooseMode = (mode: AudienceMode) =>
-    c.setAudience(mode === 'group' ? { mode, groupId: (groups.find((g) => g.memberIds.length) ?? groups[0])?.id ?? null } : { mode })
-  const toggle = (id: string) => c.setAudience({ selected: sel.includes(id) ? sel.filter((x) => x !== id) : [...sel, id] })
 
   const finish = (art: Article, tab?: Group) => {
     if (left.current) return
@@ -41,7 +30,7 @@ export function usePublishModel() {
   }
 
   const onPublish = () => {
-    if (!ok || !c.draft) return
+    if (!picker.ok || publish.isPending || !c.draft) return
     const d = c.draft
     wasOnboarding.current = !!me?.onboarding
     publish.mutate(
@@ -49,40 +38,30 @@ export function usePublishModel() {
         draftId: d.id,
         content: { headline: d.headline, sub: d.sub, summary: d.summary, body: d.body, flash: d.flash, push: d.push },
         prevId: d.basis.prevArticle?.id ?? null,
-        audience: { mode: a.mode, personIds: a.mode === 'people' ? sel : undefined, groupId: a.mode === 'group' ? group?.id : undefined },
+        audience: {
+          mode: picker.mode,
+          personIds: picker.mode === 'people' ? picker.sel : undefined,
+          groupId: picker.mode === 'group' ? picker.groupId : undefined,
+        },
         saveFacts: d.newFacts.filter(c.isFactSaved),
       },
-      { onSuccess: (art) => (a.mode === 'people' ? setPublished(art) : finish(art)) },
+      { onSuccess: (art) => (picker.mode === 'people' ? setPublished(art) : finish(art)) },
     )
   }
 
   return {
+    ...picker,
+    ok: picker.ok && !publish.isPending,
     blocked: !left.current && (!c.draft || !c.draftReady),
     published,
-    sheetPeople: people.filter((p) => sel.includes(p.id)),
+    sheetPeople: picker.people.filter((p) => picker.sel.includes(p.id)),
     onSheetDone: (tab?: Group) => {
       if (published) finish(published, tab)
     },
     goDraft: () => nav('/compose/draft'),
-    modes: audienceModes(np, groups.length),
-    mode: a.mode,
-    chooseMode,
-    np,
-    openInvite: () => ui.openInvite(),
-    groups,
-    people,
-    sel,
-    addGroupMembers: (memberIds: string[]) => c.setAudience({ selected: [...new Set([...sel, ...memberIds])] }),
-    toggle,
-    groupId: group?.id,
-    pickGroup: (id: string) => c.setAudience({ groupId: id }),
-    editGroup: (id: string) => ui.openGroupEditor({ groupId: id, onSaved: (saved) => c.setAudience({ mode: 'group', groupId: saved.id }) }),
-    createGroup: () => ui.openGroupEditor({ onSaved: (g) => c.setAudience({ mode: 'group', groupId: g.id }) }),
     publishError: publish.isError,
     pending: publish.isPending,
-    ok,
     onPublish,
-    label: publishLabel(a, people, groups),
   }
 }
 

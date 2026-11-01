@@ -1,7 +1,8 @@
 import { btn, CheckRow, Radio } from '../../components/ui'
+import type { AudiencePicker } from '../../lib/useAudiencePicker'
 import type { PublishModel } from './usePublishModel'
 
-export function AudienceModes({ m }: { m: PublishModel }) {
+export function AudienceModes({ m }: { m: AudiencePicker }) {
   return (
     <>
       {m.modes.map((mode) =>
@@ -33,7 +34,7 @@ export function AudienceModes({ m }: { m: PublishModel }) {
   )
 }
 
-export function PublishBody({ m }: { m: PublishModel }) {
+export function PublishBody({ m }: { m: AudiencePicker }) {
   return (
     <div className="flex flex-col gap-2.5">
       <AudienceModes m={m} />

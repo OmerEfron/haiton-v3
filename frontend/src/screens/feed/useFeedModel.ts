@@ -1,6 +1,5 @@
 import { useNavigate, useSearchParams } from 'react-router'
 import { useFeed, useGroups, useMe, useNotifications } from '../../api/queries'
-import type { ArticleSummary } from '../../api/types'
 import { FRONT } from '../../lib/audience'
 import { useNameOf } from '../../lib/useNameOf'
 import { useCompose } from '../../state/ComposeContext'
@@ -21,7 +20,11 @@ export function useFeedModel() {
   const tabFeed = useFeed(group?.id)
   const list = (group ? tabFeed.data : front.data) ?? []
   const loading = group ? tabFeed.isPending : front.isPending
-  const flashes = front.data ?? []
+  const withFlash = (front.data ?? []).filter((a) => a.flash)
+  const ticker = [
+    ...withFlash.filter((a) => a.authorId !== me?.id).slice(0, 6),
+    ...withFlash.filter((a) => a.authorId === me?.id).slice(0, 2),
+  ].sort((a, b) => b.createdAt.localeCompare(a.createdAt))
   const c = useCompose()
   const { setNotifs, openGroupEditor, openInvite } = useUiActions()
   const { invite } = useUiState()
@@ -42,7 +45,7 @@ export function useFeedModel() {
     memberLine,
     list,
     loading,
-    ticker: (flashes.length > 1 ? flashes.slice(0, 6) : []) as ArticleSummary[],
+    ticker: ticker.length > 1 ? ticker : [],
     tabs,
     activeTab: group?.id ?? FRONT_TAB,
     setTab,

@@ -1,3 +1,4 @@
+import type { ChatMessage } from '../../api/types'
 import type { ChatModel } from './useChatModel'
 
 const pillBtn = 'h-[38px] rounded-full border border-[#d9d9d9] bg-white px-[18px] text-[14.5px] font-semibold text-chat shadow-sm'
@@ -11,7 +12,7 @@ function ReporterAvatar() {
 export function ChatHeader({ m, className = 'px-4' }: { m: ChatModel; className?: string }) {
   return (
     <div className={`flex h-[54px] flex-none items-center justify-between ${className}`}>
-      <button onClick={m.goFeed} aria-label="לעמוד הראשי" className="flex size-9 flex-col items-center justify-center gap-[5px]">
+      <button onClick={m.openHistory} aria-label="שיחות קודמות" className="flex size-9 flex-col items-center justify-center gap-[5px]">
         <span className="h-0.5 w-[18px] rounded bg-chat" />
         <span className="h-0.5 w-3 rounded bg-chat" />
       </button>
@@ -31,10 +32,10 @@ export function ChatHeader({ m, className = 'px-4' }: { m: ChatModel; className?
   )
 }
 
-export function MessageList({ m }: { m: ChatModel }) {
+export function Bubbles({ messages }: { messages: ChatMessage[] }) {
   return (
     <div className="flex flex-col gap-6">
-      {m.messages.map((msg, i) =>
+      {messages.map((msg, i) =>
         msg.role === 'reporter' ? (
           <div key={i} className="flex items-start gap-3">
             <ReporterAvatar />
@@ -46,6 +47,14 @@ export function MessageList({ m }: { m: ChatModel }) {
           </div>
         ),
       )}
+    </div>
+  )
+}
+
+export function MessageList({ m }: { m: ChatModel }) {
+  return (
+    <div className="flex flex-col gap-6">
+      <Bubbles messages={m.messages} />
       {m.typing && (
         <div className="flex items-center gap-3">
           <ReporterAvatar />

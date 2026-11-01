@@ -1,7 +1,7 @@
 import { delay, http, HttpResponse } from 'msw'
 import type { ArticleSummary, Draft, DraftContent, Fact, Me, RevisionKind } from '../../api/types'
 import { AI_API_URL, API_URL } from '../../config'
-import { db, save, uid, type DbDraft, type DbSession, type Script } from '../db'
+import { db, nowIso, save, uid, type DbDraft, type DbSession, type Script } from '../db'
 import { fail } from './util'
 import { DATA } from '../seed/haiton-data.js'
 
@@ -73,11 +73,35 @@ function aiRoute(fn: (c: { me: Me; params: Record<string, string>; body: any; re
 }
 
 export const aiHandlers = [
+  http.get(
+    u('/reporter/sessions'),
+    aiRoute(({ me }) => {
+      const world = db.worlds[me.id]
+      return Object.entries(db.sessions)
+        .filter(([, s]) => s.userId === me.id && s.messages.some((m) => m.role === 'user'))
+        .map(([id, s]) => {
+          const drafts = Object.entries(db.drafts).filter(([, d]) => d.sessionId === id && d.userId === me.id)
+          const latest = drafts.at(-1)
+          const ids = new Set(drafts.map(([draftId]) => draftId))
+          const article = world?.articles.find((a) => a.draftId && ids.has(a.draftId))
+          return {
+            id,
+            createdAt: s.createdAt || new Date(0).toISOString(),
+            messages: s.messages,
+            draft: latest ? content(scriptFor(me.id), s, latest[1]) : null,
+            articleId: article?.id ?? null,
+          }
+        })
+        .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
+        .slice(0, 20)
+    }),
+  ),
+
   http.post(
     u('/reporter/sessions'),
     aiRoute(({ me }) => {
       const id = uid('s')
-      db.sessions[id] = { userId: me.id, messages: [{ role: 'reporter', text: 'מה קרה?' }] }
+      db.sessions[id] = { userId: me.id, createdAt: nowIso(), messages: [{ role: 'reporter', text: 'מה קרה?' }] }
       return { id, messages: db.sessions[id].messages }
     }),
   ),

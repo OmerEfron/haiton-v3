@@ -21,8 +21,8 @@ function full(w: World, a: DbArticle): Article {
   }
 }
 
-function audienceIds(w: World, req: PublishRequest): Id[] {
-  const { mode, personIds = [], groupId } = req.audience
+function audienceIds(w: World, aud: PublishRequest['audience']): Id[] {
+  const { mode, personIds = [], groupId } = aud
   const connected = new Set(w.connections.map((c) => c.id))
   if (mode === 'people') return personIds.filter((id) => connected.has(id))
   if (mode === 'group') return w.groups.find((g) => g.id === groupId)?.memberIds ?? []
@@ -54,7 +54,7 @@ export const articleHandlers = [
       const req = body as PublishRequest
       const c = req.content
       if (!c?.headline || !c.body?.length) return fail(400, 'content required')
-      const aud = audienceIds(w, req)
+      const aud = audienceIds(w, req.audience)
       if (req.audience.mode !== 'me' && !aud.length) return fail(400, 'empty audience')
       const art: DbArticle = {
         id: uid('a'),
@@ -69,6 +69,7 @@ export const articleHandlers = [
         body: c.body,
         prevId: req.prevId,
         audienceIds: aud,
+        draftId: req.draftId,
       }
       w.articles.unshift(art)
       for (const f of req.saveFacts ?? []) {
@@ -89,6 +90,20 @@ export const articleHandlers = [
         })
       }
       return full(w, art)
+    }),
+  ),
+
+  http.put(
+    u('/articles/:id/audience'),
+    route(({ w, params, body }) => {
+      const a = w.articles.find((x) => x.id === params.id)
+      const next = body?.audience as PublishRequest['audience'] | undefined
+      if (!next) return fail(400, 'invalid')
+      if (!a || a.authorId !== w.me.id) return fail(404, 'not found')
+      const aud = audienceIds(w, next)
+      if (next.mode !== 'me' && !aud.length) return fail(400, 'empty audience')
+      a.audienceIds = aud
+      return full(w, a)
     }),
   ),
 

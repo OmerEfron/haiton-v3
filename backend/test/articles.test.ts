@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { pair, story } from './helpers.ts'
+import { pool } from '../src/db.ts'
+import { freshEmail, pair, signIn, story } from './helpers.ts'
 
 describe('articles', () => {
   it('rejects an empty audience', async () => {
@@ -92,5 +93,60 @@ describe('articles', () => {
     expect(feed.body.some((x: { id: string }) => x.id === pub.body.id)).toBe(false)
     const hidden = await b.agent.get('/api/me/hidden')
     expect(hidden.body[0].id).toBe(pub.body.id)
+  })
+
+  it('changes who can see an article and ignores a foreign draft', async () => {
+    const { a, b } = await pair()
+    const c = await signIn(freshEmail())
+    await c.agent.post(`/api/invites/${a.me.id}/accept`)
+
+    const foreign = await pool.query<{ id: string }>(
+      `insert into ai_sessions (user_id, messages, turns) values ($1, '[]'::jsonb, '[]'::jsonb) returning id`,
+      [b.me.id],
+    )
+    const foreignDraft = await pool.query<{ id: string }>(
+      `insert into ai_drafts (session_id, user_id, content) values ($1, $2, '{}'::jsonb) returning id`,
+      [foreign.rows[0].id, b.me.id],
+    )
+
+    const pub = await a.agent.post('/api/articles').send({
+      content: story,
+      prevId: null,
+      audience: { mode: 'circle' },
+      saveFacts: [],
+      draftId: foreignDraft.rows[0].id,
+    })
+    expect(pub.status).toBe(200)
+    expect(pub.body.audienceIds).toHaveLength(2)
+    expect(pub.body.audienceIds).toEqual(expect.arrayContaining([b.me.id, c.me.id]))
+    const stored = await pool.query<{ draft_id: string | null }>('select draft_id from articles where id = $1', [pub.body.id])
+    expect(stored.rows[0].draft_id).toBeNull()
+
+    const own = await pool.query<{ id: string }>(
+      `insert into ai_sessions (user_id, messages, turns) values ($1, '[]'::jsonb, '[]'::jsonb) returning id`,
+      [a.me.id],
+    )
+    const ownDraft = await pool.query<{ id: string }>(
+      `insert into ai_drafts (session_id, user_id, content) values ($1, $2, '{}'::jsonb) returning id`,
+      [own.rows[0].id, a.me.id],
+    )
+    const kept = await a.agent.post('/api/articles').send({
+      content: { ...story, headline: 'שלי' },
+      prevId: null,
+      audience: { mode: 'me' },
+      saveFacts: [],
+      draftId: ownDraft.rows[0].id,
+    })
+    expect(kept.status).toBe(200)
+    const keptRow = await pool.query<{ draft_id: string | null }>('select draft_id from articles where id = $1', [kept.body.id])
+    expect(keptRow.rows[0].draft_id).toBe(ownDraft.rows[0].id)
+
+    const edit = await a.agent.put(`/api/articles/${pub.body.id}/audience`).send({
+      audience: { mode: 'people', personIds: [b.me.id] },
+    })
+    expect(edit.status).toBe(200)
+    expect(edit.body.audienceIds).toEqual([b.me.id])
+    expect((await c.agent.get(`/api/articles/${pub.body.id}`)).status).toBe(404)
+    expect((await b.agent.put(`/api/articles/${pub.body.id}/audience`).send({ audience: { mode: 'me' } })).status).toBe(404)
   })
 })

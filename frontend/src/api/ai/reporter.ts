@@ -1,5 +1,7 @@
 import { aiApi } from '../http'
-import type { Id, ReporterSession, ReporterTurn } from '../types'
+import type { Id, PastSession, ReporterSession, ReporterTurn } from '../types'
+
+export const listSessions = () => aiApi.get<PastSession[]>('/reporter/sessions')
 
 export const startSession = () => aiApi.post<ReporterSession>('/reporter/sessions')
 
