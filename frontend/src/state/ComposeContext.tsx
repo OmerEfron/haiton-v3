@@ -1,6 +1,8 @@
+import { useQueryClient } from '@tanstack/react-query'
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react'
 import { createDraft, reviseDraft } from '../api/ai/editor'
-import { sendMessage, startSession } from '../api/ai/reporter'
+import { QUOTA_MESSAGE, sendMessage, startSession } from '../api/ai/reporter'
+import { ApiError } from '../api/http'
 import type { ChatMessage, Draft, Id, NewFact, RevisionKind } from '../api/types'
 import type { AudienceState } from '../lib/audience'
 
@@ -37,7 +39,13 @@ function load(): Stored {
   return fresh()
 }
 
+function quotaError(err: unknown, fallback: string) {
+  return err instanceof ApiError && err.status === 429 ? QUOTA_MESSAGE : fallback
+}
+
 function useComposeState() {
+  const qc = useQueryClient()
+  const bumpQuota = () => qc.invalidateQueries({ queryKey: ['quota'] })
   const [s, setS] = useState<Stored>(load)
   const [typing, setTyping] = useState(false)
   const [revising, setRevising] = useState<string | null>(null)
@@ -63,13 +71,14 @@ function useComposeState() {
       try {
         const turn = await sendMessage(s.sessionId, text)
         if (turn.reply) setS((p) => ({ ...p, messages: [...p.messages, { role: 'reporter', text: turn.reply! }] }))
-      } catch {
-        setError('הכתב לא זמין כרגע. נסו שוב.')
+        bumpQuota()
+      } catch (err) {
+        setError(quotaError(err, 'הכתב לא זמין כרגע. נסו שוב.'))
       } finally {
         setTyping(false)
       }
     },
-    [s.sessionId, typing],
+    [s.sessionId, typing, qc],
   )
 
   const makeDraft = useCallback(
@@ -77,8 +86,9 @@ function useComposeState() {
       if (!s.sessionId) throw new Error('no session')
       const draft = await createDraft(s.sessionId, signal)
       setS((p) => ({ ...p, draft, draftAt: p.messages.filter((m) => m.role === 'user').length, skipFacts: [] }))
+      bumpQuota()
     },
-    [s.sessionId],
+    [s.sessionId, qc],
   )
 
   const revise = useCallback(
@@ -88,11 +98,12 @@ function useComposeState() {
       try {
         const draft = await reviseDraft(s.draft.id, kind)
         setS((p) => ({ ...p, draft }))
+        bumpQuota()
       } finally {
         setRevising(null)
       }
     },
-    [s.draft, revising],
+    [s.draft, revising, qc],
   )
 
   const reset = useCallback((audience?: Partial<AudienceState>) => {

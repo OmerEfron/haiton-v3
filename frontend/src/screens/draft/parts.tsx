@@ -43,10 +43,10 @@ export function Loading({ onCancel }: { onCancel: () => void }) {
   )
 }
 
-export function DraftFailed({ onBack }: { onBack: () => void }) {
+export function DraftFailed({ onBack, message }: { onBack: () => void; message: string }) {
   return (
     <div className="flex h-dvh flex-col items-center justify-center gap-4 p-10 text-center">
-      <div className="text-lg font-bold">העורך לא הצליח לכתוב את הכתבה</div>
+      <div className="text-lg font-bold">{message}</div>
       <button onClick={onBack} className="h-10 rounded-full bg-charcoal px-5 font-semibold text-white">חזרה לשיחה</button>
     </div>
   )
@@ -159,6 +159,7 @@ export function DraftFooter({ m }: { m: DraftModel }) {
   return (
     <>
       <div className="text-[13px] font-semibold text-dim">בקשה מהעורך</div>
+      {m.reviseError && <div className="text-center text-sm text-brand">{m.reviseError}</div>}
       <RevisionChips m={m} />
       <button onClick={m.goPublish} className={btn.cta}>המשך לפרסום</button>
     </>

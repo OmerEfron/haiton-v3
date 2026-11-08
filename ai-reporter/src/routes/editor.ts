@@ -5,8 +5,9 @@ import { loadContext } from '../context.ts'
 import { pool } from '../db.ts'
 import { asDraft, contentOf, toDraft } from '../draft.ts'
 import { HttpError } from '../errors.ts'
-import { aiDay, aiMinute } from '../limits.ts'
+import { aiMinute } from '../limits.ts'
 import { chat, SCHEMA } from '../openai.ts'
+import { recordUsage, requireQuota } from '../quota.ts'
 import { parse } from '../parse.ts'
 import { fill, prompts, reviseBlock, reviseSystem } from '../prompts.ts'
 import { answeredCount, getSession, MIN_QUESTIONS, transcript } from '../sessions.ts'
@@ -53,7 +54,7 @@ async function requireStory(userId: string, sessionId: string) {
   return { session, ctx, editor }
 }
 
-editorRouter.post('/editor/drafts', requireAuth, aiMinute, aiDay, async (req, res) => {
+editorRouter.post('/editor/drafts', requireAuth, aiMinute, requireQuota, async (req, res) => {
   const { sessionId } = parse(z.object({ sessionId: z.string().min(1, 'sessionId required') }), req.body)
   const { session, ctx, editor } = await requireStory(req.userId!, sessionId)
   const chatText = 'CHAT:\n' + transcript(session.messages)
@@ -71,10 +72,11 @@ editorRouter.post('/editor/drafts', requireAuth, aiMinute, aiDay, async (req, re
      values ($1, $2, $3::jsonb, $4::text[], $5::jsonb) returning id`,
     [session.id, req.userId, JSON.stringify(contentOf(draft)), draft.usedFacts, JSON.stringify(draft.newFacts)],
   )
+  await recordUsage(req.userId!, 'draft')
   res.json(toDraft(rows[0].id, session.id, contentOf(draft), draft.usedFacts, draft.newFacts, ctx))
 })
 
-editorRouter.post('/editor/drafts/:id/revise', requireAuth, aiMinute, aiDay, async (req, res) => {
+editorRouter.post('/editor/drafts/:id/revise', requireAuth, aiMinute, requireQuota, async (req, res) => {
   const { kind } = parse(z.object({ kind: z.enum(KINDS, { error: 'unknown revision' }) }), req.body)
   const { rows } = await pool.query<DraftRow>(
     'select id, session_id, content, used_facts, new_facts from ai_drafts where id = $1 and user_id = $2',
@@ -97,5 +99,6 @@ editorRouter.post('/editor/drafts/:id/revise', requireAuth, aiMinute, aiDay, asy
   // The revise prompt copies facts unchanged. Keep the stored ones so a sloppy completion cannot drop them.
   const content = contentOf(revised)
   await pool.query('update ai_drafts set content = $2::jsonb where id = $1', [row.id, JSON.stringify(content)])
+  await recordUsage(req.userId!, 'revise')
   res.json(toDraft(row.id, row.session_id, content, row.used_facts, row.new_facts, ctx))
 })

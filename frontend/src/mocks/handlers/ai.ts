@@ -81,6 +81,11 @@ function aiRoute(fn: (c: { me: Me; params: Record<string, string>; body: any; re
 
 export const aiHandlers = [
   http.get(
+    u('/quota'),
+    aiRoute(() => ({ used: 0, limit: 60, resetsAt: null })),
+  ),
+
+  http.get(
     u('/reporter/sessions'),
     aiRoute(({ me }) => {
       const world = db.worlds[me.id]

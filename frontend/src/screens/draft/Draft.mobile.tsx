@@ -7,7 +7,7 @@ import { useDraftModel } from './useDraftModel'
 export default function DraftMobile() {
   const m = useDraftModel()
   if (m.redirect) return <Navigate to="/compose" replace />
-  if (m.failed) return <DraftFailed onBack={m.goChat} />
+  if (m.failed) return <DraftFailed message={m.failed} onBack={m.goChat} />
   if (!m.draftReady || !m.draft) return <Loading onCancel={m.goChat} />
   return (
     <>

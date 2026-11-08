@@ -23,5 +23,5 @@ export function perUser(limit: number, windowMs: number) {
 }
 
 export const aiMinute = perUser(20, 60_000)
-export const aiDay = perUser(200, 24 * 60 * 60_000)
+export const introMinute = perUser(20, 60_000)
 export const sessionLimit = perUser(10, 60 * 60_000)

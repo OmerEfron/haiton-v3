@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
 import { useNavigate } from 'react-router'
-import { useFacts, useMe } from '../../api/queries'
+import { useFacts, useMe, useQuota } from '../../api/queries'
 import { useCompose } from '../../state/ComposeContext'
 import { useStartStory } from '../../state/useStartStory'
 
@@ -10,6 +10,8 @@ export function useChatModel() {
   const startStory = useStartStory()
   const me = useMe().data
   const facts = useFacts().data ?? []
+  const quota = useQuota().data
+  const quotaLeft = quota ? Math.max(0, quota.limit - quota.used) : null
   const [input, setInput] = useState('')
   const [startError, setStartError] = useState(false)
   const scroller = useRef<HTMLDivElement>(null)
@@ -23,7 +25,7 @@ export function useChatModel() {
     scroller.current?.scrollTo({ top: scroller.current.scrollHeight })
   }, [c.messages.length, c.typing])
 
-  const canSend = !!input.trim() && !c.typing && !!c.sessionId
+  const canSend = !!input.trim() && !c.typing && !!c.sessionId && quotaLeft !== 0
   const send = () => {
     if (!canSend) return
     c.send(input.trim())
@@ -45,6 +47,8 @@ export function useChatModel() {
     setInput,
     onInputKeyDown,
     canSend,
+    quotaLeft,
+    quotaLabel: quota ? `נותרו ${quotaLeft} מתוך ${quota.limit} פעולות היום` : null,
     send,
     scroller,
     openHistory: () => nav('/compose/history'),

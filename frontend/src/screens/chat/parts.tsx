@@ -76,7 +76,9 @@ export function ChatDock({ m }: { m: ChatModel }) {
       )}
       {m.userCount >= 3 && !m.typing && !m.draftReady && (
         <div className="flex justify-center">
-          <button onClick={m.goDraft} className={pillBtn}>די, תיצור טיוטה</button>
+          <button onClick={m.goDraft} disabled={m.quotaLeft === 0} className={`${pillBtn} disabled:opacity-40`}>
+            די, תיצור טיוטה
+          </button>
         </div>
       )}
       <div className="flex min-h-[54px] items-center gap-2 rounded-[28px] bg-input p-1.5">
@@ -97,6 +99,9 @@ export function ChatDock({ m }: { m: ChatModel }) {
           ↑
         </button>
       </div>
+      {m.quotaLabel && (
+        <div className={`text-center text-xs ${m.quotaLeft === 0 ? 'text-brand' : 'text-faint'}`}>{m.quotaLabel}</div>
+      )}
       <div className="text-center text-xs text-faint">הכתב לא מוסיף פרטים שלא סיפרתם</div>
     </>
   )

@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { listSessions } from './ai/reporter'
+import { getQuota, listSessions } from './ai/reporter'
 import { getArticle, getFeed, getUserArticles } from './core/articles'
 import { getFacts, getHidden, getMe, getPrefs } from './core/me'
 import { getConnections, getGroups, getUser } from './core/people'
@@ -25,6 +25,7 @@ export const useNotifications = () =>
   useQuery({ queryKey: ['notifications'], queryFn: getNotifications, refetchInterval: 5_000 })
 
 export const usePastSessions = () => useQuery({ queryKey: ['pastSessions'], queryFn: listSessions })
+export const useQuota = () => useQuery({ queryKey: ['quota'], queryFn: getQuota })
 
 export const useInvite = (code: string) =>
   useQuery({ queryKey: ['invite', code], queryFn: () => getInvite(code), retry: false })

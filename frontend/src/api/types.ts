@@ -151,6 +151,12 @@ export interface IntroTurn {
   newFacts: NewFact[]
 }
 
+export interface Quota {
+  used: number
+  limit: number
+  resetsAt: string | null
+}
+
 export interface DraftContent {
   headline: string
   sub: string

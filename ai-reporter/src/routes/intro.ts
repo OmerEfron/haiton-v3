@@ -5,7 +5,7 @@ import { loadContext } from '../context.ts'
 import { pool } from '../db.ts'
 import { asIntro } from '../draft.ts'
 import { HttpError } from '../errors.ts'
-import { aiDay, aiMinute, sessionLimit } from '../limits.ts'
+import { introMinute, sessionLimit } from '../limits.ts'
 import { chat, SCHEMA } from '../openai.ts'
 import { parse } from '../parse.ts'
 import { fill, prompts } from '../prompts.ts'
@@ -51,7 +51,7 @@ introRouter.post('/intro/sessions', requireAuth, sessionLimit, async (req, res) 
   res.json({ id: rows[0].id, messages })
 })
 
-introRouter.post('/intro/sessions/:id/messages', requireAuth, aiMinute, aiDay, async (req, res) => {
+introRouter.post('/intro/sessions/:id/messages', requireAuth, introMinute, async (req, res) => {
   const text = parse(textBody, req.body).text
   const session = await getIntro(param(req, 'id'), req.userId!)
   if (!session) throw new HttpError(404, 'session not found')

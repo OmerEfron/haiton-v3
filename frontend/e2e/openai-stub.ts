@@ -10,6 +10,7 @@ const reporter = {
   articleType: 'feature',
   reply: 'רגע, ומה קרה אחר כך?',
   canDraft: true,
+  newFacts: [] as { k: string; v: string }[],
 }
 
 function draft(user: string) {

@@ -4,8 +4,9 @@ import { param, requireAuth } from '../auth.ts'
 import { loadContext } from '../context.ts'
 import { asReporter } from '../draft.ts'
 import { HttpError, UpstreamError } from '../errors.ts'
-import { aiDay, aiMinute, sessionLimit } from '../limits.ts'
+import { aiMinute, sessionLimit } from '../limits.ts'
 import { chat, SCHEMA } from '../openai.ts'
+import { getQuota, recordUsage, requireQuota } from '../quota.ts'
 import { parse } from '../parse.ts'
 import { fill, prompts } from '../prompts.ts'
 import { askedCount, answeredCount, getSession, insertSession, listSessions, MAX_QUESTIONS, MIN_QUESTIONS, saveSession } from '../sessions.ts'
@@ -34,6 +35,10 @@ function modelMessages(system: string, messages: ChatMessage[], turns: ReporterJ
   return msgs
 }
 
+reporterRouter.get('/quota', requireAuth, async (req, res) => {
+  res.json(await getQuota(req.userId!))
+})
+
 reporterRouter.get('/reporter/sessions', requireAuth, async (req, res) => {
   res.json(await listSessions(req.userId!))
 })
@@ -44,7 +49,7 @@ reporterRouter.post('/reporter/sessions', requireAuth, sessionLimit, async (req,
   res.json(await insertSession(req.userId!))
 })
 
-reporterRouter.post('/reporter/sessions/:id/messages', requireAuth, aiMinute, aiDay, async (req, res) => {
+reporterRouter.post('/reporter/sessions/:id/messages', requireAuth, aiMinute, requireQuota, async (req, res) => {
   const text = parse(textBody, req.body).text
   const session = await getSession(param(req, 'id'), req.userId!)
   if (!session) throw new HttpError(404, 'session not found')
@@ -75,5 +80,6 @@ reporterRouter.post('/reporter/sessions/:id/messages', requireAuth, aiMinute, ai
   const turns = [...session.turns, turn]
   if (turn.reply) messages.push({ role: 'reporter', text: turn.reply })
   await saveSession(session.id, req.userId!, messages, turns, turn.articleType, turn.angle)
+  await recordUsage(req.userId!, 'reporter')
   res.json({ reply: turn.reply, canDraft: answered >= MIN_QUESTIONS })
 })
