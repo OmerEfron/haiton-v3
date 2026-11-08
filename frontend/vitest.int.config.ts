@@ -2,7 +2,7 @@ import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   test: {
-    include: ['src/api/core/core.int.test.ts'],
+    include: ['src/**/*.int.test.ts'],
     fileParallelism: false,
     globalSetup: './src/api/core/int-setup.ts',
     env: {

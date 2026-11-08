@@ -1,4 +1,4 @@
-// Opt-in smoke test. Skipped unless E2E_REAL_AI=1. Uses ai-reporter/.env (the real key), not the stub.
+// Opt-in smoke test. Skipped unless OPENAI_API_KEY is set. Uses that key, not the stub.
 import { spawn, type ChildProcess } from 'node:child_process'
 import { createServer } from 'node:net'
 import { fileURLToPath } from 'node:url'
@@ -29,7 +29,7 @@ async function waitHealth(port: number) {
 }
 
 test('one chat and a draft against OpenAI', async ({ request }) => {
-  test.skip(process.env.E2E_REAL_AI !== '1', 'set E2E_REAL_AI=1 to call OpenAI')
+  test.skip(!process.env.OPENAI_API_KEY, 'set OPENAI_API_KEY to call OpenAI')
   test.setTimeout(180_000)
 
   const email = `e2e-real-${Date.now()}@test.local`

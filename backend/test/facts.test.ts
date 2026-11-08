@@ -17,4 +17,17 @@ describe('facts', () => {
     const facts = await a.agent.get('/api/me/facts')
     expect(facts.body).toEqual(second.body)
   })
+
+  it('does not delete someone else\'s fact', async () => {
+    const a = await signIn(freshEmail())
+    const b = await signIn(freshEmail())
+    const saved = await a.agent.post('/api/me/facts').send({ facts: [{ k: 'עיר', v: 'חיפה' }] })
+    const id = saved.body[0].id as string
+
+    expect((await b.agent.delete(`/api/me/facts/${id}`)).status).toBe(204)
+    const left = await a.agent.get('/api/me/facts')
+    expect(left.body).toHaveLength(1)
+    expect((await a.agent.delete(`/api/me/facts/${id}`)).status).toBe(204)
+    expect((await a.agent.get('/api/me/facts')).body).toEqual([])
+  })
 })

@@ -20,7 +20,7 @@ export function createApp() {
     res.json({ ok: true })
   })
   app.use('/api', perIp(300, 60_000))
-  app.post('/api/auth/google', perIp(10, 60_000))
+  app.post('/api/auth/google', perIp(Number(process.env.AUTH_LIMIT) || 10, 60_000))
   app.use('/api', authRouter)
   app.use('/api', meRouter)
   app.use('/api', articlesRouter)

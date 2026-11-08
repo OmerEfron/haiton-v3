@@ -11,13 +11,23 @@ function env(extra: Record<string, string>) {
   return { ...out, ...extra }
 }
 
+// The publish story spends 5 model calls. The quota spec needs the cap low enough that
+// follow-up messages still record usage (the 8th turn in a session does not), so keep this between 6 and 10.
+const uiIgnore = [/api\.spec\.ts/, /real-ai\.spec\.ts/]
+
 export default defineConfig({
   testDir: 'e2e',
   timeout: 60_000,
-  use: { ...devices['Desktop Chrome'], baseURL: web },
+  retries: process.env.CI ? 1 : 0,
+  use: { baseURL: web, trace: 'retain-on-failure' },
+  projects: [
+    { name: 'desktop', use: { ...devices['Desktop Chrome'] }, testIgnore: uiIgnore },
+    { name: 'mobile', use: { ...devices['Pixel 7'] }, testIgnore: uiIgnore },
+    { name: 'api', testMatch: /api\.spec\.ts|real-ai\.spec\.ts/ },
+  ],
   webServer: [
     {
-      command: 'node --experimental-strip-types e2e/openai-stub.ts',
+      command: 'node --experimental-strip-types ../ai-reporter/test/openai-stub.ts',
       url: `${stub}/health`,
       name: 'openai-stub',
       reuseExistingServer: true,
@@ -28,6 +38,7 @@ export default defineConfig({
       url: `${api}/api/health`,
       name: 'backend',
       reuseExistingServer: true,
+      env: env({ AUTH_LIMIT: '1000' }),
     },
     {
       command: 'node --env-file-if-exists=.env --experimental-strip-types src/server.ts',
@@ -35,7 +46,7 @@ export default defineConfig({
       url: `${ai}/ai/health`,
       name: 'ai-reporter',
       reuseExistingServer: true,
-      env: env({ OPENAI_BASE_URL: stub, PORT: '4100' }),
+      env: env({ OPENAI_BASE_URL: stub, OPENAI_API_KEY: 'test', PORT: '4100', AI_DAILY_CALLS: '8' }),
     },
     {
       command: 'npx vite --port 5174 --strictPort',

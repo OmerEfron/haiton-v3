@@ -149,4 +149,54 @@ describe('articles', () => {
     expect((await c.agent.get(`/api/articles/${pub.body.id}`)).status).toBe(404)
     expect((await b.agent.put(`/api/articles/${pub.body.id}/audience`).send({ audience: { mode: 'me' } })).status).toBe(404)
   })
+
+  it('lets the owner delete an article and not anyone else', async () => {
+    const { a, b } = await pair()
+    const pub = await a.agent.post('/api/articles').send({
+      content: story,
+      prevId: null,
+      audience: { mode: 'people', personIds: [b.me.id] },
+      saveFacts: [],
+    })
+    expect((await b.agent.delete(`/api/articles/${pub.body.id}`)).status).toBe(404)
+    expect((await a.agent.delete(`/api/articles/${pub.body.id}`)).status).toBe(204)
+    expect((await b.agent.get(`/api/articles/${pub.body.id}`)).status).toBe(404)
+    expect((await a.agent.get('/api/feed')).body.some((x: { id: string }) => x.id === pub.body.id)).toBe(false)
+  })
+
+  it('reports once, rejects a long reaction, and clears one', async () => {
+    const { a, b } = await pair()
+    const pub = await a.agent.post('/api/articles').send({
+      content: story,
+      prevId: null,
+      audience: { mode: 'people', personIds: [b.me.id] },
+      saveFacts: [],
+    })
+    const id = pub.body.id as string
+    expect((await b.agent.put(`/api/articles/${id}/reaction`).send({ label: 'א'.repeat(21) })).status).toBe(400)
+    expect((await b.agent.put(`/api/articles/${id}/reaction`).send({ label: 'אהבתי' })).status).toBe(204)
+    expect((await b.agent.put(`/api/articles/${id}/reaction`).send({ label: null })).status).toBe(204)
+    expect((await b.agent.get(`/api/articles/${id}`)).body.myReaction).toBeNull()
+
+    expect((await b.agent.post(`/api/articles/${id}/report`).send({ reason: 'ספאם' })).status).toBe(204)
+    expect((await b.agent.post(`/api/articles/${id}/report`).send({ reason: 'ספאם' })).status).toBe(204)
+    const reported = await pool.query<{ n: number }>('select count(*)::int as n from reports where article_id = $1', [id])
+    expect(reported.rows[0].n).toBe(1)
+    expect((await b.agent.get(`/api/articles/${id}`)).body.reported).toBe(true)
+  })
+
+  it('puts a hidden article back on the feed', async () => {
+    const { a, b } = await pair()
+    const pub = await a.agent.post('/api/articles').send({
+      content: story,
+      prevId: null,
+      audience: { mode: 'people', personIds: [b.me.id] },
+      saveFacts: [],
+    })
+    await b.agent.post(`/api/articles/${pub.body.id}/hide`)
+    expect((await b.agent.delete(`/api/articles/${pub.body.id}/hide`)).status).toBe(204)
+    const feed = await b.agent.get('/api/feed')
+    expect(feed.body.some((x: { id: string }) => x.id === pub.body.id)).toBe(true)
+    expect((await b.agent.get('/api/me/hidden')).body).toEqual([])
+  })
 })

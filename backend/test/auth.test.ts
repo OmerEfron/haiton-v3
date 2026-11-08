@@ -44,5 +44,10 @@ describe('auth', () => {
     expect(ok.body.name).toBe('מאיה')
     expect(ok.body.gender).toBe('female')
     expect(ok.body.birthYear).toBe(birthYear)
+
+    const future = await agent.patch('/api/me').send({ birthYear: new Date().getFullYear() + 1 })
+    expect(future.status).toBe(400)
+    const long = await agent.patch('/api/me').send({ name: 'א'.repeat(61) })
+    expect(long.status).toBe(400)
   })
 })

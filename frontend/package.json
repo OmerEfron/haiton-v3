@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "typecheck": "tsc -b",
     "test": "vitest run",
+    "test:unit": "vitest run",
     "test:int": "vitest run --config vitest.int.config.ts",
     "test:e2e": "playwright test"
   },

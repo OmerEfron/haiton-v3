@@ -28,5 +28,32 @@ describe('invites', () => {
     const notes = await a.agent.get('/api/notifications')
     expect(notes.body[0].kind).toBe('join')
     expect(notes.body[0].personId).toBe(b.me.id)
+    expect(notes.body[0].unread).toBe(true)
+
+    expect((await a.agent.post('/api/notifications/read')).status).toBe(204)
+    const read = await a.agent.get('/api/notifications')
+    expect(read.body[0].unread).toBe(false)
+
+    const again = await b.agent.post(`/api/invites/${created.body.code}/accept`)
+    expect(again.status).toBe(200)
+    const consAgain = await b.agent.get('/api/connections')
+    expect(consAgain.body.filter((c: { id: string }) => c.id === a.me.id)).toHaveLength(1)
+  })
+
+  it('does not connect you to yourself', async () => {
+    const a = await signIn(freshEmail())
+    await a.agent.post('/api/invites').send({ channel: 'link' })
+    const accept = await a.agent.post(`/api/invites/${a.me.id}/accept`)
+    expect(accept.status).toBe(200)
+    expect((await a.agent.get('/api/connections')).body).toEqual([])
+  })
+
+  it('decline does not create a connection', async () => {
+    const a = await signIn(freshEmail())
+    const b = await signIn(freshEmail())
+    await a.agent.post('/api/invites').send({ channel: 'link' })
+    expect((await b.agent.post(`/api/invites/${a.me.id}/decline`)).status).toBe(204)
+    expect((await b.agent.get('/api/connections')).body).toEqual([])
+    expect((await a.agent.get('/api/notifications')).body).toEqual([])
   })
 })
