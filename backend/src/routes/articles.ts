@@ -3,8 +3,7 @@ import { z } from 'zod'
 import { param, requireAuth } from '../auth.ts'
 import { pool } from '../db.ts'
 import { HttpError } from '../errors.ts'
-import { articlesBy, feed, findVisible, read } from '../lib/articles.ts'
-import { saveFacts } from '../lib/facts.ts'
+import { articlesBy, changeAudience, feed, findVisible, publish, read } from '../lib/articles.ts'
 import { notify } from '../lib/notify.ts'
 import { getUser } from '../lib/users.ts'
 import { writeLimit } from '../limits.ts'
@@ -55,80 +54,13 @@ const publishBody = z.object({
   saveFacts: z.array(z.object({ k: z.string().max(40), v: z.string().max(200) })).max(20).default([]),
 })
 
-async function audienceIds(userId: string, aud: z.infer<typeof audience>) {
-  const connected = (
-    await pool.query<{ other_id: string }>('select other_id from connections where user_id = $1', [userId])
-  ).rows.map((r) => r.other_id)
-  const set = new Set(connected)
-  if (aud.mode === 'people') return (aud.personIds ?? []).filter((id) => set.has(id))
-  if (aud.mode === 'group') {
-    const { rows } = await pool.query<{ user_id: string }>(
-      'select user_id from group_members gm join groups g on g.id = gm.group_id where g.id = $1 and g.owner_id = $2',
-      [aud.groupId, userId],
-    )
-    return rows.map((r) => r.user_id)
-  }
-  if (aud.mode === 'circle') return connected
-  return []
-}
-
 articlesRouter.post('/articles', auth, writeLimit, async (req, res) => {
-  const u = await viewer(req.userId!)
-  const body = parse(publishBody, req.body)
-  const aud = await audienceIds(u.id, body.audience)
-  if (body.audience.mode !== 'me' && !aud.length) throw new HttpError(400, 'empty audience')
-  let draftId: string | null = null
-  if (body.draftId) {
-    const owned = await pool.query('select 1 from ai_drafts where id = $1 and user_id = $2', [body.draftId, u.id])
-    if (owned.rowCount) draftId = body.draftId
-  }
-  const { rows } = await pool.query<{ id: string }>(
-    `insert into articles (author_id, headline, sub, flash, push, body, prev_id, draft_id)
-     values ($1, $2, $3, $4, $5, $6, $7, $8) returning id`,
-    [u.id, body.content.headline, body.content.sub, body.content.flash, body.content.push ?? null, body.content.body, body.prevId ?? null, draftId],
-  )
-  const id = rows[0].id
-  if (aud.length) {
-    await pool.query(
-      `insert into article_audience (article_id, user_id) select $1, unnest($2::text[])`,
-      [id, aud],
-    )
-  }
-  await saveFacts(u.id, body.saveFacts, 'נוסף היום, מתוך השיחה')
-  await pool.query('update users set onboarding = false where id = $1', [u.id])
-  res.json(await read(u, id))
+  res.json(await publish(await viewer(req.userId!), parse(publishBody, req.body)))
 })
 
-async function replaceAudience(articleId: string, userIds: string[]) {
-  const client = await pool.connect()
-  try {
-    await client.query('begin')
-    await client.query('delete from article_audience where article_id = $1', [articleId])
-    if (userIds.length) {
-      await client.query(
-        'insert into article_audience (article_id, user_id) select $1, unnest($2::text[])',
-        [articleId, userIds],
-      )
-    }
-    await client.query('commit')
-  } catch (err) {
-    await client.query('rollback')
-    throw err
-  } finally {
-    client.release()
-  }
-}
-
 articlesRouter.put('/articles/:id/audience', auth, writeLimit, async (req, res) => {
-  const u = await viewer(req.userId!)
-  const articleId = param(req, 'id')
-  const owned = await pool.query('select 1 from articles where id = $1 and author_id = $2', [articleId, u.id])
-  if (!owned.rowCount) throw new HttpError(404, 'not found')
   const { audience: next } = parse(z.object({ audience }), req.body)
-  const aud = await audienceIds(u.id, next)
-  if (next.mode !== 'me' && !aud.length) throw new HttpError(400, 'empty audience')
-  await replaceAudience(articleId, aud)
-  res.json(await read(u, articleId))
+  res.json(await changeAudience(await viewer(req.userId!), param(req, 'id'), next))
 })
 
 articlesRouter.delete('/articles/:id', auth, async (req, res) => {

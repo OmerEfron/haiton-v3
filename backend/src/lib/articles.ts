@@ -1,5 +1,6 @@
-import { pool } from '../db.ts'
+import { pool, tx } from '../db.ts'
 import { HttpError } from '../errors.ts'
+import { saveFacts } from './facts.ts'
 import { IN_GROUP, NOT_HIDDEN, NOT_MUTED, VISIBLE, visible } from './visible.ts'
 
 /** The user looking at Articles. Every function below takes it first. */
@@ -132,4 +133,79 @@ export async function read(viewer: Viewer, id: string) {
     myReaction: my.rows[0]?.label ?? null,
     reported: reported.rowCount !== 0,
   }
+}
+
+export interface AudienceInput {
+  mode: 'circle' | 'me' | 'people' | 'group'
+  personIds?: string[]
+  groupId?: string
+}
+
+export interface PublishInput {
+  draftId?: string
+  content: { headline: string; sub: string; body: string[]; flash: string; push?: string }
+  prevId?: string | null
+  audience: AudienceInput
+  saveFacts: { k: string; v: string }[]
+}
+
+/** Who the author's chosen Audience resolves to: only people they are connected to. Throws 400 if empty (except "me"). */
+async function resolveAudience(authorId: string, aud: AudienceInput) {
+  const connected = (
+    await pool.query<{ other_id: string }>('select other_id from connections where user_id = $1', [authorId])
+  ).rows.map((r) => r.other_id)
+  let ids: string[] = []
+  if (aud.mode === 'people') ids = (aud.personIds ?? []).filter((id) => connected.includes(id))
+  else if (aud.mode === 'circle') ids = connected
+  else if (aud.mode === 'group') {
+    const { rows } = await pool.query<{ user_id: string }>(
+      'select user_id from group_members gm join groups g on g.id = gm.group_id where g.id = $1 and g.owner_id = $2',
+      [aud.groupId, authorId],
+    )
+    ids = rows.map((r) => r.user_id)
+  }
+  if (aud.mode !== 'me' && !ids.length) throw new HttpError(400, 'empty audience')
+  return ids
+}
+
+const insertAudience = (db: { query: typeof pool.query }, articleId: string, userIds: string[]) =>
+  userIds.length
+    ? db.query('insert into article_audience (article_id, user_id) select $1, unnest($2::text[])', [articleId, userIds])
+    : undefined
+
+/**
+ * Publishes an Article: the Article, its Audience, the Facts to save and the end of onboarding
+ * are written in one transaction. Empty Audience is rejected (400) and a foreign Draft ignored before writing.
+ */
+export async function publish(viewer: Viewer, input: PublishInput) {
+  const ids = await resolveAudience(viewer.id, input.audience)
+  const owned = input.draftId
+    ? await pool.query('select 1 from ai_drafts where id = $1 and user_id = $2', [input.draftId, viewer.id])
+    : null
+  const draftId = owned?.rowCount ? input.draftId : null
+  const { content } = input
+  const id = await tx(async (db) => {
+    const { rows } = await db.query<{ id: string }>(
+      `insert into articles (author_id, headline, sub, flash, push, body, prev_id, draft_id)
+       values ($1, $2, $3, $4, $5, $6, $7, $8) returning id`,
+      [viewer.id, content.headline, content.sub, content.flash, content.push ?? null, content.body, input.prevId ?? null, draftId],
+    )
+    await insertAudience(db, rows[0].id, ids)
+    await saveFacts(viewer.id, input.saveFacts, 'נוסף היום, מתוך השיחה', db)
+    await db.query('update users set onboarding = false where id = $1', [viewer.id])
+    return rows[0].id
+  })
+  return read(viewer, id)
+}
+
+/** Replaces the Audience of one of the viewer's own Articles (404 if not theirs, 400 if empty) and returns the full view. */
+export async function changeAudience(viewer: Viewer, articleId: string, audience: AudienceInput) {
+  const owned = await pool.query('select 1 from articles where id = $1 and author_id = $2', [articleId, viewer.id])
+  if (!owned.rowCount) throw new HttpError(404, 'not found')
+  const ids = await resolveAudience(viewer.id, audience)
+  await tx(async (db) => {
+    await db.query('delete from article_audience where article_id = $1', [articleId])
+    await insertAudience(db, articleId, ids)
+  })
+  return read(viewer, articleId)
 }
