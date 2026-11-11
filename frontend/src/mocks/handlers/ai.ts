@@ -150,8 +150,11 @@ export const aiHandlers = [
       s.messages.push({ role: 'user', text })
       const n = s.messages.filter((m) => m.role === 'user').length
       const reply = scriptFor(me.id).replies[n - 1] ?? null
-      if (reply) s.messages.push({ role: 'reporter', text: reply })
-      spend(me.id)
+      // Like production: no model call at the maximum, so no usage is recorded.
+      if (reply) {
+        s.messages.push({ role: 'reporter', text: reply })
+        spend(me.id)
+      }
       return { reply, canDraft: n >= 3 }
     }, 1300),
   ),

@@ -60,7 +60,7 @@ editorRouter.post('/editor/drafts/:id/revise', requireAuth, aiMinute, requireQuo
   if (!row) throw new HttpError(404, 'draft not found')
   const { session, ctx } = await requireStory(req.userId!, row.session_id)
   const revised = await reviseDraft(session, ctx, modelDraft(row.content, row.used_facts, row.new_facts), kind, chat)
-  // Keep the stored Facts: the revised Draft's content only.
+  // The revise prompt copies facts unchanged. Keep the stored ones so a sloppy completion cannot drop them.
   const content = contentOf(revised)
   await pool.query('update ai_drafts set content = $2::jsonb where id = $1', [row.id, JSON.stringify(content)])
   await recordUsage(req.userId!, 'revise')

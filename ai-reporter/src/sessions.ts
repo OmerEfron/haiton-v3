@@ -3,10 +3,6 @@ import { pool } from './db.ts'
 import { FIXED_OPENER, INTRO_OPENER, OPENER } from './interview.ts'
 import type { ChatMessage, DraftContent, ReporterJson, SessionRow } from './types.ts'
 
-export function transcript(messages: ChatMessage[]) {
-  return messages.map((m) => `${m.role}: ${m.text.replace(/[\r\n\u2028\u2029]+/g, ' ')}`).join('\n')
-}
-
 export async function insertSession(userId: string) {
   const messages: ChatMessage[] = [{ role: 'reporter', text: FIXED_OPENER }]
   const { rows } = await pool.query<{ id: string }>(
@@ -16,7 +12,7 @@ export async function insertSession(userId: string) {
   return { id: rows[0].id, messages }
 }
 
-// Interview and intro sessions share one get/save path; only the table and columns differ.
+// Interview sessions and intro sessions share one get/save path; only the table and columns differ.
 const KINDS = {
   interview: { table: 'ai_sessions', cols: 'id, user_id, messages, turns, article_type, angle' },
   intro: { table: 'ai_intros', cols: 'id, user_id, messages' },

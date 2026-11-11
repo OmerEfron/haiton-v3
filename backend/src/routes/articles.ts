@@ -59,8 +59,7 @@ articlesRouter.post('/articles', auth, writeLimit, async (req, res) => {
 })
 
 articlesRouter.put('/articles/:id/audience', auth, writeLimit, async (req, res) => {
-  const { audience: next } = parse(z.object({ audience }), req.body)
-  res.json(await changeAudience(await viewer(req.userId!), param(req, 'id'), next))
+  res.json(await changeAudience(await viewer(req.userId!), param(req, 'id'), () => parse(z.object({ audience }), req.body).audience))
 })
 
 articlesRouter.delete('/articles/:id', auth, async (req, res) => {
@@ -75,7 +74,7 @@ articlesRouter.delete('/articles/:id', auth, async (req, res) => {
 articlesRouter.put('/articles/:id/reaction', auth, writeLimit, async (req, res) => {
   const { label } = parse(z.object({ label: z.string().max(20, 'label too long').nullable() }), req.body)
   const u = await viewer(req.userId!)
-  const a = await findVisible(u, param(req, 'id'))
+  const a = await findVisible(u.id, param(req, 'id'))
   if (label) {
     await pool.query(
       `insert into reactions (article_id, user_id, label) values ($1, $2, $3)
@@ -109,7 +108,7 @@ articlesRouter.post('/articles/:id/report', auth, writeLimit, async (req, res) =
     }),
     req.body,
   )
-  const a = await findVisible(await viewer(req.userId!), param(req, 'id'))
+  const a = await findVisible(req.userId!, param(req, 'id'))
   await pool.query(
     `insert into reports (article_id, user_id, reason, note) values ($1, $2, $3, $4)
      on conflict (article_id, user_id) do nothing`,
@@ -119,7 +118,7 @@ articlesRouter.post('/articles/:id/report', auth, writeLimit, async (req, res) =
 })
 
 articlesRouter.post('/articles/:id/hide', auth, async (req, res) => {
-  const a = await findVisible(await viewer(req.userId!), param(req, 'id'))
+  const a = await findVisible(req.userId!, param(req, 'id'))
   await pool.query('insert into hidden (article_id, user_id) values ($1, $2) on conflict do nothing', [a.id, req.userId])
   res.status(204).end()
 })

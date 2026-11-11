@@ -55,8 +55,8 @@ async function getVisible(viewerId: string, id: string) {
 }
 
 /** The plain Article row if it is Visible to the viewer, else 404. For reactions, hide and report. */
-export async function findVisible(viewer: Viewer, id: string) {
-  const a = await getVisible(viewer.id, id)
+export async function findVisible(viewerId: string, id: string) {
+  const a = await getVisible(viewerId, id)
   if (!a) throw new HttpError(404, 'not found')
   return a
 }
@@ -91,7 +91,7 @@ export const hiddenBy = (viewer: Viewer) =>
 
 /** Full view of one Visible Article (body, history, reactions, Audience for the author), or 404. */
 export async function read(viewer: Viewer, id: string) {
-  const a = await findVisible(viewer, id)
+  const a = await findVisible(viewer.id, id)
   const viewerId = viewer.id
   const viewerName = viewer.name
   const mine = a.author_id === viewerId
@@ -198,11 +198,13 @@ export async function publish(viewer: Viewer, input: PublishInput) {
   return read(viewer, id)
 }
 
-/** Replaces the Audience of one of the viewer's own Articles (404 if not theirs, 400 if empty) and returns the full view. */
-export async function changeAudience(viewer: Viewer, articleId: string, audience: AudienceInput) {
+/**
+ * Replaces the Audience of one of the viewer's own Articles (404 if not theirs, 400 if empty) and returns the full view.
+ * `parseAudience` runs after the ownership check, so a non-owner gets 404 before any body error. */
+export async function changeAudience(viewer: Viewer, articleId: string, parseAudience: () => AudienceInput) {
   const owned = await pool.query('select 1 from articles where id = $1 and author_id = $2', [articleId, viewer.id])
   if (!owned.rowCount) throw new HttpError(404, 'not found')
-  const ids = await resolveAudience(viewer.id, audience)
+  const ids = await resolveAudience(viewer.id, parseAudience())
   await tx(async (db) => {
     await db.query('delete from article_audience where article_id = $1', [articleId])
     await insertAudience(db, articleId, ids)
