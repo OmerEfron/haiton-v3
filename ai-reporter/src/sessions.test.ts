@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { answeredCount, askedCount, transcript } from './sessions.ts'
+import { answeredCount, askedCount } from './interview.ts'
+import { transcript } from './sessions.ts'
 import type { ChatMessage } from './types.ts'
 
 const msg = (role: ChatMessage['role'], text: string): ChatMessage => ({ role, text })
