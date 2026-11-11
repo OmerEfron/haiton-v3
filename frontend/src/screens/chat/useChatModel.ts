@@ -41,7 +41,7 @@ export function useChatModel() {
     error: c.error,
     startError,
     draftReady: c.draftReady,
-    userCount: c.userCount,
+    canDraft: c.canDraft,
     factsCount: facts.length,
     input,
     setInput,
