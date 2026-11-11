@@ -24,7 +24,7 @@ export interface Fact {
   k: string
   v: string
   src: string
-  isNew?: boolean
+  isNew: boolean
 }
 
 export interface NewFact {
@@ -89,7 +89,7 @@ export interface Audience {
 }
 
 export interface PublishRequest {
-  draftId: Id
+  draftId?: Id
   content: DraftContent
   prevId: Id | null
   audience: Audience
