@@ -9,13 +9,16 @@ test('mock quota counts Reporter calls and hits the 429 path at the limit', asyn
   await dismissTip(page, 'שלב 1 מתוך 4')
   await expect(page.getByText('נותרו 3 מתוך 3 פעולות היום')).toBeVisible()
 
-  for (const [text, left] of [['אחד', 2], ['שניים', 1], ['שלושה', 0]] as const) {
+  // The 3rd message gets no scripted reply (the maximum), so it spends nothing.
+  for (const [text, left] of [['אחד', 2], ['שניים', 1], ['שלושה', 1]] as const) {
     await page.getByLabel('הודעה לכתב').fill(text)
     await page.getByRole('button', { name: 'שליחה' }).click()
     await expect(page.getByText(`נותרו ${left} מתוך 3 פעולות היום`)).toBeVisible()
   }
 
+  // The Draft spends the last action; the next revision hits the 429 path.
   await page.goto('/compose/draft')
+  await page.getByRole('button', { name: 'כותרת חדשה' }).click()
   await expect(page.getByText('הגעתם למכסה היומית. אפשר להמשיך מחר.')).toBeVisible()
 })
 

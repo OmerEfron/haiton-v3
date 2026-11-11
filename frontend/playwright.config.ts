@@ -12,7 +12,7 @@ function env(extra: Record<string, string>) {
   return { ...out, ...extra }
 }
 
-// The publish story spends 5 model calls. The quota spec needs the cap low enough that
+// Writing and publishing a Draft spends 5 model calls. The quota spec needs the cap low enough that
 // follow-up messages still record usage (the 8th turn in a session does not), so keep this between 6 and 10.
 const uiIgnore = [/api\.spec\.ts/, /real-ai\.spec\.ts/, /\.mock\.spec\.ts/]
 

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { asIntro } from './draft.ts'
 import { fill, prompts, reviseBlock, reviseSystem } from './prompts.ts'
-import { transcript } from './sessions.ts'
+import { transcript } from './interview.ts'
 
 const user = { name: 'מאיה', gender: 'female' as const, facts: [{ k: 'עיר', v: 'חיפה' }], previous: '' }
 const reporter = fill(prompts.reporter, user)

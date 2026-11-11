@@ -16,7 +16,7 @@ function bodyChars(body: string[]) {
   return body.reduce((n, p) => n + p.length, 0)
 }
 
-// ponytail: one retry, then the longer body wins. A thin chat can still fall short; the upgrade is a second pass that lists the unused details.
+// ponytail: one retry, then the longer body wins. A short Interview can still fall short; the upgrade is a second pass that lists the unused details.
 async function longerBody(first: ModelDraft, again: (note: string) => Promise<unknown>) {
   const n = bodyChars(first.body)
   if (n >= MIN_BODY_CHARS) return first
