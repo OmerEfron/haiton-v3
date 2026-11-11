@@ -38,13 +38,16 @@ test('mock Article read returns 404 once the author is no longer a Connection', 
   await page.goto('/')
   await page.getByRole('button', { name: 'כניסה' }).click()
   await page.getByRole('button', { name: 'מאיה כהן' }).click()
+  await expect(page).toHaveURL(/\/feed/)
 
-  await page.getByRole('link', { name: 'עונת הלימונים נפתחה' }).click()
+  // The feed repeats her name on several links, so open the Article and her profile directly.
+  await page.goto('/article/m1')
   await expect(page.getByRole('heading', { name: 'עונת הלימונים נפתחה' })).toBeVisible()
 
-  await page.getByRole('link', { name: 'רינה כהן' }).click()
+  await page.goto('/u/mom')
   await page.getByRole('button', { name: 'הסרה מהחיבורים' }).click()
   await page.getByRole('button', { name: 'הסרה', exact: true }).click()
+  await expect(page).toHaveURL(/\/feed/)
 
   await page.goto('/article/m1')
   await expect(page.getByText('הכתבה הזו הוסרה או שאין לכם גישה אליה.')).toBeVisible()
