@@ -14,5 +14,5 @@
     "erasableSyntaxOnly": true,
     "types": ["node"]
   },
-  "include": ["src", "test", "vitest.config.ts", "vitest.unit.config.ts"]
+  "include": ["src"]
 }
