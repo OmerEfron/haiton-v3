@@ -10,7 +10,8 @@ import { chat, SCHEMA } from '../openai.ts'
 import { recordUsage, requireQuota } from '../quota.ts'
 import { parse } from '../parse.ts'
 import { fill, prompts, reviseBlock, reviseSystem } from '../prompts.ts'
-import { answeredCount, getSession, MIN_QUESTIONS, transcript } from '../sessions.ts'
+import { answeredCount, MIN_QUESTIONS } from '../interview.ts'
+import { getSession, transcript } from '../sessions.ts'
 import type { DraftContent, ModelDraft, NewFact } from '../types.ts'
 
 export const editorRouter = Router()
