@@ -9,6 +9,8 @@ import type { AudienceState } from '../lib/audience'
 interface Stored {
   sessionId: Id | null
   messages: ChatMessage[]
+  /** the latest Reporter reply's `canDraft`: drives the Draft button */
+  canDraft: boolean
   draft: Draft | null
   /** number of user messages the draft was written from */
   draftAt: number
@@ -22,6 +24,7 @@ const factKey = (f: NewFact) => f.k + '|' + f.v
 const fresh = (audience?: Partial<AudienceState>): Stored => ({
   sessionId: null,
   messages: [],
+  canDraft: false,
   draft: null,
   draftAt: 0,
   skipFacts: [],
@@ -70,7 +73,11 @@ function useComposeState() {
       setTyping(true)
       try {
         const turn = await sendMessage(s.sessionId, text)
-        if (turn.reply) setS((p) => ({ ...p, messages: [...p.messages, { role: 'reporter', text: turn.reply! }] }))
+        setS((p) => ({
+          ...p,
+          canDraft: turn.canDraft,
+          messages: turn.reply ? [...p.messages, { role: 'reporter', text: turn.reply }] : p.messages,
+        }))
         bumpQuota()
       } catch (err) {
         setError(quotaError(err, 'הכתב לא זמין כרגע. נסו שוב.'))
