@@ -19,7 +19,7 @@ export function createApp() {
   app.get('/api/health', (_req, res) => {
     res.json({ ok: true })
   })
-  app.use('/api', perIp(300, 60_000))
+  app.use('/api', perIp(Number(process.env.API_LIMIT) || 300, 60_000))
   app.post('/api/auth/google', perIp(Number(process.env.AUTH_LIMIT) || 10, 60_000))
   app.use('/api', authRouter)
   app.use('/api', meRouter)

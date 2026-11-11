@@ -46,8 +46,9 @@ test('mock Article read returns 404 once the author is no longer a Connection', 
 
   await page.goto('/u/mom')
   await page.getByRole('button', { name: 'הסרה מהחיבורים' }).click()
-  await page.getByRole('button', { name: 'הסרה', exact: true }).click()
-  await expect(page).toHaveURL(/\/feed/)
+  const removed = page.waitForResponse((r) => r.url().endsWith('/api/connections/mom') && r.request().method() === 'DELETE')
+  await page.getByRole('alertdialog').getByRole('button', { name: 'הסרה' }).click()
+  expect((await removed).status()).toBe(204)
 
   await page.goto('/article/m1')
   await expect(page.getByText('הכתבה הזו הוסרה או שאין לכם גישה אליה.')).toBeVisible()

@@ -17,7 +17,7 @@ export function createApp() {
   app.get('/ai/health', (_req, res) => {
     res.json({ ok: true })
   })
-  app.use('/ai', perIp(120, 60_000))
+  app.use('/ai', perIp(Number(process.env.AI_LIMIT) || 120, 60_000))
   app.use('/ai', reporterRouter)
   app.use('/ai', editorRouter)
   app.use('/ai', introRouter)
