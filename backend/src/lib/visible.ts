@@ -1,11 +1,12 @@
-/** Viewer wrote it, or they're in the audience and still connected to the author. */
-export const VISIBLE = `
-  (a.author_id = $1
+/** Viewer ($1) wrote it, or they're in the audience and still connected to the author. `t` is the articles table alias. */
+export const visible = (t: string) => `
+  (${t}.author_id = $1
    or (
-     exists (select 1 from article_audience aa where aa.article_id = a.id and aa.user_id = $1)
-     and exists (select 1 from connections c where c.user_id = $1 and c.other_id = a.author_id)
+     exists (select 1 from article_audience aa where aa.article_id = ${t}.id and aa.user_id = $1)
+     and exists (select 1 from connections c where c.user_id = $1 and c.other_id = ${t}.author_id)
    ))
 `
+export const VISIBLE = visible('a')
 
 export const NOT_HIDDEN = `not exists (select 1 from hidden h where h.article_id = a.id and h.user_id = $1)`
 

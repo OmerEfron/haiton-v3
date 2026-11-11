@@ -4,7 +4,7 @@ import { z } from 'zod'
 import { COOKIE, cookieOpts, param, requireAuth } from '../auth.ts'
 import { pool } from '../db.ts'
 import { HttpError } from '../errors.ts'
-import { summary, type ArticleRow } from '../lib/articles.ts'
+import { hiddenBy } from '../lib/articles.ts'
 import { saveFacts } from '../lib/facts.ts'
 import { getUser, toMe } from '../lib/users.ts'
 import { writeLimit } from '../limits.ts'
@@ -127,17 +127,5 @@ meRouter.delete('/me/facts/:id', auth, async (req, res) => {
 })
 
 meRouter.get('/me/hidden', auth, async (req, res) => {
-  const u = await me(req.userId!)
-  const { rows } = await pool.query<ArticleRow>(
-    `select a.id, a.author_id, au.name as author, a.created_at, a.image_url,
-            a.headline, a.sub, a.flash, a.push, a.body, a.prev_id,
-            exists (select 1 from articles p where p.id = a.prev_id and p.author_id = a.author_id) as has_prev
-     from hidden h
-     join articles a on a.id = h.article_id
-     join users au on au.id = a.author_id
-     where h.user_id = $1
-     order by a.created_at desc`,
-    [req.userId],
-  )
-  res.json(rows.map((a) => summary(a, u.id, u.name)))
+  res.json(await hiddenBy(await me(req.userId!)))
 })
