@@ -74,7 +74,7 @@ export function ChatDock({ m }: { m: ChatModel }) {
           <button onClick={m.goDraft} className={pillBtn}>חזרה לטיוטה ←</button>
         </div>
       )}
-      {m.userCount >= 3 && !m.typing && !m.draftReady && (
+      {m.canDraft && !m.typing && !m.draftReady && (
         <div className="flex justify-center">
           <button onClick={m.goDraft} disabled={m.quotaLeft === 0} className={`${pillBtn} disabled:opacity-40`}>
             די, תיצור טיוטה

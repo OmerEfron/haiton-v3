@@ -49,7 +49,7 @@ function toWorld(key: keyof typeof DATA, P: SeedPersona, now: number): World {
   return {
     me: { id: P.meId, name: P.meName, email: EMAILS[key], photoUrl: null, onboarding: !!P.onboard, ...PROFILES[key] },
     prefs: { articles: true, joins: true, reactions: true },
-    facts: P.facts.map((f, i) => ({ id: `${P.meId}_f${i + 1}`, ...f })),
+    facts: P.facts.map((f, i) => ({ id: `${P.meId}_f${i + 1}`, isNew: false, ...f })),
     connections: P.people.map((p) => ({ ...p, muted: false })),
     removed: [],
     groups: P.groups.map((g, i) => ({ id: groupIds[i], name: g.name, memberIds: g.members })),

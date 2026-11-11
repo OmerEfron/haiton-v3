@@ -47,6 +47,9 @@ export function later(userId: Id, ms: number, fn: (w: World) => void) {
 export const findPrev = (w: World, a: DbArticle) =>
   (a.prevId && w.articles.find((x) => x.id === a.prevId && x.authorId === a.authorId)) || null
 
+/** The viewer wrote it, or still has its author as a Connection (the mock keeps no per-Article Audience for others' Articles). */
+export const canSee = (w: World, a: DbArticle) => a.authorId === w.me.id || !w.removed.includes(a.authorId)
+
 export const byNewest = (a: { createdAt: string }, b: { createdAt: string }) => b.createdAt.localeCompare(a.createdAt)
 
 export function summary(w: World, a: DbArticle): ArticleSummary {

@@ -2,7 +2,7 @@ import { http } from 'msw'
 import type { Article, Id, PublishRequest } from '../../api/types'
 import { API_URL } from '../../config'
 import { nowIso, uid, type DbArticle, type World } from '../db'
-import { byNewest, fail, feedFor, findPrev, later, personName, route, summary } from './util'
+import { byNewest, canSee, fail, feedFor, findPrev, later, personName, route, summary } from './util'
 
 const u = (p: string) => API_URL + p
 
@@ -37,7 +37,7 @@ export const articleHandlers = [
     u('/articles/:id'),
     route(({ w, params }) => {
       const a = w.articles.find((x) => x.id === params.id)
-      return a ? full(w, a) : fail(404, 'not found')
+      return a && canSee(w, a) ? full(w, a) : fail(404, 'not found')
     }),
   ),
 
