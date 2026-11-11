@@ -1,28 +1,7 @@
+import type { QueryResultRow } from 'pg'
 import { pool } from './db.ts'
+import { FIXED_OPENER, INTRO_OPENER, OPENER } from './interview.ts'
 import type { ChatMessage, DraftContent, ReporterJson, SessionRow } from './types.ts'
-
-export const FIXED_OPENER = 'מה קרה?'
-export const MIN_QUESTIONS = 2
-export const MAX_QUESTIONS = 7
-
-/** Reporter lines after the fixed opener. */
-export function askedCount(messages: ChatMessage[]) {
-  return Math.max(0, messages.filter((m) => m.role === 'reporter').length - 1)
-}
-
-/** User answers to those questions. The first user message answers the opener. */
-export function answeredCount(messages: ChatMessage[]) {
-  return Math.max(0, messages.filter((m) => m.role === 'user').length - 1)
-}
-
-export const OPENER: ReporterJson = {
-  known: 'nothing yet',
-  angle: '',
-  target: 'what happened',
-  articleType: 'feature',
-  reply: FIXED_OPENER,
-  canDraft: false,
-}
 
 export function transcript(messages: ChatMessage[]) {
   return messages.map((m) => `${m.role}: ${m.text.replace(/[\r\n\u2028\u2029]+/g, ' ')}`).join('\n')
@@ -37,12 +16,33 @@ export async function insertSession(userId: string) {
   return { id: rows[0].id, messages }
 }
 
-export async function getSession(id: string, userId: string) {
-  const { rows } = await pool.query<SessionRow>(
-    'select id, user_id, messages, turns, article_type, angle from ai_sessions where id = $1 and user_id = $2',
-    [id, userId],
-  )
+// Interview and intro sessions share one get/save path; only the table and columns differ.
+const KINDS = {
+  interview: { table: 'ai_sessions', cols: 'id, user_id, messages, turns, article_type, angle' },
+  intro: { table: 'ai_intros', cols: 'id, user_id, messages' },
+}
+
+async function getRow<T extends QueryResultRow>(kind: keyof typeof KINDS, id: string, userId: string) {
+  const { table, cols } = KINDS[kind]
+  const { rows } = await pool.query<T>(`select ${cols} from ${table} where id = $1 and user_id = $2`, [id, userId])
   return rows[0] ?? null
+}
+
+export const getSession = (id: string, userId: string) => getRow<SessionRow>('interview', id, userId)
+export const getIntro = (id: string, userId: string) => getRow<{ id: string; messages: ChatMessage[] }>('intro', id, userId)
+
+export async function insertIntro(userId: string) {
+  const messages: ChatMessage[] = [{ role: 'reporter', text: INTRO_OPENER }]
+  const { rows } = await pool.query<{ id: string }>(
+    'insert into ai_intros (user_id, messages) values ($1, $2::jsonb) returning id',
+    [userId, JSON.stringify(messages)],
+  )
+  return { id: rows[0].id, messages }
+}
+
+/** Stores the messages alone: the user's answer before the model is called, and intro turns. */
+export async function saveMessages(kind: keyof typeof KINDS, id: string, userId: string, messages: ChatMessage[]) {
+  await pool.query(`update ${KINDS[kind].table} set messages = $3::jsonb where id = $1 and user_id = $2`, [id, userId, JSON.stringify(messages)])
 }
 
 interface PastSessionRow {

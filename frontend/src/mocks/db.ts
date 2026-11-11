@@ -75,6 +75,8 @@ export interface Db {
   invites: Record<string, DbInvite>
   sessions: Record<Id, DbSession>
   drafts: Record<Id, DbDraft>
+  /** per account: timestamps of Reporter/Editor calls in the last 24h (the mock quota) */
+  usage?: Record<Id, string[]>
 }
 
 const KEY = 'haiton-mock-db-v1'

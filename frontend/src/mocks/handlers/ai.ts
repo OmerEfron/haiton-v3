@@ -15,6 +15,9 @@ const INTRO_TURNS = [
 const intros: Record<string, DbSession> = {}
 const REV_INDEX: Partial<Record<RevisionKind, number>> = { funnier: 1, dramatic: 2, restrained: 3 }
 const clip = (s: string, n: number) => (s.length > n ? s.slice(0, n).trimEnd() + '…' : s)
+const DAY_MS = 24 * 60 * 60_000
+// Same default as the ai-reporter; the mock-mode Playwright project lowers it so the 429 path is cheap to reach.
+const LIMIT = Number(import.meta.env.VITE_MOCK_AI_LIMIT) || 60
 const GENERIC: Script = { replies: ['איזה יופי. ספרו עוד, איך זה התחיל?', 'ואיך הרגשתם כשזה קרה?'] }
 
 function scriptFor(meId: string): Script {
@@ -31,6 +34,23 @@ function scriptFor(meId: string): Script {
     usedFacts: P.usedFacts,
     newFacts: P.newFacts,
   }
+}
+
+function quotaFor(userId: string) {
+  const usage = (db.usage ??= {})
+  const used = (usage[userId] ?? []).filter((t) => Date.parse(t) > Date.now() - DAY_MS)
+  usage[userId] = used
+  return { used: used.length, limit: LIMIT, resetsAt: used[0] ? new Date(Date.parse(used[0]) + DAY_MS).toISOString() : null }
+}
+
+function spend(userId: string) {
+  quotaFor(userId)
+  db.usage![userId].push(nowIso())
+}
+
+const overQuota = (userId: string) => {
+  const q = quotaFor(userId)
+  return q.used >= q.limit ? fail(429, 'daily quota reached') : null
 }
 
 async function coreGet<T>(path: string, request: Request): Promise<T | null> {
@@ -82,7 +102,7 @@ function aiRoute(fn: (c: { me: Me; params: Record<string, string>; body: any; re
 export const aiHandlers = [
   http.get(
     u('/quota'),
-    aiRoute(() => ({ used: 0, limit: 60, resetsAt: null })),
+    aiRoute(({ me }) => quotaFor(me.id)),
   ),
 
   http.get(
@@ -121,6 +141,8 @@ export const aiHandlers = [
   http.post(
     u('/reporter/sessions/:id/messages'),
     aiRoute(({ me, params, body }) => {
+      const blocked = overQuota(me.id)
+      if (blocked) return blocked
       const s = db.sessions[params.id]
       const text = String(body?.text ?? '').trim()
       if (!s || s.userId !== me.id) return fail(404, 'session not found')
@@ -129,6 +151,7 @@ export const aiHandlers = [
       const n = s.messages.filter((m) => m.role === 'user').length
       const reply = scriptFor(me.id).replies[n - 1] ?? null
       if (reply) s.messages.push({ role: 'reporter', text: reply })
+      spend(me.id)
       return { reply, canDraft: n >= 3 }
     }, 1300),
   ),
@@ -136,6 +159,8 @@ export const aiHandlers = [
   http.post(
     u('/editor/drafts'),
     aiRoute(async ({ me, body, request }) => {
+      const blocked = overQuota(me.id)
+      if (blocked) return blocked
       const s = db.sessions[body?.sessionId]
       if (!s || s.userId !== me.id) return fail(404, 'session not found')
       if (s.messages.filter((m) => m.role === 'user').length < 3) return fail(400, 'interview too short')
@@ -145,6 +170,7 @@ export const aiHandlers = [
       ])
       const id = uid('d')
       db.drafts[id] = { userId: me.id, sessionId: body.sessionId, rev: 0, hl: -1 }
+      spend(me.id)
       return toDraft(me, facts ?? [], articles ?? [], id, db.drafts[id])
     }, 3400),
   ),
@@ -152,6 +178,8 @@ export const aiHandlers = [
   http.post(
     u('/editor/drafts/:id/revise'),
     aiRoute(async ({ me, params, body, request }) => {
+      const blocked = overQuota(me.id)
+      if (blocked) return blocked
       const d = db.drafts[params.id]
       if (!d || d.userId !== me.id) return fail(404, 'draft not found')
       const kind = body?.kind as RevisionKind
@@ -160,6 +188,7 @@ export const aiHandlers = [
       else if (kind === 'alternate') Object.assign(d, { rev: (d.rev + 1) % versions, hl: -1 })
       else if (REV_INDEX[kind] != null) Object.assign(d, { rev: REV_INDEX[kind], hl: -1 })
       else return fail(400, 'unknown revision')
+      spend(me.id)
       const [facts, articles] = await Promise.all([
         coreGet<Fact[]>('/me/facts', request),
         coreGet<ArticleSummary[]>(`/users/${me.id}/articles`, request),
