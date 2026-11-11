@@ -18,6 +18,8 @@ test('edit profile, preferences, an article, and the account', async ({ page }) 
   await expect(reactions).toHaveAttribute('aria-checked', 'false')
 
   await publish(page, 'כתבה למחיקה', { mode: 'me' })
+  // The article was created through the API, so the open profile still has the empty list.
+  await page.reload()
   await page.getByRole('button', { name: 'כתבות' }).click()
   await expect(page.getByRole('heading', { name: 'כתבה למחיקה' })).toBeVisible()
   await page.getByRole('button', { name: 'הסרה' }).click()
