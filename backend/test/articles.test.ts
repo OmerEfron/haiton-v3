@@ -80,6 +80,22 @@ describe('articles', () => {
     expect(filtered.body.some((x: { id: string }) => x.id === grouped.body.id)).toBe(true)
   })
 
+  it('leaves nothing behind when a publish fails part-way', async () => {
+    const { a, b } = await pair()
+    // A NUL byte passes validation but Postgres rejects it, after the Article and Audience are written.
+    const res = await a.agent.post('/api/articles').send({
+      content: story,
+      prevId: null,
+      audience: { mode: 'people', personIds: [b.me.id] },
+      saveFacts: [{ k: 'עיר', v: 'חיפה\u0000' }],
+    })
+    expect(res.status).toBe(500)
+    expect((await a.agent.get(`/api/users/${a.me.id}/articles`)).body).toEqual([])
+    expect((await b.agent.get('/api/feed')).body).toEqual([])
+    expect((await a.agent.get('/api/me/facts')).body).toEqual([])
+    expect((await a.agent.get('/api/me')).body.onboarding).toBe(true)
+  })
+
   it('hides an article from the viewer feed', async () => {
     const { a, b } = await pair()
     const pub = await a.agent.post('/api/articles').send({
