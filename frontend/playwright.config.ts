@@ -45,7 +45,7 @@ export default defineConfig({
       reuseExistingServer: !process.env.CI,
       timeout: 120_000,
       stdout: 'pipe',
-      env: env({ AUTH_LIMIT: '1000' }),
+      env: env({ AUTH_LIMIT: '1000', API_LIMIT: '10000' }),
     },
     {
       command: 'node --env-file-if-exists=.env --experimental-strip-types src/server.ts',
@@ -55,7 +55,7 @@ export default defineConfig({
       reuseExistingServer: !process.env.CI,
       timeout: 120_000,
       stdout: 'pipe',
-      env: env({ OPENAI_BASE_URL: stub, OPENAI_API_KEY: 'test', PORT: '4100', AI_DAILY_CALLS: '8' }),
+      env: env({ OPENAI_BASE_URL: stub, OPENAI_API_KEY: 'test', PORT: '4100', AI_DAILY_CALLS: '8', AI_LIMIT: '10000' }),
     },
     {
       command: 'npx vite --host 127.0.0.1 --port 5174 --strictPort',
