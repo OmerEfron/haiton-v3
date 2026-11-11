@@ -38,6 +38,7 @@ test('mock Article read returns 404 once the author is no longer a Connection', 
   await page.goto('/')
   await page.getByRole('button', { name: 'כניסה' }).click()
   await page.getByRole('button', { name: 'מאיה כהן' }).click()
+  await expect(page).toHaveURL(/\/feed/)
 
   // The feed repeats her name on several links, so open the Article and her profile directly.
   await page.goto('/article/m1')
