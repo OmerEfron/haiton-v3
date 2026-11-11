@@ -48,18 +48,17 @@ export async function getVisible(viewerId: string, id: string) {
 
 export async function loadFull(viewerId: string, viewerName: string, a: ArticleRow) {
   const mine = a.author_id === viewerId
-  const history: ArticleRow[] = []
-  let prevId = a.prev_id
-  while (prevId && history.length < 5) {
-    const { rows } = await pool.query<ArticleRow>(
-      `${SELECT} where a.id = $1 and a.author_id = $2`,
-      [prevId, a.author_id],
-    )
-    const p = rows[0]
-    if (!p) break
-    history.push(p)
-    prevId = p.prev_id
+  // Earlier Articles the viewer can see, stopping at the first one they can't.
+  // One extra step past the history limit tells us whether the last entry has an earlier Article.
+  const chain: ArticleRow[] = [a]
+  while (chain.length < 7) {
+    const prevId = chain[chain.length - 1].prev_id
+    const p = prevId ? await getVisible(viewerId, prevId) : null
+    if (!p || p.author_id !== a.author_id) break
+    chain.push(p)
   }
+  const [head, ...history] = chain.map((x, i) => ({ ...x, has_prev: i + 1 < chain.length }))
+  history.length = Math.min(history.length, 5)
   const audience = mine
     ? (await pool.query<{ user_id: string }>('select user_id from article_audience where article_id = $1', [a.id])).rows.map(
         (r) => r.user_id,
@@ -81,7 +80,7 @@ export async function loadFull(viewerId: string, viewerName: string, a: ArticleR
   ])
   const reported = await pool.query('select 1 from reports where article_id = $1 and user_id = $2', [a.id, viewerId])
   return {
-    ...summary(a, viewerId, viewerName),
+    ...summary(head, viewerId, viewerName),
     body: a.body,
     history: history.map((h) => summary(h, viewerId, viewerName)),
     audienceIds: audience,
