@@ -81,7 +81,7 @@ jobs:
         with:
           version: latest
       - run: supabase start
-      - run: npx playwright install --with-deps chromium
+      - run: npx playwright install chromium
         working-directory: frontend
       - run: npm run test:e2e
         working-directory: frontend
