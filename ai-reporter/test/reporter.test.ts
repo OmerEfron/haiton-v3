@@ -32,6 +32,20 @@ describe('reporter', () => {
     expect(await usage(a.me.id)).toBe(3)
   })
 
+  it('keeps the user message in the Interview when the model fails', async () => {
+    const a = await signIn()
+    const id = (await a.post('/ai/reporter/sessions')).body.id as string
+    const failed = await answer(a, id, 'STUB:badjson')
+    expect(failed.status).toBe(502)
+    expect(await usage(a.me.id)).toBe(0)
+
+    const stored = (await a.get('/ai/reporter/sessions')).body.find((s: { id: string }) => s.id === id)
+    expect(stored.messages).toEqual([
+      { role: 'reporter', text: 'מה קרה?' },
+      { role: 'user', text: 'STUB:badjson' },
+    ])
+  })
+
   it('stops asking at the maximum and does not spend quota on that turn', async () => {
     const a = await signIn()
     const id = (await a.post('/ai/reporter/sessions')).body.id as string

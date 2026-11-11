@@ -199,4 +199,45 @@ describe('articles', () => {
     expect(feed.body.some((x: { id: string }) => x.id === pub.body.id)).toBe(true)
     expect((await b.agent.get('/api/me/hidden')).body).toEqual([])
   })
+
+  describe('history', () => {
+    async function chain(audiences: ('me' | 'b')[]) {
+      const { a, b } = await pair()
+      const ids: string[] = []
+      for (const [i, who] of audiences.entries()) {
+        const res = await a.agent.post('/api/articles').send({
+          content: { ...story, headline: `חלק ${i}` },
+          prevId: ids[i - 1] ?? null,
+          audience: who === 'me' ? { mode: 'me' } : { mode: 'people', personIds: [b.me.id] },
+          saveFacts: [],
+        })
+        expect(res.status).toBe(200)
+        ids.push(res.body.id)
+      }
+      return { b, ids }
+    }
+
+    it('hides a private earlier article from a viewer of the later one', async () => {
+      const { b, ids } = await chain(['me', 'b'])
+      const res = await b.agent.get(`/api/articles/${ids[1]}`)
+      expect(res.status).toBe(200)
+      expect(res.body.history).toEqual([])
+      expect(res.body.hasPrev).toBe(false)
+    })
+
+    it('shows the whole chain when every earlier article is visible', async () => {
+      const { b, ids } = await chain(['b', 'b', 'b'])
+      const res = await b.agent.get(`/api/articles/${ids[2]}`)
+      expect(res.body.hasPrev).toBe(true)
+      expect(res.body.history.map((h: { id: string }) => h.id)).toEqual([ids[1], ids[0]])
+      expect(res.body.history.map((h: { hasPrev: boolean }) => h.hasPrev)).toEqual([true, false])
+    })
+
+    it('stops at the first hidden article even if an older one is visible', async () => {
+      const { b, ids } = await chain(['b', 'me', 'b'])
+      const res = await b.agent.get(`/api/articles/${ids[2]}`)
+      expect(res.body.history).toEqual([])
+      expect(res.body.hasPrev).toBe(false)
+    })
+  })
 })
